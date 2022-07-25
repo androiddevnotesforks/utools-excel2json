@@ -173,7 +173,7 @@
     <!-- 命名翻译模式按钮 -->
     <div
       class="icon code_icon"
-      :class="[是命名模式 ? 'active i-carbon-code' : 'i-carbon-code-hide']"
+      :class="[是命名模式 ? 'code_active i-tabler-code' : 'i-tabler-code-off ']"
       @click="切换模式()"
     ></div>
   </div>
@@ -608,31 +608,21 @@ onKeyStroke('Tab', e => {
 }
 .icon {
   @apply text-22px text-[#999] cursor-pointer transition-all duration-250 hover:text-[#666];
+  &:active {
+    @apply text-primary;
+  }
 }
 
 .code_icon {
   @apply absolute left-4px bottom-4px;
-  &:hover {
-    // @apply rotate-180deg;
-    // @apply rotate-179.99999deg;
-    transform: rotateZ(180deg);
-  }
-  &:active {
-    transform: scale(0.8) rotate(180deg);
-  }
-  &.active {
+  &.code_active {
     @apply text-primary;
   }
 }
 .setting_icon {
   @apply absolute right-4px bottom-4px;
-
   &:hover {
-    @apply rotate-60deg;
-  }
-  &:active {
-    @apply text-primary;
-    transform: scale(0.8) rotate(60deg);
+    @apply i-material-symbols-settings;
   }
 }
 

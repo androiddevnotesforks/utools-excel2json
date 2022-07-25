@@ -325,6 +325,33 @@
                   </a-form-item>
                 </a-col>
               </setting-card>
+              <setting-card title="配置管理">
+                <template #title>
+                  <div class="mr-4px">配置管理</div>
+                  <hover-answer>
+                    不是utools会员？又想在多个设备上同步这些配置？
+                  </hover-answer>
+                </template>
+                <a-col :span="20">
+                  <a-form-item label="导入/导出配置">
+                    <div class="space-x-16px">
+                      <a-button>
+                        <template #icon>
+                          <i class="text-16px mb-1px" i-gg-arrow-bottom-right />
+                        </template>
+                        导入配置
+                      </a-button>
+
+                      <a-button>
+                        <template #icon>
+                          <i class="text-16px mb-1px" i-gg-arrow-top-right />
+                        </template>
+                        导出配置
+                      </a-button>
+                    </div>
+                  </a-form-item>
+                </a-col>
+              </setting-card>
             </section>
           </a-row>
         </a-form>
