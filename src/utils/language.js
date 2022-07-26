@@ -1,4 +1,11 @@
 /** 整合的语言修正options */
+// 百度：泰语：th，西班牙语：spa
+// 腾讯：泰语：th，西班牙语：es
+// 谷歌：同上
+// 阿里：同上
+// 有道：同上
+// 火山：同上
+// 彩云：-
 export const optionsData = {
   tencent: {
     zh: 'zh',

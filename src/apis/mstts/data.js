@@ -14,7 +14,11 @@ const 发音角色Map = new Map([
   ['Conrad', 'de-DE-ConradNeural'],
   ['Elke', 'de-DE-ElkeNeural'],
   ['Maurice', 'fr-FR-MauriceNeural'],
-  ['Denise', 'fr-FR-DeniseNeural']
+  ['Denise', 'fr-FR-DeniseNeural'],
+  ['Alvaro', 'es-ES-AlvaroNeural'],
+  ['Elvira', 'es-ES-ElviraNeural'],
+  ['Achara', 'th-TH-AcharaNeural'],
+  ['Niwat', 'th-TH-NiwatNeural']
 ])
 
 function 获取发音人(str = '') {
@@ -51,6 +55,16 @@ export const 声音映射 = {
     male: 获取发音人('Maurice'),
     female: 获取发音人('Denise'),
     default: 获取发音人('Maurice')
+  },
+  spa: {
+    male: 获取发音人('Alvaro'),
+    female: 获取发音人('Elvira'),
+    default: 获取发音人('Elvira')
+  },
+  th: {
+    male: 获取发音人('Niwat'),
+    female: 获取发音人('Achara'),
+    default: 获取发音人('Niwat')
   },
   yue: {
     male: 获取发音人('云龙'),
