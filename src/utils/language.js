@@ -1,74 +1,124 @@
 /** 整合的语言修正options */
-// 百度：泰语：th，西班牙语：spa
-// 腾讯：泰语：th，西班牙语：es
-// 谷歌：同上
-// 阿里：同上
-// 有道：同上
-// 火山：同上
-// 彩云：-
-export const optionsData = {
-  tencent: {
-    zh: 'zh',
-    en: 'en',
-    jp: 'ja',
-    ru: 'ru',
-    de: 'de',
-    fra: 'fr',
-    cht: 'zh-TW',
-    kor: 'ko',
-    spa: 'es'
+const 语音集合 = {
+  // 简体中文
+  zh: {
+    baidu: 'zh',
+    tencent: 'zh',
+    ali: 'zh',
+    youdao: 'zh-CHS',
+    google: 'zh-CN',
+    caiyun: 'zh',
+    huoshan: 'zh'
   },
-  ali: {
-    zh: 'zh',
-    en: 'en',
-    jp: 'ja',
-    ru: 'ru',
-    de: 'de',
-    fra: 'fr',
-    cht: 'zh-tw',
-    kor: 'ko',
-    yue: 'yue',
-    spa: 'es'
+  // 繁体中文
+  cht: {
+    baidu: 'cht',
+    tencent: 'zh-TW',
+    ali: 'zh-tw',
+    youdao: 'zh-CHT',
+    google: 'zh-TW',
+    caiyun: '',
+    huoshan: 'zh-Hant'
   },
-  youdao: {
-    zh: 'zh-CHS',
-    en: 'en',
-    jp: 'ja',
-    ru: 'ru',
-    de: 'de',
-    fra: 'fr',
-    cht: 'zh-CHT',
-    kor: 'ko',
-    yue: 'yue',
-    spa: 'es'
+  // 文言文
+  wyw: {
+    baidu: 'wyw',
+    tencent: '',
+    ali: '',
+    youdao: '',
+    google: '',
+    caiyun: '',
+    huoshan: ''
   },
-  google: {
-    zh: 'zh-CN',
-    en: 'en',
-    jp: 'ja',
-    ru: 'ru',
-    de: 'de',
-    fra: 'fr',
-    cht: 'zh-TW',
-    kor: 'ko',
-    spa: 'es'
+  // 粤语
+  yue: {
+    baidu: 'yue',
+    tencent: '',
+    ali: 'yue',
+    youdao: 'yue',
+    google: '',
+    caiyun: '',
+    huoshan: ''
   },
-  caiyun: {
-    zh: 'zh',
-    en: 'en',
-    jp: 'ja',
-    spa: 'es'
+  // 英语
+  en: {
+    baidu: 'en',
+    tencent: 'en',
+    ali: 'en',
+    youdao: 'en',
+    google: 'en',
+    caiyun: 'en',
+    huoshan: 'en'
   },
-  huoshan: {
-    zh: 'zh',
-    en: 'en',
-    jp: 'ja',
-    ru: 'ru',
-    de: 'de',
-    fra: 'fr',
-    cht: 'zh-Hant',
-    kor: 'ko',
-    spa: 'es'
+  // 日语
+  jp: {
+    baidu: 'jp',
+    tencent: 'ja',
+    ali: 'ja',
+    youdao: 'ja',
+    google: 'ja',
+    caiyun: 'ja',
+    huoshan: 'ja'
+  },
+  // 俄语
+  ru: {
+    baidu: 'ru',
+    tencent: 'ru',
+    ali: 'ru',
+    youdao: 'ru',
+    google: 'ru',
+    caiyun: 'ru',
+    huoshan: 'ru'
+  },
+  // 德语
+  de: {
+    baidu: 'de',
+    tencent: 'de',
+    ali: 'de',
+    youdao: 'de',
+    google: 'de',
+    caiyun: '',
+    huoshan: 'de'
+  },
+  // 法语
+  fra: {
+    baidu: 'fra',
+    tencent: 'fr',
+    ali: 'fr',
+    youdao: 'fr',
+    google: 'fr',
+    caiyun: '',
+    huoshan: 'fr'
+  },
+  // 韩语
+  kor: {
+    baidu: 'kor',
+    tencent: 'ko',
+    ali: 'ko',
+    youdao: 'ko',
+    google: 'ko',
+    caiyun: '',
+    huoshan: 'ko'
+  },
+  // 泰语
+  th: {
+    baidu: 'th',
+    tencent: 'th',
+    ali: 'th',
+    youdao: 'th',
+    google: 'th',
+    caiyun: 'th',
+    huoshan: 'th'
+  },
+  // 西班牙语
+  spa: {
+    baidu: 'spa',
+    tencent: 'es',
+    ali: 'es',
+    youdao: 'es',
+    google: 'es',
+    caiyun: 'es',
+    huoshan: 'es'
   }
 }
 
@@ -80,9 +130,16 @@ export const optionsData = {
  * @returns
  */
 export function languageCorrectionByTag(tag, { from, to }) {
-  const options = optionsData[tag] || {}
-  const fn = target => {
-    return options[target] || target
+  const fn = 目标语言 => {
+    if (目标语言 === 'auto') {
+      return 目标语言
+    }
+    try {
+      const options = 语音集合[目标语言]
+      return options[tag] || 目标语言
+    } catch (error) {
+      console.error(`语言标识错误: ${tag} - ${目标语言}`)
+    }
   }
 
   return {
