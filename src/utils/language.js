@@ -15,7 +15,8 @@ export const optionsData = {
     de: 'de',
     fra: 'fr',
     cht: 'zh-TW',
-    kor: 'ko'
+    kor: 'ko',
+    spa: 'es'
   },
   ali: {
     zh: 'zh',
@@ -26,7 +27,8 @@ export const optionsData = {
     fra: 'fr',
     cht: 'zh-tw',
     kor: 'ko',
-    yue: 'yue'
+    yue: 'yue',
+    spa: 'es'
   },
   youdao: {
     zh: 'zh-CHS',
@@ -37,7 +39,8 @@ export const optionsData = {
     fra: 'fr',
     cht: 'zh-CHT',
     kor: 'ko',
-    yue: 'yue'
+    yue: 'yue',
+    spa: 'es'
   },
   google: {
     zh: 'zh-CN',
@@ -47,12 +50,14 @@ export const optionsData = {
     de: 'de',
     fra: 'fr',
     cht: 'zh-TW',
-    kor: 'ko'
+    kor: 'ko',
+    spa: 'es'
   },
   caiyun: {
     zh: 'zh',
     en: 'en',
-    jp: 'ja'
+    jp: 'ja',
+    spa: 'es'
   },
   huoshan: {
     zh: 'zh',
@@ -62,7 +67,8 @@ export const optionsData = {
     de: 'de',
     fra: 'fr',
     cht: 'zh-Hant',
-    kor: 'ko'
+    kor: 'ko',
+    spa: 'es'
   }
 }
 
