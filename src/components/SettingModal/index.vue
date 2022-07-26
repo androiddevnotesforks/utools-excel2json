@@ -189,7 +189,10 @@
                         </hover-answer>
                       </div>
                     </template>
-                    <cus-switch v-model="formData.readAloud" />
+                    <a-switch
+                      v-model="formData.readAloud"
+                      class="ml-5px"
+                    ></a-switch>
                   </a-form-item>
                 </a-col>
                 <a-col :span="20">
