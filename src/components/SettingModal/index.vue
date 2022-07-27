@@ -345,12 +345,25 @@
                         导入
                       </a-button>
 
-                      <a-button>
-                        <template #icon>
-                          <i class="text-16px mb-1px" i-gg-arrow-top-right />
+                      <a-popconfirm
+                        position="tl"
+                        content-class="popconfirm_wrapper"
+                        type="warning"
+                        @ok="导出数据()"
+                      >
+                        <template #content>
+                          将导出当前
+                          <span class="text_important"> 「已生效的配置」 </span>
+                          ，如果你刚才修改过设置，还未点确定进行保存，修改过的信息将不会被导出。
+                          <br />确认导出吗？
                         </template>
-                        导出
-                      </a-button>
+                        <a-button>
+                          <template #icon>
+                            <i class="text-16px mb-1px" i-gg-arrow-top-right />
+                          </template>
+                          导出
+                        </a-button>
+                      </a-popconfirm>
                     </div>
                   </a-form-item>
                 </a-col>
@@ -390,9 +403,9 @@
       @cancel="关闭导入弹窗()"
     >
       <div>
-        <a-alert class="mb-16px"
-          >导入配置会覆盖当前配置，请备份好相关信息</a-alert
-        >
+        <a-alert class="mb-16px">
+          导入配置会覆盖当前配置，请备份好相关信息
+        </a-alert>
         <a-textarea
           ref="importModalRef"
           v-model.trim="配置信息"
@@ -526,6 +539,9 @@ function 关闭导入弹窗() {
   配置信息.value = ''
 }
 
+function 导出数据() {
+  console.log('导出数据')
+}
 // 点击弹框取消
 function modal取消() {
   清除引导()
