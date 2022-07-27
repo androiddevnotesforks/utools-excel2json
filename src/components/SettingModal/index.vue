@@ -390,6 +390,9 @@
       @cancel="关闭导入弹窗()"
     >
       <div>
+        <a-alert class="mb-16px"
+          >导入配置会覆盖当前配置，请备份好相关信息</a-alert
+        >
         <a-textarea
           ref="importModalRef"
           v-model.trim="配置信息"
