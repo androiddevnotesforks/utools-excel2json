@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div ref="settingModalRef" class="">
     <a-modal
       :visible="modal可见"
       fullscreen
@@ -338,18 +338,18 @@
                 <a-col :span="20">
                   <a-form-item label="导入/导出配置">
                     <div class="space-x-16px">
-                      <a-button>
+                      <a-button @click="打开导入弹窗()">
                         <template #icon>
                           <i class="text-16px mb-1px" i-gg-arrow-bottom-right />
                         </template>
-                        导入配置
+                        导入
                       </a-button>
 
                       <a-button>
                         <template #icon>
                           <i class="text-16px mb-1px" i-gg-arrow-top-right />
                         </template>
-                        导出配置
+                        导出
                       </a-button>
                     </div>
                   </a-form-item>
@@ -381,6 +381,33 @@
         </div>
       </template>
     </a-modal>
+
+    <!-- 导入弹窗 -->
+    <a-modal
+      v-model:visible="导入弹窗显隐"
+      :popup-container="settingModalRef"
+      title="导入配置"
+      @cancel="关闭导入弹窗()"
+    >
+      <div>
+        <a-textarea
+          ref="importModalRef"
+          v-model.trim="配置信息"
+          :auto-size="{
+            minRows: 6,
+            maxRows: 6
+          }"
+          placeholder="请输入配置信息"
+          allow-clear
+        />
+      </div>
+      <template #footer>
+        <div class="space-x-12px">
+          <a-button @click="关闭导入弹窗()">取消</a-button>
+          <a-button type="primary" @click="导入点击确定()">确定</a-button>
+        </div>
+      </template>
+    </a-modal>
   </div>
 </template>
 
@@ -396,6 +423,7 @@ const globalStore = useGlobalStore()
 const { currentOS } = storeToRefs(globalStore)
 const modal可见 = ref(false) // 弹框的显隐
 const emit = defineEmits(['ok', 'cancel', 'reset'])
+const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
 const formData = reactive({
   homeHasApi: ['baidu', 'tencent', 'youdao', 'ali'], // 首页展示的翻译方式
   textFont: 16, // 文本框字号
@@ -419,6 +447,9 @@ const formData = reactive({
   huoshanAccessKeyId: undefined, // 火山
   huoshanSecretAccessKey: undefined // 火山
 })
+const settingModalRef = ref()
+const importModalRef = ref()
+const 配置信息 = ref('')
 const utools = window?.utools
 const api列表 = ref(api选项) // 翻译方式选项
 const { 获取设置, 保存设置, 重置设置 } = 设置存储(formData)
@@ -470,6 +501,26 @@ function 计算快捷键文案() {
     ['macOS', 'Command+Shift+C']
   ])
   return m.get(currentOS.value) || 'Ctrl+Shift+C / Command+Shift+C'
+}
+function 导入框获得焦点() {
+  importModalRef.value.focus()
+}
+
+function 打开导入弹窗() {
+  导入弹窗显隐.value = true
+  nextTick(() => {
+    导入框获得焦点()
+  })
+}
+
+function 导入点击确定() {
+  console.log('点了确定')
+  关闭导入弹窗()
+}
+
+function 关闭导入弹窗() {
+  导入弹窗显隐.value = false
+  配置信息.value = ''
 }
 
 // 点击弹框取消
