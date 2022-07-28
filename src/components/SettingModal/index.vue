@@ -338,9 +338,12 @@
                 <a-col :span="20">
                   <a-form-item label="导入/导出配置">
                     <div class="space-x-16px">
-                      <a-button @click="打开导入弹窗()">
+                      <a-button
+                        :type="currentTheme === 'light' ? 'outline' : 'primary'"
+                        @click="打开导入弹窗()"
+                      >
                         <template #icon>
-                          <i class="text-16px mb-1px" i-gg-arrow-bottom-right />
+                          <i class="text-16px mb-1px" i-iconoir-import />
                         </template>
                         导入
                       </a-button>
@@ -371,9 +374,13 @@
                             如果你设置了密码，在导入时需要填写相同的密码才能正常导入
                           </p>
                         </template>
-                        <a-button>
+                        <a-button
+                          :type="
+                            currentTheme === 'light' ? 'outline' : 'primary'
+                          "
+                        >
                           <template #icon>
-                            <i class="text-16px mb-1px" i-gg-arrow-top-right />
+                            <i class="text-16px mb-1px" i-iconoir-share-ios />
                           </template>
                           导出
                         </a-button>
@@ -455,7 +462,7 @@ import 设置存储 from './useSettingStore'
 import { useGlobalStore } from '@/store/globalData.js'
 import SettingCard from '../settingCard.vue'
 const globalStore = useGlobalStore()
-const { currentOS } = storeToRefs(globalStore)
+const { currentOS, currentTheme } = storeToRefs(globalStore)
 const modal可见 = ref(false) // 弹框的显隐
 const emit = defineEmits(['ok', 'cancel', 'reset'])
 const 导入弹窗显隐 = ref(false) // 导入弹框的显隐

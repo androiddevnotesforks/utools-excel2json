@@ -97,7 +97,7 @@
           <div
             class="text_wrapper text_readonly flex flex-1 absolute top-0 h-full w-full"
             :class="{ 'code_font-family': 是命名模式 }"
-            @click.right.ctrl="解除结果只读;"
+            @click.right.ctrl="解除结果只读()"
           >
             <a-textarea
               v-model="结果对象.数据.结果文字"
@@ -277,6 +277,7 @@ function 清空输入框() {
 }
 
 function 解除结果只读() {
+  提示.info('结果文本框现已可编辑')
   结果只读.value = false
 }
 
