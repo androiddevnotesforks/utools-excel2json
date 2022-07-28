@@ -424,7 +424,7 @@
         </a-alert>
         <a-textarea
           ref="importModalRef"
-          v-model.trim="配置信息"
+          v-model.trim="导入配置文本"
           :auto-size="{
             minRows: 6,
             maxRows: 6
@@ -456,6 +456,8 @@ import { getDbStorageItem as 获取存储项 } from '@/utils/storage.js'
 import 设置存储 from './useSettingStore'
 import { useGlobalStore } from '@/store/globalData.js'
 import SettingCard from '../settingCard.vue'
+import { useClipboard } from '@vueuse/core'
+
 const globalStore = useGlobalStore()
 const { currentOS, currentTheme } = storeToRefs(globalStore)
 const modal可见 = ref(false) // 弹框的显隐
@@ -488,10 +490,11 @@ const formData = reactive({
 })
 const importModalRef = ref()
 const modalBody = ref()
-const 配置信息 = ref('')
+const 导入配置文本 = ref('')
 const utools = window?.utools
 const api列表 = ref(api选项) // 翻译方式选项
-const { 获取设置, 保存设置, 重置设置 } = 设置存储(formData)
+const { 获取设置, 保存设置, 重置设置, 导出设置, 导入配置 } = 设置存储(formData)
+const { copy: 复制 } = useClipboard() // 复制结果功能
 
 // 默认翻译方式的下拉选项
 const defaultOptions = computed(() => {
@@ -554,16 +557,44 @@ function 打开导入弹窗() {
 
 function 导入点击确定() {
   console.log('点了确定')
-  关闭导入弹窗()
+  导入配置(导入配置文本.value, 导入密码框.value)
+    .then(() => {
+      提示.success({
+        content: '导入成功，欢迎回来~🎉',
+        duration: 2500
+      })
+      关闭导入弹窗()
+      保存设置()
+      emit('ok')
+      关闭弹窗()
+    })
+    .catch(() => {
+      提示.error({
+        content: '导入出错了，再检查一下吧😯',
+        duration: 2500
+      })
+    })
 }
 
 function 关闭导入弹窗() {
   导入弹窗显隐.value = false
-  配置信息.value = ''
+  导入配置文本.value = ''
+  导入密码框.value = ''
 }
 
 function 导出数据() {
-  console.log('导出数据')
+  导出设置(导出密码框.value)
+    .then(async 导出内容 => {
+      导出密码框.value = ''
+      await 复制(导出内容)
+      提示.success({ content: '已将导出设置添加到剪切板', duration: 2500 })
+    })
+    .catch(() => {
+      提示.error({
+        content: '导出出错了，稍后再试一下吧😯',
+        duration: 2500
+      })
+    })
 }
 // 点击弹框取消
 function modal取消() {
