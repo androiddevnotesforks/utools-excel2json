@@ -62,8 +62,8 @@ export const api不支持的大对象 = {
       fra: ['cht', 'wyw', 'yue'],
       spa: ['cht', 'wyw', 'yue'],
       th: ['cht', 'wyw', 'yue'],
-      yue: ['en', 'jp', 'ru', 'kor', 'de', 'fra', 'cht', 'wyw'],
-      cht: ['jp', 'ru', 'kor', 'de', 'fra', 'wyw', 'yue']
+      yue: ['en', 'jp', 'ru', 'kor', 'de', 'fra', 'spa', 'th', 'cht', 'wyw'],
+      cht: ['jp', 'ru', 'kor', 'de', 'fra', 'spa', 'th', 'wyw', 'yue']
     }
   },
   youdao: {

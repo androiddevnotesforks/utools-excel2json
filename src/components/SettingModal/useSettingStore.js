@@ -3,6 +3,7 @@
  */
 
 import { 用户设置存储 } from '@/store/userSetting'
+import { cloneDeep } from 'lodash-es'
 
 import Rabbit from 'crypto-js/rabbit'
 // import AES from 'crypto-js/aes'
@@ -92,7 +93,12 @@ export default function (formData) {
   function 导出设置(密码) {
     return new Promise((resolve, reject) => {
       try {
-        const tempFormData = settingStore.getSetingFormData
+        const tempFormData = cloneDeep(settingStore.getSetingFormData)
+        // 按下面这种方式转字符串，用一个专属的符号标识这个字段是undefined
+        // 转回Object的时候，循环一下，批量把这个特殊符号还原成undefined
+        // const json = JSON.stringify(tempFormData, (_, v) => {
+        //   return v === undefined ? '专属符号表示undefined' : v
+        // })
         const json = JSON.stringify(tempFormData)
         const 密文 = 加密(json, 密码)
         resolve(密文)

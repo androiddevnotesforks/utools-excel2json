@@ -555,25 +555,17 @@ function 打开导入弹窗() {
   })
 }
 
-function 导入点击确定() {
-  console.log('点了确定')
-  导入配置(导入配置文本.value, 导入密码框.value)
-    .then(() => {
-      提示.success({
-        content: '导入成功，欢迎回来~🎉',
-        duration: 2500
-      })
-      关闭导入弹窗()
-      保存设置()
-      emit('ok')
-      关闭弹窗()
-    })
-    .catch(() => {
-      提示.error({
-        content: '导入出错了，再检查一下吧😯',
-        duration: 2500
-      })
-    })
+async function 导入点击确定() {
+  try {
+    await 导入配置(导入配置文本.value, 导入密码框.value)
+    提示.success('导入成功，欢迎回来~🎉')
+    关闭导入弹窗()
+    保存设置()
+    emit('ok')
+    关闭弹窗()
+  } catch (e) {
+    提示.error('导入出错了，可能是配置信息有误或密码错误😯')
+  }
 }
 
 function 关闭导入弹窗() {
@@ -582,19 +574,15 @@ function 关闭导入弹窗() {
   导入密码框.value = ''
 }
 
-function 导出数据() {
-  导出设置(导出密码框.value)
-    .then(async 导出内容 => {
-      导出密码框.value = ''
-      await 复制(导出内容)
-      提示.success({ content: '已将导出设置添加到剪切板', duration: 2500 })
-    })
-    .catch(() => {
-      提示.error({
-        content: '导出出错了，稍后再试一下吧😯',
-        duration: 2500
-      })
-    })
+async function 导出数据() {
+  try {
+    const 导出内容 = await 导出设置(导出密码框.value)
+    导出密码框.value = ''
+    await 复制(导出内容)
+    提示.success('已将导出设置添加到剪切板')
+  } catch (error) {
+    提示.error('导出出错了，稍后再试一下吧😯')
+  }
 }
 // 点击弹框取消
 function modal取消() {
