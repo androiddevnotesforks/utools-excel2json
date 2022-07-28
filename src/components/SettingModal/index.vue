@@ -1,5 +1,5 @@
 <template>
-  <div ref="settingModalRef" class="">
+  <div>
     <a-modal
       :visible="modal可见"
       fullscreen
@@ -15,7 +15,7 @@
           <span>设置</span>
         </div>
       </template>
-      <div>
+      <div ref="modalBody">
         <setting-card title="一些提示">
           <ul class="mb-18px list-disc pl-16px">
             <li>
@@ -348,21 +348,20 @@
                       <a-popconfirm
                         position="tl"
                         content-class="popconfirm_wrapper"
-                        popup-container="settingModalRef"
+                        :popup-container="modalBody"
+                        ok-text="确认导出"
                         @ok="导出数据()"
                       >
-                        <!-- FIXIT：修复他挂载不上去的问题 -->
                         <template #icon>
                           <div class="hidden"></div>
                         </template>
                         <template #content>
-                          <div class="mb-16px">
+                          <div class="mb-8px">
                             将导出当前
                             <span class="text_important">
                               「已生效的配置」
                             </span>
                             ，如果你刚才修改过设置，还未点确定进行保存，修改过的信息将不会被导出。
-                            <br />确认导出吗？
                           </div>
                           <a-input-password
                             v-model.trim="导出密码框"
@@ -413,7 +412,7 @@
     <!-- 导入弹窗 -->
     <a-modal
       v-model:visible="导入弹窗显隐"
-      :popup-container="settingModalRef"
+      :popup-container="modalBody"
       title="导入配置"
       @cancel="关闭导入弹窗()"
     >
@@ -485,8 +484,8 @@ const formData = reactive({
   huoshanAccessKeyId: undefined, // 火山
   huoshanSecretAccessKey: undefined // 火山
 })
-const settingModalRef = ref()
 const importModalRef = ref()
+const modalBody = ref()
 const 配置信息 = ref('')
 const utools = window?.utools
 const api列表 = ref(api选项) // 翻译方式选项

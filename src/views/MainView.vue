@@ -97,12 +97,13 @@
           <div
             class="text_wrapper text_readonly flex flex-1 absolute top-0 h-full w-full"
             :class="{ 'code_font-family': 是命名模式 }"
+            @click.right.ctrl="解除结果只读;"
           >
             <a-textarea
               v-model="结果对象.数据.结果文字"
               class="rounded-b-8px relative z-1"
               :placeholder="下方placeholder"
-              readonly
+              :readonly="结果只读"
             />
             <transition v-if="朗读功能 && !是命名模式" name="fade-in-standard">
               <div
@@ -218,6 +219,7 @@ const {
 } = storeToRefs(存储)
 const 翻译加载 = ref(false) // 是否正在翻译
 const 用户输入 = ref('') // 输入的内容
+const 结果只读 = ref(true) // 结果是否可编辑
 const 结果对象 = reactive({
   数据: {
     结果文字: ``, // 翻译结果
@@ -272,6 +274,10 @@ function 格式化级联显示内容(options) {
 function 清空输入框() {
   用户输入.value = ''
   输入框focus()
+}
+
+function 解除结果只读() {
+  结果只读.value = false
 }
 
 // 输入框获取焦点
