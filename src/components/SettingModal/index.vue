@@ -328,70 +328,65 @@
                   </a-form-item>
                 </a-col>
               </setting-card>
-              <setting-card title="配置管理">
-                <template #title>
-                  <div class="mr-4px">配置管理</div>
-                  <hover-answer>
-                    不是utools会员？又想在多个设备上同步这些配置？
-                  </hover-answer>
-                </template>
-                <a-col :span="20">
-                  <a-form-item label="导入/导出配置">
-                    <div class="space-x-16px">
-                      <a-button
-                        :type="currentTheme === 'light' ? 'outline' : 'primary'"
-                        @click="打开导入弹窗()"
-                      >
-                        <template #icon>
-                          <i class="text-16px mb-1px" i-iconoir-import />
-                        </template>
-                        导入
-                      </a-button>
-
-                      <a-popconfirm
-                        position="tl"
-                        content-class="popconfirm_wrapper"
-                        :popup-container="modalBody"
-                        ok-text="确认导出"
-                        @ok="导出数据()"
-                      >
-                        <template #icon>
-                          <div class="hidden"></div>
-                        </template>
-                        <template #content>
-                          <div class="mb-8px">
-                            将导出当前
-                            <span class="text_important">
-                              「已生效的配置」
-                            </span>
-                            ，如果你刚才修改过设置，还未点确定进行保存，修改过的信息将不会被导出。
-                          </div>
-                          <a-input-password
-                            v-model.trim="导出密码框"
-                            placeholder="密码（非必填）"
-                          ></a-input-password>
-                          <p class="text-12px text-red-500 mt-8px">
-                            如果你设置了密码，在导入时需要填写相同的密码才能正常导入
-                          </p>
-                        </template>
-                        <a-button
-                          :type="
-                            currentTheme === 'light' ? 'outline' : 'primary'
-                          "
-                        >
-                          <template #icon>
-                            <i class="text-16px mb-1px" i-iconoir-share-ios />
-                          </template>
-                          导出
-                        </a-button>
-                      </a-popconfirm>
-                    </div>
-                  </a-form-item>
-                </a-col>
-              </setting-card>
             </section>
           </a-row>
         </a-form>
+        <setting-card title="配置信息" class="mt-18px">
+          <template #title>
+            <div class="mr-4px">配置信息</div>
+            <hover-answer>
+              不是utools会员？又想在多个设备上同步这些配置？导出会将配置信息写入你的剪贴板，利用配置信息可以在其他设备进行导入。
+            </hover-answer>
+          </template>
+          <div class="space-x-16px mb-20px">
+            <a-button
+              :type="currentTheme === 'light' ? 'outline' : 'primary'"
+              @click="打开导入弹窗()"
+            >
+              <template #icon>
+                <i class="text-16px mb-1px" i-iconoir-import />
+              </template>
+              导入
+            </a-button>
+
+            <a-popconfirm
+              position="tl"
+              content-class="popconfirm_wrapper"
+              :popup-container="modalBody"
+              ok-text="确认导出"
+              @ok="导出数据()"
+            >
+              <template #icon>
+                <div class="hidden"></div>
+              </template>
+              <template #content>
+                <div class="mb-8px">
+                  将导出当前
+                  <span class="text_important"> 「已生效的配置」 </span>
+                  ，如果你刚才修改过设置，还未点确定进行保存，请先点确定保存后再进行导出。
+                </div>
+                <a-input-password
+                  v-model.trim="导出密码框"
+                  size="small"
+                  :max-length="20"
+                  show-word-limit
+                  placeholder="密码（非必填）"
+                ></a-input-password>
+                <p class="text-12px text-red-500 mt-4px leading-tight">
+                  如果你设置了密码，在导入时需要填写相同的密码才能正常导入
+                </p>
+              </template>
+              <a-button
+                :type="currentTheme === 'light' ? 'outline' : 'primary'"
+              >
+                <template #icon>
+                  <i class="text-16px mb-1px" i-iconoir-share-ios />
+                </template>
+                导出
+              </a-button>
+            </a-popconfirm>
+          </div>
+        </setting-card>
       </div>
       <template #footer>
         <div class="flex justify-between">

@@ -43,7 +43,7 @@ const props = defineProps({
     .title_wrapper {
       text-shadow: 4px 4px 7px #fff;
       --offset: 4px;
-      text-decoration-color: #a3c8ff99;
+      text-decoration-color: #ffffff88;
     }
   }
 }
