@@ -348,14 +348,29 @@
                       <a-popconfirm
                         position="tl"
                         content-class="popconfirm_wrapper"
-                        type="warning"
+                        popup-container="settingModalRef"
                         @ok="导出数据()"
                       >
+                        <!-- FIXIT：修复他挂载不上去的问题 -->
+                        <template #icon>
+                          <div class="hidden"></div>
+                        </template>
                         <template #content>
-                          将导出当前
-                          <span class="text_important"> 「已生效的配置」 </span>
-                          ，如果你刚才修改过设置，还未点确定进行保存，修改过的信息将不会被导出。
-                          <br />确认导出吗？
+                          <div class="mb-16px">
+                            将导出当前
+                            <span class="text_important">
+                              「已生效的配置」
+                            </span>
+                            ，如果你刚才修改过设置，还未点确定进行保存，修改过的信息将不会被导出。
+                            <br />确认导出吗？
+                          </div>
+                          <a-input-password
+                            v-model.trim="导出密码框"
+                            placeholder="密码（非必填）"
+                          ></a-input-password>
+                          <p class="text-12px text-red-500 mt-8px">
+                            如果你设置了密码，在导入时需要填写相同的密码才能正常导入
+                          </p>
                         </template>
                         <a-button>
                           <template #icon>
@@ -416,6 +431,11 @@
           placeholder="请输入配置信息"
           allow-clear
         />
+        <a-input-password
+          v-model.trim="导入密码框"
+          placeholder="如未设置导入密码，请留空"
+          allow-clear
+        />
       </div>
       <template #footer>
         <div class="space-x-12px">
@@ -440,6 +460,8 @@ const { currentOS } = storeToRefs(globalStore)
 const modal可见 = ref(false) // 弹框的显隐
 const emit = defineEmits(['ok', 'cancel', 'reset'])
 const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
+const 导出密码框 = ref('') // 导出密码框的内容
+const 导入密码框 = ref('') // 导入密码框的内容
 const formData = reactive({
   homeHasApi: ['baidu', 'tencent', 'youdao', 'ali'], // 首页展示的翻译方式
   textFont: 16, // 文本框字号
