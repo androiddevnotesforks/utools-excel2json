@@ -588,8 +588,9 @@ const 设置弹框正在活动 = computed(() => {
 
 // Tab键切换翻译方式
 onKeyStroke('Tab', e => {
-  if (设置弹框正在活动.value) return
   e.preventDefault()
+  if (设置弹框正在活动.value) return
+  if (翻译api数组.value.length <= 1) return
   let 当前api的index = 翻译api数组.value.findIndex(
     i => i.value === 当前翻译api.value
   )
