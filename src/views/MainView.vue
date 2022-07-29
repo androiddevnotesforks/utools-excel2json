@@ -169,14 +169,13 @@
       id="setting-wrapper"
       class="icon setting_icon i-carbon-settings"
       @click="打开设置Modal()"
-    >
-    </i>
+    />
     <!-- 命名翻译模式按钮 -->
-    <div
+    <i
       class="icon code_icon"
       :class="[是命名模式 ? 'code_active i-tabler-code' : 'i-tabler-code-off ']"
       @click="切换模式()"
-    ></div>
+    />
   </div>
 
   <!-- 设置弹窗 -->
@@ -614,10 +613,7 @@ onKeyStroke('Tab', e => {
   }
 }
 .icon {
-  @apply text-22px text-[#999] cursor-pointer transition-all duration-250 hover:text-[#666];
-  &:active {
-    @apply text-primary;
-  }
+  @apply text-22px text-[#999] cursor-pointer transition-all duration-250 hover:text-[#666] active:text-primary;
 }
 
 .code_icon {
@@ -627,10 +623,7 @@ onKeyStroke('Tab', e => {
   }
 }
 .setting_icon {
-  @apply absolute right-4px bottom-4px;
-  &:hover {
-    @apply i-material-symbols-settings;
-  }
+  @apply absolute right-4px bottom-4px hover:i-material-symbols-settings-rounded;
 }
 
 // 文本域公用样式

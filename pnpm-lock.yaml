@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@arco-design/web-vue': ^2.33.1
-  '@iconify/json': ^2.1.84
+  '@iconify/json': ^2.1.85
   '@unocss/preset-rem-to-px': ^0.44.7
   '@unocss/reset': ^0.44.7
   '@vitejs/plugin-vue': ^3.0.1
@@ -44,7 +44,7 @@ dependencies:
 
 devDependencies:
   '@arco-design/web-vue': 2.33.1_vue@3.2.37
-  '@iconify/json': 2.1.84
+  '@iconify/json': 2.1.85
   '@unocss/preset-rem-to-px': 0.44.7
   '@unocss/reset': 0.44.7
   '@vitejs/plugin-vue': 3.0.1_vite@3.0.3+vue@3.2.37
@@ -155,8 +155,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@iconify/json/2.1.84:
-    resolution: {integrity: sha512-e/EbhMina1Pqt7JhFVPbw5iJo0TpJRiJDfVzIKoUjQiucYOVbLKP7WLir+uYF99W1pnXTA+izYETBdEXM3M0nA==}
+  /@iconify/json/2.1.85:
+    resolution: {integrity: sha512-293//mPNSEaKBeiD3CC0DTQlEr3OicBAw6XqMXdKR9qMx8k9ZD+lrcuVNEX2KGlm72W19JnjJjeg5NSHZnbR0g==}
     dependencies:
       '@iconify/types': 1.1.0
       pathe: 0.3.2
