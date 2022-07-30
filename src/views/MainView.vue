@@ -280,8 +280,7 @@ function 结果只读切换() {
     提示.warning('命名模式不可以编辑结果哦')
     return
   }
-  提示.info('结果文本框现已可编辑')
-  结果只读.value = false
+  结果只读.value = !结果只读.value
 }
 
 // 输入框获取焦点
@@ -584,6 +583,11 @@ watchEffect(() => {
   } else {
     重置from和to()
   }
+})
+
+// 监听结果只读
+watch(结果只读, newVal => {
+  提示.info(`结果文本框现已${newVal ? '只读' : '可编辑'}`)
 })
 
 // 设置弹窗的状态
