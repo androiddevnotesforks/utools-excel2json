@@ -277,6 +277,10 @@ function 清空输入框() {
 }
 
 function 解除结果只读() {
+  if (是命名模式.value) {
+    提示.warning('命名模式不可以编辑结果哦')
+    return
+  }
   提示.info('结果文本框现已可编辑')
   结果只读.value = false
 }
@@ -577,6 +581,7 @@ watchEffect(() => {
 watchEffect(() => {
   if (是命名模式.value) {
     form和to的数组.value = ['auto', 'en']
+    结果只读.value = true
   } else {
     重置from和to()
   }
