@@ -30,7 +30,7 @@
                 class="-indent-4px"
                 target="_blank"
                 href="https://www.wolai.com/jtSV7oah6M7rErz2RMFzo"
-                @click="打开url()"
+                @click="打开url('https://www.wolai.com/jtSV7oah6M7rErz2RMFzo')"
               >
                 大力点击这里，了解如何申请~
               </a-link>
@@ -623,12 +623,9 @@ function 关闭弹窗() {
 }
 
 // 打开url
-function 打开url(e) {
-  // TODO: e 取不到值了？
-  console.log(e)
+function 打开url(url) {
   if (!utools) return
-  // utools.shellOpenExternal(e.target.getAttribute('href'))
-  utools.shellOpenExternal('https://www.wolai.com/jtSV7oah6M7rErz2RMFzo')
+  utools.shellOpenExternal(url)
 }
 
 // 重置数据
