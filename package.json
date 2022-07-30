@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.33.1",
-    "@iconify/json": "^2.1.84",
+    "@iconify/json": "^2.1.85",
     "@unocss/preset-rem-to-px": "^0.44.7",
     "@unocss/reset": "^0.44.7",
     "@vitejs/plugin-vue": "^3.0.1",

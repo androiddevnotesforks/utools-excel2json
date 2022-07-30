@@ -97,7 +97,7 @@
           <div
             class="text_wrapper text_readonly flex flex-1 absolute top-0 h-full w-full"
             :class="{ 'code_font-family': 是命名模式 }"
-            @click.right.ctrl="解除结果只读()"
+            @click.right.ctrl="结果只读切换()"
           >
             <a-textarea
               v-model="结果对象.数据.结果文字"
@@ -169,14 +169,13 @@
       id="setting-wrapper"
       class="icon setting_icon i-carbon-settings"
       @click="打开设置Modal()"
-    >
-    </i>
+    />
     <!-- 命名翻译模式按钮 -->
-    <div
+    <i
       class="icon code_icon"
       :class="[是命名模式 ? 'code_active i-tabler-code' : 'i-tabler-code-off ']"
       @click="切换模式()"
-    ></div>
+    />
   </div>
 
   <!-- 设置弹窗 -->
@@ -276,7 +275,7 @@ function 清空输入框() {
   输入框focus()
 }
 
-function 解除结果只读() {
+function 结果只读切换() {
   if (是命名模式.value) {
     提示.warning('命名模式不可以编辑结果哦')
     return
@@ -594,8 +593,9 @@ const 设置弹框正在活动 = computed(() => {
 
 // Tab键切换翻译方式
 onKeyStroke('Tab', e => {
-  if (设置弹框正在活动.value) return
   e.preventDefault()
+  if (设置弹框正在活动.value) return
+  if (翻译api数组.value.length <= 1) return
   let 当前api的index = 翻译api数组.value.findIndex(
     i => i.value === 当前翻译api.value
   )
@@ -619,10 +619,7 @@ onKeyStroke('Tab', e => {
   }
 }
 .icon {
-  @apply text-22px text-[#999] cursor-pointer transition-all duration-250 hover:text-[#666];
-  &:active {
-    @apply text-primary;
-  }
+  @apply text-22px text-[#999] cursor-pointer transition-all duration-250 hover:text-[#666] active:text-primary;
 }
 
 .code_icon {
@@ -632,10 +629,7 @@ onKeyStroke('Tab', e => {
   }
 }
 .setting_icon {
-  @apply absolute right-4px bottom-4px;
-  &:hover {
-    @apply i-material-symbols-settings;
-  }
+  @apply absolute right-4px bottom-4px hover:i-material-symbols-settings-rounded;
 }
 
 // 文本域公用样式
