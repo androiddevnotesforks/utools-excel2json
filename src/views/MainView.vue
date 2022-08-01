@@ -97,9 +97,7 @@
           <div
             class="text_wrapper text_readonly flex flex-1 absolute top-0 h-full w-full"
             :class="{ 'code_font-family': 是命名模式 }"
-            @click.right.exact="() => {}"
-            @click.right.meta="结果只读切换()"
-            @click.right.ctrl="结果只读切换()"
+            @click.right="结果只读切换()"
             @contextmenu.prevent
           >
             <a-textarea
@@ -207,6 +205,9 @@ import use复制模块 from './useCopy'
 import use命名模式模块 from './useNamingMode'
 import use主题 from './useTheme'
 import 关闭窗口 from './useExit'
+import { useGlobalStore } from '@/store/globalData.js'
+const globalStore = useGlobalStore()
+const { currentOS } = storeToRefs(globalStore)
 
 const 语种树的数据 = ref(语种树())
 const form和to的数组 = ref(['auto', 'zh'])
@@ -278,12 +279,23 @@ function 清空输入框() {
   输入框focus()
 }
 
+const { ctrl, command } = useMagicKeys()
+
+// 这个函数目前只有右键才会触发
+// 触发后检查是否按下了必要的按键
 function 结果只读切换() {
-  if (是命名模式.value) {
-    提示.warning('命名模式不可以编辑结果哦')
-    return
+  // 条件：当前为Windows、Linux或是浏览器，且按下了Ctrl
+  const windows和linux条件 =
+    ['Windows', 'Linux', 'browser'].includes(currentOS.value) && ctrl.value
+
+  // 条件：当前为macOS，且按下了Command
+  const mac条件 =
+    ['macOS', 'browser'].includes(currentOS.value) && command.value
+
+  if (windows和linux条件 || mac条件) {
+    if (是命名模式.value) return 提示.warning('命名模式不可以编辑结果哦')
+    结果只读.value = !结果只读.value
   }
-  结果只读.value = !结果只读.value
 }
 
 // 输入框获取焦点
