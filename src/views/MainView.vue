@@ -97,7 +97,10 @@
           <div
             class="text_wrapper text_readonly flex flex-1 absolute top-0 h-full w-full"
             :class="{ 'code_font-family': 是命名模式 }"
+            @click.right.exact="() => {}"
+            @click.right.meta="结果只读切换()"
             @click.right.ctrl="结果只读切换()"
+            @contextmenu.prevent
           >
             <a-textarea
               v-model="结果对象.数据.结果文字"
