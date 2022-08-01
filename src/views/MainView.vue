@@ -433,9 +433,9 @@ function 重置from和to(arr = ['auto', 'zh']) {
   form和to的数组.value = arr
 }
 
-const 特殊符号reg = /[\x21-\x2F\x3A-\x40\x5B-\x60\x7B-\x7E\s]/g
+const 符号数字reg = /[\x21-\x2F\x3A-\x40\x5B-\x60\x7B-\x7E\s\d]/g
 const 去除英文符号的用户输入 = computed(() => {
-  return replace(用户输入.value, 特殊符号reg, '')
+  return replace(用户输入.value, 符号数字reg, '')
 })
 
 function 获取用户输入前几个字(字数 = 0) {
