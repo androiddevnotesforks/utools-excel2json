@@ -191,6 +191,7 @@
 <script setup>
 import { debounce, throttle, replace } from 'lodash-es'
 import { nanoid } from 'nanoid'
+import { noCase } from 'change-case'
 import { Message as 提示 } from '@arco-design/web-vue'
 
 import { storeToRefs } from 'pinia'
@@ -374,7 +375,7 @@ async function 开始翻译(val = 当前翻译api.value, isRefresh) {
 
   翻译加载.value = true
   const obj = {
-    q: 用户输入.value,
+    q: 尝试分词(用户输入.value),
     from: form和to的数组.value[0],
     to: form和to的数组.value[1],
     isRefresh
@@ -389,6 +390,12 @@ async function 开始翻译(val = 当前翻译api.value, isRefresh) {
     结果编号: nanoid()
   }
   翻译加载.value = false
+}
+
+function 尝试分词(str = '') {
+  const reg = /^[A-Za-z-_]+\d*$/g
+  const result = reg.test(str)
+  return result ? noCase(str) : str
 }
 
 // 切换翻译的From和To
