@@ -5,6 +5,7 @@ import { useClipboard } from '@vueuse/core'
 import useUtools from './useUtools'
 import { 用户设置存储 } from '@/store/userSetting'
 import { Message as 提示 } from '@arco-design/web-vue'
+import { useGlobalStore } from '@/store/globalData.js'
 
 export default function (结果对象) {
   const { copyBtnBehavior: 复制按钮行为 } = storeToRefs(用户设置存储())
@@ -64,9 +65,18 @@ export default function (结果对象) {
 
   // 监听复制快捷键
   watchEffect(() => {
-    const windows快捷键 = 组合键['ctrl+shift+c']
-    const mac快捷键 = 组合键['command+shift+c']
-    if ((windows快捷键.value || mac快捷键.value) && 要显示复制按钮.value) {
+    const globalStore = useGlobalStore()
+    const { currentOS } = storeToRefs(globalStore)
+    const windows和linux复制条件 =
+      ['Windows', 'Linux', 'browser'].includes(currentOS.value) &&
+      组合键['ctrl+shift+c']
+    const mac复制条件 =
+      ['macOS', 'browser'].includes(currentOS.value) &&
+      组合键['command+shift+c']
+    if (
+      (windows和linux复制条件.value || mac复制条件.value) &&
+      要显示复制按钮.value
+    ) {
       快捷键复制()
     }
   })
