@@ -340,7 +340,7 @@
           </template>
           <div class="space-x-16px mb-20px">
             <a-button
-              :type="currentTheme === 'light' ? 'outline' : 'primary'"
+              :type="获取当前('主题') === 'light' ? 'outline' : 'primary'"
               @click="打开导入弹窗()"
             >
               <template #icon>
@@ -377,7 +377,7 @@
                 </p>
               </template>
               <a-button
-                :type="currentTheme === 'light' ? 'outline' : 'primary'"
+                :type="获取当前('主题') === 'light' ? 'outline' : 'primary'"
               >
                 <template #icon>
                   <i class="text-16px mb-1px" i-iconoir-share-ios />
@@ -454,12 +454,9 @@ import { apiOptions as api选项 } from '@/assets/translateApiOption.js'
 import { 清除引导, 显示引导 } from '@/utils/showGuide.js'
 import { getDbStorageItem as 获取存储项 } from '@/utils/storage.js'
 import 设置存储 from './useSettingStore'
-import { useGlobalStore } from '@/store/globalData.js'
+import { 获取当前 } from '@/utils/getEnv.js'
 import SettingCard from '../settingCard.vue'
 import { useClipboard } from '@vueuse/core'
-
-const globalStore = useGlobalStore()
-const { currentOS, currentTheme } = storeToRefs(globalStore)
 const modal可见 = ref(false) // 弹框的显隐
 const emit = defineEmits(['ok', 'cancel', 'reset'])
 const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
@@ -537,12 +534,13 @@ function modal确定() {
 
 // 动态快捷键文案
 function 计算快捷键文案() {
+  const 系统 = 获取当前('系统')
   const m = new Map([
     ['Windows', 'Ctrl+Shift+C'],
     ['Linux', 'Ctrl+Shift+C'],
     ['macOS', 'Command+Shift+C']
   ])
-  return m.get(currentOS.value) || 'Ctrl+Shift+C / Command+Shift+C'
+  return m.get(系统) || 'Ctrl+Shift+C / Command+Shift+C'
 }
 function 导入框获得焦点() {
   importModalRef.value.focus()
