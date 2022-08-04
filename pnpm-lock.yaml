@@ -27,7 +27,7 @@ specifiers:
   unplugin-auto-import: ^0.9.5
   unplugin-vue-components: ^0.21.2
   vite: ^3.0.4
-  vite-plugin-chunk-split: ^0.2.6
+  vite-plugin-chunk-split: ^0.2.7
   vue: ^3.2.37
 
 dependencies:
@@ -60,7 +60,7 @@ devDependencies:
   unplugin-auto-import: 0.9.5_acydjjxemu2xp4gd2vardb6gwa
   unplugin-vue-components: 0.21.2_vite@3.0.4+vue@3.2.37
   vite: 3.0.4_5xwlls2uidzrg66uhbtxusn6aa
-  vite-plugin-chunk-split: 0.2.6_vite@3.0.4
+  vite-plugin-chunk-split: 0.2.7_vite@3.0.4
 
 packages:
 
@@ -2510,8 +2510,8 @@ packages:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
     dev: true
 
-  /vite-plugin-chunk-split/0.2.6_vite@3.0.4:
-    resolution: {integrity: sha512-/D+tgMYRqeohD2m35IKBbM9yMQ63GgzROV09NxWfo33EWvNNGkXjVUHxX3FMxQk+SZ6YI42rWb6w+yVjah28WA==}
+  /vite-plugin-chunk-split/0.2.7_vite@3.0.4:
+    resolution: {integrity: sha512-LZa5iQ5rtY1T3+dBRlqMm+g7u5j3e6Hydvt5GFxx4dXKl6j34hvFmH/H+1v1iwf9sh/B84285buSBPC9lXx8+g==}
     peerDependencies:
       vite: '>=2.0.0'
     dependencies:

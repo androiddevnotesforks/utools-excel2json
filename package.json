@@ -38,6 +38,6 @@
     "unplugin-auto-import": "^0.9.5",
     "unplugin-vue-components": "^0.21.2",
     "vite": "^3.0.4",
-    "vite-plugin-chunk-split": "^0.2.6"
+    "vite-plugin-chunk-split": "^0.2.7"
   }
 }
