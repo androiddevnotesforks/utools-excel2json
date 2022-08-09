@@ -1,4 +1,3 @@
-import { pickBy, isNil, isNumber } from 'lodash-es'
 const baseUrl = import.meta.env.VITE_UNIAPI_BASEURL
 
 /**
@@ -56,7 +55,7 @@ export async function 语音朗读生成base64({ text, voice, rate, pitch }) {
  */
 export async function 语音朗读生成ArrayBuffer({ text, voice, rate, pitch }) {
   if (window.servers) {
-    const options = pickBy(
+    const options = _.pickBy(
       {
         text,
         voice,

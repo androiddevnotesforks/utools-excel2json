@@ -36,7 +36,14 @@ export default defineConfig({
         filepath: './.eslintrc-auto-import.json',
         globalsPropValue: true
       },
-      imports: ['vue', '@vueuse/core', 'pinia']
+      imports: [
+        'vue',
+        '@vueuse/core',
+        'pinia',
+        {
+          'lodash-es': [['default', '_']]
+        }
+      ]
     }),
     UnoCSS(),
     Components({

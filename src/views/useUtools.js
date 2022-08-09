@@ -1,5 +1,4 @@
 /** utools 业务逻辑 */
-import { delay as 延迟 } from 'lodash-es'
 import { 获取当前 } from '@/utils/getEnv.js'
 
 export default function (设置弹框Ref, 用户输入, 改变命名模式类型) {
@@ -37,7 +36,7 @@ export default function (设置弹框Ref, 用户输入, 改变命名模式类型
   function 延迟关闭utools(delayTime = 300) {
     if (!utools) return
     return new Promise(resolve => {
-      延迟(function () {
+      _.delay(function () {
         utools.hideMainWindow()
         resolve()
       }, delayTime)

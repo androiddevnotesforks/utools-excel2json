@@ -1,6 +1,5 @@
 /** 用户设置信息 */
 import { defineStore } from 'pinia'
-import { cloneDeep } from 'lodash-es'
 
 import {
   getDbStorageItem,
@@ -133,7 +132,7 @@ export const 用户设置存储 = defineStore('settings', {
   getters: {
     /** 获取首页api选择 */
     getHomeApiOptions: state => {
-      return cloneDeep(apiOptions).filter(
+      return _.cloneDeep(apiOptions).filter(
         i => state.homeOption.indexOf(i.value) !== -1
       )
     },

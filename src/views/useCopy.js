@@ -1,6 +1,5 @@
 /** 复制相关业务 */
 import { storeToRefs } from 'pinia'
-import { throttle } from 'lodash-es'
 import { useClipboard } from '@vueuse/core'
 import useUtools from './useUtools'
 import { 用户设置存储 } from '@/store/userSetting'
@@ -12,7 +11,7 @@ export default function (结果对象) {
   const { copy: 复制 } = useClipboard() // 复制结果功能
   const 组合键 = useMagicKeys()
   // 快捷键复制结果
-  const 快捷键复制 = throttle(async () => {
+  const 快捷键复制 = _.throttle(async () => {
     await 仅复制()
     if (!utools) return
     const 行为 = 复制按钮行为.value
@@ -25,7 +24,7 @@ export default function (结果对象) {
   }, 300)
 
   // 复制按钮事件
-  const 复制按钮事件 = throttle((val = 1) => {
+  const 复制按钮事件 = _.throttle((val = 1) => {
     switch (val) {
       case 1:
         仅复制()

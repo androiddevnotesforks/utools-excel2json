@@ -189,7 +189,6 @@
 </template>
 
 <script setup>
-import { debounce, throttle, replace } from 'lodash-es'
 import { nanoid } from 'nanoid'
 import { noCase } from 'change-case'
 import { Message as 提示 } from '@arco-design/web-vue'
@@ -324,7 +323,7 @@ function 打开设置Modal() {
   设置弹框Ref.value.打开弹窗()
 }
 
-const 切换自动模式 = throttle(() => {
+const 切换自动模式 = _.throttle(() => {
   自动模式.value = !自动模式.value
 }, 500)
 
@@ -333,7 +332,7 @@ watch(自动模式, newVal => {
 })
 
 // 变更模式
-const 切换模式 = throttle(() => {
+const 切换模式 = _.throttle(() => {
   提示.success({
     content: `命名翻译模式${是命名模式.value ? '关闭' : '开启'}`,
     duration: 1000
@@ -440,7 +439,7 @@ function 重置from和to(arr = ['auto', 'zh']) {
 
 const 符号数字reg = /[\x21-\x2F\x3A-\x40\x5B-\x60\x7B-\x7E\s\d]/g
 const 去除英文符号的用户输入 = computed(() => {
-  return replace(用户输入.value, 符号数字reg, '')
+  return _.replace(用户输入.value, 符号数字reg, '')
 })
 
 function 获取用户输入前几个字(字数 = 0) {
@@ -467,7 +466,7 @@ function changeFromTo() {
     const 比例 = 0.35
     const 一部分字 = 获取用户输入前几个字(抽样数量)
     const 一部分字包含汉字数 =
-      replace(一部分字, ChineseReg, '◎').split('◎').length - 1
+      _.replace(一部分字, ChineseReg, '◎').split('◎').length - 1
     const 汉字占一部分字的比例 = parseFloat(
       一部分字包含汉字数 / 抽样数量
     ).toFixed(2)
@@ -508,7 +507,7 @@ watch(页面可见性, (current, previous) => {
 watch(用户输入, () => 防抖翻译())
 
 // 加了一层防抖的翻译
-const 防抖翻译 = debounce(function () {
+const 防抖翻译 = _.debounce(function () {
   开始翻译()
 }, 300)
 

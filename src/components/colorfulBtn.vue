@@ -29,7 +29,6 @@
 </template>
 
 <script setup>
-import { delay } from 'lodash-es'
 import { nanoid } from 'nanoid'
 const btnRef = ref() // 按钮的DOM
 
@@ -52,7 +51,7 @@ function 显示波纹(e) {
 
 // 鼠标抬起时，清除波纹
 function 清除波纹(delayTime = 1100) {
-  delay(() => 删除第一个波纹dom(), delayTime)
+  _.delay(() => 删除第一个波纹dom(), delayTime)
 }
 
 // 清除第一个波纹

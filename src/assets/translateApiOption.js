@@ -1,4 +1,3 @@
-import { cloneDeep } from 'lodash-es'
 import { nanoid } from 'nanoid'
 export const apiOptions = [
   { label: '谷歌翻译', value: 'google' },
@@ -103,7 +102,7 @@ const translateFromOptions = [
 ]
 
 export function 语种树(arr = translateFromOptions) {
-  const tmpArr = cloneDeep(arr)
+  const tmpArr = _.cloneDeep(arr)
   tmpArr.forEach(i => {
     i.children = arr
       .filter(r => r.value !== 'auto')

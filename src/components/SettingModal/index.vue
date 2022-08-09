@@ -74,14 +74,14 @@
                   <a-form-item label="显示顺序">
                     <template #label>
                       <div class="space-x-4px">
-                        <span>显示顺序</span>
+                        <span>主页显示顺序</span>
                         <hover-answer>
                           将根据上面「翻译服务」的勾选顺序进行排序
                         </hover-answer>
                       </div>
                     </template>
                     <div>
-                      {{ 显示顺序 }}
+                      {{ 显示循序text }}
                     </div>
                   </a-form-item>
                 </a-col>
@@ -465,7 +465,6 @@
 
 <script setup>
 import { Message as 提示 } from '@arco-design/web-vue'
-import { cloneDeep } from 'lodash-es'
 import { apiOptions as api选项 } from '@/assets/translateApiOption.js'
 import { 清除引导, 显示引导 } from '@/utils/showGuide.js'
 import { getDbStorageItem as 获取存储项 } from '@/utils/storage.js'
@@ -501,14 +500,20 @@ const formData = reactive({
   huoshanAccessKeyId: undefined, // 火山
   huoshanSecretAccessKey: undefined // 火山
 })
-const 显示顺序 = computed(() => {
-  const 所有服务 = cloneDeep(api列表.value)
-  const 选的服务 = cloneDeep(formData.homeHasApi)
-  return 选的服务
-    .map(i => {
-      return 所有服务.find(j => j.value === i)?.label
-    })
-    .join(' | ')
+const 显示顺序data = computed(() => {
+  const 所有服务 = _.cloneDeep(api列表.value)
+  const 选的服务 = _.cloneDeep(formData.homeHasApi)
+  const arr = 选的服务.map((i, idx) => {
+    return {
+      ...所有服务.find(j => j.value === i),
+      sort: idx
+    }
+  })
+  return arr
+})
+
+const 显示循序text = computed(() => {
+  return 显示顺序data.value.map(i => i.label).join(' | ')
 })
 const importModalRef = ref()
 const modalBody = ref()
