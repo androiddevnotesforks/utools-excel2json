@@ -40,9 +40,7 @@ export default defineConfig({
         'vue',
         '@vueuse/core',
         'pinia',
-        {
-          'lodash-es': [['default', '_']]
-        }
+        { 'lodash-es': [['default', '_']] }
       ]
     }),
     UnoCSS(),
