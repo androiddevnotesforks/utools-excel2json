@@ -40,7 +40,16 @@ export default defineConfig({
         'vue',
         '@vueuse/core',
         'pinia',
-        { 'lodash-es': [['default', '_']] }
+        {
+          'lodash-es': [
+            'pickBy',
+            'cloneDeep',
+            'delay',
+            'throttle',
+            'debounce',
+            'replace'
+          ]
+        }
       ]
     }),
     UnoCSS(),

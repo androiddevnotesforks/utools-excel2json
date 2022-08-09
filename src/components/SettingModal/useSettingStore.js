@@ -92,7 +92,7 @@ export default function (formData) {
   function 导出设置(密码) {
     return new Promise((resolve, reject) => {
       try {
-        const tempFormData = _.cloneDeep(settingStore.getSetingFormData)
+        const tempFormData = cloneDeep(settingStore.getSetingFormData)
         const json = JSON.stringify(tempFormData)
         const 密文 = 加密(json, 密码)
         resolve(密文)

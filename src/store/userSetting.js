@@ -132,7 +132,7 @@ export const 用户设置存储 = defineStore('settings', {
   getters: {
     /** 获取首页api选择 */
     getHomeApiOptions: state => {
-      return _.cloneDeep(apiOptions).filter(
+      return cloneDeep(apiOptions).filter(
         i => state.homeOption.indexOf(i.value) !== -1
       )
     },

@@ -1,7 +1,6 @@
 {
   "name": "utools-easy-translation",
   "private": true,
-  "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "vite --port 6789 --open",
@@ -37,7 +36,7 @@
     "terser": "^5.14.2",
     "unocss": "^0.44.7",
     "unplugin-auto-import": "^0.11.1",
-    "unplugin-vue-components": "^0.22.2",
+    "unplugin-vue-components": "^0.22.3",
     "vite": "^3.0.4",
     "vite-plugin-chunk-split": "^0.2.7"
   }

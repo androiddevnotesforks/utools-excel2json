@@ -51,7 +51,7 @@ function 显示波纹(e) {
 
 // 鼠标抬起时，清除波纹
 function 清除波纹(delayTime = 1100) {
-  _.delay(() => 删除第一个波纹dom(), delayTime)
+  delay(() => 删除第一个波纹dom(), delayTime)
 }
 
 // 清除第一个波纹

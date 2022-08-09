@@ -36,7 +36,7 @@ export default function (设置弹框Ref, 用户输入, 改变命名模式类型
   function 延迟关闭utools(delayTime = 300) {
     if (!utools) return
     return new Promise(resolve => {
-      _.delay(function () {
+      delay(function () {
         utools.hideMainWindow()
         resolve()
       }, delayTime)

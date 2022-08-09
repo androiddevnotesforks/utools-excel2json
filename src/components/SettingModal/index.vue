@@ -501,8 +501,8 @@ const formData = reactive({
   huoshanSecretAccessKey: undefined // 火山
 })
 const 显示顺序data = computed(() => {
-  const 所有服务 = _.cloneDeep(api列表.value)
-  const 选的服务 = _.cloneDeep(formData.homeHasApi)
+  const 所有服务 = cloneDeep(api列表.value)
+  const 选的服务 = cloneDeep(formData.homeHasApi)
   const arr = 选的服务.map((i, idx) => {
     return {
       ...所有服务.find(j => j.value === i),

@@ -102,7 +102,7 @@ const translateFromOptions = [
 ]
 
 export function 语种树(arr = translateFromOptions) {
-  const tmpArr = _.cloneDeep(arr)
+  const tmpArr = cloneDeep(arr)
   tmpArr.forEach(i => {
     i.children = arr
       .filter(r => r.value !== 'auto')

@@ -323,7 +323,7 @@ function 打开设置Modal() {
   设置弹框Ref.value.打开弹窗()
 }
 
-const 切换自动模式 = _.throttle(() => {
+const 切换自动模式 = throttle(() => {
   自动模式.value = !自动模式.value
 }, 500)
 
@@ -332,7 +332,7 @@ watch(自动模式, newVal => {
 })
 
 // 变更模式
-const 切换模式 = _.throttle(() => {
+const 切换模式 = throttle(() => {
   提示.success({
     content: `命名翻译模式${是命名模式.value ? '关闭' : '开启'}`,
     duration: 1000
@@ -438,12 +438,12 @@ function 重置from和to(arr = ['auto', 'zh']) {
 }
 
 const 符号数字reg = /[\x21-\x2F\x3A-\x40\x5B-\x60\x7B-\x7E\s\d]/g
-const 去除英文符号的用户输入 = computed(() => {
-  return _.replace(用户输入.value, 符号数字reg, '')
+const 去除符号和数字的用户输入 = computed(() => {
+  return replace(用户输入.value, 符号数字reg, '')
 })
 
 function 获取用户输入前几个字(字数 = 0) {
-  return 去除英文符号的用户输入.value.substring(0, 字数)
+  return 去除符号和数字的用户输入.value.substring(0, 字数)
 }
 
 // 汉字+汉字符号的正则
@@ -451,7 +451,7 @@ const ChineseReg =
   /[\u4e00-\u9fa5|\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3008|\u3009|\u3010|\u3011|\u300e|\u300f|\u300c|\u300d|\ufe43|\ufe44|\u3014|\u3015|\u2026|\u2014|\uff5e|\ufe4f|\uffe5|[\u3400-\u4DB5\u4E00-\u9FEA\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29]|[\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879][\uDC00-\uDFFF]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0]]/g
 
 const 用户输入字数 = computed(() => {
-  return 去除英文符号的用户输入.value.match(/./gu)?.length || 0
+  return 去除符号和数字的用户输入.value.match(/./gu)?.length || 0
 })
 
 function changeFromTo() {
@@ -466,7 +466,7 @@ function changeFromTo() {
     const 比例 = 0.35
     const 一部分字 = 获取用户输入前几个字(抽样数量)
     const 一部分字包含汉字数 =
-      _.replace(一部分字, ChineseReg, '◎').split('◎').length - 1
+      replace(一部分字, ChineseReg, '◎').split('◎').length - 1
     const 汉字占一部分字的比例 = parseFloat(
       一部分字包含汉字数 / 抽样数量
     ).toFixed(2)
@@ -507,7 +507,7 @@ watch(页面可见性, (current, previous) => {
 watch(用户输入, () => 防抖翻译())
 
 // 加了一层防抖的翻译
-const 防抖翻译 = _.debounce(function () {
+const 防抖翻译 = debounce(function () {
   开始翻译()
 }, 300)
 
