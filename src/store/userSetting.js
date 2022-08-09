@@ -1,6 +1,6 @@
 /** 用户设置信息 */
 import { defineStore } from 'pinia'
-
+import { cloneDeep } from 'lodash-es'
 import {
   getDbStorageItem,
   setDbStorageItem,

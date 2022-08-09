@@ -190,9 +190,9 @@
 
 <script setup>
 import { nanoid } from 'nanoid'
+import { throttle, debounce, replace } from 'lodash-es'
 import { noCase } from 'change-case'
 import { Message as 提示 } from '@arco-design/web-vue'
-
 import { storeToRefs } from 'pinia'
 import { 通用翻译 } from '@/apis/translation/index.js'
 import { 用户设置存储 } from '@/store/userSetting'

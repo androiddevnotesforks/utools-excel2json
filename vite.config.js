@@ -36,21 +36,7 @@ export default defineConfig({
         filepath: './.eslintrc-auto-import.json',
         globalsPropValue: true
       },
-      imports: [
-        'vue',
-        '@vueuse/core',
-        'pinia',
-        {
-          'lodash-es': [
-            'pickBy',
-            'cloneDeep',
-            'delay',
-            'throttle',
-            'debounce',
-            'replace'
-          ]
-        }
-      ]
+      imports: ['vue', '@vueuse/core', 'pinia']
     }),
     UnoCSS(),
     Components({

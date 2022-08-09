@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash-es'
 import { nanoid } from 'nanoid'
 export const apiOptions = [
   { label: '谷歌翻译', value: 'google' },

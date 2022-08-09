@@ -1,5 +1,6 @@
 /** 复制相关业务 */
 import { storeToRefs } from 'pinia'
+import { throttle } from 'lodash-es'
 import { useClipboard } from '@vueuse/core'
 import useUtools from './useUtools'
 import { 用户设置存储 } from '@/store/userSetting'

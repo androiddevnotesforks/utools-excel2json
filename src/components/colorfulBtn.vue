@@ -29,6 +29,7 @@
 </template>
 
 <script setup>
+import { delay } from 'lodash-es'
 import { nanoid } from 'nanoid'
 const btnRef = ref() // 按钮的DOM
 
