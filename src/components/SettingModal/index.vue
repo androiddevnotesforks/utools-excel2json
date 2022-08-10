@@ -80,8 +80,21 @@
                         </hover-answer>
                       </div>
                     </template>
-                    <div>
+                    <!-- <div>
                       {{ 显示循序text }}
+                    </div> -->
+                    <div>
+                      <template
+                        v-for="(item, index) in 显示顺序data"
+                        :key="item"
+                      >
+                        {{ item.label }}
+                        <i
+                          v-if="index < 显示顺序data.length - 1"
+                          class="text-16px mx-10px c-gray"
+                          i-ic-twotone-keyboard-double-arrow-right
+                        />
+                      </template>
                     </div>
                   </a-form-item>
                 </a-col>
@@ -514,8 +527,9 @@ const 显示顺序data = computed(() => {
 })
 
 const 显示循序text = computed(() => {
-  return 显示顺序data.value.map(i => i.label).join(' | ')
+  return 显示顺序data.value.map(i => i.label).join(' >> ')
 })
+
 const importModalRef = ref()
 const modalBody = ref()
 const 导入配置文本 = ref('')
