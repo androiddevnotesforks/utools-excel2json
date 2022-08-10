@@ -132,9 +132,14 @@ export const 用户设置存储 = defineStore('settings', {
   getters: {
     /** 获取首页api选择 */
     getHomeApiOptions: state => {
-      return cloneDeep(apiOptions).filter(
-        i => state.homeOption.indexOf(i.value) !== -1
-      )
+      const tempMap = new Map()
+      cloneDeep(apiOptions).map(item => {
+        tempMap.set(item.value, item)
+      })
+      const result = state.homeOption.map(key => {
+        return tempMap.get(key)
+      })
+      return result
     },
 
     getHomeFontSize: state => {
