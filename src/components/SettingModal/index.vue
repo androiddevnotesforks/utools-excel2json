@@ -5,7 +5,7 @@
       fullscreen
       title-align="start"
       modal-animation-name="zoom-br"
-      body-class="pt-10px"
+      body-class="p-0"
       @open="打开model()"
       @cancel="modal取消()"
     >
@@ -15,407 +15,364 @@
           <span>设置</span>
         </div>
       </template>
-      <div ref="modalBody">
-        <setting-card title="一些提示">
-          <ul class="mb-18px list-disc pl-16px">
-            <li>
-              插件的功能依赖第三方服务，不幸的是，除谷歌翻译外，其他的您需要自行申请之后才能使用它们
-              <i class="text-18px" i-twemoji-slightly-frowning-face></i>
-              ，但是万幸，他们都是免费的
-              <i class="text-18px" i-twemoji-grinning-face></i>
-            </li>
-            <li>
-              <a-link
-                id="guide-link"
-                class="-indent-4px"
-                target="_blank"
-                href="https://www.wolai.com/jtSV7oah6M7rErz2RMFzo"
-                @click="打开url('https://www.wolai.com/jtSV7oah6M7rErz2RMFzo')"
-              >
-                大力点击这里，了解如何申请~
-              </a-link>
-            </li>
-            <li>
-              如果你使用utools的
-              <span class="text_important">全局快捷键</span>
-              功能，请将关键字请设置为 “<span
-                class="select-all text_important text-15px code_font-family"
-                >fjyi</span
-              >” 并打开自动复制，以获得更好的体验
-            </li>
-          </ul>
-        </setting-card>
-        <a-form auto-label-width :model="formData">
-          <a-row>
-            <section class="mt-18px space-y-18px flex-1">
-              <setting-card title="基本设置">
-                <a-col :span="20">
-                  <a-form-item label="翻译方式">
-                    <template #label>
-                      <div class="space-x-4px">
-                        <span>翻译服务</span>
-                        <hover-answer>
-                          在首页您可以通过「Tab」键快速切换翻译服务，最多选择4个翻译服务
-                        </hover-answer>
-                      </div>
-                    </template>
-                    <a-checkbox-group v-model="formData.homeHasApi">
-                      <a-checkbox
-                        v-for="item in api列表"
-                        :key="item.value"
-                        :value="item.value"
-                        :disabled="
-                          !formData.homeHasApi.includes(item.value) &&
-                          formData.homeHasApi?.length >= 可选择的服务数量
-                        "
+      <div ref="modalBody" class="w-full h-full overflow-auto px-20px py-16px">
+        <div class="w-full space-x-16px flex">
+          <div class="w-70% left">
+            <setting-card title="一些提示" @mouseenter="切换文案()">
+              <ul class="mb-18px list-disc pl-16px">
+                <li>
+                  插件的功能依赖第三方服务，不幸的是，除谷歌翻译外，其他的您需要自行申请之后才能使用它们
+                  <i class="text-18px" i-twemoji-slightly-frowning-face></i>
+                  ，但是万幸，他们都是免费的
+                  <i class="text-18px" i-twemoji-grinning-face></i>
+                </li>
+                <li>
+                  <a-link
+                    id="guide-link"
+                    class="-indent-4px"
+                    target="_blank"
+                    href="https://www.wolai.com/jtSV7oah6M7rErz2RMFzo"
+                    @click="
+                      打开url('https://www.wolai.com/jtSV7oah6M7rErz2RMFzo')
+                    "
+                  >
+                    大力点击这里，了解如何申请~
+                  </a-link>
+                </li>
+                <li>
+                  如果你使用utools的
+                  <span class="text_important">全局快捷键</span>
+                  功能，请将关键字请设置为 “<span
+                    class="select-all text_important text-15px code_font-family"
+                    >fjyi</span
+                  >” 并打开自动复制，以获得更好的体验
+                </li>
+              </ul>
+            </setting-card>
+            <a-form auto-label-width :model="formData">
+              <a-row>
+                <section class="mt-18px space-y-18px flex-1">
+                  <setting-card title="基本设置">
+                    <a-col :span="24">
+                      <a-form-item
+                        label="翻译服务"
+                        @mouseenter="切换文案('翻译服务')"
                       >
-                        {{ item.label }}
-                      </a-checkbox>
-                    </a-checkbox-group>
-                  </a-form-item>
-                </a-col>
-                <a-col :span="20">
-                  <a-form-item label="显示顺序">
-                    <template #label>
-                      <div class="space-x-4px">
-                        <span>主页显示顺序</span>
-                        <hover-answer>
-                          将根据上面「翻译服务」的勾选顺序进行排序
-                        </hover-answer>
-                      </div>
-                    </template>
-                    <div class="flex items-center space-x-8px">
-                      <template
-                        v-for="(item, index) in 显示顺序data"
-                        :key="item"
+                        <a-checkbox-group v-model="formData.homeHasApi">
+                          <a-checkbox
+                            v-for="item in api列表"
+                            :key="item.value"
+                            :value="item.value"
+                            :disabled="
+                              !formData.homeHasApi.includes(item.value) &&
+                              formData.homeHasApi?.length >= 可选择的服务数量
+                            "
+                          >
+                            {{ item.label }}
+                          </a-checkbox>
+                        </a-checkbox-group>
+                      </a-form-item>
+                    </a-col>
+                    <a-col :span="24">
+                      <a-form-item
+                        label="主页显示顺序"
+                        @mouseenter="切换文案('主页显示顺序')"
                       >
-                        <i
-                          v-if="index > 0"
-                          i-ic-twotone-keyboard-double-arrow-right
-                          class="mt-1px text-#777:70"
+                        <div class="flex items-center space-x-8px">
+                          <template
+                            v-for="(item, index) in 显示顺序data"
+                            :key="item"
+                          >
+                            <i
+                              v-if="index > 0"
+                              i-ic-twotone-keyboard-double-arrow-right
+                              class="mt-1px text-#777:70"
+                            />
+                            <span>{{ item.label }}</span>
+                          </template>
+                        </div>
+                      </a-form-item>
+                    </a-col>
+                    <a-col :span="24">
+                      <a-form-item
+                        label="文本框字号"
+                        @mouseenter="切换文案('文本框字号')"
+                      >
+                        <a-input-number
+                          v-model="formData.textFont"
+                          :min="14"
+                          :max="20"
+                          placeholder="请输入文本框字号（14 ~ 20）"
+                          mode="button"
+                        >
+                          <template #suffix> 像素 </template>
+                        </a-input-number>
+                      </a-form-item>
+                    </a-col>
+                    <a-col :span="24">
+                      <a-form-item
+                        label="快捷键行为"
+                        @mouseenter="切换文案('快捷键行为')"
+                      >
+                        <a-radio-group v-model="formData.copyBtnBehavior">
+                          <a-radio value="open">仅复制</a-radio>
+                          <a-radio value="close"> 复制后隐藏插件 </a-radio>
+                          <a-radio value="closeInput"> 复制隐藏并输入 </a-radio>
+                        </a-radio-group>
+                      </a-form-item>
+                    </a-col>
+                    <a-col :span="24">
+                      <a-form-item
+                        label="显示按钮"
+                        @mouseenter="切换文案('显示按钮')"
+                      >
+                        <a-checkbox-group v-model="formData.copyBtnShow">
+                          <a-checkbox :value="1">仅复制</a-checkbox>
+                          <a-checkbox :value="2">复制并隐藏</a-checkbox>
+                          <a-checkbox :value="3">复制并输入</a-checkbox>
+                        </a-checkbox-group>
+                      </a-form-item>
+                    </a-col>
+                    <a-col :span="24">
+                      <a-form-item
+                        label="默认目标外语"
+                        class="flex items-start"
+                        @mouseenter="切换文案('默认目标外语')"
+                      >
+                        <a-radio-group
+                          v-model="formData.defaultForeignLanguage"
+                        >
+                          <a-radio value="en"> 英语 </a-radio>
+                          <a-radio value="jp"> 日语 </a-radio>
+                          <a-radio value="ru"> 俄语 </a-radio>
+                        </a-radio-group>
+                      </a-form-item>
+                    </a-col>
+                    <a-col :span="24">
+                      <a-form-item
+                        label="插件主题"
+                        @mouseenter="切换文案('插件主题')"
+                      >
+                        <a-radio-group v-model="formData.theme">
+                          <a-radio value="auto">跟随utools</a-radio>
+                          <a-radio value="light"> 浅色 </a-radio>
+                          <a-radio value="dark"> 深色 </a-radio>
+                        </a-radio-group>
+                      </a-form-item>
+                    </a-col>
+                    <a-col :span="24">
+                      <a-form-item
+                        label="语音朗读"
+                        @mouseenter="切换文案('语音朗读')"
+                      >
+                        <a-switch
+                          v-model="formData.readAloud"
+                          class="ml-5px"
+                        ></a-switch>
+                      </a-form-item>
+                    </a-col>
+                    <a-col :span="24">
+                      <a-form-item
+                        label="朗读偏好"
+                        @mouseenter="切换文案('朗读偏好')"
+                      >
+                        <a-radio-group
+                          v-model="formData.readingPreference"
+                          :disabled="!formData.readAloud"
+                        >
+                          <a-radio value="default">系统默认</a-radio>
+                          <a-radio value="male"> 仅男声 </a-radio>
+                          <a-radio value="female"> 仅女声 </a-radio>
+                        </a-radio-group>
+                      </a-form-item>
+                    </a-col>
+                  </setting-card>
+                  <setting-card
+                    title="翻译服务数据"
+                    @mouseenter="切换文案('翻译服务数据')"
+                  >
+                    <a-divider orientation="left">百度翻译</a-divider>
+                    <a-col :span="24">
+                      <a-form-item label="APP ID">
+                        <a-input
+                          v-model.trim="formData.appid"
+                          placeholder="请输入百度翻译的APP ID"
+                          allow-clear
                         />
-                        <span>{{ item.label }}</span>
-                      </template>
+                      </a-form-item>
+                    </a-col>
+                    <a-col :span="24">
+                      <a-form-item label="密钥">
+                        <a-input-password
+                          v-model.trim="formData.token"
+                          placeholder="请输入百度翻译的密钥"
+                          allow-clear
+                        />
+                      </a-form-item>
+                    </a-col>
+
+                    <a-divider orientation="left">腾讯翻译</a-divider>
+                    <a-col :span="24">
+                      <a-form-item label="Secret Id">
+                        <a-input
+                          v-model.trim="formData.secretId"
+                          placeholder="请输入腾讯翻译Secret Id"
+                          allow-clear
+                        />
+                      </a-form-item>
+                    </a-col>
+                    <a-col :span="24">
+                      <a-form-item label="Secret Key">
+                        <a-input-password
+                          v-model.trim="formData.secretKey"
+                          placeholder="请输入腾讯翻译Secret Key"
+                          allow-clear
+                        />
+                      </a-form-item>
+                    </a-col>
+
+                    <a-divider orientation="left">阿里翻译</a-divider>
+                    <a-col :span="24">
+                      <a-form-item label="Secret Id">
+                        <a-input
+                          v-model.trim="formData.accessKeyId"
+                          placeholder="请输入阿里云AccessKeyID"
+                          allow-clear
+                        />
+                      </a-form-item>
+                    </a-col>
+                    <a-col :span="24">
+                      <a-form-item label="Secret Key">
+                        <a-input-password
+                          v-model.trim="formData.accessKeySecret"
+                          placeholder="请输入阿里云Access Key Secret"
+                          allow-clear
+                        />
+                      </a-form-item>
+                    </a-col>
+
+                    <a-divider orientation="left">有道翻译</a-divider>
+                    <a-col :span="24">
+                      <a-form-item label="应用ID">
+                        <a-input
+                          v-model.trim="formData.youdaoId"
+                          placeholder="请输入有道智云应用ID"
+                          allow-clear
+                        />
+                      </a-form-item>
+                    </a-col>
+                    <a-col :span="24">
+                      <a-form-item label="应用密钥">
+                        <a-input-password
+                          v-model.trim="formData.youdaoSecret"
+                          placeholder="请输入有道智云应用密钥"
+                          allow-clear
+                        />
+                      </a-form-item>
+                    </a-col>
+
+                    <a-divider orientation="left">彩云小译</a-divider>
+                    <a-col :span="24">
+                      <a-form-item label="令牌">
+                        <a-input-password
+                          v-model.trim="formData.caiyunToken"
+                          placeholder="请输入彩云小译令牌"
+                          allow-clear
+                        />
+                      </a-form-item>
+                    </a-col>
+
+                    <a-divider orientation="left">火山翻译</a-divider>
+                    <a-col :span="24">
+                      <a-form-item label="AccessKeyID">
+                        <a-input
+                          v-model.trim="formData.huoshanAccessKeyId"
+                          placeholder="请输入火山翻译AccessKeyID"
+                          allow-clear
+                        />
+                      </a-form-item>
+                    </a-col>
+                    <a-col :span="24">
+                      <a-form-item label="SecretAccessKey">
+                        <a-input-password
+                          v-model.trim="formData.huoshanSecretAccessKey"
+                          placeholder="请输入火山翻译SecretAccessKey"
+                          allow-clear
+                        />
+                      </a-form-item>
+                    </a-col>
+                  </setting-card>
+                </section>
+              </a-row>
+            </a-form>
+            <setting-card
+              title="配置信息"
+              class="mt-18px"
+              @mouseenter="切换文案('配置信息')"
+            >
+              <div class="space-x-16px mb-20px">
+                <a-button
+                  :type="获取当前('主题') === 'light' ? 'outline' : 'primary'"
+                  @click="打开导入弹窗()"
+                >
+                  <template #icon>
+                    <i class="text-16px mb-1px" i-iconoir-import />
+                  </template>
+                  导入
+                </a-button>
+
+                <a-popconfirm
+                  position="tl"
+                  content-class="popconfirm_wrapper"
+                  :popup-container="modalBody"
+                  ok-text="确认导出"
+                  @ok="导出数据()"
+                >
+                  <template #icon>
+                    <div class="hidden"></div>
+                  </template>
+                  <template #content>
+                    <div class="mb-8px">
+                      将导出当前
+                      <span class="text_important"> 「已生效的配置」 </span>
+                      ，如果你刚才修改过设置，还未点确定进行保存，请先点确定保存后再进行导出。
                     </div>
-                  </a-form-item>
-                </a-col>
-                <a-col :span="20">
-                  <a-form-item label="文本框字号">
-                    <a-input-number
-                      v-model="formData.textFont"
-                      :min="14"
-                      :max="20"
-                      placeholder="请输入文本框字号（14 ~ 20）"
-                      mode="button"
-                    >
-                      <template #suffix> 像素 </template>
-                    </a-input-number>
-                  </a-form-item>
-                </a-col>
-                <a-col :span="20">
-                  <a-form-item label="快捷键行为">
-                    <template #label>
-                      <div class="space-x-4px">
-                        <span>快捷键行为</span>
-                        <hover-answer>
-                          {{ 计算快捷键文案() + ' ' }}
-                          可进行快捷键复制，该选项可设置按下快捷键后会发生什么
-                        </hover-answer>
-                      </div>
+                    <a-input-password
+                      v-model.trim="导出密码框"
+                      size="small"
+                      :max-length="20"
+                      show-word-limit
+                      placeholder="密码（非必填）"
+                    ></a-input-password>
+                    <p class="text-12px text-red-500 mt-4px leading-tight">
+                      如果你设置了密码，在导入时需要填写相同的密码才能正常导入
+                    </p>
+                  </template>
+                  <a-button
+                    :type="获取当前('主题') === 'light' ? 'outline' : 'primary'"
+                  >
+                    <template #icon>
+                      <i class="text-16px mb-1px" i-iconoir-share-ios />
                     </template>
-                    <a-radio-group v-model="formData.copyBtnBehavior">
-                      <a-radio value="open">仅复制</a-radio>
-                      <a-radio value="close"> 复制并隐藏插件 </a-radio>
-                      <a-radio value="closeInput"> 复制隐藏并输入 </a-radio>
-                    </a-radio-group>
-                  </a-form-item>
-                </a-col>
-                <a-col :span="20">
-                  <a-form-item label="显示按钮">
-                    <template #label>
-                      <div class="space-x-4px">
-                        <span>显示按钮</span>
-                        <hover-answer>
-                          翻译页底部会显示的按钮，请根据您的使用习惯勾选，勾选多个将会在翻译完成后，底部显示多个按钮，以应对不同的情况
-                        </hover-answer>
-                      </div>
-                    </template>
-                    <a-checkbox-group v-model="formData.copyBtnShow">
-                      <a-checkbox :value="1">仅复制</a-checkbox>
-                      <a-checkbox :value="2">复制并隐藏</a-checkbox>
-                      <a-checkbox :value="3">复制并输入</a-checkbox>
-                    </a-checkbox-group>
-                  </a-form-item>
-                </a-col>
-                <a-col :span="20">
-                  <a-form-item label="默认目标外语" class="flex items-start">
-                    <template #label>
-                      <div class="space-x-4px">
-                        <span>默认目标外语</span>
-                        <hover-answer>
-                          <ul class="list-disc pl-16px space-y-10px">
-                            <li>
-                              如果在翻译界面开启了
-                              <span class="text_important">
-                                「智能切换语种」
-                              </span>
-                              ，将在翻译之前判断输入是否为中文，如果
-                              <span class="text_important"> 认定为中文 </span>
-                              ，将会自动切换
-                              「目标语种」为一个外语，该选项用来指定这个外语默认是什么，若
-                              <span class="text_important"> 不是中文 </span>
-                              ，则会切换为 “自动 → 中文” 尽可能免去你
-                              手动调整目标语种的这一步骤
-                            </li>
-                            <li>
-                              如果
-                              <span class="text_important">手动切换了</span>
-                              「原语种」或「目标语种」，易翻会认为自己猜错了，将
-                              <span class="text_important"
-                                >自动关闭「智能切换语种」功能</span
-                              >
-                              ，直至
-                              <span class="text_important">插件退出</span>
-                              ，但是你依然可以在语种下拉选择的左侧
-                              <span class="text_important"> 手动开启 </span>
-                            </li>
-                            <li>
-                              智能切换语种的算法刚刚起步，如果经常不能正确识别，希望可以带着脱敏后的文字联系我们，我们会尽力优化😊
-                            </li>
-                          </ul>
-                        </hover-answer>
-                      </div>
-                    </template>
-                    <a-radio-group v-model="formData.defaultForeignLanguage">
-                      <a-radio value="en"> 英语 </a-radio>
-                      <a-radio value="jp"> 日语 </a-radio>
-                      <a-radio value="ru"> 俄语 </a-radio>
-                    </a-radio-group>
-                  </a-form-item>
-                </a-col>
-                <a-col :span="20">
-                  <a-form-item label="插件主题">
-                    <a-radio-group v-model="formData.theme">
-                      <a-radio value="auto">跟随utools</a-radio>
-                      <a-radio value="light"> 浅色 </a-radio>
-                      <a-radio value="dark"> 深色 </a-radio>
-                    </a-radio-group>
-                  </a-form-item>
-                </a-col>
-                <a-col :span="20">
-                  <a-form-item label="语音朗读">
-                    <template #label>
-                      <div class="space-x-4px">
-                        <span>语音朗读</span>
-                        <hover-answer>
-                          如果出现朗读失败，可以用以下方式解决<br />
-                          <ul class="list-disc pl-16px">
-                            <li>再次点击按钮重试</li>
-                            <li>保证设备的时间正确</li>
-                            <li>减少需要朗读的文字</li>
-                            <li>使用一个更科学的上网方式</li>
-                          </ul>
-                        </hover-answer>
-                      </div>
-                    </template>
-                    <a-switch
-                      v-model="formData.readAloud"
-                      class="ml-5px"
-                    ></a-switch>
-                  </a-form-item>
-                </a-col>
-                <a-col :span="20">
-                  <a-form-item label="朗读偏好">
-                    <template #label>
-                      <div class="space-x-4px">
-                        <span>朗读性别偏好</span>
-                        <hover-answer>
-                          系统默认是我们认为还不错的声音，不同的语种下有男声也有女声，你可以通过更改此选项，来指定朗读声音的性别
-                        </hover-answer>
-                      </div>
-                    </template>
-                    <a-radio-group
-                      v-model="formData.readingPreference"
-                      :disabled="!formData.readAloud"
-                    >
-                      <a-radio value="default">系统默认</a-radio>
-                      <a-radio value="male"> 仅男声 </a-radio>
-                      <a-radio value="female"> 仅女声 </a-radio>
-                    </a-radio-group>
-                  </a-form-item>
-                </a-col>
-              </setting-card>
-              <setting-card title="翻译服务数据">
-                <a-divider orientation="left">百度翻译</a-divider>
-                <a-col :span="20">
-                  <a-form-item label="APP ID">
-                    <a-input
-                      v-model.trim="formData.appid"
-                      placeholder="请输入百度翻译的APP ID"
-                      allow-clear
-                    />
-                  </a-form-item>
-                </a-col>
-                <a-col :span="20">
-                  <a-form-item label="密钥">
-                    <a-input-password
-                      v-model.trim="formData.token"
-                      placeholder="请输入百度翻译的密钥"
-                      allow-clear
-                    />
-                  </a-form-item>
-                </a-col>
-
-                <a-divider orientation="left">腾讯翻译</a-divider>
-                <a-col :span="20">
-                  <a-form-item label="Secret Id">
-                    <a-input
-                      v-model.trim="formData.secretId"
-                      placeholder="请输入腾讯翻译Secret Id"
-                      allow-clear
-                    />
-                  </a-form-item>
-                </a-col>
-                <a-col :span="20">
-                  <a-form-item label="Secret Key">
-                    <a-input-password
-                      v-model.trim="formData.secretKey"
-                      placeholder="请输入腾讯翻译Secret Key"
-                      allow-clear
-                    />
-                  </a-form-item>
-                </a-col>
-
-                <a-divider orientation="left">阿里翻译</a-divider>
-                <a-col :span="20">
-                  <a-form-item label="Secret Id">
-                    <a-input
-                      v-model.trim="formData.accessKeyId"
-                      placeholder="请输入阿里云AccessKeyID"
-                      allow-clear
-                    />
-                  </a-form-item>
-                </a-col>
-                <a-col :span="20">
-                  <a-form-item label="Secret Key">
-                    <a-input-password
-                      v-model.trim="formData.accessKeySecret"
-                      placeholder="请输入阿里云Access Key Secret"
-                      allow-clear
-                    />
-                  </a-form-item>
-                </a-col>
-
-                <a-divider orientation="left">有道翻译</a-divider>
-                <a-col :span="20">
-                  <a-form-item label="应用ID">
-                    <a-input
-                      v-model.trim="formData.youdaoId"
-                      placeholder="请输入有道智云应用ID"
-                      allow-clear
-                    />
-                  </a-form-item>
-                </a-col>
-                <a-col :span="20">
-                  <a-form-item label="应用密钥">
-                    <a-input-password
-                      v-model.trim="formData.youdaoSecret"
-                      placeholder="请输入有道智云应用密钥"
-                      allow-clear
-                    />
-                  </a-form-item>
-                </a-col>
-
-                <a-divider orientation="left">彩云小译</a-divider>
-                <a-col :span="20">
-                  <a-form-item label="令牌">
-                    <a-input-password
-                      v-model.trim="formData.caiyunToken"
-                      placeholder="请输入彩云小译令牌"
-                      allow-clear
-                    />
-                  </a-form-item>
-                </a-col>
-
-                <a-divider orientation="left">火山翻译</a-divider>
-                <a-col :span="20">
-                  <a-form-item label="AccessKeyID">
-                    <a-input
-                      v-model.trim="formData.huoshanAccessKeyId"
-                      placeholder="请输入火山翻译AccessKeyID"
-                      allow-clear
-                    />
-                  </a-form-item>
-                </a-col>
-                <a-col :span="20">
-                  <a-form-item label="SecretAccessKey">
-                    <a-input-password
-                      v-model.trim="formData.huoshanSecretAccessKey"
-                      placeholder="请输入火山翻译SecretAccessKey"
-                      allow-clear
-                    />
-                  </a-form-item>
-                </a-col>
-              </setting-card>
-            </section>
-          </a-row>
-        </a-form>
-        <setting-card title="配置信息" class="mt-18px">
-          <template #title>
-            <div class="mr-4px">配置信息</div>
-            <hover-answer>
-              不是utools会员？又想在多个设备上同步这些配置？导出会将配置信息写入你的剪贴板，利用配置信息可以在其他设备进行导入。
-            </hover-answer>
-          </template>
-          <div class="space-x-16px mb-20px">
-            <a-button
-              :type="获取当前('主题') === 'light' ? 'outline' : 'primary'"
-              @click="打开导入弹窗()"
-            >
-              <template #icon>
-                <i class="text-16px mb-1px" i-iconoir-import />
-              </template>
-              导入
-            </a-button>
-
-            <a-popconfirm
-              position="tl"
-              content-class="popconfirm_wrapper"
-              :popup-container="modalBody"
-              ok-text="确认导出"
-              @ok="导出数据()"
-            >
-              <template #icon>
-                <div class="hidden"></div>
-              </template>
-              <template #content>
-                <div class="mb-8px">
-                  将导出当前
-                  <span class="text_important"> 「已生效的配置」 </span>
-                  ，如果你刚才修改过设置，还未点确定进行保存，请先点确定保存后再进行导出。
-                </div>
-                <a-input-password
-                  v-model.trim="导出密码框"
-                  size="small"
-                  :max-length="20"
-                  show-word-limit
-                  placeholder="密码（非必填）"
-                ></a-input-password>
-                <p class="text-12px text-red-500 mt-4px leading-tight">
-                  如果你设置了密码，在导入时需要填写相同的密码才能正常导入
-                </p>
-              </template>
-              <a-button
-                :type="获取当前('主题') === 'light' ? 'outline' : 'primary'"
-              >
-                <template #icon>
-                  <i class="text-16px mb-1px" i-iconoir-share-ios />
-                </template>
-                导出
-              </a-button>
-            </a-popconfirm>
+                    导出
+                  </a-button>
+                </a-popconfirm>
+              </div>
+            </setting-card>
           </div>
-        </setting-card>
+          <div class="flex-1 relative right">
+            <setting-card
+              class="sticky top-0 pb-16px"
+              title="选项说明"
+              :style="{ height: `${modalHeight}px` }"
+            >
+              <div
+                class="flex flex-col flex-1 overflow-hidden"
+                v-html="解释文案 || '鼠标悬浮左侧选项上可查看对应选项说明'"
+              ></div>
+            </setting-card>
+          </div>
+        </div>
       </div>
       <template #footer>
         <div class="flex justify-between">
@@ -485,13 +442,16 @@ import { 清除引导, 显示引导 } from '@/utils/showGuide.js'
 import { getDbStorageItem as 获取存储项 } from '@/utils/storage.js'
 import 设置存储 from './useSettingStore'
 import { 获取当前 } from '@/utils/getEnv.js'
-import SettingCard from '../settingCard.vue'
 import { useClipboard } from '@vueuse/core'
-const modal可见 = ref(false) // 弹框的显隐
+import { 文案映射 } from './setExplanation.js'
+const modal可见 = ref(true) // 弹框的显隐
 const emit = defineEmits(['ok', 'cancel', 'reset'])
 const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
 const 导出密码框 = ref('') // 导出密码框的内容
 const 导入密码框 = ref('') // 导入密码框的内容
+const modalBody = ref()
+const { height: modalHeight } = useElementSize(modalBody)
+const 解释文案 = ref('') // 解释文案
 const formData = reactive({
   homeHasApi: ['baidu', 'tencent', 'youdao', 'ali'], // 首页展示的翻译方式
   textFont: 16, // 文本框字号
@@ -528,7 +488,6 @@ const 显示顺序data = computed(() => {
 })
 
 const importModalRef = ref()
-const modalBody = ref()
 const 导入配置文本 = ref('')
 const utools = window?.utools
 const api列表 = ref(api选项) // 翻译方式选项
@@ -574,16 +533,6 @@ function modal确定() {
   关闭弹窗()
 }
 
-// 动态快捷键文案
-function 计算快捷键文案() {
-  const 系统 = 获取当前('系统')
-  const m = new Map([
-    ['Windows', 'Ctrl+Shift+C'],
-    ['Linux', 'Ctrl+Shift+C'],
-    ['macOS', 'Command+Shift+C']
-  ])
-  return m.get(系统) || 'Ctrl+Shift+C / Command+Shift+C'
-}
 function 导入框获得焦点() {
   importModalRef.value.focus()
 }
@@ -680,6 +629,14 @@ function 重置数据() {
   }, 300)
 }
 
+function 切换文案(id = '') {
+  if (!id) {
+    解释文案.value = ''
+    return
+  }
+  解释文案.value = `<h2 class="text-20px">${id}:</h2>${文案映射?.[id]}`
+}
+
 // 暴露打开弹窗的函数，供父组件调用
 defineExpose({
   打开弹窗,
@@ -688,8 +645,4 @@ defineExpose({
 })
 </script>
 
-<style lang="scss" scoped>
-.text_important {
-  @apply text-red-500 font-bold;
-}
-</style>
+<style lang="scss" scoped></style>

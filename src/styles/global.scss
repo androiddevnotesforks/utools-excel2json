@@ -55,6 +55,10 @@ body,
   background-color: #fff;
 }
 
+.text_important {
+  @apply text-red-500 font-bold;
+}
+
 .code_font-family {
   font-family: 'JetBrains Mono NL', Menlo, Monaco, Consolas, 'HarmonyOS Sans SC',
     'HarmonyOS' !important;

@@ -1,14 +1,14 @@
 <template>
   <div
     border="~ #f2f3f4 dark:#444"
-    class="setting_card rounded-4px overflow-hidden w-full"
+    class="setting_card rounded-4px overflow-hidden w-full flex flex-col"
   >
     <div
       class="title_wrapper bg-#2f54ea:5 flex items-center py-4px px-22px text-16px select-none dark:(bg-#333)"
     >
       <slot name="title">{{ props.title }}</slot>
     </div>
-    <div class="px-18px pt-16px">
+    <div class="px-16px pt-16px flex flex-col overflow-hidden">
       <slot></slot>
     </div>
   </div>
