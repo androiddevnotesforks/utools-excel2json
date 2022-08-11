@@ -88,7 +88,7 @@
                         <i
                           v-if="index > 0"
                           i-ic-twotone-keyboard-double-arrow-right
-                          class="mx-8px text-#777:60"
+                          class="mx-8px mt-1px text-#777:60"
                         />
                         {{ item.label }}
                       </template>
