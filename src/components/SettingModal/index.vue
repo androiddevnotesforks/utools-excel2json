@@ -55,7 +55,7 @@
                       <div class="space-x-4px">
                         <span>翻译服务</span>
                         <hover-answer>
-                          在首页您可以通过「Tab」键快速切换翻译服务
+                          在首页您可以通过「Tab」键快速切换翻译服务，最多选择4个翻译服务
                         </hover-answer>
                       </div>
                     </template>
@@ -64,6 +64,10 @@
                         v-for="item in api列表"
                         :key="item.value"
                         :value="item.value"
+                        :disabled="
+                          !formData.homeHasApi.includes(item.value) &&
+                          formData.homeHasApi?.length >= 可选择的服务数量
+                        "
                       >
                         {{ item.label }}
                       </a-checkbox>
@@ -88,7 +92,7 @@
                         <i
                           v-if="index > 0"
                           i-ic-twotone-keyboard-double-arrow-right
-                          class="mt-1px text-#777:60"
+                          class="mt-1px text-#777:70"
                         />
                         <span>{{ item.label }}</span>
                       </template>
@@ -537,11 +541,11 @@ const defaultOptions = computed(() => {
 })
 
 const 首页的api数组 = ref([]) // 当前首页展示的翻译方式
-
+const 可选择的服务数量 = ref(4)
 // 监听首页翻译方式的checkbox勾选数量
 watchEffect(() => {
   const 已选择的api长度 = formData.homeHasApi?.length
-  if (已选择的api长度 > 4) {
+  if (已选择的api长度 > 可选择的服务数量.value) {
     formData.homeHasApi = 首页的api数组.value
     提示.warning({ content: '最多只能选择4个翻译方式哦~', duration: 2500 })
   } else if (已选择的api长度 < 1) {
