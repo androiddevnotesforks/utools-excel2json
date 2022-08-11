@@ -17,9 +17,9 @@
       </template>
       <div ref="modalBody" class="w-full h-full overflow-auto px-20px py-16px">
         <div class="w-full space-x-16px flex">
-          <div class="w-70% left">
+          <div class="w-70% left" @mouseleave="切换文案()">
             <setting-card title="一些提示" @mouseenter="切换文案()">
-              <ul class="mb-18px list-disc pl-16px">
+              <ul class="mb-16px list-disc pl-16px">
                 <li>
                   插件的功能依赖第三方服务，不幸的是，除谷歌翻译外，其他的您需要自行申请之后才能使用它们
                   <i class="text-18px" i-twemoji-slightly-frowning-face></i>
@@ -51,7 +51,7 @@
             </setting-card>
             <a-form auto-label-width :model="formData">
               <a-row>
-                <section class="mt-18px space-y-18px flex-1">
+                <section class="mt-16px space-y-16px flex-1">
                   <setting-card title="基本设置">
                     <a-col :span="24">
                       <a-form-item
@@ -307,7 +307,7 @@
             </a-form>
             <setting-card
               title="配置信息"
-              class="mt-18px"
+              class="mt-16px"
               @mouseenter="切换文案('配置信息')"
             >
               <div class="space-x-16px mb-20px">
@@ -444,7 +444,7 @@ import 设置存储 from './useSettingStore'
 import { 获取当前 } from '@/utils/getEnv.js'
 import { useClipboard } from '@vueuse/core'
 import { 文案映射 } from './setExplanation.js'
-const modal可见 = ref(true) // 弹框的显隐
+const modal可见 = ref(false) // 弹框的显隐
 const emit = defineEmits(['ok', 'cancel', 'reset'])
 const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
 const 导出密码框 = ref('') // 导出密码框的内容
