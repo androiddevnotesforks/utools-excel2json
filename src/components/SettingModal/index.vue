@@ -80,7 +80,7 @@
                         </hover-answer>
                       </div>
                     </template>
-                    <div class="flex items-center">
+                    <div class="flex items-center space-x-8px">
                       <template
                         v-for="(item, index) in 显示顺序data"
                         :key="item"
@@ -88,9 +88,9 @@
                         <i
                           v-if="index > 0"
                           i-ic-twotone-keyboard-double-arrow-right
-                          class="mx-8px mt-1px text-#777:60"
+                          class="mt-1px text-#777:60"
                         />
-                        {{ item.label }}
+                        <span>{{ item.label }}</span>
                       </template>
                     </div>
                   </a-form-item>
