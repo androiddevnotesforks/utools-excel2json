@@ -1,6 +1,6 @@
 /** 主题相关业务 */
-import { setTheme } from '@/utils/setTheme.js'
 import { storeToRefs } from 'pinia'
+import { setTheme } from '@/utils/setTheme'
 import { 用户设置存储 } from '@/store/userSetting'
 
 export default function () {

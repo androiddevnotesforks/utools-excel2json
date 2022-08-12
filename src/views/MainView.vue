@@ -79,7 +79,7 @@
         :style="{
           minHeight: '22%',
           maxHeight: '78%',
-          height: 'calc(50% - 21.5px)'
+          height: 'calc(50% - 21.5px)',
         }"
       >
         <div class="flex h-full relative">
@@ -120,7 +120,7 @@
                 <MimicryBtn v-show="音频Url" @click="正在播放 = !正在播放">
                   <i
                     :class="[
-                      正在播放 ? 'i-ic-twotone-pause' : 'i-ri-play-fill'
+                      正在播放 ? 'i-ic-twotone-pause' : 'i-ri-play-fill',
                     ]"
                   ></i>
                 </MimicryBtn>
@@ -188,24 +188,24 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { nanoid } from 'nanoid'
-import { throttle, debounce, replace } from 'lodash-es'
+import { debounce, replace, throttle } from 'lodash-es'
 import { noCase } from 'change-case'
 import { Message as 提示 } from '@arco-design/web-vue'
 import { storeToRefs } from 'pinia'
-import { 通用翻译 } from '@/apis/translation/index.js'
-import { 用户设置存储 } from '@/store/userSetting'
-import { 显示引导, 清除引导 } from '@/utils/showGuide.js'
-import { getDbStorageItem as 获取存储项 } from '@/utils/storage.js'
-import { 语种树, api不支持的大对象 } from '@/assets/translateApiOption.js'
 import useUtools from './useUtools'
 import use语音朗读模块 from './useVoice'
 import use复制模块 from './useCopy'
 import use命名模式模块 from './useNamingMode'
 import use主题 from './useTheme'
 import 关闭窗口 from './useExit'
-import { 获取当前 } from '@/utils/getEnv.js'
+import { api不支持的大对象, 语种树 } from '@/assets/translateApiOption'
+import { getDbStorageItem as 获取存储项 } from '@/utils/storage'
+import { 显示引导, 清除引导 } from '@/utils/showGuide'
+import { 用户设置存储 } from '@/store/userSetting'
+import { 通用翻译 } from '@/apis/translation/index'
+import { 获取当前 } from '@/utils/getEnv'
 
 const 语种树的数据 = ref(语种树())
 const form和to的数组 = ref(['auto', 'zh'])
@@ -215,7 +215,7 @@ const {
   getHomeApiOptions: 翻译api数组,
   getHomeFontSize: 文字尺寸,
   copyBtnShow: 复制按钮显示的数组,
-  defaultForeignLanguage: 默认目标外语语种
+  defaultForeignLanguage: 默认目标外语语种,
   // theme: 主题
 } = storeToRefs(存储)
 const 翻译加载 = ref(false) // 是否正在翻译
@@ -225,8 +225,8 @@ const 结果对象 = reactive({
   数据: {
     结果文字: ``, // 翻译结果
     结果码: -1, // 翻译结果状态(code = 200 为成功,code = -1为等待用户操作,code = 401为未配置翻译API)
-    结果编号: nanoid()
-  }
+    结果编号: nanoid(),
+  },
 })
 const 当前翻译api = ref('') // 当前翻译api
 const 设置弹框Ref = ref() // 设置弹窗的ref
@@ -242,7 +242,7 @@ const {
   切换类型数组,
   命名模式切换类型,
   返回命名模式对应结果,
-  改变命名模式类型
+  改变命名模式类型,
 } = use命名模式模块(结果对象)
 
 use主题()
@@ -259,15 +259,15 @@ const 自动模式 = ref(true)
 function 格式化级联显示内容(options) {
   const 文字 = options.map(option => option.label)
   return h('div', { class: 'flex items-center justify-between relative' }, [
-    h('span', {}, 文字[0] + '\u3000'),
+    h('span', {}, `${文字[0]}\u3000`),
     h(
       'i',
       {
-        class: 'i-gg-arrow-right text-22px flex-1 absolute-center'
+        class: 'i-gg-arrow-right text-22px flex-1 absolute-center',
       },
       ''
     ),
-    h('span', {}, '\u3000' + 文字[1])
+    h('span', {}, `\u3000${文字[1]}`),
   ])
 }
 
@@ -291,7 +291,8 @@ function 结果只读切换() {
   const mac条件 = ['macOS', 'browser'].includes(系统) && command.value
 
   if (windows和linux条件 || mac条件) {
-    if (是命名模式.value) return 提示.warning('命名模式不可以编辑结果哦')
+    if (是命名模式.value) 
+return 提示.warning('命名模式不可以编辑结果哦')
     结果只读.value = !结果只读.value
   }
 }
@@ -335,7 +336,7 @@ watch(自动模式, newVal => {
 const 切换模式 = throttle(() => {
   提示.success({
     content: `命名翻译模式${是命名模式.value ? '关闭' : '开启'}`,
-    duration: 1000
+    duration: 1000,
   })
   // 如果未输入，则结果码设为-1，即为等待用户操作状态，-1会触发Code动画
   // 否则，将结果码设为0，后面会触发翻译，翻译成功后继而变为200，会在成功后触发Code动画
@@ -375,7 +376,7 @@ async function 开始翻译(val = 当前翻译api.value, isRefresh) {
     q: 尝试分词(用户输入.value),
     from: form和to的数组.value[0],
     to: form和to的数组.value[1],
-    isRefresh
+    isRefresh,
   }
   const { text: 返回的文字, code: 状态码 } = await 通用翻译(val, obj)
   const 处理后的文字 = 是命名模式.value
@@ -384,7 +385,7 @@ async function 开始翻译(val = 当前翻译api.value, isRefresh) {
   结果对象.数据 = {
     结果文字: 处理后的文字,
     结果码: 状态码,
-    结果编号: nanoid()
+    结果编号: nanoid(),
   }
   翻译加载.value = false
 }
@@ -411,9 +412,9 @@ function 首次引导() {
     text: '初次使用，应该点击这里去配置一下服务哦~',
     attachTo: {
       element: '#setting-wrapper',
-      on: 'left'
+      on: 'left',
     },
-    classes: 'guide_wrapper'
+    classes: 'guide_wrapper',
   }
 
   显示引导(option, 'firstUseMain')
@@ -448,14 +449,15 @@ function 获取用户输入前几个字(字数 = 0) {
 
 // 汉字+汉字符号的正则
 const ChineseReg =
-  /[\u4e00-\u9fa5|\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3008|\u3009|\u3010|\u3011|\u300e|\u300f|\u300c|\u300d|\ufe43|\ufe44|\u3014|\u3015|\u2026|\u2014|\uff5e|\ufe4f|\uffe5|[\u3400-\u4DB5\u4E00-\u9FEA\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29]|[\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879][\uDC00-\uDFFF]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0]]/g
+  /[\u4E00-\u9FA5|\u3002|\uFF1F|\uFF01|\uFF0C|\u3001|\uFF1B|\uFF1A|\u201C|\u201D|\u2018|\u2019|\uFF08|\uFF09|\u300A|\u300B|\u3008|\u3009|\u3010|\u3011|\u300E|\u300F|\u300C|\u300D|\uFE43|\uFE44|\u3014|\u3015|\u2026|\u2014|\uFF5E|\uFE4F|\uFFE5|[\u3400-\u4DB5\u4E00-\u9FEA\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29]|[\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879][\uDC00-\uDFFF]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0]]/g
 
 const 用户输入字数 = computed(() => {
   return 去除符号和数字的用户输入.value.match(/./gu)?.length || 0
 })
 
 function changeFromTo() {
-  if (是命名模式.value) return
+  if (是命名模式.value) 
+return
   let arr
   const 目标外语 = 默认目标外语语种.value
   if (用户输入字数.value < 20) {
@@ -502,14 +504,13 @@ watch(页面可见性, (current, previous) => {
     正在播放.value = false
   }
 })
-
-// 监听用户输入，防抖翻译
-watch(用户输入, () => 防抖翻译())
-
 // 加了一层防抖的翻译
 const 防抖翻译 = debounce(function () {
   开始翻译()
 }, 300)
+
+// 监听用户输入，防抖翻译
+watch(用户输入, () => 防抖翻译())
 
 // 监听401，自动弹引导层
 watch(
@@ -522,9 +523,9 @@ watch(
         text: '你应该点击这里去配置一下服务哦~🖊️',
         attachTo: {
           element: '#setting-wrapper',
-          on: 'left'
+          on: 'left',
         },
-        classes: 'guide_wrapper'
+        classes: 'guide_wrapper',
       }
       清除引导()
       显示引导(option, 'firstUseMain')
@@ -534,7 +535,9 @@ watch(
 
 watchEffect(() => {
   const 当前api规则 = api不支持的大对象?.[当前翻译api.value]
-  if (!当前api规则) return
+  if (!当前api规则) {
+    return
+  }
   const 非互翻_自定义不支持 = 当前api规则?.自定义不支持 // 不支持互翻的才会有这个obj
   const 互翻_to不支持的数组 = 当前api规则?.to不支持 // 支持互翻的会有这个数组
 
@@ -544,7 +547,7 @@ watchEffect(() => {
 
     // 如果存在「自定义不支持」这个对象，则为不支持任意互翻api，根据数据禁用对应的不支持互翻的语种
     if (非互翻_自定义不支持) {
-      源语言项.children.forEach(目标语言项 => {
+      ;(源语言项.children || []).forEach(目标语言项 => {
         const 不支持的数组 = 非互翻_自定义不支持[源语言项.value]
         目标语言项.disabled = 不支持的数组
           ? 不支持的数组.includes(目标语言项.value)
@@ -552,7 +555,7 @@ watchEffect(() => {
       })
     } else if (互翻_to不支持的数组) {
       // 如果存在目标语言不支持，则代表该api支持任意互翻，禁用掉本就不支持的语种即可
-      源语言项.children.forEach(目标语言项 => {
+      ;(源语言项.children || []).forEach(目标语言项 => {
         目标语言项.disabled = 互翻_to不支持的数组.includes(目标语言项.value)
       })
     }
@@ -561,7 +564,9 @@ watchEffect(() => {
 
 function 检查from和to是否兼容(arr = []) {
   const 当前api规则 = api不支持的大对象?.[当前翻译api.value]
-  if (!当前api规则) return
+  if (!当前api规则) {
+    return
+  }
   const 非互翻_自定义不支持 = 当前api规则?.自定义不支持 // 不支持互翻的才会有这个obj
   const 互翻_to不支持的数组 = 当前api规则?.to不支持 // 支持互翻的会有这个数组
   const 源语言 = arr?.[0]
@@ -617,8 +622,12 @@ const 设置弹框正在活动 = computed(() => {
 // Tab键切换翻译方式
 onKeyStroke('Tab', e => {
   e.preventDefault()
-  if (设置弹框正在活动.value) return
-  if (翻译api数组.value.length <= 1) return
+  if (设置弹框正在活动.value) {
+    return
+  }
+  if (翻译api数组.value.length <= 1) {
+    return
+  }
   let 当前api的index = 翻译api数组.value.findIndex(
     i => i.value === 当前翻译api.value
   )

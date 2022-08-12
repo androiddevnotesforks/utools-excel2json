@@ -18,15 +18,15 @@
   </a-tooltip>
 </template>
 
-<script setup>
-import { useGlobalStore } from '@/store/globalData.js'
-const globalStore = useGlobalStore()
-const { currentTheme } = storeToRefs(globalStore)
+<script setup lang="ts">
+import { useGlobalStore } from '@/store/globalData'
 const props = defineProps({
   modelValue: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 })
+const globalStore = useGlobalStore()
+const { currentTheme } = storeToRefs(globalStore)
 </script>
 
 <style lang="scss" scoped>

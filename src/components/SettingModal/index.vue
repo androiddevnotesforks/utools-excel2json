@@ -413,7 +413,7 @@
           v-model.trim="导入配置文本"
           :auto-size="{
             minRows: 6,
-            maxRows: 6
+            maxRows: 6,
           }"
           placeholder="请输入配置信息"
           allow-clear
@@ -434,18 +434,20 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Message as 提示 } from '@arco-design/web-vue'
 import { cloneDeep } from 'lodash-es'
-import { apiOptions as api选项 } from '@/assets/translateApiOption.js'
-import { 清除引导, 显示引导 } from '@/utils/showGuide.js'
-import { getDbStorageItem as 获取存储项 } from '@/utils/storage.js'
-import 设置存储 from './useSettingStore'
-import { 获取当前 } from '@/utils/getEnv.js'
 import { useClipboard } from '@vueuse/core'
-import { 文案映射 } from './setExplanation.js'
-const modal可见 = ref(true) // 弹框的显隐
-const emit = defineEmits(['ok', 'cancel', 'reset'])
+import 设置存储 from './useSettingStore'
+import { 文案映射 } from './setExplanation'
+import { apiOptions as api选项 } from '@/assets/translateApiOption'
+import { 显示引导, 清除引导 } from '@/utils/showGuide'
+import { getDbStorageItem as 获取存储项 } from '@/utils/storage'
+import { 获取当前 } from '@/utils/getEnv'
+// 翻译方式选项
+const emit = defineEmits(['ok', 'cancel', 'reset']) // 弹框的显隐
+const api列表 = ref(api选项)
+const modal可见 = ref(true)
 const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
 const 导出密码框 = ref('') // 导出密码框的内容
 const 导入密码框 = ref('') // 导入密码框的内容
@@ -473,7 +475,7 @@ const formData = reactive({
   youdaoSecret: undefined, // 有道
   caiyunToken: undefined, // 彩云
   huoshanAccessKeyId: undefined, // 火山
-  huoshanSecretAccessKey: undefined // 火山
+  huoshanSecretAccessKey: undefined, // 火山
 })
 const 显示顺序data = computed(() => {
   const 所有服务 = cloneDeep(api列表.value)
@@ -481,7 +483,7 @@ const 显示顺序data = computed(() => {
   const arr = 选的服务.map((i, idx) => {
     return {
       ...所有服务.find(j => j.value === i),
-      sort: idx
+      sort: idx,
     }
   })
   return arr
@@ -490,16 +492,15 @@ const 显示顺序data = computed(() => {
 const importModalRef = ref()
 const 导入配置文本 = ref('')
 const utools = window?.utools
-const api列表 = ref(api选项) // 翻译方式选项
+
 const { 获取设置, 保存设置, 重置设置, 导出设置, 导入配置 } = 设置存储(formData)
 const { copy: 复制 } = useClipboard() // 复制结果功能
-
+const 首页的api数组 = ref([]) // 当前首页展示的翻译方式
 // 默认翻译方式的下拉选项
 const defaultOptions = computed(() => {
   return api列表.value.filter(i => 首页的api数组.value.includes(i.value))
 })
 
-const 首页的api数组 = ref([]) // 当前首页展示的翻译方式
 const 可选择的服务数量 = ref(4)
 // 监听首页翻译方式的checkbox勾选数量
 watchEffect(() => {
@@ -511,7 +512,7 @@ watchEffect(() => {
     formData.homeHasApi = 首页的api数组.value
     提示.warning({
       content: '还是至少留下1个翻译方式吧！',
-      duration: 2500
+      duration: 2500,
     })
   }
   首页的api数组.value = formData.homeHasApi
@@ -593,9 +594,9 @@ function 首次引导() {
     text: '这可是我起早贪黑写的，你可以在点击”关闭“按钮后点击链接查看，它可以帮助你申请到这些免费的服务，如果你已经是个老手了，那就关闭这个对话框开始使用吧~',
     attachTo: {
       element: '#guide-link',
-      on: 'right'
+      on: 'right',
     },
-    classes: 'guide_wrapper'
+    classes: 'guide_wrapper',
   }
   显示引导(option, 'firstUseSetting')
 }
@@ -612,8 +613,10 @@ function 关闭弹窗() {
 }
 
 // 打开url
-function 打开url(url) {
-  if (!utools) return
+function 打开url(url: string) {
+  if (!utools) {
+    return
+  }
   utools.shellOpenExternal(url)
 }
 
@@ -641,7 +644,7 @@ function 切换文案(id = '') {
 defineExpose({
   打开弹窗,
   关闭弹窗,
-  modal可见
+  modal可见,
 })
 </script>
 

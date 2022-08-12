@@ -3,8 +3,8 @@ import { defineStore } from 'pinia'
 import { cloneDeep } from 'lodash-es'
 import {
   getDbStorageItem,
+  removeDbStorageItem,
   setDbStorageItem,
-  removeDbStorageItem
 } from '@/utils/storage'
 import { apiOptions } from '@/assets/translateApiOption'
 
@@ -18,68 +18,68 @@ const CONFIG = {
   KEY_SETTING: {
     key: 'keyConfig',
     type: Object,
-    defaultState: {}
+    defaultState: {},
   },
   // 首页选择
   HOME_OPTION: {
     key: 'homeOption',
     type: Array,
-    defaultState: getDefaultHomeApi()
+    defaultState: getDefaultHomeApi(),
   },
   // 默认使用api
   DEFAULT_API: {
     key: 'defaultApi',
     type: String,
-    defaultState: getDefaultHomeApi()[0]
+    defaultState: getDefaultHomeApi()[0],
   },
   // 输入框文本大小
   FONT_SIZE: {
     key: 'fontSize',
     type: Number,
-    defaultState: 16
+    defaultState: 16,
   },
   // 复制快捷键行为
   COPY_BTN_BEHAVIOR: {
     key: 'copyBtnBehavior',
     type: String,
-    defaultState: 'open'
+    defaultState: 'open',
   },
   // 显示的复制按钮
   COPY_BTN_SHOW: {
     key: 'copyBtnShow',
     type: Array,
-    defaultState: [1, 2, 3]
+    defaultState: [1, 2, 3],
   },
   // 命名翻译模式
   CODE_MODE: {
     key: 'codeMode',
     type: Boolean,
-    defaultState: false
+    defaultState: false,
   },
   // 语音朗读
   READ_ALOUD: {
     key: 'readAloud',
     type: Boolean,
-    defaultState: false
+    defaultState: false,
   },
   // 朗读偏好
   READING_PREFERENCE: {
     key: 'readingPreference',
     type: String,
-    defaultState: 'default'
+    defaultState: 'default',
   },
   // 插件主题
   THEME: {
     key: 'theme',
     type: String,
-    defaultState: 'auto'
+    defaultState: 'auto',
   },
   // 默认目标外语语种
   DEFAULT_FOREIGN_LANGUAGE: {
     key: 'defaultForeignLanguage',
     type: String,
-    defaultState: 'en'
-  }
+    defaultState: 'en',
+  },
 }
 
 /** 获取初始化初始值 */
@@ -100,7 +100,7 @@ function getInitState() {
       } else if (type === Object || type === Array) {
         result = JSON.parse(strData)
       } else if (type === Boolean) {
-        result = strData === 'true' || strData === true ? true : false
+        result = !!(strData === 'true' || strData === true)
       } else {
         result = strData
       }
@@ -122,7 +122,7 @@ function getInitState() {
     readAloud: getStorageData(CONFIG.READ_ALOUD),
     readingPreference: getStorageData(CONFIG.READING_PREFERENCE),
     theme: getStorageData(CONFIG.THEME),
-    defaultForeignLanguage: getStorageData(CONFIG.DEFAULT_FOREIGN_LANGUAGE)
+    defaultForeignLanguage: getStorageData(CONFIG.DEFAULT_FOREIGN_LANGUAGE),
   }
 }
 
@@ -159,12 +159,12 @@ export const 用户设置存储 = defineStore('settings', {
         readAloud,
         readingPreference,
         theme,
-        defaultForeignLanguage
+        defaultForeignLanguage,
       } = state
 
       return {
         homeHasApi: homeOption, // 首页展示的翻译方式
-        defaultApi: defaultApi, // 默认翻译方式
+        defaultApi, // 默认翻译方式
         textFont: fontSize, // 文本框字号
         appid: keyConfig.baidu?.appid, // 百度
         token: keyConfig.baidu?.token, // 百度
@@ -183,9 +183,9 @@ export const 用户设置存储 = defineStore('settings', {
         readAloud, // 语音朗读
         readingPreference, // 朗读偏好
         theme, // 主题
-        defaultForeignLanguage
+        defaultForeignLanguage,
       }
-    }
+    },
   },
 
   actions: {
@@ -270,8 +270,8 @@ export const 用户设置存储 = defineStore('settings', {
      */
     getKeyByTag(tag) {
       return this.keyConfig[tag] || {}
-    }
-  }
+    },
+  },
 })
 
 export function getKeyByTag(tag) {

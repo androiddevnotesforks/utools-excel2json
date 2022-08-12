@@ -2,10 +2,10 @@
 import { storeToRefs } from 'pinia'
 import { throttle } from 'lodash-es'
 import { useClipboard } from '@vueuse/core'
+import { Message as 提示 } from '@arco-design/web-vue'
 import useUtools from './useUtools'
 import { 用户设置存储 } from '@/store/userSetting'
-import { Message as 提示 } from '@arco-design/web-vue'
-import { 获取当前 } from '@/utils/getEnv.js'
+import { 获取当前 } from '@/utils/getEnv'
 export default function (结果对象) {
   const { copyBtnBehavior: 复制按钮行为 } = storeToRefs(用户设置存储())
   const { utools, 粘贴, 延迟关闭utools } = useUtools()
@@ -14,7 +14,9 @@ export default function (结果对象) {
   // 快捷键复制结果
   const 快捷键复制 = throttle(async () => {
     await 仅复制()
-    if (!utools) return
+    if (!utools) {
+      return
+    }
     const 行为 = 复制按钮行为.value
     if (行为 === 'close') {
       await 延迟关闭utools()
@@ -79,6 +81,6 @@ export default function (结果对象) {
 
   return {
     要显示复制按钮,
-    复制按钮事件
+    复制按钮事件,
   }
 }

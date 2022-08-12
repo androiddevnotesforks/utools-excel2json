@@ -1,7 +1,7 @@
 /** 退出插件 */
-import { 获取当前 } from '@/utils/getEnv.js'
+import { 获取当前 } from '@/utils/getEnv'
 
-export default function (utools) {
+export default function (utools: any) {
   const 组合键 = useMagicKeys()
 
   function 关闭当前窗口() {
@@ -17,7 +17,7 @@ export default function (utools) {
   watchEffect(() => {
     // 这里可能有问题，因为升级了VueUse9.0，详见
     // https://github.com/vueuse/vueuse/releases/tag/v9.0.0
-    const windows快捷键 = 组合键['Escape']
+    const windows快捷键 = 组合键.Escape
     if (windows快捷键.value) {
       关闭当前窗口()
     }

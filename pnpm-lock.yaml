@@ -4,7 +4,7 @@ specifiers:
   '@antfu/eslint-config': ^0.25.2
   '@arco-design/web-vue': ^2.34.1
   '@iconify/json': ^2.1.89
-  '@types/lodash': ^4.14.182
+  '@types/lodash-es': ^4.17.6
   '@types/node': ^18.6.4
   '@unocss/preset-rem-to-px': ^0.44.5
   '@unocss/reset': ^0.44.5
@@ -51,7 +51,7 @@ devDependencies:
   '@antfu/eslint-config': 0.25.2_qugx7qdu5zevzvxaiqyxfiwquq
   '@arco-design/web-vue': 2.34.1_vue@3.2.37
   '@iconify/json': 2.1.89
-  '@types/lodash': 4.14.182
+  '@types/lodash-es': 4.17.6
   '@types/node': 18.7.1
   '@unocss/preset-rem-to-px': 0.44.7
   '@unocss/reset': 0.44.7
@@ -412,6 +412,12 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: true
+
+  /@types/lodash-es/4.17.6:
+    resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
+    dependencies:
+      '@types/lodash': 4.14.182
     dev: true
 
   /@types/lodash/4.14.182:

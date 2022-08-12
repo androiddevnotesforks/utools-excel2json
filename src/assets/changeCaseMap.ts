@@ -1,14 +1,14 @@
 import {
   camelCase,
-  paramCase,
-  pascalCase,
-  snakeCase,
-  constantCase,
   capitalCase,
+  constantCase,
   dotCase,
   headerCase,
   noCase,
-  pathCase
+  paramCase,
+  pascalCase,
+  pathCase,
+  snakeCase,
 } from 'change-case'
 
 export const 切换类型数组 = [
@@ -21,5 +21,5 @@ export const 切换类型数组 = [
   { name: 'capitalCase', handle: capitalCase, label: '分词(大)' },
   { name: 'dotCase', handle: dotCase, label: '对象属性' },
   { name: 'pathCase', handle: pathCase, label: '文件路径' },
-  { name: 'constantCase', handle: constantCase, label: '常量' }
+  { name: 'constantCase', handle: constantCase, label: '常量' },
 ]

@@ -9,11 +9,11 @@
   <label class="cus_switch_label" for="switch"> 切换 </label>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
   modelValue: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 })
 const emit = defineEmits(['update:modelValue'])
 

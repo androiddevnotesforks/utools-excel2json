@@ -1,6 +1,6 @@
 /** 命名翻译模式相关业务 */
 import { 用户设置存储 } from '@/store/userSetting'
-import { 切换类型数组 } from '@/assets/changeCaseMap.js'
+import { 切换类型数组 } from '@/assets/changeCaseMap'
 
 export default function (结果对象) {
   const 存储 = 用户设置存储()
@@ -19,14 +19,17 @@ export default function (结果对象) {
   // 获取命名翻译模式的翻译结果
   function 返回命名模式对应结果(文字 = '', type = 'camelCase') {
     const 当前模式对象 = 切换类型数组.find(item => item.name === type)
-    if (!文字) return 文字
-    if (!当前模式对象) return 文字
+    if (!文字) {
+      return 文字
+    }
+    if (!当前模式对象) {
+      return 文字
+    }
     return 当前模式对象.handle(文字)
   }
 
   /** 根据关键字切换命名翻译模式 */
   function 改变命名模式类型(code) {
-    console.log('改变命名模式类型:', code)
     // codeMode&xx
     const reg = /^codeMode__/
     if (reg.test(code)) {
@@ -44,6 +47,6 @@ export default function (结果对象) {
     切换类型数组,
     命名模式切换类型,
     改变命名模式类型,
-    返回命名模式对应结果
+    返回命名模式对应结果,
   }
 }

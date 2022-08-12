@@ -21,31 +21,37 @@
           top: `${item.top}px`,
           left: `${item.left}px`,
           width: `${item.width}px`,
-          height: `${item.height}px`
+          height: `${item.height}px`,
         }"
       ></span>
     </div>
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { delay } from 'lodash-es'
 import { nanoid } from 'nanoid'
 const btnRef = ref() // 按钮的DOM
 
-const 波纹数组 = ref([]) // 波纹DOM数组
-
+const 波纹数组 = ref<波纹数组Item[]>([]) // 波纹DOM数组
+interface 波纹数组Item {
+  key: string
+  top: number
+  left: number
+  width: number
+  height: number
+}
 // 生成波纹DOM
 function 显示波纹(e) {
   const 按钮Dom = btnRef.value
   const 按钮宽度 = 按钮Dom.offsetWidth
   const 按钮位置 = 按钮Dom.getBoundingClientRect()
-  const obj = {
+  const obj: 波纹数组Item = {
     left: e.pageX - 按钮位置.left - 按钮宽度 / 2,
     top: e.pageY - 按钮位置.top - 按钮宽度 / 2,
     width: 按钮宽度,
     height: 按钮宽度,
-    key: nanoid()
+    key: nanoid(),
   }
   波纹数组.value.push(obj)
 }

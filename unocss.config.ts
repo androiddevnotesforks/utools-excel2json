@@ -7,7 +7,7 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 import presetRemToPx from '@unocss/preset-rem-to-px'
-import primaryColor from './src/config/colorConfig'
+import { primaryColor } from './src/config/colorConfig'
 export default defineConfig({
   shortcuts: [
     {

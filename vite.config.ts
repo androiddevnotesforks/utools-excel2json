@@ -6,7 +6,7 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import UnoCSS from 'unocss/vite'
 import { ArcoResolver } from 'unplugin-vue-components/resolvers'
-import primaryColor from './src/config/colorConfig'
+import { primaryColor } from './src/config/colorConfig'
 
 export default defineConfig({
   base: './',
@@ -26,6 +26,11 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
+      eslintrc: {
+        enabled: true,
+        filepath: './.eslintrc-auto-import.json',
+        globalsPropValue: true,
+      },
       imports: ['vue', '@vueuse/core', 'pinia'],
       dts: true,
       vueTemplate: true,
