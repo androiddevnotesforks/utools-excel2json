@@ -1,0 +1,35 @@
+// 动画效果
+
+// ==========缩放的效果==========
+.component-scale-enter-active,
+.component-scale-leave-active {
+  transition: transform 0.3s $imitate-ios;
+}
+
+.component-scale-enter-from,
+.component-scale-leave-to {
+  transform: scale(0);
+}
+
+// ==========往右下角缩放的效果==========
+.zoom-br-enter-from,
+.zoom-br-appear-from,
+.zoom-br-leave-to {
+  transform: scale(0, 0);
+  opacity: 0.1;
+}
+
+.zoom-br-enter-to,
+.zoom-br-appear-to,
+.zoom-br-leave-from {
+  transform: scale(1, 1);
+  transform-origin: 100% 100%;
+  opacity: 1;
+}
+
+.zoom-br-enter-active,
+.zoom-br-appear-active,
+.zoom-br-leave-active {
+  transform-origin: 100% 100%;
+  transition: all 0.35s $imitate-ios;
+}
