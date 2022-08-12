@@ -18,7 +18,7 @@ function getOS() {
 export const useGlobalStore = defineStore('global', {
   state: () => {
     return {
-      currentTheme: undefined,
+      currentTheme: '',
       currentOS: getOS(),
     }
   },
