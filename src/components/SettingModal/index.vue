@@ -447,7 +447,7 @@ import { 获取当前 } from '@/utils/getEnv'
 // 翻译方式选项
 const emit = defineEmits(['ok', 'cancel', 'reset']) // 弹框的显隐
 const api列表 = ref(api选项)
-const modal可见 = ref(true)
+const modal可见 = ref(false)
 const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
 const 导出密码框 = ref('') // 导出密码框的内容
 const 导入密码框 = ref('') // 导入密码框的内容
