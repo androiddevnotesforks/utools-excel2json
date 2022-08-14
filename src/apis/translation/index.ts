@@ -1,10 +1,10 @@
+import { 上传日志 } from '../log'
 import {
   获取指定的翻译方法,
+  读取并检查密钥配置,
   返回状态码及信息,
-  读取并检查密钥配置
 } from './common'
 import { languageCorrectionByTag } from '@/utils/language'
-import { updateLog } from '../log'
 /**
  * 翻译
  * @param {String} tag 翻译标识
@@ -31,7 +31,7 @@ export async function 通用翻译(tag, options) {
   // }
 
   // 语言修正
-  let { from, to } = languageCorrectionByTag(tag, options)
+  const { from, to } = languageCorrectionByTag(tag, options)
 
   // 读取密钥信息
   const checkKey = 读取并检查密钥配置(tag)
@@ -46,12 +46,12 @@ export async function 通用翻译(tag, options) {
     return 返回状态码及信息(400, null, '这个功能还在建设中哦')
   }
 
-  let result = await fn({ q, from, to, keyConfig })
+  const result = await fn({ q, from, to, keyConfig })
   if (result.code === 503) {
     // 访问频率受限，再次发起翻译
     return await 通用翻译(tag, options)
   }
-  updateLog(tag)
+  上传日志(tag)
 
   // last.result = result
   // last.optionsStr = optionsStr

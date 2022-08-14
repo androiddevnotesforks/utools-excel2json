@@ -4,7 +4,7 @@ import { Message as 提示 } from '@arco-design/web-vue'
 import { 用户设置存储 } from '@/store/userSetting'
 import { 语音朗读生成ArrayBuffer, 语音朗读生成base64 } from '@/apis/mstts/index'
 import { 声音映射 } from '@/apis/mstts/data'
-import { updateLog } from '@/apis/log'
+import { 上传日志 } from '@/apis/log'
 
 export default function (form和to的数组: string[], 结果对象) {
   const { readAloud: 朗读功能, readingPreference: 朗读性别偏好 } = storeToRefs(
@@ -52,7 +52,7 @@ export default function (form和to的数组: string[], 结果对象) {
       提示.error('啊哦，播放出错了，请再试一次吧！')
     }
 
-    updateLog('朗读')
+    上传日志('朗读')
   }
 
   // 播放语音
