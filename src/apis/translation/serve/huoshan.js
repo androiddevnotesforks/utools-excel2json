@@ -39,7 +39,7 @@ const 错误信息 = {
   InvalidSecretToken:
     '错误的STS or STS2，可能是多种错误，例如签名错误、过期等。',
   '-400': '请求参数错误，具体错误可参考Message信息',
-  '-415': '不支持的翻译'
+  '-415': '不支持的翻译',
   // '-429': '请求过于频繁',
   // '-500': '翻译服务内部错误'
 }
@@ -52,63 +52,59 @@ const 错误信息 = {
  * @param {Object} options.keyConfig key配置
  */
 export default async function ({ q, from, to, keyConfig }) {
-  if (window.utools) {
-    const url = import.meta.env.VITE_HUOSHAN_BASEURL
-    const query = 'Action=TranslateText&Version=2020-06-01'
+  const url = import.meta.env.VITE_HUOSHAN_BASEURL
+  const query = 'Action=TranslateText&Version=2020-06-01'
 
-    if (from === 'auto') {
-      from = ''
-    }
-    const bodyData = {
-      TextList: [q],
-      SourceLanguage: from,
-      TargetLanguage: to
-    }
+  if (from === 'auto') {
+    from = ''
+  }
+  const bodyData = {
+    TextList: [q],
+    SourceLanguage: from,
+    TargetLanguage: to,
+  }
 
-    const headers = toSign(query, bodyData, keyConfig)
+  const headers = toSign(query, bodyData, keyConfig)
 
-    try {
-      // const res = await axios.post(url + `?${query}`, bodyData, { headers })
-      const resData = await fetch(url + `?${query}`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(bodyData)
-      }).then(res => {
-        return res.json()
-      })
-      const { TranslationList } = resData
-      const ResponseMetadata =
-        resData.ResponseMetadata || resData.ResponseMetaData
-      let result
-      const apiError = ResponseMetadata?.Error?.Code
-      if (apiError) {
-        return 返回状态码及信息(500, null, 错误信息[apiError])
-      } else {
-        let text = TranslationList[0].Translation
-        result = 返回状态码及信息(200, { text })
-      }
-      return result
-    } catch (err) {
-      const apiError = err?.response?.data?.ResponseMetadata?.Error?.Code
-      if (apiError) {
-        return 返回状态码及信息(500, null, 错误信息[apiError])
-      } else {
-        console.error(err)
-        return 返回状态码及信息(500)
-      }
+  try {
+    // const res = await axios.post(url + `?${query}`, bodyData, { headers })
+    const resData = await fetch(`${url}?${query}`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(bodyData),
+    }).then(res => {
+      return res.json()
+    })
+    const { TranslationList } = resData
+    const ResponseMetadata =
+      resData.ResponseMetadata || resData.ResponseMetaData
+    let result
+    const apiError = ResponseMetadata?.Error?.Code
+    if (apiError) {
+      return 返回状态码及信息(500, null, 错误信息[apiError])
+    } else {
+      const text = TranslationList[0].Translation
+      result = 返回状态码及信息(200, { text })
     }
-  } else {
-    return 返回状态码及信息(403)
+    return result
+  } catch (err) {
+    const apiError = err?.response?.data?.ResponseMetadata?.Error?.Code
+    if (apiError) {
+      return 返回状态码及信息(500, null, 错误信息[apiError])
+    } else {
+      console.error(err)
+      return 返回状态码及信息(500)
+    }
   }
 }
 
 /** 获取规范化header数组 */
 function getCanonicalHeadersArr(headers) {
-  let result = []
+  const result = []
   Object.keys(headers).forEach(key => {
     result.push({
       key: key.toLowerCase(),
-      value: headers[key]
+      value: headers[key],
     })
   })
   result.sort((h1, h2) => {
@@ -126,7 +122,7 @@ function getUtcDate() {
   const hours = date.getUTCHours().toString().padStart(2, '0')
   const minutes = date.getUTCMinutes().toString().padStart(2, '0')
   const seconds = date.getUTCSeconds().toString().padStart(2, '0')
-  return year + month + day + 'T' + hours + minutes + seconds + 'Z'
+  return `${year + month + day}T${hours}${minutes}${seconds}Z`
 }
 
 /** 生成签名 */
@@ -144,7 +140,7 @@ function toSign(query, bodyData, keyConfig) {
     Host: 'open.volcengineapi.com',
     'Content-Type': 'application/json; charset=utf-8',
     'X-Content-Sha256': SHA256(payload).toString(encHex),
-    'X-Date': xDate
+    'X-Date': xDate,
   }
   const headerArr = getCanonicalHeadersArr(headers)
   const headerKeys = headerArr.map(item => item.key)
@@ -160,18 +156,9 @@ function toSign(query, bodyData, keyConfig) {
   })
   const SignedHeaders = headerKeys.join(';')
 
-  const CanonicalRequest =
-    HTTPRequestMethod +
-    '\n' +
-    CanonicalURI +
-    '\n' +
-    CanonicalQueryString +
-    '\n' +
-    CanonicalHeaders +
-    '\n' +
-    SignedHeaders +
-    '\n' +
-    SHA256(payload).toString(encHex)
+  const CanonicalRequest = `${HTTPRequestMethod}\n${CanonicalURI}\n${CanonicalQueryString}\n${CanonicalHeaders}\n${SignedHeaders}\n${SHA256(
+    payload
+  ).toString(encHex)}`
 
   // console.log(CanonicalRequest)
 
@@ -180,15 +167,10 @@ function toSign(query, bodyData, keyConfig) {
   const Algorithm = 'HMAC-SHA256'
   const RequestDate = xDate
   const CredentialScope = `${date}/${region}/${service}/request`
-  const StringToSign =
-    Algorithm +
-    '\n' +
-    RequestDate +
-    '\n' +
-    CredentialScope +
-    '\n' +
+  const StringToSign = `${Algorithm}\n${RequestDate}\n${CredentialScope}\n${
     // HexEncode(Hash(CanonicalRequest))
     SHA256(CanonicalRequest).toString(encHex)
+  }`
   // console.log(StringToSign)
 
   /** 3：构建签名 */
