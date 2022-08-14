@@ -18,68 +18,79 @@ const 发音角色Map = new Map([
   ['Alvaro', 'es-ES-AlvaroNeural'],
   ['Elvira', 'es-ES-ElviraNeural'],
   ['Achara', 'th-TH-AcharaNeural'],
-  ['Niwat', 'th-TH-NiwatNeural']
+  ['Niwat', 'th-TH-NiwatNeural'],
 ])
 
 function 获取发音人(str = '') {
   return 发音角色Map.get(str) || 'zh-CN-XiaoxiaoNeural'
 }
 
-export const 声音映射 = {
+// interface 声音角色 {
+//   male: string // 男声
+//   female: string // 女声
+//   default: string // 默认
+//   rate?: number // 语速
+// }
+
+interface 声音映射Type {
+  [key: string]: any
+}
+
+export const 声音映射: 声音映射Type = {
   zh: {
     male: 获取发音人('云健'),
     female: 获取发音人('晓秋'),
-    default: 获取发音人('晓秋')
+    default: 获取发音人('晓秋'),
   },
   en: {
     male: 获取发音人('Guy'),
     female: 获取发音人('Jenny'),
-    default: 获取发音人('Jenny')
+    default: 获取发音人('Jenny'),
   },
   jp: {
     male: 获取发音人('圭太'),
     female: 获取发音人('七海'),
-    default: 获取发音人('圭太')
+    default: 获取发音人('圭太'),
   },
   ru: {
     male: 获取发音人('Dmitry'),
     female: 获取发音人('Svetlana'),
-    default: 获取发音人('Svetlana')
+    default: 获取发音人('Svetlana'),
   },
   de: {
     male: 获取发音人('Conrad'),
     female: 获取发音人('Elke'),
-    default: 获取发音人('Conrad')
+    default: 获取发音人('Conrad'),
   },
   fra: {
     male: 获取发音人('Maurice'),
     female: 获取发音人('Denise'),
-    default: 获取发音人('Maurice')
+    default: 获取发音人('Maurice'),
   },
   spa: {
     male: 获取发音人('Alvaro'),
     female: 获取发音人('Elvira'),
-    default: 获取发音人('Elvira')
+    default: 获取发音人('Elvira'),
   },
   th: {
     male: 获取发音人('Niwat'),
     female: 获取发音人('Achara'),
-    default: 获取发音人('Niwat')
+    default: 获取发音人('Niwat'),
   },
   yue: {
     male: 获取发音人('云龙'),
     female: 获取发音人('晓佳'),
     default: 获取发音人('云龙'),
-    rate: 1.1
+    rate: 1.1,
   },
   cht: {
     male: 获取发音人('云健'),
     female: 获取发音人('晓秋'),
-    default: 获取发音人('云健')
+    default: 获取发音人('云健'),
   },
   kor: {
     male: 获取发音人('inJoon'),
     female: 获取发音人('Sun-Hi'),
-    default: 获取发音人('inJoon')
-  }
+    default: 获取发音人('inJoon'),
+  },
 }
