@@ -5,15 +5,21 @@ import {
   返回状态码及信息,
 } from './common'
 import { languageCorrectionByTag } from '@/utils/language'
+
+interface 翻译参数 {
+  q: string // 请求翻译query(UTF-8编码)
+  from: string // 翻译源语言(可设置为auto)
+  to: string // 翻译目标语言 (不可设置为auto)
+}
+
 /**
- * 翻译
- * @param {String} tag 翻译标识
- * @param {String} options.q 请求翻译query(UTF-8编码)
- * @param {String} options.from 翻译源语言(可设置为auto)
- * @param {String} options.to 翻译目标语言 (可设置为auto)
+ *
+ * @param tag 翻译标识
+ * @param options 翻译参数
+ * @returns
  */
-export async function 通用翻译(tag, options) {
-  const { q, isRefresh } = options
+export async function 通用翻译(tag: string, options: 翻译参数): Promise<any> {
+  const { q } = options
   // let last
   // 空值优化
   if (!q) {
@@ -36,14 +42,14 @@ export async function 通用翻译(tag, options) {
   // 读取密钥信息
   const checkKey = 读取并检查密钥配置(tag)
   if (!checkKey.flag) {
-    return 返回状态码及信息(401, null, checkKey.msg)
+    return 返回状态码及信息(401, undefined, checkKey.msg)
   }
 
   const keyConfig = checkKey.keyConfig
 
   const fn = 获取指定的翻译方法(tag)
   if (!fn) {
-    return 返回状态码及信息(400, null, '这个功能还在建设中哦')
+    return 返回状态码及信息(400, undefined, '这个功能还在建设中哦')
   }
 
   const result = await fn({ q, from, to, keyConfig })

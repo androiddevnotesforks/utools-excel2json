@@ -291,8 +291,7 @@ function 结果只读切换() {
   const mac条件 = ['macOS', 'browser'].includes(系统) && command.value
 
   if (windows和linux条件 || mac条件) {
-    if (是命名模式.value) 
-return 提示.warning('命名模式不可以编辑结果哦')
+    if (是命名模式.value) return 提示.warning('命名模式不可以编辑结果哦')
     结果只读.value = !结果只读.value
   }
 }
@@ -378,7 +377,9 @@ async function 开始翻译(val = 当前翻译api.value, isRefresh) {
     to: form和to的数组.value[1],
     isRefresh,
   }
+
   const { text: 返回的文字, code: 状态码 } = await 通用翻译(val, obj)
+
   const 处理后的文字 = 是命名模式.value
     ? 返回命名模式对应结果(返回的文字, 命名模式类型.value)
     : 返回的文字
@@ -456,8 +457,7 @@ const 用户输入字数 = computed(() => {
 })
 
 function changeFromTo() {
-  if (是命名模式.value) 
-return
+  if (是命名模式.value) return
   let arr
   const 目标外语 = 默认目标外语语种.value
   if (用户输入字数.value < 20) {
