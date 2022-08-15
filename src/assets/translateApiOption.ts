@@ -10,7 +10,7 @@ export const apiOptions = [
   { label: '火山翻译', value: 'huoshan' },
 ]
 
-const onlyChinese = [
+const onlyChinese: 语种[] = [
   'en',
   'jp',
   'ru',
@@ -23,15 +23,55 @@ const onlyChinese = [
   'yue',
   'wyw',
 ]
+type 语种 =
+  | 'zh'
+  | 'en'
+  | 'jp'
+  | 'ru'
+  | 'kor'
+  | 'de'
+  | 'fra'
+  | 'spa'
+  | 'th'
+  | 'cht'
+  | 'yue'
+  | 'wyw'
 
-export const api不支持的大对象 = {
+interface 不支持对象 {
+  auto: 语种[]
+  zh: 语种[]
+  en: 语种[]
+  jp: 语种[]
+  ru: 语种[]
+  kor?: 语种[]
+  de?: 语种[]
+  fra?: 语种[]
+  spa?: 语种[]
+  th?: 语种[]
+  yue?: 语种[]
+  cht?: 语种[]
+}
+
+interface 大对象item基础类型 {
+  from不支持: string[]
+  to不支持: string[] | undefined
+  自定义不支持: 不支持对象 | undefined
+}
+
+interface 大对象item类型 {
+  [key: string]: 大对象item基础类型
+}
+
+export const api不支持的大对象: 大对象item类型 = {
   google: {
     from不支持: ['yue', 'wyw'],
     to不支持: ['yue', 'wyw'],
+    自定义不支持: undefined,
   },
   baidu: {
     from不支持: [],
     to不支持: [],
+    自定义不支持: undefined,
   },
   tencent: {
     from不支持: ['yue', 'wyw'],
@@ -48,6 +88,7 @@ export const api不支持的大对象 = {
       th: ['ru', 'de', 'jp', 'kor', 'fra', 'spa', 'th', 'yue', 'wyw'],
       cht: ['yue', 'wyw'],
     },
+    to不支持: undefined,
   },
   ali: {
     from不支持: ['wyw'],
@@ -65,10 +106,12 @@ export const api不支持的大对象 = {
       yue: ['en', 'jp', 'ru', 'kor', 'de', 'fra', 'spa', 'th', 'cht', 'wyw'],
       cht: ['jp', 'ru', 'kor', 'de', 'fra', 'spa', 'th', 'wyw', 'yue'],
     },
+    to不支持: undefined,
   },
   youdao: {
     from不支持: ['wyw'],
     to不支持: ['wyw'],
+    自定义不支持: undefined,
   },
   caiyun: {
     from不支持: ['kor', 'de', 'fra', 'cht', 'yue', 'wyw'],
@@ -79,13 +122,15 @@ export const api不支持的大对象 = {
       jp: onlyChinese, // 只支持中文
       ru: onlyChinese, // 只支持中文
     },
+    to不支持: undefined,
   },
   huoshan: {
     from不支持: ['yue', 'wyw'],
     to不支持: ['yue', 'wyw'],
+    自定义不支持: undefined,
   },
 }
-interface 语种类型 {
+export interface 语种类型 {
   label: string
   value: string
   disabled: boolean

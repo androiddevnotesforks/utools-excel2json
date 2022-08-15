@@ -2,7 +2,7 @@ import Shepherd from 'shepherd.js'
 import { getDbStorageItem, setDbStorageItem } from '@/utils/storage'
 
 let tour: any
-interface 引导options {
+export interface 引导options类型 {
   id: string
   title: string
   text: string
@@ -14,7 +14,7 @@ interface 引导链接 {
   element: string
   on: 'left' | 'right' | 'top' | 'bottom'
 }
-export function 显示引导(params: 引导options, localName: string) {
+export function 显示引导(params: 引导options类型, localName: string) {
   tour = new Shepherd.Tour({
     useModalOverlay: true,
     defaultStepOptions: {

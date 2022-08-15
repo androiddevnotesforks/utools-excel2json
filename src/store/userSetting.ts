@@ -125,13 +125,17 @@ function getInitState() {
     defaultForeignLanguage: getStorageData(CONFIG.DEFAULT_FOREIGN_LANGUAGE),
   }
 }
+interface 首页api类型 {
+  value: string
+  label: string
+}
 
 export const 用户设置存储 = defineStore('settings', {
   state: () => getInitState(),
 
   getters: {
     /** 获取首页api选择 */
-    getHomeApiOptions: state => {
+    getHomeApiOptions: (state): 首页api类型[] => {
       const tempMap = new Map()
       cloneDeep(apiOptions).map(item => {
         tempMap.set(item.value, item)

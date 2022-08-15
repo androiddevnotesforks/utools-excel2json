@@ -32,7 +32,7 @@
         >
           <a-radio
             v-for="项 in (翻译api数组 || []).slice(0, 4)"
-            :key="项.item"
+            :key="项.value"
             :value="项.value"
           >
             {{ 项.label }}
@@ -192,6 +192,7 @@
 import { nanoid } from 'nanoid'
 import { debounce, replace, throttle } from 'lodash-es'
 import { noCase } from 'change-case'
+import type { CascaderOption } from '@arco-design/web-vue'
 import { Message as 提示 } from '@arco-design/web-vue'
 import { storeToRefs } from 'pinia'
 import useUtools from './useUtools'
@@ -202,11 +203,11 @@ import use主题 from './useTheme'
 import 关闭窗口 from './useExit'
 import { api不支持的大对象, 语种树 } from '@/assets/translateApiOption'
 import { getDbStorageItem as 获取存储项 } from '@/utils/storage'
+import type { 引导options类型 } from '@/utils/showGuide'
 import { 显示引导, 清除引导 } from '@/utils/showGuide'
 import { 用户设置存储 } from '@/store/userSetting'
 import { 通用翻译 } from '@/apis/translation/index'
 import { 获取当前 } from '@/utils/getEnv'
-
 const 语种树的数据 = ref(语种树())
 const form和to的数组 = ref(['auto', 'zh'])
 const 存储 = 用户设置存储()
@@ -256,7 +257,7 @@ const 自动模式 = ref(true)
 
 关闭窗口(utools)
 
-function 格式化级联显示内容(options) {
+function 格式化级联显示内容(options: CascaderOption[]) {
   const 文字 = options.map(option => option.label)
   return h('div', { class: 'flex items-center justify-between relative' }, [
     h('span', {}, `${文字[0]}\u3000`),
@@ -268,7 +269,7 @@ function 格式化级联显示内容(options) {
       ''
     ),
     h('span', {}, `\u3000${文字[1]}`),
-  ])
+  ]) as any as string
 }
 
 // 清空输入框
@@ -291,7 +292,9 @@ function 结果只读切换() {
   const mac条件 = ['macOS', 'browser'].includes(系统) && command.value
 
   if (windows和linux条件 || mac条件) {
-    if (是命名模式.value) return 提示.warning('命名模式不可以编辑结果哦')
+    if (是命名模式.value) {
+      return 提示.warning('命名模式不可以编辑结果哦')
+    }
     结果只读.value = !结果只读.value
   }
 }
@@ -309,7 +312,7 @@ function 设置确定() {
     // 输入框获取焦点
     输入框focus()
     // 设置成功，刷新上一次翻译
-    开始翻译(当前翻译api.value, true)
+    开始翻译(当前翻译api.value)
   })
 }
 
@@ -358,7 +361,7 @@ function 切换翻译服务() {
 }
 
 // 分发翻译请求，并开始翻译，默认根据Radio的值来确定翻译api
-async function 开始翻译(val = 当前翻译api.value, isRefresh) {
+async function 开始翻译(val = 当前翻译api.value) {
   重置音频()
   输入框focus()
   // 如果没输入内容，则不翻译
@@ -375,7 +378,6 @@ async function 开始翻译(val = 当前翻译api.value, isRefresh) {
     q: 尝试分词(用户输入.value),
     from: form和to的数组.value[0],
     to: form和to的数组.value[1],
-    isRefresh,
   }
 
   const { text: 返回的文字, code: 状态码 } = await 通用翻译(val, obj)
@@ -407,7 +409,7 @@ function 切换from和to() {
 }
 
 function 首次引导() {
-  const option = {
+  const option: 引导options类型 = {
     id: 'firstUseMain',
     title: '欢迎使用易翻😁',
     text: '初次使用，应该点击这里去配置一下服务哦~',
@@ -457,7 +459,9 @@ const 用户输入字数 = computed(() => {
 })
 
 function changeFromTo() {
-  if (是命名模式.value) return
+  if (是命名模式.value) {
+    return
+  }
   let arr
   const 目标外语 = 默认目标外语语种.value
   if (用户输入字数.value < 20) {
@@ -470,8 +474,8 @@ function changeFromTo() {
     const 一部分字包含汉字数 =
       replace(一部分字, ChineseReg, '◎').split('◎').length - 1
     const 汉字占一部分字的比例 = parseFloat(
-      一部分字包含汉字数 / 抽样数量
-    ).toFixed(2)
+      (一部分字包含汉字数 / 抽样数量).toFixed(2)
+    )
     const 前一部分字大多汉字 = 汉字占一部分字的比例 >= 比例
     arr = ['auto', 前一部分字大多汉字 ? 目标外语 : 'zh']
   }
@@ -517,7 +521,7 @@ watch(
   () => 结果对象.数据.结果编号,
   () => {
     if (结果对象.数据.结果码 === 401) {
-      const option = {
+      const option: 引导options类型 = {
         id: 'missingParameter',
         title: '未配置服务',
         text: '你应该点击这里去配置一下服务哦~🖊️',
@@ -538,7 +542,7 @@ watchEffect(() => {
   if (!当前api规则) {
     return
   }
-  const 非互翻_自定义不支持 = 当前api规则?.自定义不支持 // 不支持互翻的才会有这个obj
+  const 非互翻_自定义不支持: any = 当前api规则?.自定义不支持 // 不支持互翻的才会有这个obj
   const 互翻_to不支持的数组 = 当前api规则?.to不支持 // 支持互翻的会有这个数组
 
   语种树的数据.value.forEach(源语言项 => {
@@ -562,12 +566,12 @@ watchEffect(() => {
   })
 })
 
-function 检查from和to是否兼容(arr = []) {
+function 检查from和to是否兼容(arr: string[] = []) {
   const 当前api规则 = api不支持的大对象?.[当前翻译api.value]
   if (!当前api规则) {
-    return
+    return 'from不兼容'
   }
-  const 非互翻_自定义不支持 = 当前api规则?.自定义不支持 // 不支持互翻的才会有这个obj
+  const 非互翻_自定义不支持: any = 当前api规则?.自定义不支持 // 不支持互翻的才会有这个obj
   const 互翻_to不支持的数组 = 当前api规则?.to不支持 // 支持互翻的会有这个数组
   const 源语言 = arr?.[0]
   const 目标语言 = arr?.[1]
@@ -645,9 +649,9 @@ onKeyStroke('Tab', e => {
 
 <style lang="scss" scoped>
 .main_wrapper {
-  @apply grid-c h-screen overflow-hidden px-24px pb-24px relative dark:(bg-[#303133] text-white);
+  @apply grid-c h-screen overflow-hidden relative dark:text-white;
   .main {
-    @apply p-16px flex flex-col h-full w-full shadow-xl rounded-8px overflow-hidden dark:(shadow-[#161616] bg-dark-300 shadow-lg );
+    @apply p-23px pt-16px flex flex-col h-full w-full overflow-hidden dark:bg-#303133;
   }
 }
 .icon {
