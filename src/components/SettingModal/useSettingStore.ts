@@ -8,7 +8,7 @@ import Rabbit from 'crypto-js/rabbit'
 import encUtf8 from 'crypto-js/enc-utf8'
 import { 用户设置存储 } from '@/store/userSetting'
 
-export default function (formData) {
+export default function (formData: any) {
   // 从pinia读取设置
   const settingStore = 用户设置存储()
 
@@ -21,7 +21,7 @@ export default function (formData) {
     // })
   }
 
-  function 填写表单(value) {
+  function 填写表单(value: any) {
     Object.keys(formData).forEach(key => {
       formData[key] = value[key]
     })
@@ -97,7 +97,7 @@ export default function (formData) {
         const 密文 = 加密(json, 密码)
         resolve(密文)
       } catch (error) {
-        reject()
+        reject(error)
       }
     })
   }
@@ -109,12 +109,12 @@ export default function (formData) {
         try {
           const tempFormData = JSON.parse(json)
           填写表单(tempFormData)
-          resolve()
+          resolve(tempFormData)
         } catch (error) {
-          reject()
+          reject(error)
         }
       } else {
-        reject()
+        reject(new Error('期望转化结果为JSON'))
       }
     })
   }
