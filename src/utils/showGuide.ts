@@ -35,7 +35,7 @@ export function 显示引导(params: 引导options类型, localName: string) {
     classes: params.classes,
     buttons: [
       {
-        action(): any {
+        action() {
           // 如果传了localName且存储中不存在，则存储
           if (localName && !getDbStorageItem(localName)) {
             setDbStorageItem(localName, new Date().getTime())

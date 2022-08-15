@@ -42,7 +42,7 @@ interface 波纹数组Item {
   height: number
 }
 // 生成波纹DOM
-function 显示波纹(e) {
+function 显示波纹(e: MouseEvent) {
   const 按钮Dom = btnRef.value
   const 按钮宽度 = 按钮Dom.offsetWidth
   const 按钮位置 = 按钮Dom.getBoundingClientRect()

@@ -76,11 +76,11 @@ export default function (formData) {
     settingStore.reset()
   }
 
-  function 加密(文本, 密码) {
+  function 加密(文本: string, 密码: string) {
     return Rabbit.encrypt(文本, 密码).toString()
   }
 
-  function 解密(文本, 密码) {
+  function 解密(文本: string, 密码: string) {
     const decrypted = Rabbit.decrypt(文本, 密码)
     if (decrypted) {
       return decrypted.toString(encUtf8)
@@ -89,7 +89,7 @@ export default function (formData) {
     }
   }
 
-  function 导出设置(密码): Promise<string> {
+  function 导出设置(密码: string): Promise<string> {
     return new Promise((resolve, reject) => {
       try {
         const tempFormData = cloneDeep(settingStore.getSetingFormData)
@@ -102,13 +102,12 @@ export default function (formData) {
     })
   }
 
-  function 导入配置(文本, 密码) {
+  function 导入配置(文本: string, 密码: string) {
     return new Promise((resolve, reject) => {
       const json = 解密(文本, 密码)
       if (json) {
         try {
           const tempFormData = JSON.parse(json)
-          console.log('tempFormData', tempFormData)
           填写表单(tempFormData)
           resolve()
         } catch (error) {

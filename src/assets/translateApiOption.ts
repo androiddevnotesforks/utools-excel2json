@@ -23,7 +23,7 @@ const onlyChinese: 语种[] = [
   'yue',
   'wyw',
 ]
-type 语种 =
+export type 语种 =
   | 'zh'
   | 'en'
   | 'jp'

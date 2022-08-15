@@ -1,3 +1,4 @@
+import type { 语种 } from '@/assets/translateApiOption'
 const 发音角色Map = new Map([
   ['云健', 'zh-CN-YunjianNeural'],
   ['晓秋', 'zh-CN-XiaoqiuNeural'],
@@ -25,15 +26,13 @@ function 获取发音人(str = '') {
   return 发音角色Map.get(str) || 'zh-CN-XiaoxiaoNeural'
 }
 
-// interface 声音角色 {
-//   male: string // 男声
-//   female: string // 女声
-//   default: string // 默认
-//   rate?: number // 语速
-// }
-
-interface 声音映射Type {
-  [key: string]: any
+type 声音映射Type = {
+  [key in 语种]?: {
+    male: string
+    female: string
+    default: string
+    rate?: number
+  }
 }
 
 export const 声音映射: 声音映射Type = {

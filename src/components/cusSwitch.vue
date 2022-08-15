@@ -1,7 +1,7 @@
 <template>
   <input
     id="switch"
-    class="cus_switch im_aa"
+    class="cus_switch"
     type="checkbox"
     :checked="props.modelValue"
     @input="changeVal($event)"
@@ -17,7 +17,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue'])
 
-function changeVal(e) {
+function changeVal(e: any) {
   emit('update:modelValue', e.target.checked)
 }
 </script>
