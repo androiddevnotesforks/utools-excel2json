@@ -441,6 +441,7 @@ import { useClipboard } from '@vueuse/core'
 import 设置存储 from './useSettingStore'
 import { 文案映射 } from './setExplanation'
 import { apiOptions as api选项 } from '@/assets/translateApiOption'
+import type { 引导options类型 } from '@/utils/showGuide'
 import { 显示引导, 清除引导 } from '@/utils/showGuide'
 import { getDbStorageItem as 获取存储项 } from '@/utils/storage'
 import { 获取当前 } from '@/utils/getEnv'
@@ -463,7 +464,7 @@ const formData = reactive({
   readingPreference: 'default', // 朗读偏好
   codeMode: false, // 命名翻译模式
   defaultForeignLanguage: 'en', // 默认目标外语
-  defaultApi: undefined, // 默认翻译方式
+  defaultApi: '', // 默认翻译方式
   theme: 'auto',
   appid: undefined, // 百度
   token: undefined, // 百度
@@ -495,7 +496,7 @@ const utools = window?.utools
 
 const { 获取设置, 保存设置, 重置设置, 导出设置, 导入配置 } = 设置存储(formData)
 const { copy: 复制 } = useClipboard() // 复制结果功能
-const 首页的api数组 = ref([]) // 当前首页展示的翻译方式
+const 首页的api数组 = ref<string[]>([]) // 当前首页展示的翻译方式
 // 默认翻译方式的下拉选项
 const defaultOptions = computed(() => {
   return api列表.value.filter(i => 首页的api数组.value.includes(i.value))
@@ -566,7 +567,7 @@ function 关闭导入弹窗() {
 
 async function 导出数据() {
   try {
-    const 导出内容 = await 导出设置(导出密码框.value)
+    const 导出内容: string = await 导出设置(导出密码框.value)
     导出密码框.value = ''
     await 复制(导出内容)
     提示.success('已将导出设置添加到剪切板')
@@ -588,7 +589,7 @@ function 打开model() {
 
 // 首次提示链接位置
 function 首次引导() {
-  const option = {
+  const option: 引导options类型 = {
     id: 'firstUseSetting',
     title: '这里有一些提示',
     text: '这可是我起早贪黑写的，你可以在点击”关闭“按钮后点击链接查看，它可以帮助你申请到这些免费的服务，如果你已经是个老手了，那就关闭这个对话框开始使用吧~',

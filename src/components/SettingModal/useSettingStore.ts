@@ -2,11 +2,11 @@
  * 用户设置存储业务
  */
 import { cloneDeep } from 'lodash-es'
-import { 用户设置存储 } from '@/store/userSetting'
 
 import Rabbit from 'crypto-js/rabbit'
 // import AES from 'crypto-js/aes'
 import encUtf8 from 'crypto-js/enc-utf8'
+import { 用户设置存储 } from '@/store/userSetting'
 
 export default function (formData) {
   // 从pinia读取设置
@@ -32,32 +32,32 @@ export default function (formData) {
     const keyDatas = {
       baidu: {
         appid: formData.appid,
-        token: formData.token
+        token: formData.token,
       },
 
       tencent: {
         secretId: formData.secretId,
-        secretKey: formData.secretKey
+        secretKey: formData.secretKey,
       },
 
       youdao: {
         appid: formData.youdaoId,
-        appkey: formData.youdaoSecret
+        appkey: formData.youdaoSecret,
       },
 
       ali: {
         accessKeyId: formData.accessKeyId,
-        accessKeySecret: formData.accessKeySecret
+        accessKeySecret: formData.accessKeySecret,
       },
 
       caiyun: {
-        token: formData.caiyunToken
+        token: formData.caiyunToken,
       },
 
       huoshan: {
         accessKeyId: formData.huoshanAccessKeyId,
-        secretAccessKey: formData.huoshanSecretAccessKey
-      }
+        secretAccessKey: formData.huoshanSecretAccessKey,
+      },
     }
     settingStore.setHomeOption(formData.homeHasApi)
     settingStore.setDefaultStorage(formData.defaultApi)
@@ -81,7 +81,7 @@ export default function (formData) {
   }
 
   function 解密(文本, 密码) {
-    var decrypted = Rabbit.decrypt(文本, 密码)
+    const decrypted = Rabbit.decrypt(文本, 密码)
     if (decrypted) {
       return decrypted.toString(encUtf8)
     } else {
@@ -89,7 +89,7 @@ export default function (formData) {
     }
   }
 
-  function 导出设置(密码) {
+  function 导出设置(密码): Promise<string> {
     return new Promise((resolve, reject) => {
       try {
         const tempFormData = cloneDeep(settingStore.getSetingFormData)
@@ -125,6 +125,6 @@ export default function (formData) {
     保存设置,
     重置设置,
     导出设置,
-    导入配置
+    导入配置,
   }
 }

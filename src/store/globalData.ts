@@ -15,13 +15,12 @@ function getOS() {
   return OSRules.find(rule => rule.condition())?.OSName || 'unknown'
 }
 
-export const useGlobalStore = defineStore('global', {
-  state: () => {
-    return {
-      currentTheme: '',
-      currentOS: getOS(),
-    }
-  },
-  getters: {},
-  actions: {},
+export const useGlobalStore = defineStore('global', () => {
+  const currentTheme = ref('')
+  const currentOS = ref(getOS())
+
+  return {
+    currentTheme,
+    currentOS,
+  }
 })

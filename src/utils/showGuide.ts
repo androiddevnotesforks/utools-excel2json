@@ -6,14 +6,14 @@ export interface 引导options类型 {
   id: string
   title: string
   text: string
-  attachTo: 引导链接
+  attachTo: {
+    element: string
+    on: 'left' | 'right' | 'top' | 'bottom'
+  }
   classes: string
+  buttons?: any[]
 }
 
-interface 引导链接 {
-  element: string
-  on: 'left' | 'right' | 'top' | 'bottom'
-}
 export function 显示引导(params: 引导options类型, localName: string) {
   tour = new Shepherd.Tour({
     useModalOverlay: true,
@@ -24,7 +24,7 @@ export function 显示引导(params: 引导options类型, localName: string) {
       canClickTarget: false, // 引导的时候不能点击dom
     },
   })
-  tour.addStep({
+  const options: 引导options类型 = {
     id: params.id,
     title: params.title,
     text: params.text,
@@ -45,7 +45,8 @@ export function 显示引导(params: 引导options类型, localName: string) {
         text: '关闭',
       },
     ],
-  })
+  }
+  tour.addStep(options)
   tour.start()
 }
 
