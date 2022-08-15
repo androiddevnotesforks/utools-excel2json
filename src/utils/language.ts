@@ -1,5 +1,15 @@
 /** 整合的语言修正options */
-const 语音集合 = {
+
+interface 语言集合Type {
+  [key: string]: any
+}
+
+export interface 语音标识参数Type {
+  from: string // 翻译源语言
+  to: string // 翻译目标语言
+}
+
+const 语音集合: 语言集合Type = {
   // 简体中文
   zh: {
     baidu: 'zh',
@@ -8,7 +18,7 @@ const 语音集合 = {
     youdao: 'zh-CHS',
     google: 'zh-CN',
     caiyun: 'zh',
-    huoshan: 'zh'
+    huoshan: 'zh',
   },
   // 繁体中文
   cht: {
@@ -18,7 +28,7 @@ const 语音集合 = {
     youdao: 'zh-CHT',
     google: 'zh-TW',
     caiyun: '',
-    huoshan: 'zh-Hant'
+    huoshan: 'zh-Hant',
   },
   // 文言文
   wyw: {
@@ -28,7 +38,7 @@ const 语音集合 = {
     youdao: '',
     google: '',
     caiyun: '',
-    huoshan: ''
+    huoshan: '',
   },
   // 粤语
   yue: {
@@ -38,7 +48,7 @@ const 语音集合 = {
     youdao: 'yue',
     google: '',
     caiyun: '',
-    huoshan: ''
+    huoshan: '',
   },
   // 英语
   en: {
@@ -48,7 +58,7 @@ const 语音集合 = {
     youdao: 'en',
     google: 'en',
     caiyun: 'en',
-    huoshan: 'en'
+    huoshan: 'en',
   },
   // 日语
   jp: {
@@ -58,7 +68,7 @@ const 语音集合 = {
     youdao: 'ja',
     google: 'ja',
     caiyun: 'ja',
-    huoshan: 'ja'
+    huoshan: 'ja',
   },
   // 俄语
   ru: {
@@ -68,7 +78,7 @@ const 语音集合 = {
     youdao: 'ru',
     google: 'ru',
     caiyun: 'ru',
-    huoshan: 'ru'
+    huoshan: 'ru',
   },
   // 德语
   de: {
@@ -78,7 +88,7 @@ const 语音集合 = {
     youdao: 'de',
     google: 'de',
     caiyun: '',
-    huoshan: 'de'
+    huoshan: 'de',
   },
   // 法语
   fra: {
@@ -88,7 +98,7 @@ const 语音集合 = {
     youdao: 'fr',
     google: 'fr',
     caiyun: '',
-    huoshan: 'fr'
+    huoshan: 'fr',
   },
   // 韩语
   kor: {
@@ -98,7 +108,7 @@ const 语音集合 = {
     youdao: 'ko',
     google: 'ko',
     caiyun: '',
-    huoshan: 'ko'
+    huoshan: 'ko',
   },
   // 泰语
   th: {
@@ -108,7 +118,7 @@ const 语音集合 = {
     youdao: 'th',
     google: 'th',
     caiyun: 'th',
-    huoshan: 'th'
+    huoshan: 'th',
   },
   // 西班牙语
   spa: {
@@ -118,8 +128,8 @@ const 语音集合 = {
     youdao: 'es',
     google: 'es',
     caiyun: 'es',
-    huoshan: 'es'
-  }
+    huoshan: 'es',
+  },
 }
 
 /**
@@ -129,8 +139,19 @@ const 语音集合 = {
  * @param {*} param {form,to}
  * @returns
  */
-export function languageCorrectionByTag(tag, { from, to }) {
-  const fn = 目标语言 => {
+
+/**
+ *
+ * @param tag 修正的翻译标识
+ * @param 翻译参数 语音标识参数
+ * @returns 修正后的语音标识参数
+ */
+export function 语音标识修正(
+  tag: string,
+  翻译参数: 语音标识参数Type
+): 语音标识参数Type {
+  const { from, to } = 翻译参数
+  const fn = (目标语言: string) => {
     if (目标语言 === 'auto') {
       return 目标语言
     }
@@ -144,6 +165,6 @@ export function languageCorrectionByTag(tag, { from, to }) {
 
   return {
     from: fn(from),
-    to: fn(to)
+    to: fn(to),
   }
 }

@@ -2,8 +2,8 @@
 
 const utools = window.utools
 
-/** 数据存储某一项 */
-export function getDbStorageItem(key) {
+/** 数据读取某一项 */
+export function getDbStorageItem(key: string) {
   if (utools) {
     return utools.dbStorage.getItem(key)
   } else {
@@ -11,8 +11,8 @@ export function getDbStorageItem(key) {
   }
 }
 
-/** 数据读取某一项 */
-export function setDbStorageItem(key, value) {
+/** 数据存储某一项 */
+export function setDbStorageItem(key: string, value: any) {
   if (utools) {
     return utools.dbStorage.setItem(key, value)
   } else {
@@ -21,7 +21,7 @@ export function setDbStorageItem(key, value) {
 }
 
 /** 移除数据 */
-export function removeDbStorageItem(key) {
+export function removeDbStorageItem(key: string) {
   if (utools) {
     return utools.dbStorage.removeItem(key)
   } else {

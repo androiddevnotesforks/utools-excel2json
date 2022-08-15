@@ -4,9 +4,9 @@ import {
   读取并检查密钥配置,
   返回状态码及信息,
 } from './common'
-import { languageCorrectionByTag } from '@/utils/language'
+import { 语音标识修正 } from '@/utils/language'
 
-interface 翻译参数 {
+interface 翻译参数Type {
   q: string // 请求翻译query(UTF-8编码)
   from: string // 翻译源语言(可设置为auto)
   to: string // 翻译目标语言 (不可设置为auto)
@@ -18,7 +18,10 @@ interface 翻译参数 {
  * @param options 翻译参数
  * @returns
  */
-export async function 通用翻译(tag: string, options: 翻译参数): Promise<any> {
+export async function 通用翻译(
+  tag: string,
+  options: 翻译参数Type
+): Promise<any> {
   const { q } = options
   // let last
   // 空值优化
@@ -37,7 +40,8 @@ export async function 通用翻译(tag: string, options: 翻译参数): Promise<
   // }
 
   // 语言修正
-  const { from, to } = languageCorrectionByTag(tag, options)
+  // const { from, to } = 语音标识修正(tag, options)
+  const { from, to } = 语音标识修正(tag, options)
 
   // 读取密钥信息
   const checkKey = 读取并检查密钥配置(tag)
