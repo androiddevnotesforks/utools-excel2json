@@ -6,7 +6,8 @@ import { Message as 提示 } from '@arco-design/web-vue'
 import useUtools from './useUtools'
 import { 用户设置存储 } from '@/store/userSetting'
 import { 获取当前 } from '@/utils/getEnv'
-export default function (结果对象) {
+
+export default function (结果对象: any) {
   const { copyBtnBehavior: 复制按钮行为 } = storeToRefs(用户设置存储())
   const { utools, 粘贴, 延迟关闭utools } = useUtools()
   const { copy: 复制 } = useClipboard() // 复制结果功能
@@ -64,13 +65,14 @@ export default function (结果对象) {
     return 结果对象.数据.结果文字?.trim() && 结果对象.数据.结果码 === 200
   })
 
+  const 系统 = 获取当前('系统')
+  const windows和linux系统 = ref(['Windows', 'Linux', 'browser'].includes(系统))
+  const mac系统 = ref(['macOS', 'browser'].includes(系统))
+
   // 监听复制快捷键
   watchEffect(() => {
-    const 系统 = 获取当前('系统')
-    const windows和linux复制条件 =
-      ['Windows', 'Linux', 'browser'].includes(系统) && 组合键['ctrl+shift+c']
-    const mac复制条件 =
-      ['macOS', 'browser'].includes(系统) && 组合键['command+shift+c']
+    const windows和linux复制条件 = windows和linux系统 && 组合键['ctrl+shift+c']
+    const mac复制条件 = mac系统 && 组合键['command+shift+c']
     if (
       (windows和linux复制条件.value || mac复制条件.value) &&
       要显示复制按钮.value

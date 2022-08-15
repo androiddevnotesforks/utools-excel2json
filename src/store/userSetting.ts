@@ -13,7 +13,17 @@ const getDefaultHomeApi = () => {
   return apiOptions.slice(0, 4).map(i => i.value)
 }
 
-const CONFIG = {
+interface configType {
+  key: string
+  type: object
+  defaultState: {}
+}
+
+interface configObj {
+  [key: string]: configType
+}
+
+const CONFIG: configObj = {
   // 密钥配置
   KEY_SETTING: {
     key: 'keyConfig',
@@ -85,7 +95,7 @@ const CONFIG = {
 /** 获取初始化初始值 */
 function getInitState() {
   // 获取存储的数据
-  const getStorageData = config => {
+  const getStorageData = (config: configType) => {
     const { key, type, defaultState } = config
     const strData = getDbStorageItem(key)
     // if (defaultState === null || defaultState === undefined) {
@@ -136,14 +146,10 @@ export const 用户设置存储 = defineStore('settings', {
   getters: {
     /** 获取首页api选择 */
     getHomeApiOptions: (state): 首页api类型[] => {
-      const tempMap = new Map()
-      cloneDeep(apiOptions).map(item => {
-        tempMap.set(item.value, item)
-      })
-      const result = state.homeOption.map(key => {
+      const tempMap = new Map(cloneDeep(apiOptions).map(i => [i.value, i]))
+      return state.homeOption.map((key: string) => {
         return tempMap.get(key)
       })
-      return result
     },
 
     getHomeFontSize: state => {
@@ -194,67 +200,67 @@ export const 用户设置存储 = defineStore('settings', {
 
   actions: {
     /** 设置首页可见翻译 */
-    setHomeOption(data) {
+    setHomeOption(data: any) {
       this.homeOption = data
       setDbStorageItem(CONFIG.HOME_OPTION.key, JSON.stringify(data))
     },
 
     /** 设置默认翻译 */
-    setDefaultStorage(data) {
+    setDefaultStorage(data: any) {
       this.defaultApi = data
       setDbStorageItem(CONFIG.DEFAULT_API.key, data)
     },
 
     /** 设置密钥 */
-    setKeyConfig(data) {
+    setKeyConfig(data: any) {
       this.keyConfig = data
       setDbStorageItem(CONFIG.KEY_SETTING.key, JSON.stringify(data))
     },
 
     /** 设置字体大小 */
-    setFontSize(data) {
+    setFontSize(data: any) {
       this.fontSize = data
       setDbStorageItem(CONFIG.FONT_SIZE.key, data)
     },
 
     /** 设置复制快捷键行为 */
-    setCopyBtnBehavior(data) {
+    setCopyBtnBehavior(data: any) {
       this.copyBtnBehavior = data
       setDbStorageItem(CONFIG.COPY_BTN_BEHAVIOR.key, data)
     },
 
     /** 设置复制按钮 */
-    setCopyBtnShow(data) {
+    setCopyBtnShow(data: any) {
       this.copyBtnShow = data
       setDbStorageItem(CONFIG.COPY_BTN_SHOW.key, JSON.stringify(data))
     },
 
     /** 设置命名翻译模式 */
-    setCodeMode(data) {
+    setCodeMode(data: any) {
       this.codeMode = data
       // setDbStorageItem(CONFIG.CODE_MODE.key.key, data)
     },
 
     /** 设置语音朗读开启 */
-    setReadAloud(data) {
+    setReadAloud(data: any) {
       this.readAloud = data
       setDbStorageItem(CONFIG.READ_ALOUD.key, data)
     },
 
     /** 设置语音朗读偏好 */
-    setReadingPreference(data) {
+    setReadingPreference(data: any) {
       this.readingPreference = data
       setDbStorageItem(CONFIG.READING_PREFERENCE.key, data)
     },
 
     /** 设置主题 */
-    setTheme(data) {
+    setTheme(data: any) {
       this.theme = data
       setDbStorageItem(CONFIG.THEME.key, data)
     },
 
     /** 设置默认外语 */
-    setDefaultForeignLanguage(data) {
+    setDefaultForeignLanguage(data: any) {
       this.defaultForeignLanguage = data
       setDbStorageItem(CONFIG.DEFAULT_FOREIGN_LANGUAGE.key, data)
     },
@@ -272,13 +278,13 @@ export const 用户设置存储 = defineStore('settings', {
      * 获取指定密钥
      * @param {String} tag 第三方api标识
      */
-    getKeyByTag(tag) {
+    getKeyByTag(tag: string) {
       return this.keyConfig[tag] || {}
     },
   },
 })
 
-export function getKeyByTag(tag) {
+export function getKeyByTag(tag: string) {
   const settingStore = 用户设置存储()
   const { keyConfig } = settingStore
   return keyConfig[tag] || {}

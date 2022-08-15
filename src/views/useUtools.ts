@@ -1,12 +1,25 @@
 /** utools 业务逻辑 */
 import { delay } from 'lodash-es'
+import type { Ref } from 'vue'
 import { 获取当前 } from '@/utils/getEnv'
-export default function (设置弹框Ref, 用户输入, 改变命名模式类型) {
+
+interface utoolsPluginEnter {
+  code: string // plugin.json 配置的 feature.code
+  type: string // plugin.json 配置的 feature.cmd.type，可以为 "text"、"img"、 "files"、 "regex"、 "over"、"window"
+  payload: any // feature.cmd.type 对应匹配的数据(String | Object | Array)
+}
+
+export default function (
+  设置弹框Ref: Ref<any>,
+  用户输入: Ref<string>,
+  改变命名模式类型: Function
+) {
   const utools = window?.utools
 
   // 初始化utools
   function utools初始化() {
-    utools.onPluginEnter(({ code, payload }) => {
+    // 每当插件从后台进入到前台时，uTools 将会主动调用这个方法
+    utools.onPluginEnter(({ code, payload }: utoolsPluginEnter) => {
       设置弹框Ref.value.关闭弹窗()
       let value = ''
       const reg = /^anyword__/
@@ -38,7 +51,7 @@ export default function (设置弹框Ref, 用户输入, 改变命名模式类型
     if (!utools) {
       return
     }
-    return new Promise(resolve => {
+    return new Promise<void>(resolve => {
       delay(function () {
         utools.hideMainWindow()
         resolve()
