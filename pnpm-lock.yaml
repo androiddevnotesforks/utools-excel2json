@@ -4,6 +4,7 @@ specifiers:
   '@antfu/eslint-config': ^0.25.2
   '@arco-design/web-vue': ^2.35.0
   '@iconify/json': ^2.1.92
+  '@types/crypto-js': ^4.1.1
   '@types/lodash-es': ^4.17.6
   '@types/node': ^18.7.3
   '@unocss/preset-rem-to-px': ^0.44.7
@@ -51,6 +52,7 @@ devDependencies:
   '@antfu/eslint-config': 0.25.2_4rv7y5c6xz3vfxwhbrcxxi73bq
   '@arco-design/web-vue': 2.35.0_vue@3.2.37
   '@iconify/json': 2.1.92
+  '@types/crypto-js': 4.1.1
   '@types/lodash-es': 4.17.6
   '@types/node': 18.7.3
   '@unocss/preset-rem-to-px': 0.44.7
@@ -404,6 +406,10 @@ packages:
     dependencies:
       estree-walker: 2.0.2
       picomatch: 2.3.1
+    dev: true
+
+  /@types/crypto-js/4.1.1:
+    resolution: {integrity: sha512-BG7fQKZ689HIoc5h+6D2Dgq1fABRa0RbBWKBd9SP/MVRVXROflpm5fhwyATX5duFmbStzyzyycPB8qUYKDH3NA==}
     dev: true
 
   /@types/json-schema/7.0.11:
