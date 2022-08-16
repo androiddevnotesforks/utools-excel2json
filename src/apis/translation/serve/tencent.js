@@ -6,8 +6,8 @@ import SHA256 from 'crypto-js/sha256'
 import encHex from 'crypto-js/enc-hex'
 import hmacSHA256 from 'crypto-js/hmac-sha256'
 import axios from 'axios'
-import { 返回状态码及信息 } from '../common'
 import dayjs from 'dayjs'
+import { 返回状态码及信息 } from '../common'
 
 const 错误信息 = {
   ActionOffline: '接口已下线。',
@@ -76,7 +76,7 @@ const 错误信息 = {
     '不支持的目标语言，请参照语言列表。',
   'UnsupportedOperation.UnsupportedLanguage': '不支持的语言，请参照语言列表。',
   'UnsupportedOperation.UnsupportedSourceLanguage':
-    '不支持的源语言，请参照语言列表。'
+    '不支持的源语言，请参照语言列表。',
 }
 
 /**
@@ -93,7 +93,7 @@ export default async function ({ q, from, to, keyConfig }) {
     SourceText: q,
     Source: from,
     Target: to,
-    ProjectId: 0
+    ProjectId: 0,
   }
 
   const { authorization, timestamp } = toSign(params, keyConfig)
@@ -103,7 +103,7 @@ export default async function ({ q, from, to, keyConfig }) {
     'X-TC-Region': 'ap-guangzhou',
     'X-TC-Timestamp': timestamp,
     Authorization: authorization,
-    'Content-Type': 'application/json; charset=utf-8'
+    'Content-Type': 'application/json; charset=utf-8',
   }
 
   try {
@@ -127,8 +127,8 @@ export default async function ({ q, from, to, keyConfig }) {
 function getDateToTimestamp(timestamp) {
   const date = new Date(timestamp * 1000)
   const year = date.getUTCFullYear()
-  const month = ('0' + (date.getUTCMonth() + 1)).slice(-2)
-  const day = ('0' + date.getUTCDate()).slice(-2)
+  const month = `0${date.getUTCMonth() + 1}`.slice(-2)
+  const day = `0${date.getUTCDate()}`.slice(-2)
   return `${year}-${month}-${day}`
 }
 
@@ -143,26 +143,15 @@ function toSign(params, keyConfig) {
   const host = 'tmt.tencentcloudapi.com'
   // /** 1. 拼接规范请求串 */
   // console.log('1. 拼接规范请求串 ')
-  const HTTPRequestMethod = 'POST',
-    CanonicalURI = '/',
-    CanonicalQueryString = '',
-    CanonicalHeaders = `content-type:application/json; charset=utf-8\nhost:${host}\n`,
-    SignedHeaders = 'content-type;host'
+  const HTTPRequestMethod = 'POST'
+  const CanonicalURI = '/'
+  const CanonicalQueryString = ''
+  const CanonicalHeaders = `content-type:application/json; charset=utf-8\nhost:${host}\n`
+  const SignedHeaders = 'content-type;host'
   // const HashedRequestPayload = SHA256(body).toString(encHex).toLowerCase()
   const HashedRequestPayload = SHA256(payload).toString(encHex).toLowerCase()
 
-  const CanonicalRequest =
-    HTTPRequestMethod +
-    '\n' +
-    CanonicalURI +
-    '\n' +
-    CanonicalQueryString +
-    '\n' +
-    CanonicalHeaders +
-    '\n' +
-    SignedHeaders +
-    '\n' +
-    HashedRequestPayload
+  const CanonicalRequest = `${HTTPRequestMethod}\n${CanonicalURI}\n${CanonicalQueryString}\n${CanonicalHeaders}\n${SignedHeaders}\n${HashedRequestPayload}`
   // console.log('CanonicalRequest:', CanonicalRequest)
   /** 2. 拼接待签名字符串 */
   // console.log('2. 拼接待签名字符串')
@@ -173,20 +162,13 @@ function toSign(params, keyConfig) {
     .toString(encHex)
     .toLowerCase()
 
-  const StringToSign =
-    Algorithm +
-    '\n' +
-    RequestTimestamp +
-    '\n' +
-    CredentialScope +
-    '\n' +
-    HashedCanonicalRequest
+  const StringToSign = `${Algorithm}\n${RequestTimestamp}\n${CredentialScope}\n${HashedCanonicalRequest}`
 
   // console.log('StringToSign:', StringToSign)
   /** 3. 计算签名 */
   // console.log(' 3. 计算签名')
 
-  const SecretDate = hmacSHA256(date, 'TC3' + secretKey)
+  const SecretDate = hmacSHA256(date, `TC3${secretKey}`)
   const SecretService = hmacSHA256(service, SecretDate)
   const SecretSigning = hmacSHA256('tc3_request', SecretService)
   const Signature = hmacSHA256(StringToSign, SecretSigning).toString(encHex)
@@ -195,18 +177,10 @@ function toSign(params, keyConfig) {
   // /** 4. 拼接 Authorization */
   // console.log(' 拼接 Authorization')
   const authorization =
-    Algorithm +
-    ' ' +
-    'Credential=' +
-    secretId +
-    '/' +
-    CredentialScope +
-    ', ' +
-    'SignedHeaders=' +
-    SignedHeaders +
-    ', ' +
-    'Signature=' +
-    Signature
+    `${Algorithm} ` +
+    `Credential=${secretId}/${CredentialScope}, ` +
+    `SignedHeaders=${SignedHeaders}, ` +
+    `Signature=${Signature}`
 
   // console.log('authorization:', authorization)
   return { authorization, timestamp }

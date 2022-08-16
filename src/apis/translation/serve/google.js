@@ -17,7 +17,7 @@ export default function ({ q, from, to }) {
       .googleTextTranslate({
         q,
         from,
-        to
+        to,
       })
       .then(res => {
         return 返回状态码及信息(200, { text: res.text })

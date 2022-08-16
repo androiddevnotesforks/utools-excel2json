@@ -8,7 +8,7 @@ import { 返回状态码及信息 } from '../common'
 
 const last = {
   optionsStr: '',
-  result: ''
+  result: '',
 }
 
 /**
@@ -22,23 +22,22 @@ export default function ({ q, from, to, keyConfig }) {
   const url = import.meta.env.VITE_CAIYUN_BASEURL
 
   // 翻译方式
-  const direction = from + '2' + to
+  const direction = `${from}2${to}`
   const data = {
     source: q,
     trans_type: direction,
     request_id: 'demo',
-    detect: true
+    detect: true,
   }
 
   const headers = {
     'content-type': 'application/json',
-    'x-authorization': 'token ' + keyConfig.token
+    'x-authorization': `token ${keyConfig.token}`,
   }
 
   return axios
     .post(url, data, { headers })
     .then(res => {
-      console.log('res:', res.data)
       const { target } = res.data
       let result
       if (target) {

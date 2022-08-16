@@ -136,11 +136,11 @@ const 错误信息 = {
   17002: '图片过大（1M）',
   17003: '识别类型未找到',
   17004: '不支持的识别类型',
-  17005: '服务调用失败'
+  17005: '服务调用失败',
 }
 const last = {
   optionsStr: '',
-  result: ''
+  result: '',
 }
 
 /**
@@ -161,10 +161,10 @@ export default function ({ q, from, to, keyConfig }) {
     from,
     to,
     appKey: appid,
-    salt: salt,
-    sign: sign,
+    salt,
+    sign,
     signType: 'v3',
-    curtime: curtime
+    curtime,
   }
 
   return axios
@@ -176,7 +176,7 @@ export default function ({ q, from, to, keyConfig }) {
         // 翻译成功
         let text = ''
         translation.map(item => {
-          text += item + '\n'
+          text += `${item}\n`
         })
         result = 返回状态码及信息(200, { text })
       } else {
@@ -203,12 +203,13 @@ function toSign(appid, appkey, query) {
   return {
     sign,
     salt,
-    curtime
+    curtime,
   }
 
   function truncate(q) {
     const len = q.length
-    if (len <= 20) return q
+    if (len <= 20) 
+return q
     return q.substring(0, 10) + len + q.substring(len - 10, len)
   }
 }

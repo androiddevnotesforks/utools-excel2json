@@ -20,7 +20,7 @@ const 错误信息 = {
     '客户端IP非法，检查个人资料里填写的IP地址是否正确，可前往开发者信息-基本信息修改',
   58001: '译文语言方向不支持，检查译文语言是否在语言列表里',
   58002: '服务当前已关闭，请前往管理控制台开启服务',
-  90107: '认证未通过或未生效，请前往我的认证查看认证进度'
+  90107: '认证未通过或未生效，请前往我的认证查看认证进度',
 }
 
 let isCancel = false
@@ -40,27 +40,26 @@ export default async function baiduTranslator({ q, from, to, keyConfig }) {
   const sign = md5(appid + q + salt + token).toString()
   const url = import.meta.env.VITE_BAIDU_BASEURL
   const params = {
-    q: q,
+    q,
     from,
     to,
     appid,
     salt,
-    sign
+    sign,
   }
 
   try {
     /** 使用AbortController来取消请求 */
     const controller = new AbortController()
-    let signal = controller.signal
+    const signal = controller.signal
 
     if (isCancel) {
-      console.log('取消请求:')
       controller.abort() // 不支持 message 参数
     }
     isCancel = true
     const res = await axios.get(url, {
       params,
-      signal
+      signal,
     })
     isCancel = false
 
@@ -78,7 +77,7 @@ export default async function baiduTranslator({ q, from, to, keyConfig }) {
       // 翻译成功
       let text = ''
       trans_result.map(item => {
-        text += item.dst + '\n'
+        text += `${item.dst}\n`
       })
 
       result = 返回状态码及信息(200, { text })
@@ -86,7 +85,7 @@ export default async function baiduTranslator({ q, from, to, keyConfig }) {
     return result
   } catch (err) {
     isCancel = false
-    console.log('err:', err)
+
     // if (err.message === 'cancel') {
     if (err.code === 'ERR_CANCELED') {
       return 返回状态码及信息(204)

@@ -92,7 +92,6 @@ export default async function ({ q, from, to, keyConfig }) {
     if (apiError) {
       return 返回状态码及信息(500, null, 错误信息[apiError])
     } else {
-      console.error(err)
       return 返回状态码及信息(500)
     }
   }
@@ -135,7 +134,6 @@ function toSign(query, bodyData, keyConfig) {
   const xDate = getUtcDate()
   // const xDate = iso8601().replace(/[:\-]|\.\d{3}/g, '')
   const date = xDate.slice(0, 8)
-  // console.log('payload:', payload)
   const headers = {
     Host: 'open.volcengineapi.com',
     'Content-Type': 'application/json; charset=utf-8',
@@ -160,10 +158,10 @@ function toSign(query, bodyData, keyConfig) {
     payload
   ).toString(encHex)}`
 
-  // console.log(CanonicalRequest)
+  //
 
   /** 2. TODO:创建签名字符串 */
-  // console.log('2. 创建签名字符串')
+  //
   const Algorithm = 'HMAC-SHA256'
   const RequestDate = xDate
   const CredentialScope = `${date}/${region}/${service}/request`
@@ -171,10 +169,10 @@ function toSign(query, bodyData, keyConfig) {
     // HexEncode(Hash(CanonicalRequest))
     SHA256(CanonicalRequest).toString(encHex)
   }`
-  // console.log(StringToSign)
+  //
 
   /** 3：构建签名 */
-  // console.log('3：构建签名', date)
+  //
   // const Signingkey = HMAC(HMAC(HMAC(HMAC(kSecret,"20201230"),"cn-north-1"),"iam"),"request");
 
   const kDate = hmacSHA256(date, secretAccessKey)
@@ -182,13 +180,13 @@ function toSign(query, bodyData, keyConfig) {
   const kService = hmacSHA256(service, kRegion)
   const kSigning = hmacSHA256('request', kService)
   const signature = hmacSHA256(StringToSign, kSigning).toString(encHex)
-  // console.log(signature)
+  //
 
   /** 4：将签名添加到请求当中 */
-  // console.log('4：将签名添加到请求当中')
+  //
   const authorization = `HMAC-SHA256 Credential=${accessKeyId}/${CredentialScope}, SignedHeaders=${SignedHeaders}, Signature=${signature}`
-  // console.log('authorization:', authorization)
+  //
   headers.Authorization = authorization
-  // console.log(headers)
+  //
   return headers
 }

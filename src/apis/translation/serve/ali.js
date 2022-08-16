@@ -14,13 +14,13 @@ import { 返回状态码及信息 } from '../common'
  * @param {Object} options.keyConfig key配置
  */
 export default async function ({ q, from, to, keyConfig }) {
-  var params = {
+  const params = {
     Action: 'TranslateGeneral',
     SourceText: encodeURIComponent(q),
     SourceLanguage: from,
     TargetLanguage: to,
     FormatType: 'text',
-    Scene: 'general'
+    Scene: 'general',
   }
 
   if (window.servers) {
@@ -32,10 +32,10 @@ export default async function ({ q, from, to, keyConfig }) {
           return 返回状态码及信息(200, { text: Data.Translated })
         } else {
           // return 返回状态码及信息(500, null, Message)
-          let { code: gCode, text: gText } = await 谷歌翻译({
+          const { code: gCode, text: gText } = await 谷歌翻译({
             q: Message,
             from: 'auto',
-            to: 'zh-CN'
+            to: 'zh-CN',
           })
           return 返回状态码及信息(
             500,
