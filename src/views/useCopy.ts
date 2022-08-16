@@ -3,13 +3,16 @@ import { storeToRefs } from 'pinia'
 import { throttle } from 'lodash-es'
 import { useClipboard } from '@vueuse/core'
 import { Message as 提示 } from '@arco-design/web-vue'
-import useUtools from './useUtools'
 import { 用户设置存储 } from '@/store/userSetting'
 import { 获取当前 } from '@/utils/getEnv'
 
-export default function (结果对象: any) {
+export default function (
+  结果对象: any,
+  utools: any,
+  粘贴: Function,
+  延迟关闭utools: Function
+) {
   const { copyBtnBehavior: 复制按钮行为 } = storeToRefs(用户设置存储())
-  const { utools, 粘贴, 延迟关闭utools } = useUtools()
   const { copy: 复制 } = useClipboard() // 复制结果功能
   const 组合键 = useMagicKeys()
   // 快捷键复制结果

@@ -237,7 +237,6 @@ const 下方placeholder = ref('翻译结果') // 下方placeholder
 const { 朗读功能, 音频Url, 朗读loading, 正在播放, 点击朗读, 重置音频 } =
   use语音朗读模块(form和to的数组, 结果对象)
 
-const { 要显示复制按钮, 复制按钮事件 } = use复制模块(结果对象)
 const {
   是命名模式,
   命名模式类型,
@@ -247,13 +246,21 @@ const {
   改变命名模式类型,
 } = use命名模式模块(结果对象)
 
-use主题()
-
-const { utools, utools初始化 } = useUtools(
+const { utools, utools初始化, 粘贴, 延迟关闭utools } = useUtools(
   设置弹框Ref,
   用户输入,
   改变命名模式类型
 )
+
+const { 要显示复制按钮, 复制按钮事件 } = use复制模块(
+  结果对象,
+  utools,
+  粘贴,
+  延迟关闭utools
+)
+
+use主题()
+
 const 自动模式 = ref(true)
 
 关闭窗口(utools)

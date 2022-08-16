@@ -4,7 +4,7 @@ import {
   读取并检查密钥配置,
   返回状态码及信息,
 } from './common'
-import type { 翻译参数Type } from './types'
+import type { 翻译参数Type } from './common'
 import { 语音标识修正 } from '@/utils/language'
 
 /**
