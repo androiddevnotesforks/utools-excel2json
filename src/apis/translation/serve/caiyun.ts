@@ -5,6 +5,7 @@
 
 import axios from 'axios'
 import { 返回状态码及信息 } from '../common'
+import type { 翻译参数Type } from '../common'
 
 const last = {
   optionsStr: '',
@@ -18,7 +19,7 @@ const last = {
  * @param {String} options.to 翻译目标语言 (可设置为auto)
  * @param {Object} options.keyConfig key配置
  */
-export default function ({ q, from, to, keyConfig }) {
+export default function ({ q, from, to, keyConfig }: 翻译参数Type) {
   const url = import.meta.env.VITE_CAIYUN_BASEURL
 
   // 翻译方式

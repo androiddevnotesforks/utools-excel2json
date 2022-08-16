@@ -4,13 +4,8 @@ import {
   读取并检查密钥配置,
   返回状态码及信息,
 } from './common'
+import type { 翻译参数Type } from './types'
 import { 语音标识修正 } from '@/utils/language'
-
-interface 翻译参数Type {
-  q: string // 请求翻译query(UTF-8编码)
-  from: string // 翻译源语言(可设置为auto)
-  to: string // 翻译目标语言 (不可设置为auto)
-}
 
 /**
  *

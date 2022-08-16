@@ -15,6 +15,13 @@ interface codeType {
   [key: number]: string
 }
 
+export interface 翻译参数Type {
+  q: string // 请求翻译query(UTF-8编码)
+  from: string // 翻译源语言(可设置为auto)
+  to: string // 翻译目标语言 (不可设置为auto)
+  keyConfig?: any
+}
+
 const 翻译应用: 翻译应用Type = {
   baidu: {
     fn: 百度翻译,

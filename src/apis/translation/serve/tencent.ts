@@ -8,8 +8,9 @@ import hmacSHA256 from 'crypto-js/hmac-sha256'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import { 返回状态码及信息 } from '../common'
+import type { 翻译参数Type } from '../common'
 
-const 错误信息 = {
+const 错误信息: Record<string, string> = {
   ActionOffline: '接口已下线。',
   'AuthFailure.InvalidAuthorization':
     '请求头部的 Authorization 不符合腾讯云标准。',
@@ -86,7 +87,7 @@ const 错误信息 = {
  * @param {String} options.to 翻译目标语言(不可设置为auto)
  * @param {Object} options.keyConfig key配置
  */
-export default async function ({ q, from, to, keyConfig }) {
+export default async function ({ q, from, to, keyConfig }: 翻译参数Type) {
   const url = import.meta.env.VITE_TENCENT_BASEURL
 
   const params = {
@@ -124,7 +125,7 @@ export default async function ({ q, from, to, keyConfig }) {
 }
 
 /** 根据时间戳(unix)获取UTC时间 */
-function getDateToTimestamp(timestamp) {
+function getDateToTimestamp(timestamp: number) {
   const date = new Date(timestamp * 1000)
   const year = date.getUTCFullYear()
   const month = `0${date.getUTCMonth() + 1}`.slice(-2)
@@ -133,9 +134,10 @@ function getDateToTimestamp(timestamp) {
 }
 
 /** 生成签名 */
-function toSign(params, keyConfig) {
+function toSign(params: any, keyConfig: any) {
   // console.log('toSign()')
-  const timestamp = dayjs().unix().toString()
+  // const timestamp = dayjs().unix().toString()
+  const timestamp = dayjs().unix()
   const date = getDateToTimestamp(timestamp)
   const payload = JSON.stringify(params)
   const { secretId, secretKey } = keyConfig

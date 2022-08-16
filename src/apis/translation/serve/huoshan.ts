@@ -6,8 +6,9 @@ import SHA256 from 'crypto-js/sha256'
 import encHex from 'crypto-js/enc-hex'
 import hmacSHA256 from 'crypto-js/hmac-sha256'
 import { 返回状态码及信息 } from '../common'
+import type { 翻译参数Type } from '../common'
 
-const 错误信息 = {
+const 错误信息: Record<string, string> = {
   // UndefinedError: '一般不出现这个问题，这是系统开发兜底的错误提示',
   MissingParameter: '关键参数缺失，例如Action, Version参数',
   MissingAuthenticationToken: '缺少身份认证的必要信息，例如Auth信息',
@@ -51,7 +52,7 @@ const 错误信息 = {
  * @param {String} options.to 翻译目标语言(不可设置为auto)
  * @param {Object} options.keyConfig key配置
  */
-export default async function ({ q, from, to, keyConfig }) {
+export default async function ({ q, from, to, keyConfig }: 翻译参数Type) {
   const url = import.meta.env.VITE_HUOSHAN_BASEURL
   const query = 'Action=TranslateText&Version=2020-06-01'
 
@@ -87,7 +88,7 @@ export default async function ({ q, from, to, keyConfig }) {
       result = 返回状态码及信息(200, { text })
     }
     return result
-  } catch (err) {
+  } catch (err: any) {
     const apiError = err?.response?.data?.ResponseMetadata?.Error?.Code
     if (apiError) {
       return 返回状态码及信息(500, null, 错误信息[apiError])
@@ -98,8 +99,8 @@ export default async function ({ q, from, to, keyConfig }) {
 }
 
 /** 获取规范化header数组 */
-function getCanonicalHeadersArr(headers) {
-  const result = []
+function getCanonicalHeadersArr(headers: any) {
+  const result: any[] = []
   Object.keys(headers).forEach(key => {
     result.push({
       key: key.toLowerCase(),
@@ -125,7 +126,7 @@ function getUtcDate() {
 }
 
 /** 生成签名 */
-function toSign(query, bodyData, keyConfig) {
+function toSign(query: string, bodyData: object, keyConfig: any) {
   const payload = JSON.stringify(bodyData)
   // const payload = bodyData
   const { accessKeyId, secretAccessKey } = keyConfig
@@ -134,12 +135,14 @@ function toSign(query, bodyData, keyConfig) {
   const xDate = getUtcDate()
   // const xDate = iso8601().replace(/[:\-]|\.\d{3}/g, '')
   const date = xDate.slice(0, 8)
-  const headers = {
+
+  const headers: any = {
     Host: 'open.volcengineapi.com',
     'Content-Type': 'application/json; charset=utf-8',
     'X-Content-Sha256': SHA256(payload).toString(encHex),
     'X-Date': xDate,
   }
+
   const headerArr = getCanonicalHeadersArr(headers)
   const headerKeys = headerArr.map(item => item.key)
   const region = 'cn-north-1'
@@ -158,9 +161,7 @@ function toSign(query, bodyData, keyConfig) {
     payload
   ).toString(encHex)}`
 
-  //
-
-  /** 2. TODO:创建签名字符串 */
+  /** 2. 创建签名字符串 */
   //
   const Algorithm = 'HMAC-SHA256'
   const RequestDate = xDate

@@ -5,8 +5,10 @@
 import SHA256 from 'crypto-js/sha256'
 import encHex from 'crypto-js/enc-hex'
 import axios from 'axios'
+import type { 翻译参数Type } from '../common'
+
 import { 返回状态码及信息 } from '../common'
-const 错误信息 = {
+const 错误信息: Record<string, string> = {
   101: '缺少必填的参数,首先确保必填参数齐全，然后确认参数书写是否正确。',
   102: '不支持的语言类型',
   103: '翻译文本过长',
@@ -138,6 +140,7 @@ const 错误信息 = {
   17004: '不支持的识别类型',
   17005: '服务调用失败',
 }
+
 const last = {
   optionsStr: '',
   result: '',
@@ -150,7 +153,7 @@ const last = {
  * @param {String} options.to 翻译目标语言 (可设置为auto)
  * @param {Object} options.keyConfig key配置
  */
-export default function ({ q, from, to, keyConfig }) {
+export default function ({ q, from, to, keyConfig }: 翻译参数Type) {
   const url = import.meta.env.VITE_YOUDAO_BASEURL
   const { appid, appkey } = keyConfig
   // 签名
@@ -175,7 +178,7 @@ export default function ({ q, from, to, keyConfig }) {
       if (errorCode === '0') {
         // 翻译成功
         let text = ''
-        translation.map(item => {
+        translation.forEach((item: string) => {
           text += `${item}\n`
         })
         result = 返回状态码及信息(200, { text })
@@ -195,21 +198,21 @@ export default function ({ q, from, to, keyConfig }) {
 }
 
 /** 签名 */
-function toSign(appid, appkey, query) {
+function toSign(appid: string, appkey: string, query: string) {
   const salt = new Date().getTime()
   const curtime = Math.round(new Date().getTime() / 1000)
+  const truncate = (q: string) => {
+    const len = q.length
+    if (len <= 20) {
+      return q
+    }
+    return q.substring(0, 10) + len + q.substring(len - 10, len)
+  }
   const str1 = appid + truncate(query) + salt + curtime + appkey
   const sign = SHA256(str1).toString(encHex)
   return {
     sign,
     salt,
     curtime,
-  }
-
-  function truncate(q) {
-    const len = q.length
-    if (len <= 20) 
-return q
-    return q.substring(0, 10) + len + q.substring(len - 10, len)
   }
 }

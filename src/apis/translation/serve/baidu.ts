@@ -5,8 +5,9 @@
 import md5 from 'crypto-js/md5'
 import axios from 'axios'
 import { 返回状态码及信息 } from '../common'
+import type { 翻译参数Type } from '../common'
 
-const 错误信息 = {
+const 错误信息: Record<string, string> = {
   // 52001: '请求超时，请重试',
   // 52002: '系统错误，请重试',
   52003: '未授权用户，请检查appid是否正确或者服务是否开通',
@@ -32,7 +33,12 @@ let isCancel = false
  * @param {String} options.to 翻译目标语言 (可设置为auto)
  * @param {Object} options.keyConfig key配置
  */
-export default async function baiduTranslator({ q, from, to, keyConfig }) {
+export default async function baiduTranslator({
+  q,
+  from,
+  to,
+  keyConfig,
+}: 翻译参数Type) {
   const { appid, token } = keyConfig
   // 	随机数:可为字母或数字的字符串
   const salt = new Date().getTime()
@@ -76,14 +82,14 @@ export default async function baiduTranslator({ q, from, to, keyConfig }) {
     } else {
       // 翻译成功
       let text = ''
-      trans_result.map(item => {
+      trans_result.forEach((item: any) => {
         text += `${item.dst}\n`
       })
 
       result = 返回状态码及信息(200, { text })
     }
     return result
-  } catch (err) {
+  } catch (err: any) {
     isCancel = false
 
     // if (err.message === 'cancel') {

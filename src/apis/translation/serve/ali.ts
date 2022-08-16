@@ -3,8 +3,9 @@
  * https://help.aliyun.com/document_detail/97592.html
  *  */
 
-import 谷歌翻译 from '../serve/google'
 import { 返回状态码及信息 } from '../common'
+import type { 翻译参数Type } from '../common'
+import 谷歌翻译 from './google'
 
 /**
  * 机器翻译
@@ -13,7 +14,7 @@ import { 返回状态码及信息 } from '../common'
  * @param {String} options.to 翻译目标语言(不可设置为auto)
  * @param {Object} options.keyConfig key配置
  */
-export default async function ({ q, from, to, keyConfig }) {
+export default async function ({ q, from, to, keyConfig }: 翻译参数Type) {
   const params = {
     Action: 'TranslateGeneral',
     SourceText: encodeURIComponent(q),
@@ -26,7 +27,7 @@ export default async function ({ q, from, to, keyConfig }) {
   if (window.servers) {
     return window.servers
       .aliTextTranslate(params, keyConfig)
-      .then(async res => {
+      .then(async (res: any) => {
         const { Code, Data, Message } = res
         if (Code === '200') {
           return 返回状态码及信息(200, { text: Data.Translated })
@@ -44,7 +45,7 @@ export default async function ({ q, from, to, keyConfig }) {
           )
         }
       })
-      .catch(async err => {
+      .catch(async (err: any) => {
         console.error(err)
         return 返回状态码及信息(500)
       })

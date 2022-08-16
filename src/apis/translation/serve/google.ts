@@ -3,6 +3,7 @@
  * https://github.com/vitalets/google-translate-api
  *  */
 import { 返回状态码及信息 } from '../common'
+import type { 翻译参数Type } from '../common'
 
 /**
  * 机器翻译
@@ -11,7 +12,7 @@ import { 返回状态码及信息 } from '../common'
  * @param {String} options.to 翻译目标语言(不可设置为auto)
  * @param {Object} options.keyConfig key配置
  */
-export default function ({ q, from, to }) {
+export default function ({ q, from, to }: 翻译参数Type) {
   if (window.servers) {
     return window.servers
       .googleTextTranslate({
@@ -19,10 +20,10 @@ export default function ({ q, from, to }) {
         from,
         to,
       })
-      .then(res => {
+      .then((res: any) => {
         return 返回状态码及信息(200, { text: res.text })
       })
-      .catch(err => {
+      .catch((err: any) => {
         return 返回状态码及信息(500, null, err)
       })
   } else {
