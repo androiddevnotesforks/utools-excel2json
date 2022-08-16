@@ -208,8 +208,9 @@ import { 显示引导, 清除引导 } from '@/utils/showGuide'
 import { 用户设置存储 } from '@/store/userSetting'
 import { 通用翻译 } from '@/apis/translation/index'
 import { 获取当前 } from '@/utils/getEnv'
+import type { 级联值类型 } from '@/views/useVoice'
 const 语种树的数据 = ref(语种树())
-const form和to的数组 = ref(['auto', 'zh'])
+const form和to的数组 = ref<级联值类型>(['auto', 'zh'])
 const 存储 = 用户设置存储()
 const {
   homeOption: 首页选项,
@@ -259,17 +260,7 @@ const 自动模式 = ref(true)
 
 function 格式化级联显示内容(options: CascaderOption[]) {
   const 文字 = options.map(option => option.label)
-  return h('div', { class: 'flex items-center justify-between relative' }, [
-    h('span', {}, `${文字[0]}\u3000`),
-    h(
-      'i',
-      {
-        class: 'i-gg-arrow-right text-22px flex-1 absolute-center',
-      },
-      ''
-    ),
-    h('span', {}, `\u3000${文字[1]}`),
-  ]) as any as string
+  return 文字.join('\u3000  \u3000')
 }
 
 // 清空输入框
@@ -437,7 +428,7 @@ function resetHandler() {
   读取设置()
 }
 
-function 重置from和to(arr = ['auto', 'zh']) {
+function 重置from和to(arr: 级联值类型 = ['auto', 'zh']) {
   form和to的数组.value = arr
 }
 
@@ -462,7 +453,7 @@ function changeFromTo() {
   if (是命名模式.value) {
     return
   }
-  let arr
+  let arr: 级联值类型
   const 目标外语 = 默认目标外语语种.value
   if (用户输入字数.value < 20) {
     const 第一个字是为汉字 = !!获取用户输入前几个字(1).match(ChineseReg)
@@ -694,10 +685,16 @@ onKeyStroke('Tab', e => {
 
 .tools_wrapper {
   ::v-deep(.arco-select-view-single) {
-    @apply px-22px;
+    @apply px-16px;
   }
   ::v-deep(.arco-select-view-value) {
     @apply grid;
+  }
+  ::v-deep(.arco-select-view-value) {
+    text-align: center;
+    font-family: 'iconfont', 'Inter', 'HarmonyOS Sans SC', 'HarmonyOS',
+      'NanumGothic', 'NotoSansThai', system-ui, —apple-system, Segoe UI, Rototo,
+      Helvetica, Arial, sans-serif !important;
   }
 }
 </style>

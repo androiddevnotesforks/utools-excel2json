@@ -1,3 +1,9 @@
+// iconfont字体图标，因为不会用正常方式使用iconfont，所以其他的类都不需要，把字体引入就行
+@font-face {
+  font-family: 'iconfont';
+  src: url('@/assets/font/iconfont.woff2') format('woff2');
+}
+
 // 鸿蒙字体
 @font-face {
   font-display: swap;
