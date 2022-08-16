@@ -2,12 +2,13 @@
 import { storeToRefs } from 'pinia'
 import { Message as 提示 } from '@arco-design/web-vue'
 import type { Ref } from 'vue'
+import type { 语种 } from '@/assets/translateApiOption'
 import { 用户设置存储 } from '@/store/userSetting'
 import { 语音朗读生成ArrayBuffer, 语音朗读生成base64 } from '@/apis/mstts/index'
 import { 声音映射 } from '@/apis/mstts/data'
 import { 上传日志 } from '@/apis/log'
 
-export default function (form和to的数组: Ref<string[]>, 结果对象: any) {
+export default function (form和to的数组: Ref<语种[]>, 结果对象: any) {
   const { readAloud: 朗读功能, readingPreference: 朗读性别偏好 } = storeToRefs(
     用户设置存储()
   )
@@ -15,16 +16,14 @@ export default function (form和to的数组: Ref<string[]>, 结果对象: any) {
   const 音频Url = ref('')
   const 朗读loading = ref(false) // 译文发音按钮的Loading
   const { playing: 正在播放 } = useMediaControls(audio本体, { src: 音频Url })
-
   // 发音按钮
   async function 点击朗读() {
     重置音频()
     const 译文语言标识 = form和to的数组.value[1]
-    const 声音对象 = 声音映射[译文语言标识] || 声音映射.zh
+    const 声音对象: any = 声音映射[译文语言标识] || 声音映射.zh!
     // 读取发音配置
-    // const 声音 = 声音对象[朗读性别偏好.value]
     const 声音 = 声音对象[朗读性别偏好.value]
-    const 语速 = 声音对象.rate || 1
+    const 语速 = 声音对象?.rate || 1
     朗读loading.value = true
     if (window.utools) {
       await 播放音频V2(声音, 语速)

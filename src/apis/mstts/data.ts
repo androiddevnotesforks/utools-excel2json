@@ -26,13 +26,15 @@ function 获取发音人(str = '') {
   return 发音角色Map.get(str) || 'zh-CN-XiaoxiaoNeural'
 }
 
-type 声音映射Type = {
-  [key in 语种]?: {
-    male: string
-    female: string
-    default: string
-    rate?: number
-  }
+interface 声音映射item {
+  male: string
+  female: string
+  default: string
+  rate?: number
+}
+
+export type 声音映射Type = {
+  [key in 语种]?: 声音映射item
 }
 
 export const 声音映射: 声音映射Type = {

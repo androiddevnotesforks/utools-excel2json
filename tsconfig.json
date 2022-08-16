@@ -12,8 +12,7 @@
     "resolveJsonModule": true,
     "noUnusedLocals": true,
     "strictNullChecks": true,
-    // TODO:允许 JavaScript 文件成为程序的一部分,这个要在改完之后取消注释
-    // "allowJs": true,
+    "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "types": ["vite/client"],
     "paths": {
