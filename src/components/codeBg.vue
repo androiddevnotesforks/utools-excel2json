@@ -16,8 +16,8 @@
     text {
       animation: stroke_light 2s ease;
       @apply text-100px animate-fill-both;
-      font-family: 'JetBrains Mono NL', Menlo, Monaco, Consolas,
-        'Liberation Mono', 'Courier New', monospace;
+      font-family: 'JetBrains Mono NL', Menlo, Monaco, Consolas, 'Liberation Mono',
+        'Courier New', monospace;
     }
   }
 }

@@ -17,9 +17,9 @@
       </template>
       <div ref="modalBody" class="w-full h-full overflow-auto px-20px py-16px">
         <div class="w-full space-x-16px flex">
-          <div class="w-70% left" @mouseleave="切换文案()">
+          <div class="w-70% left">
             <setting-card title="一些提示" @mouseenter="切换文案()">
-              <ul class="mb-16px list-disc pl-16px">
+              <ul class="mb-18px list-disc pl-16px">
                 <li>
                   插件的功能依赖第三方服务，不幸的是，除谷歌翻译外，其他的您需要自行申请之后才能使用它们
                   <i class="text-18px" i-twemoji-slightly-frowning-face></i>
@@ -32,9 +32,7 @@
                     class="-indent-4px"
                     target="_blank"
                     href="https://www.wolai.com/jtSV7oah6M7rErz2RMFzo"
-                    @click="
-                      打开url('https://www.wolai.com/jtSV7oah6M7rErz2RMFzo')
-                    "
+                    @click="打开url('https://www.wolai.com/jtSV7oah6M7rErz2RMFzo')"
                   >
                     大力点击这里，了解如何申请~
                   </a-link>
@@ -45,19 +43,16 @@
                   功能，请将关键字请设置为 “<span
                     class="select-all text_important text-15px code_font-family"
                     >fjyi</span
-                  >” 并打开自动复制，以获得更好的体验
+                  >” ，若utools版本在3.0.0以下，请将自动复制打开，以获得更好的体验
                 </li>
               </ul>
             </setting-card>
             <a-form auto-label-width :model="formData">
               <a-row>
-                <section class="mt-16px space-y-16px flex-1">
+                <section class="mt-18px space-y-18px flex-1">
                   <setting-card title="基本设置">
                     <a-col :span="24">
-                      <a-form-item
-                        label="翻译服务"
-                        @mouseenter="切换文案('翻译服务')"
-                      >
+                      <a-form-item label="翻译服务" @mouseenter="切换文案('翻译服务')">
                         <a-checkbox-group v-model="formData.homeHasApi">
                           <a-checkbox
                             v-for="item in api列表"
@@ -79,10 +74,7 @@
                         @mouseenter="切换文案('主页显示顺序')"
                       >
                         <div class="flex items-center space-x-8px">
-                          <template
-                            v-for="(item, index) in 显示顺序data"
-                            :key="item"
-                          >
+                          <template v-for="(item, index) in 显示顺序data" :key="item">
                             <i
                               v-if="index > 0"
                               i-ic-twotone-keyboard-double-arrow-right
@@ -122,10 +114,7 @@
                       </a-form-item>
                     </a-col>
                     <a-col :span="24">
-                      <a-form-item
-                        label="显示按钮"
-                        @mouseenter="切换文案('显示按钮')"
-                      >
+                      <a-form-item label="显示按钮" @mouseenter="切换文案('显示按钮')">
                         <a-checkbox-group v-model="formData.copyBtnShow">
                           <a-checkbox :value="1">仅复制</a-checkbox>
                           <a-checkbox :value="2">复制并隐藏</a-checkbox>
@@ -139,9 +128,7 @@
                         class="flex items-start"
                         @mouseenter="切换文案('默认目标外语')"
                       >
-                        <a-radio-group
-                          v-model="formData.defaultForeignLanguage"
-                        >
+                        <a-radio-group v-model="formData.defaultForeignLanguage">
                           <a-radio value="en"> 英语 </a-radio>
                           <a-radio value="jp"> 日语 </a-radio>
                           <a-radio value="ru"> 俄语 </a-radio>
@@ -149,10 +136,7 @@
                       </a-form-item>
                     </a-col>
                     <a-col :span="24">
-                      <a-form-item
-                        label="插件主题"
-                        @mouseenter="切换文案('插件主题')"
-                      >
+                      <a-form-item label="插件主题" @mouseenter="切换文案('插件主题')">
                         <a-radio-group v-model="formData.theme">
                           <a-radio value="auto">跟随utools</a-radio>
                           <a-radio value="light"> 浅色 </a-radio>
@@ -161,21 +145,12 @@
                       </a-form-item>
                     </a-col>
                     <a-col :span="24">
-                      <a-form-item
-                        label="语音朗读"
-                        @mouseenter="切换文案('语音朗读')"
-                      >
-                        <a-switch
-                          v-model="formData.readAloud"
-                          class="ml-5px"
-                        ></a-switch>
+                      <a-form-item label="语音朗读" @mouseenter="切换文案('语音朗读')">
+                        <a-switch v-model="formData.readAloud" class="ml-5px"></a-switch>
                       </a-form-item>
                     </a-col>
                     <a-col :span="24">
-                      <a-form-item
-                        label="朗读偏好"
-                        @mouseenter="切换文案('朗读偏好')"
-                      >
+                      <a-form-item label="朗读偏好" @mouseenter="切换文案('朗读偏好')">
                         <a-radio-group
                           v-model="formData.readingPreference"
                           :disabled="!formData.readAloud"
@@ -307,7 +282,7 @@
             </a-form>
             <setting-card
               title="配置信息"
-              class="mt-16px"
+              class="mt-18px"
               @mouseenter="切换文案('配置信息')"
             >
               <div class="space-x-16px mb-20px">
@@ -348,9 +323,7 @@
                       如果你设置了密码，在导入时需要填写相同的密码才能正常导入
                     </p>
                   </template>
-                  <a-button
-                    :type="获取当前('主题') === 'light' ? 'outline' : 'primary'"
-                  >
+                  <a-button :type="获取当前('主题') === 'light' ? 'outline' : 'primary'">
                     <template #icon>
                       <i class="text-16px mb-1px" i-iconoir-share-ios />
                     </template>
@@ -360,7 +333,7 @@
               </div>
             </setting-card>
           </div>
-          <div class="flex-1 relative right">
+          <div class="flex-1 w-0 relative right">
             <setting-card
               class="sticky top-0 pb-16px"
               title="选项说明"
@@ -405,15 +378,13 @@
       @cancel="关闭导入弹窗()"
     >
       <div>
-        <a-alert class="mb-16px">
-          导入配置会覆盖当前配置，请备份好相关信息
-        </a-alert>
+        <a-alert class="mb-16px"> 导入配置会覆盖当前配置，请备份好相关信息 </a-alert>
         <a-textarea
           ref="importModalRef"
           v-model.trim="导入配置文本"
           :auto-size="{
             minRows: 6,
-            maxRows: 6
+            maxRows: 6,
           }"
           placeholder="请输入配置信息"
           allow-clear
@@ -434,18 +405,22 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Message as 提示 } from '@arco-design/web-vue'
 import { cloneDeep } from 'lodash-es'
-import { apiOptions as api选项 } from '@/assets/translateApiOption.js'
-import { 清除引导, 显示引导 } from '@/utils/showGuide.js'
-import { getDbStorageItem as 获取存储项 } from '@/utils/storage.js'
-import 设置存储 from './useSettingStore'
-import { 获取当前 } from '@/utils/getEnv.js'
 import { useClipboard } from '@vueuse/core'
-import { 文案映射 } from './setExplanation.js'
-const modal可见 = ref(false) // 弹框的显隐
+import 设置存储 from './useSettingStore'
+import { 文案映射 } from './setExplanation'
+import { apiOptions as api选项 } from '@/assets/translateApiOption'
+import type { 引导options类型 } from '@/utils/showGuide'
+import { 显示引导, 清除引导 } from '@/utils/showGuide'
+import { getDbStorageItem as 获取存储项 } from '@/utils/storage'
+import { 获取当前 } from '@/utils/getEnv'
+import { replaceStr } from '@/utils/toolsFn'
 const emit = defineEmits(['ok', 'cancel', 'reset'])
+const 系统 = 获取当前('系统')
+const api列表 = ref(api选项)
+const modal可见 = ref(false)
 const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
 const 导出密码框 = ref('') // 导出密码框的内容
 const 导入密码框 = ref('') // 导入密码框的内容
@@ -461,7 +436,7 @@ const formData = reactive({
   readingPreference: 'default', // 朗读偏好
   codeMode: false, // 命名翻译模式
   defaultForeignLanguage: 'en', // 默认目标外语
-  defaultApi: undefined, // 默认翻译方式
+  defaultApi: '', // 默认翻译方式
   theme: 'auto',
   appid: undefined, // 百度
   token: undefined, // 百度
@@ -473,7 +448,7 @@ const formData = reactive({
   youdaoSecret: undefined, // 有道
   caiyunToken: undefined, // 彩云
   huoshanAccessKeyId: undefined, // 火山
-  huoshanSecretAccessKey: undefined // 火山
+  huoshanSecretAccessKey: undefined, // 火山
 })
 const 显示顺序data = computed(() => {
   const 所有服务 = cloneDeep(api列表.value)
@@ -481,7 +456,7 @@ const 显示顺序data = computed(() => {
   const arr = 选的服务.map((i, idx) => {
     return {
       ...所有服务.find(j => j.value === i),
-      sort: idx
+      sort: idx,
     }
   })
   return arr
@@ -490,16 +465,15 @@ const 显示顺序data = computed(() => {
 const importModalRef = ref()
 const 导入配置文本 = ref('')
 const utools = window?.utools
-const api列表 = ref(api选项) // 翻译方式选项
+
 const { 获取设置, 保存设置, 重置设置, 导出设置, 导入配置 } = 设置存储(formData)
 const { copy: 复制 } = useClipboard() // 复制结果功能
-
+const 首页的api数组 = ref<string[]>([]) // 当前首页展示的翻译方式
 // 默认翻译方式的下拉选项
 const defaultOptions = computed(() => {
   return api列表.value.filter(i => 首页的api数组.value.includes(i.value))
 })
 
-const 首页的api数组 = ref([]) // 当前首页展示的翻译方式
 const 可选择的服务数量 = ref(4)
 // 监听首页翻译方式的checkbox勾选数量
 watchEffect(() => {
@@ -511,7 +485,7 @@ watchEffect(() => {
     formData.homeHasApi = 首页的api数组.value
     提示.warning({
       content: '还是至少留下1个翻译方式吧！',
-      duration: 2500
+      duration: 2500,
     })
   }
   首页的api数组.value = formData.homeHasApi
@@ -565,7 +539,7 @@ function 关闭导入弹窗() {
 
 async function 导出数据() {
   try {
-    const 导出内容 = await 导出设置(导出密码框.value)
+    const 导出内容: string = await 导出设置(导出密码框.value)
     导出密码框.value = ''
     await 复制(导出内容)
     提示.success('已将导出设置添加到剪切板')
@@ -587,15 +561,15 @@ function 打开model() {
 
 // 首次提示链接位置
 function 首次引导() {
-  const option = {
+  const option: 引导options类型 = {
     id: 'firstUseSetting',
     title: '这里有一些提示',
     text: '这可是我起早贪黑写的，你可以在点击”关闭“按钮后点击链接查看，它可以帮助你申请到这些免费的服务，如果你已经是个老手了，那就关闭这个对话框开始使用吧~',
     attachTo: {
       element: '#guide-link',
-      on: 'right'
+      on: 'right',
     },
-    classes: 'guide_wrapper'
+    classes: 'guide_wrapper',
   }
   显示引导(option, 'firstUseSetting')
 }
@@ -612,8 +586,10 @@ function 关闭弹窗() {
 }
 
 // 打开url
-function 打开url(url) {
-  if (!utools) return
+function 打开url(url: string) {
+  if (!utools) {
+    return
+  }
   utools.shellOpenExternal(url)
 }
 
@@ -629,19 +605,34 @@ function 重置数据() {
   }, 300)
 }
 
+const 快捷键文案 = computed(() => {
+  const m = new Map([
+    ['macOS', 'Command+Shift+C'],
+    ['Windows', 'Ctrl+Shift+C'],
+    ['Linux', 'Ctrl+Shift+C'],
+  ])
+  return m.get(系统) || 'Ctrl+Shift+C / Command+Shift+C'
+})
+
 function 切换文案(id = '') {
   if (!id) {
     解释文案.value = ''
     return
   }
-  解释文案.value = `<h2 class="text-20px">${id}:</h2>${文案映射?.[id]}`
+  let 文案主体 = 文案映射?.[id]
+
+  // 快捷键的文案中包含动态文字，需要替换
+  if (id === '快捷键行为') {
+    文案主体 = replaceStr(文案主体, ['%s', 快捷键文案.value])
+  }
+  解释文案.value = `<h2 class="text-20px">${id}:</h2>${文案主体}`
 }
 
 // 暴露打开弹窗的函数，供父组件调用
 defineExpose({
   打开弹窗,
   关闭弹窗,
-  modal可见
+  modal可见,
 })
 </script>
 

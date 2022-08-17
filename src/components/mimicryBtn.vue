@@ -15,22 +15,22 @@
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
   loading: {
     type: Boolean,
-    default: false
+    default: false,
   },
   disabled: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 })
 // 按钮点击放大的倍率
-const 放大倍率 = ref(1.2)
+const 放大倍率 = ref<number>(1.2)
 
 // 按钮放大，文字同步缩小为14的倍率
 const 缩小后的尺寸 = computed(() => {
-  const after = (放大倍率.value * 14).toFixed(3)
+  const after: number = parseFloat((放大倍率.value * 14).toFixed(3))
   return (14 / after).toFixed(3)
 })
 </script>
@@ -55,8 +55,8 @@ const 缩小后的尺寸 = computed(() => {
     var(--houdini-colorB) 100%
   );
   box-shadow: 5px 5px 12px #d9d9d9, -5px -5px 12px #fff;
-  transition: 0.3s --houdini-colorA, 0.3s --houdini-colorB,
-    0.1s transform linear, 0.2s box-shadow;
+  transition: 0.3s --houdini-colorA, 0.3s --houdini-colorB, 0.1s transform linear,
+    0.2s box-shadow;
   .text_inner {
     @apply leading-0 transition-all duration-100 ease-linear;
   }

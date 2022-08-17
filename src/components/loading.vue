@@ -7,10 +7,10 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { counter: duration } = useInterval(1000, { controls: true })
 
-const loadingText = computed(() => {
+const loadingText = computed<string>(() => {
   const time = duration.value
   if (time > 13) {
     return '我还在努力，但是你可以检查一下网络连接是否正常'
