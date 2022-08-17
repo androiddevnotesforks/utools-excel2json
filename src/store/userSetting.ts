@@ -135,10 +135,6 @@ interface 首页api类型 {
   value: string
   label: string
 }
-interface 首页api类型 {
-  value: string
-  label: string
-}
 
 export const 用户设置存储 = defineStore('settings', {
   state: () => getInitState(),
