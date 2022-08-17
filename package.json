@@ -27,7 +27,7 @@
     "@iconify/json": "^2.1.93",
     "@types/crypto-js": "^4.1.1",
     "@types/lodash-es": "^4.17.6",
-    "@types/node": "^18.7.5",
+    "@types/node": "^18.7.6",
     "@unocss/preset-rem-to-px": "^0.44.7",
     "@unocss/reset": "^0.44.7",
     "@vitejs/plugin-vue": "^3.0.3",
@@ -43,7 +43,7 @@
     "unocss": "^0.44.7",
     "unplugin-auto-import": "^0.11.1",
     "unplugin-vue-components": "^0.22.4",
-    "vite": "^3.0.7",
+    "vite": "^3.0.8",
     "vite-plugin-chunk-split": "^0.2.7",
     "vue-tsc": "^0.40.1"
   },
