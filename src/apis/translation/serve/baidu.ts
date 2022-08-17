@@ -13,8 +13,7 @@ const 错误信息: Record<string, string> = {
   52003: '未授权用户，请检查appid是否正确或者服务是否开通',
   54000: '必填参数为空，请检查是否少传参数',
   54001: '签名错误，请检查您的签名生成方法',
-  54003:
-    '访问频率受限，请降低您的调用频率，或进行身份认证后切换为高级版/尊享版',
+  54003: '访问频率受限，请降低您的调用频率，或进行身份认证后切换为高级版/尊享版',
   54004: '账户余额不足，请前往管理控制台为账户充值',
   54005: '长query请求频繁，请降低长query的发送频率，3s后再试',
   58000:
@@ -33,12 +32,7 @@ let isCancel = false
  * @param {String} options.to 翻译目标语言 (可设置为auto)
  * @param {Object} options.keyConfig key配置
  */
-export default async function baiduTranslator({
-  q,
-  from,
-  to,
-  keyConfig,
-}: 翻译参数Type) {
+export default async function baiduTranslator({ q, from, to, keyConfig }: 翻译参数Type) {
   const { appid, token } = keyConfig
   // 	随机数:可为字母或数字的字符串
   const salt = new Date().getTime()

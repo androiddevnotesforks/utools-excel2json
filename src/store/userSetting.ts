@@ -1,11 +1,7 @@
 /** 用户设置信息 */
 import { defineStore } from 'pinia'
 import { cloneDeep } from 'lodash-es'
-import {
-  getDbStorageItem,
-  removeDbStorageItem,
-  setDbStorageItem,
-} from '@/utils/storage'
+import { getDbStorageItem, removeDbStorageItem, setDbStorageItem } from '@/utils/storage'
 import { apiOptions } from '@/assets/translateApiOption'
 
 /** 获取默认的首页api */

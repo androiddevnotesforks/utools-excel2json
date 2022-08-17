@@ -55,8 +55,8 @@ const 缩小后的尺寸 = computed(() => {
     var(--houdini-colorB) 100%
   );
   box-shadow: 5px 5px 12px #d9d9d9, -5px -5px 12px #fff;
-  transition: 0.3s --houdini-colorA, 0.3s --houdini-colorB,
-    0.1s transform linear, 0.2s box-shadow;
+  transition: 0.3s --houdini-colorA, 0.3s --houdini-colorB, 0.1s transform linear,
+    0.2s box-shadow;
   .text_inner {
     @apply leading-0 transition-all duration-100 ease-linear;
   }

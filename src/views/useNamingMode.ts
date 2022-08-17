@@ -9,10 +9,7 @@ export default function (结果对象: any) {
 
   // 切换命名翻译模式的方式select
   function 命名模式切换类型() {
-    const result = 返回命名模式对应结果(
-      结果对象.数据.结果文字,
-      命名模式类型.value
-    )
+    const result = 返回命名模式对应结果(结果对象.数据.结果文字, 命名模式类型.value)
     结果对象.数据.结果文字 = result
   }
 

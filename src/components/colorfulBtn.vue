@@ -78,13 +78,7 @@ function 删除第一个波纹dom() {
   span[dynamic='true'] {
     @apply transform scale-0 rounded-full absolute;
 
-    background: linear-gradient(
-      45deg,
-      #ff000080,
-      #ffff0080,
-      #00ffff80,
-      #0000ff80
-    );
+    background: linear-gradient(45deg, #ff000080, #ffff0080, #00ffff80, #0000ff80);
     animation: ripple 1200ms ease;
   }
 }

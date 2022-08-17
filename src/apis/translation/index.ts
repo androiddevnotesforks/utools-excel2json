@@ -1,9 +1,5 @@
 import { 上传日志 } from '../log'
-import {
-  获取指定的翻译方法,
-  读取并检查密钥配置,
-  返回状态码及信息,
-} from './common'
+import { 获取指定的翻译方法, 读取并检查密钥配置, 返回状态码及信息 } from './common'
 import type { 翻译参数Type } from './common'
 import { 语音标识修正 } from '@/utils/language'
 
@@ -13,10 +9,7 @@ import { 语音标识修正 } from '@/utils/language'
  * @param options 翻译参数
  * @returns
  */
-export async function 通用翻译(
-  tag: string,
-  options: 翻译参数Type
-): Promise<any> {
+export async function 通用翻译(tag: string, options: 翻译参数Type): Promise<any> {
   const { q } = options
   // let last
   // 空值优化

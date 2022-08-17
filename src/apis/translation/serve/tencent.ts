@@ -12,8 +12,7 @@ import type { 翻译参数Type } from '../common'
 
 const 错误信息: Record<string, string> = {
   ActionOffline: '接口已下线。',
-  'AuthFailure.InvalidAuthorization':
-    '请求头部的 Authorization 不符合腾讯云标准。',
+  'AuthFailure.InvalidAuthorization': '请求头部的 Authorization 不符合腾讯云标准。',
   'AuthFailure.InvalidSecretId': '密钥非法（不是云 API 密钥类型）。',
   'AuthFailure.MFAFailure': 'MFA 错误。',
   'AuthFailure.SecretIdNotFound':
@@ -23,10 +22,8 @@ const 错误信息: Record<string, string> = {
   'AuthFailure.SignatureFailure':
     '签名错误。签名计算错误，请对照调用方式中的签名方法文档检查签名计算过程。',
   'AuthFailure.TokenFailure': 'token 错误。',
-  'AuthFailure.UnauthorizedOperation':
-    '请求未授权。请参考 CAM 文档对鉴权的说明。',
-  DryRunOperation:
-    'DryRun 操作，代表请求将会是成功的，只是多传了 DryRun 参数。',
+  'AuthFailure.UnauthorizedOperation': '请求未授权。请参考 CAM 文档对鉴权的说明。',
+  DryRunOperation: 'DryRun 操作，代表请求将会是成功的，只是多传了 DryRun 参数。',
   // FailedOperation: '操作失败。',
   // InternalError: '内部错误。',
   InvalidAction: '接口不存在。',
@@ -57,8 +54,7 @@ const 错误信息: Record<string, string> = {
   UnsupportedRegion: '接口不支持所传地域。',
   'FailedOperation.NoFreeAmount':
     '本月免费额度已用完，如需继续使用您可以在机器翻译控制台升级为付费使用。',
-  'FailedOperation.ServiceIsolate':
-    '账号因为欠费停止服务，请在腾讯云账户充值。',
+  'FailedOperation.ServiceIsolate': '账号因为欠费停止服务，请在腾讯云账户充值。',
   'FailedOperation.UserNotRegistered':
     '服务未开通，请在腾讯云官网机器翻译控制台开通服务。',
   'InternalError.BackendTimeout': '后台服务超时，请稍后重试。',
@@ -73,11 +69,9 @@ const 错误信息: Record<string, string> = {
     '音频分片长度超过限制，请保证分片长度小于8s。',
   'UnsupportedOperation.TextTooLong':
     '单次请求text超过长度限制，请保证单次请求⻓度低于2000。',
-  'UnsupportedOperation.UnSupportedTargetLanguage':
-    '不支持的目标语言，请参照语言列表。',
+  'UnsupportedOperation.UnSupportedTargetLanguage': '不支持的目标语言，请参照语言列表。',
   'UnsupportedOperation.UnsupportedLanguage': '不支持的语言，请参照语言列表。',
-  'UnsupportedOperation.UnsupportedSourceLanguage':
-    '不支持的源语言，请参照语言列表。',
+  'UnsupportedOperation.UnsupportedSourceLanguage': '不支持的源语言，请参照语言列表。',
 }
 
 /**
@@ -160,9 +154,7 @@ function toSign(params: any, keyConfig: any) {
   const Algorithm = 'TC3-HMAC-SHA256'
   const RequestTimestamp = timestamp // 时间戳
   const CredentialScope = `${date}/${service}/tc3_request` // 需与时间戳的日期保持一致
-  const HashedCanonicalRequest = SHA256(CanonicalRequest)
-    .toString(encHex)
-    .toLowerCase()
+  const HashedCanonicalRequest = SHA256(CanonicalRequest).toString(encHex).toLowerCase()
 
   const StringToSign = `${Algorithm}\n${RequestTimestamp}\n${CredentialScope}\n${HashedCanonicalRequest}`
 

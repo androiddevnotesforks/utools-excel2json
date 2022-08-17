@@ -23,8 +23,7 @@ const 错误信息: Record<string, string> = {
     '使用service aksk访问请求，仅能访问自己的接口和公共服务的接口。公共服务例如：iam',
   LackPolicy: '子用户请求缺少权限（默认是deny的）',
   AccessDenied: '子用户拥有的权限不支持当前操作',
-  InternalError:
-    '业务服务存在故障，这里的业务一般指具体的imagex、vod。故障不来自TOP',
+  InternalError: '业务服务存在故障，这里的业务一般指具体的imagex、vod。故障不来自TOP',
   FailToConnect: '业务服务连接不上，这里的业务一般指具体的imagex、vod。',
   InternalServiceTimeout: '内部服务执行超时，请查看服务在TOP上配置的超时时间。',
   InnerApiNeedAccountInfo: 'Service aksk请求内部服务时缺少了账号信息',
@@ -37,8 +36,7 @@ const 错误信息: Record<string, string> = {
   // InternalServiceError: '服务存在故障。',
   InvalidAuthorization: 'Authorization头格式错误，检查Authorization。',
   InvalidCredential: 'Authorization头中的Credential格式错误，检查Credential。',
-  InvalidSecretToken:
-    '错误的STS or STS2，可能是多种错误，例如签名错误、过期等。',
+  InvalidSecretToken: '错误的STS or STS2，可能是多种错误，例如签名错误、过期等。',
   '-400': '请求参数错误，具体错误可参考Message信息',
   '-415': '不支持的翻译',
   // '-429': '请求过于频繁',
@@ -77,8 +75,7 @@ export default async function ({ q, from, to, keyConfig }: 翻译参数Type) {
       return res.json()
     })
     const { TranslationList } = resData
-    const ResponseMetadata =
-      resData.ResponseMetadata || resData.ResponseMetaData
+    const ResponseMetadata = resData.ResponseMetadata || resData.ResponseMetaData
     let result
     const apiError = ResponseMetadata?.Error?.Code
     if (apiError) {

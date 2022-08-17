@@ -76,10 +76,7 @@ export default function (
   watchEffect(() => {
     const windows和linux复制条件 = windows和linux系统 && 组合键['ctrl+shift+c']
     const mac复制条件 = mac系统 && 组合键['command+shift+c']
-    if (
-      (windows和linux复制条件.value || mac复制条件.value) &&
-      要显示复制按钮.value
-    ) {
+    if ((windows和linux复制条件.value || mac复制条件.value) && 要显示复制按钮.value) {
       快捷键复制()
     }
   })

@@ -1,3 +1,13 @@
+/**
+ * 替换字符串中的占位符
+ * @param str 要替换的字符串
+ * @param replace [要替换的字符串，替换后的字符串]
+ * @returns 替换后的字符串
+ */
+export function replaceStr(str: string, replace: [string, string]) {
+  return str.replaceAll(replace[0], replace[1])
+}
+
 const 验证Hex合法性 = (hex: string) => /^#([A-Fa-f0-9]{3,4}){1,2}$/.test(hex)
 function 分割hex(st: string, chunkSize: number): string[] {
   const 动态正则 = new RegExp(`.{${chunkSize}}`, 'g')
@@ -6,6 +16,12 @@ function 分割hex(st: string, chunkSize: number): string[] {
 function hex转256(hexStr: string) {
   return parseInt(hexStr.repeat(2 / hexStr.length), 16)
 }
+
+/**
+ * hex转rgb
+ * @param hex 要转换的hex值,如#333、#5b61ff
+ * @returns rgb值，如 '91, 97, 255'
+ */
 export function hex转rgb(hex: string) {
   if (!验证Hex合法性(hex)) {
     throw new Error('hex值有误')

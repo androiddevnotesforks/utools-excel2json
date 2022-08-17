@@ -38,11 +38,7 @@ export default async function ({ q, from, to, keyConfig }: 翻译参数Type) {
             from: 'auto',
             to: 'zh-CN',
           })
-          return 返回状态码及信息(
-            500,
-            null,
-            gCode === 200 && gText ? gText : Message
-          )
+          return 返回状态码及信息(500, null, gCode === 200 && gText ? gText : Message)
         }
       })
       .catch(async (err: any) => {

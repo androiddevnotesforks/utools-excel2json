@@ -25,11 +25,7 @@
       </div>
       <section class="tools_wrapper flex my-8px">
         <!-- 中间翻译Api选项 -->
-        <a-radio-group
-          v-model="当前翻译api"
-          type="button"
-          @change="切换翻译服务()"
-        >
+        <a-radio-group v-model="当前翻译api" type="button" @change="切换翻译服务()">
           <a-radio
             v-for="项 in (翻译api数组 || []).slice(0, 4)"
             :key="项.value"
@@ -49,11 +45,7 @@
               :style="{ width: '130px' }"
               @change="命名模式切换类型()"
             >
-              <a-option
-                v-for="(项, 索引) in 切换类型数组"
-                :key="索引"
-                :value="项.name"
-              >
+              <a-option v-for="(项, 索引) in 切换类型数组" :key="索引" :value="项.name">
                 {{ 项.label }}
               </a-option>
             </a-select>
@@ -84,9 +76,7 @@
       >
         <div class="flex h-full relative">
           <!-- -1：等待用户操作、200：翻译成功均应该显示<code/> -->
-          <codeBg
-            v-if="是命名模式 && [-1, 200].includes(结果对象.数据.结果码)"
-          />
+          <codeBg v-if="是命名模式 && [-1, 200].includes(结果对象.数据.结果码)" />
           <transition name="fade-in-standard">
             <Loading
               v-if="翻译加载"
@@ -118,11 +108,7 @@
 
                 <!-- 开始暂停按钮 -->
                 <MimicryBtn v-show="音频Url" @click="正在播放 = !正在播放">
-                  <i
-                    :class="[
-                      正在播放 ? 'i-ic-twotone-pause' : 'i-ri-play-fill',
-                    ]"
-                  ></i>
+                  <i :class="[正在播放 ? 'i-ic-twotone-pause' : 'i-ri-play-fill']"></i>
                 </MimicryBtn>
               </div>
             </transition>
@@ -234,8 +220,10 @@ const 当前翻译api = ref('') // 当前翻译api
 const 设置弹框Ref = ref() // 设置弹窗的ref
 const 用户输入框Ref = ref() // 输入textarea的dom
 const 下方placeholder = ref('翻译结果') // 下方placeholder
-const { 朗读功能, 音频Url, 朗读loading, 正在播放, 点击朗读, 重置音频 } =
-  use语音朗读模块(form和to的数组, 结果对象)
+const { 朗读功能, 音频Url, 朗读loading, 正在播放, 点击朗读, 重置音频 } = use语音朗读模块(
+  form和to的数组,
+  结果对象
+)
 
 const {
   是命名模式,
@@ -283,8 +271,7 @@ const { ctrl, command } = useMagicKeys()
 function 结果只读切换() {
   const 系统 = 获取当前('系统')
   // 条件：当前为Windows、Linux或是浏览器，且按下了Ctrl
-  const windows和linux条件 =
-    ['Windows', 'Linux', 'browser'].includes(系统) && ctrl.value
+  const windows和linux条件 = ['Windows', 'Linux', 'browser'].includes(系统) && ctrl.value
 
   // 条件：当前为macOS，且按下了Command
   const mac条件 = ['macOS', 'browser'].includes(系统) && command.value
@@ -469,11 +456,8 @@ function changeFromTo() {
     const 抽样数量 = 20
     const 比例 = 0.35
     const 一部分字 = 获取用户输入前几个字(抽样数量)
-    const 一部分字包含汉字数 =
-      replace(一部分字, ChineseReg, '◎').split('◎').length - 1
-    const 汉字占一部分字的比例 = parseFloat(
-      (一部分字包含汉字数 / 抽样数量).toFixed(2)
-    )
+    const 一部分字包含汉字数 = replace(一部分字, ChineseReg, '◎').split('◎').length - 1
+    const 汉字占一部分字的比例 = parseFloat((一部分字包含汉字数 / 抽样数量).toFixed(2))
     const 前一部分字大多汉字 = 汉字占一部分字的比例 >= 比例
     arr = ['auto', 前一部分字大多汉字 ? 目标外语 : 'zh']
   }
@@ -630,9 +614,7 @@ onKeyStroke('Tab', e => {
   if (翻译api数组.value.length <= 1) {
     return
   }
-  let 当前api的index = 翻译api数组.value.findIndex(
-    i => i.value === 当前翻译api.value
-  )
+  let 当前api的index = 翻译api数组.value.findIndex(i => i.value === 当前翻译api.value)
   当前api的index += 1
   if (当前api的index > 翻译api数组.value.length - 1) {
     当前api的index = 0
@@ -699,9 +681,9 @@ onKeyStroke('Tab', e => {
   }
   ::v-deep(.arco-select-view-value) {
     text-align: center;
-    font-family: 'iconfont', 'Inter', 'HarmonyOS Sans SC', 'HarmonyOS',
-      'NanumGothic', 'NotoSansThai', system-ui, —apple-system, Segoe UI, Rototo,
-      Helvetica, Arial, sans-serif !important;
+    font-family: 'iconfont', 'Inter', 'HarmonyOS Sans SC', 'HarmonyOS', 'NanumGothic',
+      'NotoSansThai', system-ui, —apple-system, Segoe UI, Rototo, Helvetica, Arial,
+      sans-serif !important;
   }
 }
 </style>

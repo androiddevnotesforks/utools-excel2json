@@ -20,5 +20,5 @@
     }
   },
   "extensions": [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
-  "exclude": ["dist", "node_modules"]
+  "exclude": ["dist", "node_modules", "public"]
 }

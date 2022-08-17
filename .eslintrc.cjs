@@ -1,13 +1,8 @@
 module.exports = {
   root: true,
   plugins: ['prettier'],
-  extends: [
-    '@antfu',
-    'plugin:prettier/recommended',
-    './.eslintrc-auto-import.json'
-  ],
+  extends: ['@antfu', 'plugin:prettier/recommended', './.eslintrc-auto-import.json'],
   rules: {
-    // TODO:改完把这个规则去掉
     'vue/component-tags-order': [
       'error',
       {
@@ -20,7 +15,8 @@ module.exports = {
       {
         singleQuote: true,
         semi: false,
-        arrowParens: 'avoid'
+        arrowParens: 'avoid',
+        printWidth: 90
       }
     ],
     eqeqeq: ['error', 'always'],

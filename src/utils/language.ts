@@ -146,10 +146,7 @@ const 语音集合: 语言集合Type = {
  * @param 翻译参数 语音标识参数
  * @returns 修正后的语音标识参数
  */
-export function 语音标识修正(
-  tag: string,
-  翻译参数: 语音标识参数Type
-): 语音标识参数Type {
+export function 语音标识修正(tag: string, 翻译参数: 语音标识参数Type): 语音标识参数Type {
   const { from, to } = 翻译参数
   const fn = (目标语言: string) => {
     if (目标语言 === 'auto') {

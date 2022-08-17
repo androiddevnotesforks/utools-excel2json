@@ -32,9 +32,7 @@
                     class="-indent-4px"
                     target="_blank"
                     href="https://www.wolai.com/jtSV7oah6M7rErz2RMFzo"
-                    @click="
-                      打开url('https://www.wolai.com/jtSV7oah6M7rErz2RMFzo')
-                    "
+                    @click="打开url('https://www.wolai.com/jtSV7oah6M7rErz2RMFzo')"
                   >
                     大力点击这里，了解如何申请~
                   </a-link>
@@ -45,7 +43,7 @@
                   功能，请将关键字请设置为 “<span
                     class="select-all text_important text-15px code_font-family"
                     >fjyi</span
-                  >” 并打开自动复制，以获得更好的体验
+                  >” ，若utools版本在3.0.0以下，请将自动复制打开，以获得更好的体验
                 </li>
               </ul>
             </setting-card>
@@ -54,10 +52,7 @@
                 <section class="mt-18px space-y-18px flex-1">
                   <setting-card title="基本设置">
                     <a-col :span="24">
-                      <a-form-item
-                        label="翻译服务"
-                        @mouseenter="切换文案('翻译服务')"
-                      >
+                      <a-form-item label="翻译服务" @mouseenter="切换文案('翻译服务')">
                         <a-checkbox-group v-model="formData.homeHasApi">
                           <a-checkbox
                             v-for="item in api列表"
@@ -79,10 +74,7 @@
                         @mouseenter="切换文案('主页显示顺序')"
                       >
                         <div class="flex items-center space-x-8px">
-                          <template
-                            v-for="(item, index) in 显示顺序data"
-                            :key="item"
-                          >
+                          <template v-for="(item, index) in 显示顺序data" :key="item">
                             <i
                               v-if="index > 0"
                               i-ic-twotone-keyboard-double-arrow-right
@@ -122,10 +114,7 @@
                       </a-form-item>
                     </a-col>
                     <a-col :span="24">
-                      <a-form-item
-                        label="显示按钮"
-                        @mouseenter="切换文案('显示按钮')"
-                      >
+                      <a-form-item label="显示按钮" @mouseenter="切换文案('显示按钮')">
                         <a-checkbox-group v-model="formData.copyBtnShow">
                           <a-checkbox :value="1">仅复制</a-checkbox>
                           <a-checkbox :value="2">复制并隐藏</a-checkbox>
@@ -139,9 +128,7 @@
                         class="flex items-start"
                         @mouseenter="切换文案('默认目标外语')"
                       >
-                        <a-radio-group
-                          v-model="formData.defaultForeignLanguage"
-                        >
+                        <a-radio-group v-model="formData.defaultForeignLanguage">
                           <a-radio value="en"> 英语 </a-radio>
                           <a-radio value="jp"> 日语 </a-radio>
                           <a-radio value="ru"> 俄语 </a-radio>
@@ -149,10 +136,7 @@
                       </a-form-item>
                     </a-col>
                     <a-col :span="24">
-                      <a-form-item
-                        label="插件主题"
-                        @mouseenter="切换文案('插件主题')"
-                      >
+                      <a-form-item label="插件主题" @mouseenter="切换文案('插件主题')">
                         <a-radio-group v-model="formData.theme">
                           <a-radio value="auto">跟随utools</a-radio>
                           <a-radio value="light"> 浅色 </a-radio>
@@ -161,21 +145,12 @@
                       </a-form-item>
                     </a-col>
                     <a-col :span="24">
-                      <a-form-item
-                        label="语音朗读"
-                        @mouseenter="切换文案('语音朗读')"
-                      >
-                        <a-switch
-                          v-model="formData.readAloud"
-                          class="ml-5px"
-                        ></a-switch>
+                      <a-form-item label="语音朗读" @mouseenter="切换文案('语音朗读')">
+                        <a-switch v-model="formData.readAloud" class="ml-5px"></a-switch>
                       </a-form-item>
                     </a-col>
                     <a-col :span="24">
-                      <a-form-item
-                        label="朗读偏好"
-                        @mouseenter="切换文案('朗读偏好')"
-                      >
+                      <a-form-item label="朗读偏好" @mouseenter="切换文案('朗读偏好')">
                         <a-radio-group
                           v-model="formData.readingPreference"
                           :disabled="!formData.readAloud"
@@ -348,9 +323,7 @@
                       如果你设置了密码，在导入时需要填写相同的密码才能正常导入
                     </p>
                   </template>
-                  <a-button
-                    :type="获取当前('主题') === 'light' ? 'outline' : 'primary'"
-                  >
+                  <a-button :type="获取当前('主题') === 'light' ? 'outline' : 'primary'">
                     <template #icon>
                       <i class="text-16px mb-1px" i-iconoir-share-ios />
                     </template>
@@ -360,7 +333,7 @@
               </div>
             </setting-card>
           </div>
-          <div class="flex-1 relative right">
+          <div class="flex-1 w-0 relative right">
             <setting-card
               class="sticky top-0 pb-16px"
               title="选项说明"
@@ -405,9 +378,7 @@
       @cancel="关闭导入弹窗()"
     >
       <div>
-        <a-alert class="mb-16px">
-          导入配置会覆盖当前配置，请备份好相关信息
-        </a-alert>
+        <a-alert class="mb-16px"> 导入配置会覆盖当前配置，请备份好相关信息 </a-alert>
         <a-textarea
           ref="importModalRef"
           v-model.trim="导入配置文本"
@@ -445,8 +416,9 @@ import type { 引导options类型 } from '@/utils/showGuide'
 import { 显示引导, 清除引导 } from '@/utils/showGuide'
 import { getDbStorageItem as 获取存储项 } from '@/utils/storage'
 import { 获取当前 } from '@/utils/getEnv'
-// 翻译方式选项
-const emit = defineEmits(['ok', 'cancel', 'reset']) // 弹框的显隐
+import { replaceStr } from '@/utils/toolsFn'
+const emit = defineEmits(['ok', 'cancel', 'reset'])
+const 系统 = 获取当前('系统')
 const api列表 = ref(api选项)
 const modal可见 = ref(false)
 const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
@@ -633,12 +605,27 @@ function 重置数据() {
   }, 300)
 }
 
+const 快捷键文案 = computed(() => {
+  const m = new Map([
+    ['macOS', 'Command+Shift+C'],
+    ['Windows', 'Ctrl+Shift+C'],
+    ['Linux', 'Ctrl+Shift+C'],
+  ])
+  return m.get(系统) || 'Ctrl+Shift+C / Command+Shift+C'
+})
+
 function 切换文案(id = '') {
   if (!id) {
     解释文案.value = ''
     return
   }
-  解释文案.value = `<h2 class="text-20px">${id}:</h2>${文案映射?.[id]}`
+  let 文案主体 = 文案映射?.[id]
+
+  // 快捷键的文案中包含动态文字，需要替换
+  if (id === '快捷键行为') {
+    文案主体 = replaceStr(文案主体, ['%s', 快捷键文案.value])
+  }
+  解释文案.value = `<h2 class="text-20px">${id}:</h2>${文案主体}`
 }
 
 // 暴露打开弹窗的函数，供父组件调用

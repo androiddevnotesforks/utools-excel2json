@@ -25,8 +25,7 @@
 
 @keyframes sun {
   50% {
-    box-shadow: 0 0 100px #ffff77, 0 0 100px #ffff77, 0 0 100px #ffff77,
-      0 0 100px #ffff77;
+    box-shadow: 0 0 100px #ffff77, 0 0 100px #ffff77, 0 0 100px #ffff77, 0 0 100px #ffff77;
   }
 }
 @keyframes sun-ray {
