@@ -16,7 +16,10 @@ export const 文案映射: 文案类型 = {
         <span class="text_important">
           「智能切换语种」
         </span>
+        <span i-simple-icons-adobeillustrator class="active_auto_btn">
+        </span>
         ，将在翻译之前判断输入是否为中文，如果
+        
         <span class="text_important">
           认定为中文
         </span>
@@ -32,11 +35,11 @@ export const 文案映射: 文案类型 = {
         任一语种，易翻会认为自己猜错了，将自动关闭「智能切换语种」功能
         ，直至
         <span class="text_important">插件退出</span>
-        ，但是你依然可以在语种下拉选择的左侧
+        ，但是你依然可以在语种下拉选择左侧点击
+        <span i-simple-icons-adobeillustrator class="text-#777:70">
+        </span>
+        按钮
         <span class="text_important"> 手动开启 </span>
-      </li>
-      <li>
-        智能切换语种的算法刚刚起步，如果经常不能正确识别，希望可以带着脱敏后的文字联系我们，我们会尽力优化😊
       </li>
     </ul>
   `,

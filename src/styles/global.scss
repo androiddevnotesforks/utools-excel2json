@@ -70,6 +70,13 @@ body,
     'HarmonyOS' !important;
 }
 
+.active_auto_btn {
+  @apply text-primary dark:text-#ffcc33;
+}
+.disabled_auto_btn {
+  @apply text-#ddd dark:text-#555;
+}
+
 ::-webkit-scrollbar {
   @apply w-6px h-6px;
 }

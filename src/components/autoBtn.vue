@@ -12,7 +12,7 @@
       <i
         i-simple-icons-adobeillustrator
         class="text-19px rounded-2px overflow-hidden"
-        :class="[props.modelValue ? 'active' : 'disabled']"
+        :class="[props.modelValue ? 'active_auto_btn' : 'disabled_auto_btn']"
       />
     </div>
   </a-tooltip>
@@ -30,12 +30,6 @@ const { currentTheme } = storeToRefs(globalStore)
 </script>
 
 <style lang="scss" scoped>
-.active {
-  @apply text-primary dark:text-#ffcc33;
-}
-.disabled {
-  @apply text-#ddd dark:text-#555;
-}
 .btn_wrapper {
   @apply select-none w-32px grid-c cursor-pointer rounded-t-4px transition-all overflow-hidden aspect-ratio-square hover:(bg-[#f2f3f5] dark:bg-[#3d3d3d]);
 }
