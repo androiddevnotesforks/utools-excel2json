@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import MainView from '@/views/MainView.vue'
+import MainView from '@/views/MainView/index.vue'
 import '@/utils/setTheme'
 
 // 虽然深色浅色的主题色一致，但是Arco主题色设置过后，深色模式下会对主题色进行一个偏移，这里强制指定深色下主题色的颜色值

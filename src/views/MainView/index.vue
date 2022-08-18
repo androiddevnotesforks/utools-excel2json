@@ -175,26 +175,40 @@
 </template>
 
 <script setup lang="ts">
-import { nanoid } from 'nanoid'
-import { debounce, replace, throttle } from 'lodash-es'
-import { noCase } from 'change-case'
-import type { CascaderOption } from '@arco-design/web-vue'
-import { Message as 提示 } from '@arco-design/web-vue'
-import { storeToRefs } from 'pinia'
-import useUtools from './useUtools'
-import use语音朗读模块 from './useVoice'
-import use复制模块 from './useCopy'
-import use命名模式模块 from './useNamingMode'
-import use主题 from './useTheme'
-import 关闭窗口 from './useExit'
-import { api不支持的大对象, 语种树 } from '@/assets/translateApiOption'
-import { getDbStorageItem as 获取存储项 } from '@/utils/storage'
-import type { 引导options类型 } from '@/utils/showGuide'
-import { 显示引导, 清除引导 } from '@/utils/showGuide'
-import { 用户设置存储 } from '@/store/userSetting'
-import { 通用翻译 } from '@/apis/translation/index'
-import { 获取当前 } from '@/utils/getEnv'
-import type { 级联值类型 } from '@/views/useVoice'
+import type {
+  CascaderOption,
+  引导options类型,
+  级联值类型,
+} from '@/views/MainView/MainViewTypes'
+import { 主页功能 } from '@/views/MainView/MainViewModule'
+import { 主页工具 } from '@/views/MainView/MainViewUtils'
+import { 主页数据 } from '@/views/MainView/MainViewData'
+
+const {
+  useUtools,
+  use语音朗读模块,
+  use复制模块,
+  use命名模式模块,
+  use主题,
+  关闭窗口,
+  通用翻译,
+} = 主页功能
+
+const {
+  获取存储项,
+  显示引导,
+  清除引导,
+  获取当前,
+  nanoid,
+  debounce,
+  replace,
+  throttle,
+  noCase,
+  提示,
+} = 主页工具
+
+const { api不支持的大对象, 语种树, 用户设置存储 } = 主页数据
+
 const 语种树的数据 = ref(语种树())
 const form和to的数组 = ref<级联值类型>(['auto', 'zh'])
 const 存储 = 用户设置存储()
