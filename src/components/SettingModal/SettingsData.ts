@@ -1,7 +1,3 @@
-import { 文案映射 } from '@/components/SettingModal/setExplanation'
-import { apiOptions as api选项 } from '@/assets/translateApiOption'
-
-export const 设置页数据 = {
-  文案映射,
-  api选项,
-}
+// 设置页用到的所有数据
+export { 文案映射 } from '@/components/SettingModal/setExplanation'
+export { apiOptions as api选项 } from '@/assets/translateApiOption'

@@ -1,3 +1,4 @@
+// MainView用到的所有数据
 import { api不支持的大对象, 语种树 } from '@/assets/translateApiOption'
 import { 用户设置存储 } from '@/store/userSetting'
 export const 主页数据 = {

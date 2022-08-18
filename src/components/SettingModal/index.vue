@@ -407,16 +407,20 @@
 </template>
 
 <script setup lang="ts">
-import { 设置页功能 } from '@/components/SettingModal/SettingsModules'
-import { 设置页工具 } from '@/components/SettingModal/SettingsUtils'
-import { 设置页数据 } from '@/components/SettingModal/SettingsData'
+import { 获取存储项, 设置存储 } from '@/components/SettingModal/SettingsModules'
+import {
+  cloneDeep,
+  useClipboard,
+  提示,
+  显示引导,
+  替换字符串,
+  清除引导,
+  获取当前,
+} from '@/components/SettingModal/SettingsUtils'
+import { api选项, 文案映射 } from '@/components/SettingModal/SettingsData'
 import type { 引导options类型 } from '@/components/SettingModal/SettingsTypes'
-
 const emit = defineEmits(['ok', 'cancel', 'reset'])
-const { 文案映射, api选项 } = 设置页数据
-const { 设置存储, 获取存储项 } = 设置页功能
-const { 提示, cloneDeep, useClipboard, 获取当前, 显示引导, 清除引导, 替换字符串 } =
-  设置页工具
+
 const 系统 = 获取当前('系统')
 const api列表 = ref(api选项)
 const modal可见 = ref(false)

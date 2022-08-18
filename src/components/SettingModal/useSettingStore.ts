@@ -8,7 +8,7 @@ import Rabbit from 'crypto-js/rabbit'
 import encUtf8 from 'crypto-js/enc-utf8'
 import { 用户设置存储 } from '@/store/userSetting'
 
-export default function (formData: any) {
+export function 设置存储(formData: any) {
   // 从pinia读取设置
   const settingStore = 用户设置存储()
 
