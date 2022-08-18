@@ -175,7 +175,15 @@
 </template>
 
 <script setup lang="ts">
-import { 主页功能 } from '@/views/MainView/MainViewModule'
+import {
+  useUtools,
+  use主题,
+  use命名模式模块,
+  use复制模块,
+  use语音朗读模块,
+  关闭窗口,
+  通用翻译,
+} from '@/views/MainView/MainViewModule'
 import {
   debounce,
   nanoid,
@@ -194,16 +202,6 @@ import type {
   引导options类型,
   级联值类型,
 } from '@/views/MainView/MainViewTypes'
-
-const {
-  useUtools,
-  use语音朗读模块,
-  use复制模块,
-  use命名模式模块,
-  use主题,
-  关闭窗口,
-  通用翻译,
-} = 主页功能
 
 const 语种树的数据 = ref(语种树())
 const form和to的数组 = ref<级联值类型>(['auto', 'zh'])
