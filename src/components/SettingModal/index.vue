@@ -43,7 +43,7 @@
                   功能，请将关键字请设置为 “<span
                     class="select-all text_important text-15px code_font-family"
                     >fjyi</span
-                  >” ，若utools版本在3.0.0以下，请将自动复制打开，以获得更好的体验
+                  >”
                 </li>
               </ul>
             </setting-card>

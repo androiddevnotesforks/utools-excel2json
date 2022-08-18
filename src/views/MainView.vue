@@ -631,7 +631,7 @@ onKeyStroke('Tab', e => {
 .main_wrapper {
   @apply grid-c h-screen overflow-hidden relative dark:text-white;
   .main {
-    @apply p-23px pt-16px flex flex-col h-full w-full overflow-hidden dark:bg-#303133;
+    @apply p-23px pt-8px flex flex-col h-full w-full overflow-hidden dark:bg-#303133;
   }
 }
 .icon {
