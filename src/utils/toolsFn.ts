@@ -4,7 +4,7 @@
  * @param replace [要替换的字符串，替换后的字符串]
  * @returns 替换后的字符串
  */
-export function replaceStr(str: string, replace: [string, string]) {
+export function 替换字符串(str: string, replace: [string, string]) {
   return str.replaceAll(replace[0], replace[1])
 }
 

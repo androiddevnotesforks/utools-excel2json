@@ -407,18 +407,16 @@
 </template>
 
 <script setup lang="ts">
-import { Message as 提示 } from '@arco-design/web-vue'
-import { cloneDeep } from 'lodash-es'
-import { useClipboard } from '@vueuse/core'
-import 设置存储 from './useSettingStore'
-import { 文案映射 } from './setExplanation'
-import { apiOptions as api选项 } from '@/assets/translateApiOption'
-import type { 引导options类型 } from '@/utils/showGuide'
-import { 显示引导, 清除引导 } from '@/utils/showGuide'
-import { getDbStorageItem as 获取存储项 } from '@/utils/storage'
-import { 获取当前 } from '@/utils/getEnv'
-import { replaceStr } from '@/utils/toolsFn'
+import { 设置页功能 } from '@/components/SettingModal/SettingsModules'
+import { 设置页工具 } from '@/components/SettingModal/SettingsUtils'
+import { 设置页数据 } from '@/components/SettingModal/SettingsData'
+import type { 引导options类型 } from '@/components/SettingModal/SettingsTypes'
+
 const emit = defineEmits(['ok', 'cancel', 'reset'])
+const { 文案映射, api选项 } = 设置页数据
+const { 设置存储, 获取存储项 } = 设置页功能
+const { 提示, cloneDeep, useClipboard, 获取当前, 显示引导, 清除引导, 替换字符串 } =
+  设置页工具
 const 系统 = 获取当前('系统')
 const api列表 = ref(api选项)
 const modal可见 = ref(false)
@@ -475,8 +473,8 @@ const 已勾选的翻译 = computed(() => {
   return api列表.value.filter(i => 首页的api数组.value.includes(i.value))
 })
 
-const 可选择的服务数量 = ref(4)
 // 监听首页翻译方式的checkbox勾选数量
+const 可选择的服务数量 = ref(4)
 watchEffect(() => {
   const 已选择的api长度 = formData.homeHasApi?.length
   if (已选择的api长度 > 可选择的服务数量.value) {
@@ -598,7 +596,7 @@ function 打开url(url: string) {
 
 function 重置数据() {
   重置设置()
-  提示.success({ content: '已重置', duration: 300 })
+  提示.success({ content: '已重置', duration: 1000 })
   // 关闭弹窗并通知重置
   setTimeout(() => {
     关闭弹窗()
@@ -623,7 +621,7 @@ function 切换文案(id = '') {
   let 文案主体 = 文案映射?.[id]
   // 快捷键的文案中包含动态文字，需要替换
   if (id === '快捷键行为') {
-    文案主体 = replaceStr(文案主体, ['%s', 快捷键文案.value])
+    文案主体 = 替换字符串(文案主体, ['%s', 快捷键文案.value])
   }
   解释文案.value = `<h2 class="text-20px">${id}:</h2>${文案主体}`
 }

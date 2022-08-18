@@ -175,14 +175,14 @@
 </template>
 
 <script setup lang="ts">
+import { 主页功能 } from '@/views/MainView/MainViewModule'
+import { 主页工具 } from '@/views/MainView/MainViewUtils'
+import { 主页数据 } from '@/views/MainView/MainViewData'
 import type {
   CascaderOption,
   引导options类型,
   级联值类型,
 } from '@/views/MainView/MainViewTypes'
-import { 主页功能 } from '@/views/MainView/MainViewModule'
-import { 主页工具 } from '@/views/MainView/MainViewUtils'
-import { 主页数据 } from '@/views/MainView/MainViewData'
 
 const {
   useUtools,
@@ -218,7 +218,6 @@ const {
   getHomeFontSize: 文字尺寸,
   copyBtnShow: 复制按钮显示的数组,
   defaultForeignLanguage: 默认目标外语语种,
-  // theme: 主题
 } = storeToRefs(存储)
 const 翻译加载 = ref(false) // 是否正在翻译
 const 用户输入 = ref('') // 输入的内容
