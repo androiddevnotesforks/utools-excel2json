@@ -8,6 +8,11 @@ import UnoCSS from 'unocss/vite'
 import { ArcoResolver } from 'unplugin-vue-components/resolvers'
 import { primaryColor } from './src/config/colorConfig'
 
+function pathResolve(dir: string) {
+  // return resolve(__dirname, '.', dir)
+  return resolve(process.cwd(), '.', dir)
+}
+
 export default defineConfig({
   base: './',
   css: {
@@ -49,7 +54,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src'),
+      '@': pathResolve('src'),
     },
   },
   build: {
