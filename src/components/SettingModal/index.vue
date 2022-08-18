@@ -8,6 +8,7 @@
       body-class="p-0"
       @open="打开model()"
       @cancel="modal取消()"
+      @close="modal关闭动画结束()"
     >
       <template #title>
         <div class="flex items-center space-x-8px">
@@ -364,7 +365,7 @@
           </div>
           <div class="space-x-12px">
             <a-button @click="modal取消()">取消</a-button>
-            <a-button type="primary" @click="modal确定()">确定</a-button>
+            <a-button type="primary" @click="设置modal确定()">确定</a-button>
           </div>
         </div>
       </template>
@@ -469,8 +470,8 @@ const utools = window?.utools
 const { 获取设置, 保存设置, 重置设置, 导出设置, 导入配置 } = 设置存储(formData)
 const { copy: 复制 } = useClipboard() // 复制结果功能
 const 首页的api数组 = ref<string[]>([]) // 当前首页展示的翻译方式
-// 默认翻译方式的下拉选项
-const defaultOptions = computed(() => {
+
+const 已勾选的翻译 = computed(() => {
   return api列表.value.filter(i => 首页的api数组.value.includes(i.value))
 })
 
@@ -495,12 +496,11 @@ watchEffect(() => {
 // 如果选择了"默认翻译方式"为"首页翻译方式"不存在的，则把可用的翻译方式第一个赋值给默认
 watchEffect(() => {
   if (!首页的api数组.value.includes(formData.defaultApi)) {
-    formData.defaultApi = defaultOptions.value[0].value
+    formData.defaultApi = 已勾选的翻译.value[0].value
   }
 })
 
-// 点击弹框确定
-function modal确定() {
+function 设置modal确定() {
   保存设置()
   提示.success({ content: '设置成功', duration: 1000 })
   emit('ok')
@@ -547,6 +547,7 @@ async function 导出数据() {
     提示.error('导出出错了，稍后再试一下吧😯')
   }
 }
+
 // 点击弹框取消
 function modal取消() {
   清除引导()
@@ -574,15 +575,17 @@ function 首次引导() {
   显示引导(option, 'firstUseSetting')
 }
 
-// 打开弹窗
 function 打开弹窗() {
   modal可见.value = true
   获取设置()
 }
 
-// 关闭弹窗
 function 关闭弹窗() {
   modal可见.value = false
+}
+
+function modal关闭动画结束() {
+  切换文案()
 }
 
 // 打开url
@@ -593,9 +596,7 @@ function 打开url(url: string) {
   utools.shellOpenExternal(url)
 }
 
-// 重置数据
 function 重置数据() {
-  // 重置设置
   重置设置()
   提示.success({ content: '已重置', duration: 300 })
   // 关闭弹窗并通知重置
@@ -620,7 +621,6 @@ function 切换文案(id = '') {
     return
   }
   let 文案主体 = 文案映射?.[id]
-
   // 快捷键的文案中包含动态文字，需要替换
   if (id === '快捷键行为') {
     文案主体 = replaceStr(文案主体, ['%s', 快捷键文案.value])
