@@ -1,7 +1,7 @@
 /** 退出插件 */
 import { 获取当前 } from '@/utils/getEnv'
 
-export default function (utools: any) {
+export function 关闭窗口(utools: any) {
   const 组合键 = useMagicKeys()
 
   function 关闭当前窗口() {

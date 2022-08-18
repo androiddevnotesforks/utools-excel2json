@@ -6,7 +6,7 @@ import { Message as 提示 } from '@arco-design/web-vue'
 import { 用户设置存储 } from '@/store/userSetting'
 import { 获取当前 } from '@/utils/getEnv'
 
-export default function (
+export function use复制模块(
   结果对象: any,
   utools: any,
   粘贴: Function,

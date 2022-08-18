@@ -9,7 +9,7 @@ interface utoolsPluginEnter {
   payload: any // feature.cmd.type 对应匹配的数据(String | Object | Array)
 }
 
-export default function (
+export function useUtools(
   设置弹框Ref: Ref<any>,
   用户输入: Ref<string>,
   改变命名模式类型: Function

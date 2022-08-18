@@ -8,7 +8,7 @@ import { 语音朗读生成ArrayBuffer, 语音朗读生成base64 } from '@/apis/
 import { 声音映射 } from '@/apis/mstts/data'
 import { 上传日志 } from '@/apis/log'
 export type 级联值类型 = [语种 | 'auto', 语种]
-export default function (form和to的数组: Ref<级联值类型>, 结果对象: any) {
+export function use语音朗读模块(form和to的数组: Ref<级联值类型>, 结果对象: any) {
   const { readAloud: 朗读功能, readingPreference: 朗读性别偏好 } = storeToRefs(
     用户设置存储()
   )

@@ -2,7 +2,7 @@
 import { 用户设置存储 } from '@/store/userSetting'
 import { 切换类型数组 } from '@/assets/changeCaseMap'
 
-export default function (结果对象: any) {
+export function use命名模式模块(结果对象: any) {
   const 存储 = 用户设置存储()
   const 是命名模式 = computed(() => 存储.codeMode) // 命名翻译模式
   const 命名模式类型 = ref('camelCase') // 命名模式要转换的类型
