@@ -176,8 +176,19 @@
 
 <script setup lang="ts">
 import { 主页功能 } from '@/views/MainView/MainViewModule'
-import { 主页工具 } from '@/views/MainView/MainViewUtils'
-import { 主页数据 } from '@/views/MainView/MainViewData'
+import {
+  debounce,
+  nanoid,
+  noCase,
+  replace,
+  throttle,
+  提示,
+  显示引导,
+  清除引导,
+  获取存储项,
+  获取当前,
+} from '@/views/MainView/MainViewUtils'
+import { api不支持的大对象, 用户设置存储, 语种树 } from '@/views/MainView/MainViewData'
 import type {
   CascaderOption,
   引导options类型,
@@ -193,21 +204,6 @@ const {
   关闭窗口,
   通用翻译,
 } = 主页功能
-
-const {
-  获取存储项,
-  显示引导,
-  清除引导,
-  获取当前,
-  nanoid,
-  debounce,
-  replace,
-  throttle,
-  noCase,
-  提示,
-} = 主页工具
-
-const { api不支持的大对象, 语种树, 用户设置存储 } = 主页数据
 
 const 语种树的数据 = ref(语种树())
 const form和to的数组 = ref<级联值类型>(['auto', 'zh'])

@@ -1,4 +1,5 @@
 // MainView用到的所有功能模块
+// TODO:直接导出这些，MainView里面直接import{...} from 这个文件 用
 import useUtools from '@/views/MainView/useUtools'
 import use语音朗读模块 from '@/views/MainView/useVoice'
 import use复制模块 from '@/views/MainView/useCopy'
