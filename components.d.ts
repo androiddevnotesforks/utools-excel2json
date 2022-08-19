@@ -12,7 +12,6 @@ declare module '@vue/runtime-core' {
     ACascader: typeof import('@arco-design/web-vue')['Cascader']
     ACheckbox: typeof import('@arco-design/web-vue')['Checkbox']
     ACheckboxGroup: typeof import('@arco-design/web-vue')['CheckboxGroup']
-    ACol: typeof import('@arco-design/web-vue')['Col']
     ADivider: typeof import('@arco-design/web-vue')['Divider']
     AForm: typeof import('@arco-design/web-vue')['Form']
     AFormItem: typeof import('@arco-design/web-vue')['FormItem']
@@ -44,7 +43,6 @@ declare module '@vue/runtime-core' {
     LoadingIcon02: typeof import('./src/components/loadingIcon02.vue')['default']
     LoadingIcon03: typeof import('./src/components/loadingIcon03.vue')['default']
     MimicryBtn: typeof import('./src/components/mimicryBtn.vue')['default']
-    RadioIcon: typeof import('./src/components/radioIcon.vue')['default']
     SettingCard: typeof import('./src/components/settingCard.vue')['default']
     SettingModal: typeof import('./src/components/SettingModal/index.vue')['default']
   }

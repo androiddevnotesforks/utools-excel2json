@@ -1,9 +1,6 @@
 <template>
   <div class="main_wrapper">
-    <div
-      class="main"
-      :class="[页面可见性 === 'hidden' && 'scale-95 opacity-50 blur-2px']"
-    >
+    <div class="main">
       <div class="text_wrapper flex flex-1 relative">
         <!-- 清除按钮 -->
         <transition name="component-scale">
@@ -481,7 +478,6 @@ function changeFromTo() {
   重置from和to(arr)
 }
 
-const pageTitle = useTitle() // 网页下页面标题
 const 页面可见性 = useDocumentVisibility()
 onMounted(() => {
   utools && utools初始化()
@@ -491,7 +487,6 @@ onMounted(() => {
 })
 
 const 恢复标题 = useTimeoutFn(() => {
-  pageTitle.value = '易翻翻译'
   下方placeholder.value = '翻译结果'
 }, 1000)
 
@@ -499,7 +494,6 @@ const 恢复标题 = useTimeoutFn(() => {
 watch(页面可见性, (current, previous) => {
   if (current === 'visible' && previous === 'hidden') {
     const 欢迎词 = '欢迎回来~🎉'
-    pageTitle.value = `${欢迎词} - 易翻翻译`
     下方placeholder.value = 欢迎词
     输入框focus()
     恢复标题.start()
