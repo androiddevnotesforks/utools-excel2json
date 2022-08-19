@@ -31,7 +31,15 @@
             :key="项.value"
             :value="项.value"
           >
-            {{ 项.label }}
+            <div class="flex space-x-4px">
+              <div
+                class="grid-c"
+                :class="[当前翻译api === 项.value ? 'contrast-120' : 'grayscale-30']"
+              >
+                <RadioIcon :data="项" />
+              </div>
+              <div>{{ 项.label }}</div>
+            </div>
           </a-radio>
         </a-radio-group>
         <div
@@ -183,7 +191,7 @@ import {
   use语音朗读模块,
   关闭窗口,
   通用翻译,
-} from '@/views/MainView/MainViewModule'
+} from '@MainView/MainViewModule'
 import {
   debounce,
   nanoid,
@@ -195,13 +203,9 @@ import {
   清除引导,
   获取存储项,
   获取当前,
-} from '@/views/MainView/MainViewUtils'
-import { api不支持的大对象, 用户设置存储, 语种树 } from '@/views/MainView/MainViewData'
-import type {
-  CascaderOption,
-  引导options类型,
-  级联值类型,
-} from '@/views/MainView/MainViewTypes'
+} from '@MainView/MainViewUtils'
+import { api不支持的大对象, 用户设置存储, 语种树 } from '@MainView/MainViewData'
+import type { CascaderOption, 引导options类型, 级联值类型 } from '@MainView/MainViewTypes'
 
 const 语种树的数据 = ref(语种树())
 const form和to的数组 = ref<级联值类型>(['auto', 'zh'])

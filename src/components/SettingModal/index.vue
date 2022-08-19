@@ -38,7 +38,7 @@
                     大力点击这里，了解如何申请~
                   </a-link>
                 </li>
-                <li>
+                <li @mouseenter="切换文案('关于自动复制')">
                   如果你使用utools的
                   <span class="text_important">全局快捷键</span>
                   功能，请将关键字请设置为 “<span

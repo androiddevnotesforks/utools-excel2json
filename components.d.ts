@@ -43,6 +43,7 @@ declare module '@vue/runtime-core' {
     LoadingIcon02: typeof import('./src/components/loadingIcon02.vue')['default']
     LoadingIcon03: typeof import('./src/components/loadingIcon03.vue')['default']
     MimicryBtn: typeof import('./src/components/mimicryBtn.vue')['default']
+    RadioIcon: typeof import('./src/components/radioIcon.vue')['default']
     SettingCard: typeof import('./src/components/settingCard.vue')['default']
     SettingModal: typeof import('./src/components/SettingModal/index.vue')['default']
   }

@@ -17,7 +17,8 @@
     "allowSyntheticDefaultImports": true,
     "types": ["vite/client"],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@MainView/*": ["src/views/MainView/*"]
     }
   },
   "extensions": [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],

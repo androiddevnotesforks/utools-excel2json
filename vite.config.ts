@@ -55,6 +55,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': pathResolve('src'),
+      '@imgs': pathResolve('src/assets/imgs'),
+      '@MainView': pathResolve('src/views/MainView'),
     },
   },
   build: {

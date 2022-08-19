@@ -55,9 +55,8 @@
 html,
 body,
 .guide_wrapper {
-  font-family: 'Inter', 'HarmonyOS Sans SC', 'HarmonyOS', 'NanumGothic',
-    'NotoSansThai', system-ui, —apple-system, Segoe UI, Rototo, Helvetica, Arial,
-    sans-serif !important;
+  font-family: 'Inter', 'HarmonyOS Sans SC', 'HarmonyOS', 'NanumGothic', 'NotoSansThai',
+    system-ui, —apple-system, Segoe UI, Rototo, Helvetica, Arial, sans-serif !important;
   background-color: #fff;
 }
 
@@ -88,6 +87,11 @@ body,
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-#777:50;
+}
+
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 // 浅色模式下的<code/>动画
