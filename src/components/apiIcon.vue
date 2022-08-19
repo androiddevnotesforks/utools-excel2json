@@ -1,12 +1,12 @@
 <template>
-  <img :width="图片大小" :src="当前图片Url" alt="" />
+  <img class="inline-flex" :width="图片大小" :src="当前图片Url" alt="" />
 </template>
 
 <script setup lang="ts">
 const props = defineProps({
   data: {
     type: Object,
-    default: () => {},
+    required: true,
   },
 })
 

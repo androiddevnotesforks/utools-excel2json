@@ -1,6 +1,9 @@
 <template>
   <div class="main_wrapper">
-    <div class="main">
+    <div
+      class="main"
+      :class="[页面可见性 === 'hidden' && 'scale-95 opacity-50 blur-2px']"
+    >
       <div class="text_wrapper flex flex-1 relative">
         <!-- 清除按钮 -->
         <transition name="component-scale">
@@ -36,7 +39,7 @@
                 class="grid-c"
                 :class="[当前翻译api === 项.value ? 'contrast-120' : 'grayscale-30']"
               >
-                <RadioIcon :data="项" />
+                <ApiIcon :data="项" />
               </div>
               <div>{{ 项.label }}</div>
             </div>
@@ -192,6 +195,7 @@ import {
   关闭窗口,
   通用翻译,
 } from '@MainView/MainViewModule'
+
 import {
   debounce,
   nanoid,
@@ -204,7 +208,9 @@ import {
   获取存储项,
   获取当前,
 } from '@MainView/MainViewUtils'
+
 import { api不支持的大对象, 用户设置存储, 语种树 } from '@MainView/MainViewData'
+
 import type { CascaderOption, 引导options类型, 级联值类型 } from '@MainView/MainViewTypes'
 
 const 语种树的数据 = ref(语种树())
@@ -640,8 +646,10 @@ onKeyStroke('Tab', e => {
 
 <style lang="scss" scoped>
 .main_wrapper {
-  @apply grid-c h-screen overflow-hidden relative dark:text-white;
+  @apply grid-c h-screen overflow-hidden relative dark:(text-white bg-#303133);
   .main {
+    transition: all 200ms $imitate-ios;
+    will-change: transform, opacity, filter;
     @apply p-23px pt-8px flex flex-col h-full w-full overflow-hidden dark:bg-#303133;
   }
 }

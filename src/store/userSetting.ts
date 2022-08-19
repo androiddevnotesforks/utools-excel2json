@@ -66,7 +66,7 @@ const CONFIG: configObj = {
   READ_ALOUD: {
     key: 'readAloud',
     type: Boolean,
-    defaultState: false,
+    defaultState: true,
   },
   // 朗读偏好
   READING_PREFERENCE: {

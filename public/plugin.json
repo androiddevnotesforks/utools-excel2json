@@ -9,8 +9,11 @@
     {
       "code": "keyword",
       "label": "易翻翻译",
-      "explain": "可能是utools上第2好用的翻译插件，支持多种语言互翻",
-      "cmds": ["易翻翻译", "ef"]
+      "explain": "可能是uTools上第2好用的翻译插件，支持多种语言互翻",
+      "cmds": [
+        "易翻翻译",
+        "ef"
+      ]
     },
     {
       "code": "anyword__fanyi",
@@ -33,61 +36,91 @@
       "code": "codeMode__camelCase",
       "label": "易翻翻译",
       "explain": "命名翻译模式：小驼峰",
-      "cmds": ["小驼峰", "mmxt"]
+      "cmds": [
+        "小驼峰",
+        "mmxt"
+      ]
     },
     {
       "code": "codeMode__pascalCase",
       "label": "易翻翻译",
       "explain": "命名翻译模式：大驼峰",
-      "cmds": ["大驼峰", "mmdt"]
+      "cmds": [
+        "大驼峰",
+        "mmdt"
+      ]
     },
     {
       "code": "codeMode__snakeCase",
       "label": "易翻翻译",
       "explain": "命名翻译模式：下划线",
-      "cmds": ["下划线", "mmxh"]
+      "cmds": [
+        "下划线",
+        "mmxh"
+      ]
     },
     {
       "code": "codeMode__paramCase",
       "label": "易翻翻译",
       "explain": "命名翻译模式：中划线(小)",
-      "cmds": ["中划线小", "mmzhx"]
+      "cmds": [
+        "中划线小",
+        "mmzhx"
+      ]
     },
     {
       "code": "codeMode__headerCase",
       "label": "易翻翻译",
       "explain": "命名翻译模式：中划线(大)",
-      "cmds": ["中划线大", "mmzhd"]
+      "cmds": [
+        "中划线大",
+        "mmzhd"
+      ]
     },
     {
       "code": "codeMode__noCase",
       "label": "易翻翻译",
       "explain": "命名翻译模式：分词(小)",
-      "cmds": ["分词小", "mmfcx"]
+      "cmds": [
+        "分词小",
+        "mmfcx"
+      ]
     },
     {
       "code": "codeMode__capitalCase",
       "label": "易翻翻译",
       "explain": "命名翻译模式：分词(大)",
-      "cmds": ["分词大", "mmfcd"]
+      "cmds": [
+        "分词大",
+        "mmfcd"
+      ]
     },
     {
       "code": "codeMode__dotCase",
       "label": "易翻翻译",
       "explain": "命名翻译模式：对象属性",
-      "cmds": ["对象属性", "mmdx"]
+      "cmds": [
+        "对象属性",
+        "mmdx"
+      ]
     },
     {
       "code": "codeMode__pathCase",
       "label": "易翻翻译",
       "explain": "命名翻译模式：文件路径",
-      "cmds": ["文件路径", "mmwj"]
+      "cmds": [
+        "文件路径",
+        "mmwj"
+      ]
     },
     {
       "code": "codeMode__constantCase",
       "label": "易翻翻译",
       "explain": "命名翻译模式：常量",
-      "cmds": ["常量", "mmcl"]
+      "cmds": [
+        "常量",
+        "mmcl"
+      ]
     }
   ]
 }

@@ -22,6 +22,7 @@ declare module '@vue/runtime-core' {
     ALink: typeof import('@arco-design/web-vue')['Link']
     AModal: typeof import('@arco-design/web-vue')['Modal']
     AOption: typeof import('@arco-design/web-vue')['Option']
+    ApiIcon: typeof import('./src/components/apiIcon.vue')['default']
     APopconfirm: typeof import('@arco-design/web-vue')['Popconfirm']
     ARadio: typeof import('@arco-design/web-vue')['Radio']
     ARadioGroup: typeof import('@arco-design/web-vue')['RadioGroup']
