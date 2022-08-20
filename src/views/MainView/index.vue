@@ -206,7 +206,12 @@ import {
   获取当前,
 } from '@MainView/MainViewUtils'
 
-import { api不支持的大对象, 用户设置存储, 语种树 } from '@MainView/MainViewData'
+import {
+  api不支持的大对象,
+  汉字和汉字符号正则,
+  用户设置存储,
+  语种树,
+} from '@MainView/MainViewData'
 
 import type { CascaderOption, 引导options类型, 级联值类型 } from '@MainView/MainViewTypes'
 
@@ -369,7 +374,7 @@ async function 开始翻译(val = 当前翻译api.value) {
     return
   }
   if (自动模式.value && !是命名模式.value) {
-    changeFromTo()
+    判断是否大多汉字()
   }
 
   翻译加载.value = true
@@ -449,36 +454,31 @@ function 获取用户输入前几个字(字数 = 0) {
   return 去除符号和数字的用户输入.value.substring(0, 字数)
 }
 
-// 汉字+汉字符号的正则
-const ChineseReg =
-  /[\u4E00-\u9FA5|\u3002|\uFF1F|\uFF01|\uFF0C|\u3001|\uFF1B|\uFF1A|\u201C|\u201D|\u2018|\u2019|\uFF08|\uFF09|\u300A|\u300B|\u3008|\u3009|\u3010|\u3011|\u300E|\u300F|\u300C|\u300D|\uFE43|\uFE44|\u3014|\u3015|\u2026|\u2014|\uFF5E|\uFE4F|\uFFE5|[\u3400-\u4DB5\u4E00-\u9FEA\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29]|[\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879][\uDC00-\uDFFF]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0]]/g
-
 const 用户输入字数 = computed(() => {
   return 去除符号和数字的用户输入.value.match(/./gu)?.length || 0
 })
 
-function changeFromTo() {
+function 判断是否大多汉字() {
   if (是命名模式.value) {
     return
   }
   let arr: 级联值类型
   const 目标外语 = 默认目标外语语种.value
   if (用户输入字数.value < 20) {
-    const 第一个字是为汉字 = !!获取用户输入前几个字(1).match(ChineseReg)
+    const 第一个字是为汉字 = !!获取用户输入前几个字(1).match(汉字和汉字符号正则)
     arr = ['auto', 第一个字是为汉字 ? 目标外语 : 'zh']
   } else {
     const 抽样数量 = 20
     const 比例 = 0.35
     const 一部分字 = 获取用户输入前几个字(抽样数量)
-    const 一部分字包含汉字数 = replace(一部分字, ChineseReg, '◎').split('◎').length - 1
-    const 汉字占一部分字的比例 = parseFloat((一部分字包含汉字数 / 抽样数量).toFixed(2))
+    const 一部分字包含汉字数 = 一部分字.match(汉字和汉字符号正则)?.length ?? 0
+    const 汉字占一部分字的比例 = parseFloat((一部分字包含汉字数 / 抽样数量).toFixed(3))
     const 前一部分字大多汉字 = 汉字占一部分字的比例 >= 比例
     arr = ['auto', 前一部分字大多汉字 ? 目标外语 : 'zh']
   }
   重置from和to(arr)
 }
 
-const 页面可见性 = useDocumentVisibility()
 onMounted(() => {
   utools && utools初始化()
   输入框focus()
@@ -491,16 +491,17 @@ const 恢复标题 = useTimeoutFn(() => {
 }, 1000)
 
 // 页面可见性逻辑
+const 页面可见性 = useDocumentVisibility()
 watch(页面可见性, (current, previous) => {
   if (current === 'visible' && previous === 'hidden') {
-    const 欢迎词 = '欢迎回来~🎉'
-    下方placeholder.value = 欢迎词
+    下方placeholder.value = '欢迎回来~🎉'
     输入框focus()
     恢复标题.start()
   } else if (current === 'hidden' && previous === 'visible') {
     正在播放.value = false
   }
 })
+
 // 加了一层防抖的翻译
 const 防抖翻译 = debounce(function () {
   开始翻译()
