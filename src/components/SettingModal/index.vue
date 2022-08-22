@@ -20,39 +20,41 @@
         <div class="w-full space-x-16px flex">
           <div class="left" :class="[!侧边收缩 ? 'w-70%' : 'w-full']">
             <setting-card title="一些提示" @mouseenter="切换文案()">
-              <ul class="mb-18px list-disc pl-16px">
-                <li>
-                  插件的功能依赖第三方服务，不幸的是，除谷歌翻译外，其他的您需要自行申请之后才能使用它们
-                  <i class="text-18px" i-twemoji-slightly-frowning-face></i>
-                  ，但是万幸，他们都是免费的
-                  <i class="text-18px" i-twemoji-grinning-face></i>
-                </li>
-                <li>
-                  <a-link
-                    id="guide-link"
-                    class="-indent-4px"
-                    target="_blank"
-                    href="https://www.wolai.com/jtSV7oah6M7rErz2RMFzo"
-                    @click="打开url('https://www.wolai.com/jtSV7oah6M7rErz2RMFzo')"
-                  >
-                    大力点击这里，了解如何申请~
-                  </a-link>
-                </li>
-                <li @mouseenter="切换文案('关于自动复制')">
-                  如果你使用uTools的
-                  <span class="text_important">全局快捷键</span>
-                  功能，请将关键字请设置为 “<span
-                    class="select-all text_important text-15px code_font-family"
-                    >fjyi</span
-                  >”
-                </li>
-              </ul>
+              <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                <ul class="mb-18px list-disc pl-16px">
+                  <li>
+                    插件的功能依赖第三方服务，不幸的是，除谷歌翻译外，其他的您需要自行申请之后才能使用它们
+                    <i class="text-18px" i-twemoji-slightly-frowning-face></i>
+                    ，但是万幸，他们都是免费的
+                    <i class="text-18px" i-twemoji-grinning-face></i>
+                  </li>
+                  <li>
+                    <a-link
+                      id="guide-link"
+                      class="-indent-4px"
+                      target="_blank"
+                      href="https://www.wolai.com/jtSV7oah6M7rErz2RMFzo"
+                      @click="打开url('https://www.wolai.com/jtSV7oah6M7rErz2RMFzo')"
+                    >
+                      大力点击这里，了解如何申请~
+                    </a-link>
+                  </li>
+                  <li @mouseenter="切换文案('关于自动复制')">
+                    如果你使用uTools的
+                    <span class="text_important">全局快捷键</span>
+                    功能，请将关键字请设置为 “<span
+                      class="select-all text_important text-15px code_font-family"
+                      >fjyi</span
+                    >”
+                  </li>
+                </ul>
+              </section>
             </setting-card>
             <a-form auto-label-width :model="formData">
               <a-row>
                 <section class="mt-18px space-y-18px flex-1">
                   <setting-card title="基本设置">
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="翻译服务:" @mouseenter="切换文案('翻译服务')">
                         <a-checkbox-group v-model="formData.homeHasApi">
                           <a-checkbox
@@ -68,8 +70,8 @@
                           </a-checkbox>
                         </a-checkbox-group>
                       </a-form-item>
-                    </div>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    </section>
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item
                         label="主页显示顺序:"
                         @mouseenter="切换文案('主页显示顺序')"
@@ -85,8 +87,8 @@
                           </template>
                         </div>
                       </a-form-item>
-                    </div>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    </section>
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item
                         label="文本框字号:"
                         @mouseenter="切换文案('文本框字号')"
@@ -101,8 +103,8 @@
                           <template #suffix> 像素 </template>
                         </a-input-number>
                       </a-form-item>
-                    </div>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    </section>
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item
                         label="快捷键行为:"
                         @mouseenter="切换文案('快捷键行为')"
@@ -113,8 +115,8 @@
                           <a-radio value="closeInput"> 复制隐藏并输入 </a-radio>
                         </a-radio-group>
                       </a-form-item>
-                    </div>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    </section>
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="显示按钮:" @mouseenter="切换文案('显示按钮')">
                         <a-checkbox-group v-model="formData.copyBtnShow">
                           <a-checkbox :value="1">仅复制</a-checkbox>
@@ -122,8 +124,8 @@
                           <a-checkbox :value="3">复制并输入</a-checkbox>
                         </a-checkbox-group>
                       </a-form-item>
-                    </div>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    </section>
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item
                         label="默认目标外语:"
                         class="flex items-start"
@@ -135,8 +137,8 @@
                           <a-radio value="ru"> 俄语 </a-radio>
                         </a-radio-group>
                       </a-form-item>
-                    </div>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    </section>
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="插件主题:" @mouseenter="切换文案('插件主题')">
                         <a-radio-group v-model="formData.theme">
                           <a-radio value="auto">跟随uTools</a-radio>
@@ -144,13 +146,13 @@
                           <a-radio value="dark"> 深色 </a-radio>
                         </a-radio-group>
                       </a-form-item>
-                    </div>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    </section>
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="语音朗读:" @mouseenter="切换文案('语音朗读')">
                         <a-switch v-model="formData.readAloud" class="ml-5px"> </a-switch>
                       </a-form-item>
-                    </div>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    </section>
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="朗读偏好:" @mouseenter="切换文案('朗读偏好')">
                         <a-radio-group
                           v-model="formData.readingPreference"
@@ -161,7 +163,7 @@
                           <a-radio value="female"> 仅女声 </a-radio>
                         </a-radio-group>
                       </a-form-item>
-                    </div>
+                    </section>
                   </setting-card>
                   <setting-card
                     title="翻译服务数据"
@@ -173,7 +175,7 @@
                         <span>百度翻译</span>
                       </div>
                     </a-divider>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="APP ID:">
                         <a-input
                           v-model.trim="formData.appid"
@@ -181,8 +183,8 @@
                           allow-clear
                         />
                       </a-form-item>
-                    </div>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    </section>
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="密钥:">
                         <a-input-password
                           v-model.trim="formData.token"
@@ -190,14 +192,14 @@
                           allow-clear
                         />
                       </a-form-item>
-                    </div>
+                    </section>
                     <a-divider orientation="left">
                       <div class="divide_content">
                         <ApiIcon :data="{ value: 'tencent' }" />
                         <span>腾讯云翻译</span>
                       </div>
                     </a-divider>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="Secret Id:">
                         <a-input
                           v-model.trim="formData.secretId"
@@ -205,8 +207,8 @@
                           allow-clear
                         />
                       </a-form-item>
-                    </div>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    </section>
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="Secret Key:">
                         <a-input-password
                           v-model.trim="formData.secretKey"
@@ -214,14 +216,14 @@
                           allow-clear
                         />
                       </a-form-item>
-                    </div>
+                    </section>
                     <a-divider orientation="left">
                       <div class="divide_content">
                         <ApiIcon :data="{ value: 'ali' }" />
                         <span>阿里云翻译</span>
                       </div>
                     </a-divider>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="Secret Id:">
                         <a-input
                           v-model.trim="formData.accessKeyId"
@@ -229,8 +231,8 @@
                           allow-clear
                         />
                       </a-form-item>
-                    </div>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    </section>
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="Secret Key:">
                         <a-input-password
                           v-model.trim="formData.accessKeySecret"
@@ -238,14 +240,14 @@
                           allow-clear
                         />
                       </a-form-item>
-                    </div>
+                    </section>
                     <a-divider orientation="left">
                       <div class="divide_content">
                         <ApiIcon :data="{ value: 'youdao' }" />
                         <span>有道翻译</span>
                       </div>
                     </a-divider>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="应用ID:">
                         <a-input
                           v-model.trim="formData.youdaoId"
@@ -253,8 +255,8 @@
                           allow-clear
                         />
                       </a-form-item>
-                    </div>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    </section>
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="应用密钥:">
                         <a-input-password
                           v-model.trim="formData.youdaoSecret"
@@ -262,14 +264,14 @@
                           allow-clear
                         />
                       </a-form-item>
-                    </div>
+                    </section>
                     <a-divider orientation="left">
                       <div class="divide_content">
                         <ApiIcon :data="{ value: 'caiyun' }" />
                         <span>彩云小译</span>
                       </div>
                     </a-divider>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="令牌:">
                         <a-input-password
                           v-model.trim="formData.caiyunToken"
@@ -277,14 +279,14 @@
                           allow-clear
                         />
                       </a-form-item>
-                    </div>
+                    </section>
                     <a-divider orientation="left">
                       <div class="divide_content">
                         <ApiIcon :data="{ value: 'huoshan' }" />
                         <span>火山翻译</span>
                       </div>
                     </a-divider>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="AccessKeyID:">
                         <a-input
                           v-model.trim="formData.huoshanAccessKeyId"
@@ -292,8 +294,8 @@
                           allow-clear
                         />
                       </a-form-item>
-                    </div>
-                    <div class="item_wrapper" :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    </section>
+                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
                       <a-form-item label="SecretAccessKey:">
                         <a-input-password
                           v-model.trim="formData.huoshanSecretAccessKey"
@@ -301,7 +303,7 @@
                           allow-clear
                         />
                       </a-form-item>
-                    </div>
+                    </section>
                   </setting-card>
                 </section>
               </a-row>
@@ -359,29 +361,31 @@
               </div>
             </setting-card>
           </div>
-          <div v-if="!侧边收缩" class="right relative flex-1 transition-all">
-            <setting-card
-              class="sticky top-0 pb-16px"
-              :style="{ height: `${modalHeight}px` }"
-            >
-              <template #title>
-                <div class="space-x-6px flex items-center">
-                  <cus-tooltip content="收起选项说明" position="left">
-                    <i
-                      i-tabler-layout-sidebar-right-collapse
-                      class="text-18px cursor-pointer"
-                      @click="收缩侧边(true)"
-                    ></i>
-                  </cus-tooltip>
-                  <span>选项说明</span>
-                </div>
-              </template>
-              <div
-                class="flex flex-col"
-                v-html="解释文案 || '鼠标悬浮左侧选项上可查看对应选项说明'"
-              ></div>
-            </setting-card>
-          </div>
+          <transition name="zoom-br">
+            <div v-if="!侧边收缩" class="right relative flex-1 transition-all">
+              <setting-card
+                class="sticky top-0 pb-16px"
+                :style="{ height: `${modalHeight}px` }"
+              >
+                <template #title>
+                  <div class="space-x-6px flex items-center">
+                    <cus-tooltip content="收起选项说明" position="left">
+                      <i
+                        i-tabler-layout-sidebar-right-collapse
+                        class="text-18px cursor-pointer"
+                        @click="收缩侧边(true)"
+                      ></i>
+                    </cus-tooltip>
+                    <span>选项说明</span>
+                  </div>
+                </template>
+                <div
+                  class="flex flex-col"
+                  v-html="解释文案 || '鼠标悬浮左侧选项上可查看对应选项说明'"
+                ></div>
+              </setting-card>
+            </div>
+          </transition>
         </div>
       </div>
       <template #footer>
@@ -697,9 +701,6 @@ defineExpose({
   @apply flex-c space-x-4px;
 }
 .left {
-  transition: all 0.5s $imitate-ios;
-}
-.item_wrapper {
-  transition: all 0.1s ease;
+  transition: all 0.3s $imitate-ios;
 }
 </style>
