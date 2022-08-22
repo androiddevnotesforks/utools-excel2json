@@ -20,7 +20,7 @@
         <div class="w-full space-x-16px flex">
           <div class="left" :class="[!侧边收缩 ? 'w-70%' : 'w-full']">
             <setting-card title="一些提示" @mouseenter="切换文案()">
-              <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+              <section :class="动态宽度类名">
                 <ul class="mb-18px list-disc pl-16px">
                   <li>
                     插件的功能依赖第三方服务，不幸的是，除谷歌翻译外，其他的您需要自行申请之后才能使用它们
@@ -54,7 +54,7 @@
               <a-row>
                 <section class="mt-18px space-y-18px flex-1">
                   <setting-card title="基本设置">
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="翻译服务:" @mouseenter="切换文案('翻译服务')">
                         <a-checkbox-group v-model="formData.homeHasApi">
                           <a-checkbox
@@ -71,7 +71,7 @@
                         </a-checkbox-group>
                       </a-form-item>
                     </section>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item
                         label="主页显示顺序:"
                         @mouseenter="切换文案('主页显示顺序')"
@@ -88,7 +88,7 @@
                         </div>
                       </a-form-item>
                     </section>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item
                         label="文本框字号:"
                         @mouseenter="切换文案('文本框字号')"
@@ -104,7 +104,7 @@
                         </a-input-number>
                       </a-form-item>
                     </section>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item
                         label="快捷键行为:"
                         @mouseenter="切换文案('快捷键行为')"
@@ -116,7 +116,7 @@
                         </a-radio-group>
                       </a-form-item>
                     </section>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="显示按钮:" @mouseenter="切换文案('显示按钮')">
                         <a-checkbox-group v-model="formData.copyBtnShow">
                           <a-checkbox :value="1">仅复制</a-checkbox>
@@ -125,7 +125,7 @@
                         </a-checkbox-group>
                       </a-form-item>
                     </section>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item
                         label="默认目标外语:"
                         class="flex items-start"
@@ -138,7 +138,7 @@
                         </a-radio-group>
                       </a-form-item>
                     </section>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="插件主题:" @mouseenter="切换文案('插件主题')">
                         <a-radio-group v-model="formData.theme">
                           <a-radio value="auto">跟随uTools</a-radio>
@@ -147,12 +147,12 @@
                         </a-radio-group>
                       </a-form-item>
                     </section>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="语音朗读:" @mouseenter="切换文案('语音朗读')">
                         <a-switch v-model="formData.readAloud" class="ml-5px"> </a-switch>
                       </a-form-item>
                     </section>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="朗读偏好:" @mouseenter="切换文案('朗读偏好')">
                         <a-radio-group
                           v-model="formData.readingPreference"
@@ -175,7 +175,7 @@
                         <span>百度翻译</span>
                       </div>
                     </a-divider>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="APP ID:">
                         <a-input
                           v-model.trim="formData.appid"
@@ -184,7 +184,7 @@
                         />
                       </a-form-item>
                     </section>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="密钥:">
                         <a-input-password
                           v-model.trim="formData.token"
@@ -199,7 +199,7 @@
                         <span>腾讯云翻译</span>
                       </div>
                     </a-divider>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="Secret Id:">
                         <a-input
                           v-model.trim="formData.secretId"
@@ -208,7 +208,7 @@
                         />
                       </a-form-item>
                     </section>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="Secret Key:">
                         <a-input-password
                           v-model.trim="formData.secretKey"
@@ -223,7 +223,7 @@
                         <span>阿里云翻译</span>
                       </div>
                     </a-divider>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="Secret Id:">
                         <a-input
                           v-model.trim="formData.accessKeyId"
@@ -232,7 +232,7 @@
                         />
                       </a-form-item>
                     </section>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="Secret Key:">
                         <a-input-password
                           v-model.trim="formData.accessKeySecret"
@@ -247,7 +247,7 @@
                         <span>有道翻译</span>
                       </div>
                     </a-divider>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="应用ID:">
                         <a-input
                           v-model.trim="formData.youdaoId"
@@ -256,7 +256,7 @@
                         />
                       </a-form-item>
                     </section>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="应用密钥:">
                         <a-input-password
                           v-model.trim="formData.youdaoSecret"
@@ -271,7 +271,7 @@
                         <span>彩云小译</span>
                       </div>
                     </a-divider>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="令牌:">
                         <a-input-password
                           v-model.trim="formData.caiyunToken"
@@ -286,7 +286,7 @@
                         <span>火山翻译</span>
                       </div>
                     </a-divider>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="AccessKeyID:">
                         <a-input
                           v-model.trim="formData.huoshanAccessKeyId"
@@ -295,7 +295,7 @@
                         />
                       </a-form-item>
                     </section>
-                    <section :class="[侧边收缩 ? 'w-80%' : 'w-full']">
+                    <section :class="动态宽度类名">
                       <a-form-item label="SecretAccessKey:">
                         <a-input-password
                           v-model.trim="formData.huoshanSecretAccessKey"
@@ -361,7 +361,7 @@
               </div>
             </setting-card>
           </div>
-          <transition name="zoom-br">
+          <transition name="fade-in-standard">
             <div v-if="!侧边收缩" class="right relative flex-1 transition-all">
               <setting-card
                 class="sticky top-0 pb-16px"
@@ -470,7 +470,7 @@ const emit = defineEmits(['ok', 'cancel', 'reset'])
 
 const 系统 = 获取当前('系统')
 const api列表 = ref(api选项)
-const modal可见 = ref(true)
+const modal可见 = ref(false)
 const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
 const 导出密码框 = ref('') // 导出密码框的内容
 const 导入密码框 = ref('') // 导入密码框的内容
@@ -550,6 +550,9 @@ watchEffect(() => {
 })
 
 const 侧边收缩 = ref(false)
+const 动态宽度类名 = computed(() => {
+  return 侧边收缩.value ? 'w-80%' : 'w-full'
+})
 
 function 收缩侧边(val: boolean) {
   if (val) {
