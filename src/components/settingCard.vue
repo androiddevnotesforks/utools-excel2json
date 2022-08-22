@@ -8,7 +8,7 @@
     >
       <slot name="title">{{ props.title }}</slot>
     </div>
-    <div class="px-16px pt-16px flex flex-col overflow-hidden">
+    <div class="px-16px pt-16px flex flex-col overflow-y-hidden overflow-x-visible">
       <slot></slot>
     </div>
   </div>

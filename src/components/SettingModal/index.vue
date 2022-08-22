@@ -17,8 +17,11 @@
         </div>
       </template>
       <div ref="modalBody" class="w-full h-full overflow-auto px-20px py-16px">
-        <div class="w-full space-x-16px flex">
-          <div class="w-70% left">
+        <div
+          class="w-full space-x-16px grid grid-cols-[1fr_30%]"
+          :class="[侧边收缩 && '!grid-cols-[1fr_0%]']"
+        >
+          <div class="left">
             <setting-card title="一些提示" @mouseenter="切换文案()">
               <ul class="mb-18px list-disc pl-16px">
                 <li>
@@ -318,12 +321,21 @@
               </div>
             </setting-card>
           </div>
-          <div class="flex-1 w-0 relative right">
+          <div class="relative right">
             <setting-card
               class="sticky top-0 pb-16px"
-              title="选项说明"
               :style="{ height: `${modalHeight}px` }"
             >
+              <template #title>
+                <div class="space-x-6px flex items-center">
+                  <i
+                    i-tabler-layout-sidebar-right-collapse
+                    class="text-18px cursor-pointer"
+                    @click="收缩侧边()"
+                  ></i>
+                  <span>选项说明</span>
+                </div>
+              </template>
               <div
                 class="flex flex-col flex-1 overflow-hidden"
                 v-html="解释文案 || '鼠标悬浮左侧选项上可查看对应选项说明'"
@@ -407,7 +419,7 @@ const emit = defineEmits(['ok', 'cancel', 'reset'])
 
 const 系统 = 获取当前('系统')
 const api列表 = ref(api选项)
-const modal可见 = ref(false)
+const modal可见 = ref(true)
 const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
 const 导出密码框 = ref('') // 导出密码框的内容
 const 导入密码框 = ref('') // 导入密码框的内容
@@ -486,6 +498,10 @@ watchEffect(() => {
   }
 })
 
+const 侧边收缩 = ref(false)
+function 收缩侧边() {
+  侧边收缩.value = true
+}
 function 设置modal确定() {
   保存设置()
   提示.success({ content: '设置成功', duration: 1000 })
