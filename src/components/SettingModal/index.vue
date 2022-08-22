@@ -17,11 +17,8 @@
         </div>
       </template>
       <div ref="modalBody" class="w-full h-full overflow-auto px-20px py-16px">
-        <div
-          class="w-full space-x-16px grid grid-cols-[1fr_30%]"
-          :class="[侧边收缩 && '!grid-cols-[1fr_0%]']"
-        >
-          <div class="left">
+        <div class="w-full space-x-16px flex">
+          <div class="left" :class="[!侧边收缩 ? 'w-70%' : 'w-full']">
             <setting-card title="一些提示" @mouseenter="切换文案()">
               <ul class="mb-18px list-disc pl-16px">
                 <li>
@@ -321,23 +318,25 @@
               </div>
             </setting-card>
           </div>
-          <div class="relative right">
+          <div v-if="!侧边收缩" class="right relative flex-1 transition-all">
             <setting-card
               class="sticky top-0 pb-16px"
               :style="{ height: `${modalHeight}px` }"
             >
               <template #title>
                 <div class="space-x-6px flex items-center">
-                  <i
-                    i-tabler-layout-sidebar-right-collapse
-                    class="text-18px cursor-pointer"
-                    @click="收缩侧边()"
-                  ></i>
+                  <cus-tooltip content="收起选项说明" position="left">
+                    <i
+                      i-tabler-layout-sidebar-right-collapse
+                      class="text-18px cursor-pointer"
+                      @click="收缩侧边(true)"
+                    ></i>
+                  </cus-tooltip>
                   <span>选项说明</span>
                 </div>
               </template>
               <div
-                class="flex flex-col flex-1 overflow-hidden"
+                class="flex flex-col"
                 v-html="解释文案 || '鼠标悬浮左侧选项上可查看对应选项说明'"
               ></div>
             </setting-card>
@@ -360,6 +359,13 @@
             </a-popconfirm>
           </div>
           <div class="space-x-12px">
+            <template v-if="侧边收缩">
+              <cus-tooltip content="展开选项说明" position="left">
+                <a-button v-if="侧边收缩" @click="收缩侧边(false)">
+                  <i i-tabler-layout-sidebar-left-collapse></i>
+                </a-button>
+              </cus-tooltip>
+            </template>
             <a-button @click="modal取消()">取消</a-button>
             <a-button type="primary" @click="设置modal确定()">确定</a-button>
           </div>
@@ -499,8 +505,11 @@ watchEffect(() => {
 })
 
 const 侧边收缩 = ref(false)
-function 收缩侧边() {
-  侧边收缩.value = true
+function 收缩侧边(val: boolean) {
+  if (val) {
+    切换文案()
+  }
+  侧边收缩.value = val
 }
 function 设置modal确定() {
   保存设置()
@@ -618,6 +627,9 @@ const 快捷键文案 = computed(() => {
 })
 
 function 切换文案(id = '') {
+  if (侧边收缩.value) {
+    return
+  }
   if (!id) {
     解释文案.value = ''
     return
@@ -641,5 +653,8 @@ defineExpose({
 <style lang="scss" scoped>
 .divide_content {
   @apply flex-c space-x-4px;
+}
+.left {
+  transition: all 0.5s $imitate-ios;
 }
 </style>

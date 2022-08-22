@@ -35,6 +35,7 @@ declare module '@vue/runtime-core' {
     CodeBg: typeof import('./src/components/codeBg.vue')['default']
     ColorfulBtn: typeof import('./src/components/colorfulBtn.vue')['default']
     CusSwitch: typeof import('./src/components/cusSwitch.vue')['default']
+    CusTooltip: typeof import('./src/components/cusTooltip.vue')['default']
     DarkFullPage: typeof import('./src/components/darkFullPage.vue')['default']
     HoverAnswer: typeof import('./src/components/hoverAnswer.vue')['default']
     LightFullPage: typeof import('./src/components/lightFullPage.vue')['default']

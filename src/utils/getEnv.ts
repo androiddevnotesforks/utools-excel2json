@@ -1,6 +1,6 @@
 import { useGlobalStore } from '@/store/globalData'
 
-export function 获取当前(str = ''): string {
+export function 获取当前(str: '系统' | '主题'): string {
   const globalStore = useGlobalStore()
   const { currentOS, currentTheme } = storeToRefs(globalStore)
   const m = new Map([
