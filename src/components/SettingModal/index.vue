@@ -454,7 +454,11 @@
 </template>
 
 <script setup lang="ts">
-import { 获取存储项, 设置存储 } from '@/components/SettingModal/SettingsModules'
+import {
+  useGlobalStore,
+  获取存储项,
+  设置存储,
+} from '@/components/SettingModal/SettingsModules'
 import {
   cloneDeep,
   useClipboard,
@@ -549,7 +553,9 @@ watchEffect(() => {
   }
 })
 
-const 侧边收缩 = ref(false)
+// const { 侧边收缩, 设置侧边收缩 } = storeToRefs(全局存储())
+const 全局存储 = useGlobalStore()
+const 侧边收缩 = computed(() => 全局存储.侧边收缩)
 const 动态宽度类名 = computed(() => {
   return 侧边收缩.value ? 'w-80%' : 'w-full'
 })
@@ -558,7 +564,7 @@ function 收缩侧边(val: boolean) {
   if (val) {
     切换文案()
   }
-  侧边收缩.value = val
+  全局存储.设置侧边收缩(val)
 }
 function 设置modal确定() {
   保存设置()
