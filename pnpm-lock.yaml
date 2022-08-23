@@ -22,7 +22,7 @@ specifiers:
   lodash-es: ^4.17.21
   nanoid: ^4.0.0
   pinia: ^2.0.20
-  pnpm: ^7.9.3
+  pnpm: ^7.9.4
   prettier: ^2.7.1
   sass: ^1.54.5
   shepherd.js: ^10.0.1
@@ -62,7 +62,7 @@ devDependencies:
   eslint-config-prettier: 8.5.0_eslint@8.22.0
   eslint-plugin-prettier: 4.2.1_i2cojdczqdiurzgttlwdgf764e
   less: 4.1.3
-  pnpm: 7.9.3
+  pnpm: 7.9.4
   prettier: 2.7.1
   sass: 1.54.5
   terser: 5.14.2
@@ -3179,8 +3179,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /pnpm/7.9.3:
-    resolution: {integrity: sha512-0hpAD1vtILw0i9gTN4ffagnScWMW9/avfZIKllBUd++fAvCss+hVgPPDd0HS9XcOT675gid4H9esGkbLdaFy+w==}
+  /pnpm/7.9.4:
+    resolution: {integrity: sha512-eZG33kdDFmIzBZoSRguEHVLtnHdJTvfP6wm53SyBt4Mqzbro9eIaQcEcB4qfJCGMaLvPegG2MQxD2EiArALaJA==}
     engines: {node: '>=14.6'}
     hasBin: true
     dev: true
