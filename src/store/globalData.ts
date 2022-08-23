@@ -24,17 +24,17 @@ function getSettingSide() {
 export const useGlobalStore = defineStore('global', () => {
   const currentTheme = ref('')
   const currentOS = ref(getOS())
-  const 侧边收缩 = ref(getSettingSide())
+  const 侧边收起 = ref(getSettingSide())
 
-  function 设置侧边收缩(val: boolean) {
-    侧边收缩.value = val
-    setDbStorageItem('settingSide', val)
+  function 设置侧边收起() {
+    侧边收起.value = !侧边收起.value
+    setDbStorageItem('settingSide', 侧边收起.value)
   }
 
   return {
     currentTheme,
     currentOS,
-    侧边收缩,
-    设置侧边收缩,
+    侧边收起,
+    设置侧边收起,
   }
 })

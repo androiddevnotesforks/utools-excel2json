@@ -16,9 +16,12 @@
           <span>设置</span>
         </div>
       </template>
-      <div ref="modalBody" class="w-full h-full overflow-auto px-20px py-16px">
-        <div class="w-full space-x-16px flex">
-          <div class="left" :class="[!侧边收缩 ? 'w-70%' : 'w-full']">
+      <div
+        ref="modalBody"
+        class="w-full h-full overflow-y-auto overflow-x-hidden px-20px py-16px"
+      >
+        <div class="w-full flex">
+          <div class="left" :class="[!侧边收起 ? 'w-70%' : 'w-full']">
             <setting-card title="一些提示" @mouseenter="切换文案()">
               <section :class="动态宽度类名">
                 <ul class="mb-18px list-disc pl-16px">
@@ -361,31 +364,33 @@
               </div>
             </setting-card>
           </div>
-          <transition name="fade-in-standard">
-            <div v-if="!侧边收缩" class="right relative flex-1 transition-all">
-              <setting-card
-                class="sticky top-0 pb-16px"
-                :style="{ height: `${modalHeight}px` }"
+          <div
+            class="right relative w-30% transition-all ml-16px"
+            :class="{ '-mr-100% opacity-30': 侧边收起 }"
+          >
+            <setting-card
+              class="sticky top-0 pb-16px"
+              title="选项说明"
+              :style="{ height: `${modalHeight}px` }"
+            >
+              <div
+                class="bg-white rounded-full shadow-md w-22px grid-c text-18px cursor-pointer absolute-y-center aspect-ratio-square -left-11px transition-all active:shadow dark:bg-#444"
+                @click="切换侧边()"
               >
-                <template #title>
-                  <div class="space-x-6px flex items-center">
-                    <cus-tooltip content="收起选项说明" position="left">
-                      <i
-                        i-tabler-layout-sidebar-right-collapse
-                        class="text-18px cursor-pointer"
-                        @click="收缩侧边(true)"
-                      ></i>
-                    </cus-tooltip>
-                    <span>选项说明</span>
-                  </div>
-                </template>
-                <div
-                  class="flex flex-col"
-                  v-html="解释文案 || '鼠标悬浮左侧选项上可查看对应选项说明'"
-                ></div>
-              </setting-card>
-            </div>
-          </transition>
+                <i
+                  :class="[
+                    侧边收起
+                      ? 'i-ic-outline-keyboard-arrow-left'
+                      : 'i-ic-outline-keyboard-arrow-right',
+                  ]"
+                />
+              </div>
+              <div
+                class="flex flex-col"
+                v-html="解释文案 || '鼠标悬浮左侧选项上可查看对应选项说明'"
+              ></div>
+            </setting-card>
+          </div>
         </div>
       </div>
       <template #footer>
@@ -404,13 +409,6 @@
             </a-popconfirm>
           </div>
           <div class="space-x-12px">
-            <template v-if="侧边收缩">
-              <cus-tooltip content="展开选项说明" position="left">
-                <a-button v-if="侧边收缩" @click="收缩侧边(false)">
-                  <i i-tabler-layout-sidebar-left-collapse></i>
-                </a-button>
-              </cus-tooltip>
-            </template>
             <a-button @click="modal取消()">取消</a-button>
             <a-button type="primary" @click="设置modal确定()">确定</a-button>
           </div>
@@ -553,18 +551,17 @@ watchEffect(() => {
   }
 })
 
-// const { 侧边收缩, 设置侧边收缩 } = storeToRefs(全局存储())
 const 全局存储 = useGlobalStore()
-const 侧边收缩 = computed(() => 全局存储.侧边收缩)
+const 侧边收起 = computed(() => 全局存储.侧边收起)
 const 动态宽度类名 = computed(() => {
-  return 侧边收缩.value ? 'w-80%' : 'w-full'
+  return 侧边收起.value ? 'w-80%' : 'w-full'
 })
 
-function 收缩侧边(val: boolean) {
-  if (val) {
+function 切换侧边() {
+  if (!侧边收起.value) {
     切换文案()
   }
-  全局存储.设置侧边收缩(val)
+  全局存储.设置侧边收起()
 }
 function 设置modal确定() {
   保存设置()
@@ -654,7 +651,6 @@ function modal关闭动画结束() {
   切换文案()
 }
 
-// 打开url
 function 打开url(url: string) {
   if (!utools) {
     return
@@ -682,13 +678,14 @@ const 快捷键文案 = computed(() => {
 })
 
 function 切换文案(id = '') {
-  if (侧边收缩.value) {
+  if (侧边收起.value) {
     return
   }
   if (!id) {
     解释文案.value = ''
     return
   }
+
   let 文案主体 = 文案映射?.[id]
   // 快捷键的文案中包含动态文字，需要替换
   if (id === '快捷键行为') {
@@ -710,6 +707,6 @@ defineExpose({
   @apply flex-c space-x-4px;
 }
 .left {
-  transition: all 0.3s $imitate-ios;
+  transition: all 0.4s $imitate-ios;
 }
 </style>

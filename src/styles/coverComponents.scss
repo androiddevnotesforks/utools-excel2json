@@ -40,10 +40,12 @@
 
   .shepherd-button {
     @apply bg-primary text-white py-4px px-16px rounded-2px;
-
     &:hover {
-      filter: brightness(0.9) contrast(200%);
+      filter: contrast(150%);
     }
+  }
+  .shepherd-button:not(:disabled):hover {
+    @apply bg-primary:70;
   }
 }
 
