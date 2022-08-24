@@ -1,4 +1,5 @@
-@import '@/styles/global.scss';
-@import '@/styles/darkMode.scss';
-@import '@/styles/animation.scss';
-@import '@/styles/coverComponents.scss';
+@forward '@/styles/variable.scss';
+@forward '@/styles/global.scss';
+@forward '@/styles/darkMode.scss';
+@forward '@/styles/animation.scss';
+@forward '@/styles/coverComponents.scss';

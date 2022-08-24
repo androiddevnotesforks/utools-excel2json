@@ -707,6 +707,6 @@ defineExpose({
   @apply flex-c space-x-4px;
 }
 .left {
-  transition: all 0.4s $imitate-ios;
+  transition: all 0.4s var(--ani-bezier);
 }
 </style>

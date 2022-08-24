@@ -643,7 +643,7 @@ onKeyStroke('Tab', e => {
 .main_wrapper {
   @apply grid-c h-screen overflow-hidden relative dark:(text-white bg-#303133);
   .main {
-    transition: all 200ms $imitate-ios;
+    transition: all 200ms var(--ani-bezier);
     will-change: transform, opacity, filter;
     @apply p-23px pt-8px flex flex-col h-full w-full overflow-hidden dark:bg-#303133;
   }

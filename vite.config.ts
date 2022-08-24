@@ -23,9 +23,6 @@ export default defineConfig({
         },
         javascriptEnabled: true,
       },
-      scss: {
-        additionalData: `@import "@/styles/variable.scss";`,
-      },
     },
   },
   plugins: [

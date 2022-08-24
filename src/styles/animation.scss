@@ -3,7 +3,7 @@
 // ==========缩放的效果==========
 .component-scale-enter-active,
 .component-scale-leave-active {
-  transition: transform 0.3s $imitate-ios;
+  transition: transform 0.3s var(--ani-bezier);
 }
 
 .component-scale-enter-from,
@@ -31,5 +31,5 @@
 .zoom-br-appear-active,
 .zoom-br-leave-active {
   transform-origin: 100% 100%;
-  transition: all 0.35s $imitate-ios;
+  transition: all 0.35s var(--ani-bezier);
 }

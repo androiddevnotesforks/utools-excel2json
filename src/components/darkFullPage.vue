@@ -13,7 +13,7 @@
   transform: rotate(60deg);
   filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px #fff) drop-shadow(0 0 10px #fff)
     drop-shadow(0 0 20px #fff);
-  animation: rotate 1s $imitate-ios 0.2s both;
+  animation: rotate 1s var(--ani-bezier) 0.2s both;
 }
 
 @keyframes rotate {
