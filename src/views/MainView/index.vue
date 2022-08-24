@@ -1,6 +1,8 @@
 <template>
-  <div class="main_wrapper">
-    <div class="main">
+  <div class="grid-c h-screen overflow-hidden relative dark:(text-white bg-#303133)">
+    <div
+      class="main p-23px pt-8px flex flex-col h-full w-full overflow-hidden dark:bg-#303133"
+    >
       <div class="text_wrapper flex flex-1 relative">
         <!-- 清除按钮 -->
         <transition name="component-scale">
@@ -640,13 +642,8 @@ onKeyStroke('Tab', e => {
 </script>
 
 <style lang="scss" scoped>
-.main_wrapper {
-  @apply grid-c h-screen overflow-hidden relative dark:(text-white bg-#303133);
-  .main {
-    transition: all 200ms var(--ani-bezier);
-    will-change: transform, opacity, filter;
-    @apply p-23px pt-8px flex flex-col h-full w-full overflow-hidden dark:bg-#303133;
-  }
+.main {
+  transition: all 200ms var(--ani-bezier);
 }
 .icon {
   @apply text-22px text-[#999] cursor-pointer transition-all duration-250 hover:text-[#666] active:text-primary;
