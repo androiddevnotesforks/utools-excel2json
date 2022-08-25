@@ -3,10 +3,10 @@ lockfileVersion: 5.4
 specifiers:
   '@antfu/eslint-config': ^0.26.1
   '@arco-design/web-vue': ^2.35.1
-  '@iconify/json': ^2.1.96
+  '@iconify/json': ^2.1.97
   '@types/crypto-js': ^4.1.1
   '@types/lodash-es': ^4.17.6
-  '@types/node': ^18.7.11
+  '@types/node': ^18.7.13
   '@unocss/preset-rem-to-px': ^0.45.12
   '@unocss/reset': ^0.45.12
   '@vitejs/plugin-vue': ^3.0.3
@@ -22,7 +22,7 @@ specifiers:
   lodash-es: ^4.17.21
   nanoid: ^4.0.0
   pinia: ^2.0.20
-  pnpm: ^7.9.4
+  pnpm: ^7.9.5
   prettier: ^2.7.1
   sass: ^1.54.5
   shepherd.js: ^10.0.1
@@ -51,10 +51,10 @@ dependencies:
 devDependencies:
   '@antfu/eslint-config': 0.26.1_4rv7y5c6xz3vfxwhbrcxxi73bq
   '@arco-design/web-vue': 2.35.1_vue@3.2.37
-  '@iconify/json': 2.1.96
+  '@iconify/json': 2.1.97
   '@types/crypto-js': 4.1.1
   '@types/lodash-es': 4.17.6
-  '@types/node': 18.7.11
+  '@types/node': 18.7.13
   '@unocss/preset-rem-to-px': 0.45.12
   '@unocss/reset': 0.45.12
   '@vitejs/plugin-vue': 3.0.3_vite@3.0.9+vue@3.2.37
@@ -62,7 +62,7 @@ devDependencies:
   eslint-config-prettier: 8.5.0_eslint@8.22.0
   eslint-plugin-prettier: 4.2.1_i2cojdczqdiurzgttlwdgf764e
   less: 4.1.3
-  pnpm: 7.9.4
+  pnpm: 7.9.5
   prettier: 2.7.1
   sass: 1.54.5
   terser: 5.15.0
@@ -302,11 +302,11 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@iconify/json/2.1.96:
-    resolution: {integrity: sha512-wmc5KRqvKAlAr0bQz3P1UnUCXC9hYu1o89GZFR5Mr5NiUhhNHdbZyosOPnDHXduOa9lTM/ve8/Vo1vR55hCF5A==}
+  /@iconify/json/2.1.97:
+    resolution: {integrity: sha512-oS04S/mAT9/d5sTMy3vH3180eoQJbNBiGxykliOApAaJ71+GEmV9hAa1TvdkmXTiv8ymdQCpcvFD8Fy53zDFcg==}
     dependencies:
       '@iconify/types': 1.1.0
-      pathe: 0.3.4
+      pathe: 0.3.5
     dev: true
 
   /@iconify/types/1.1.0:
@@ -436,8 +436,8 @@ packages:
       '@types/unist': 2.0.6
     dev: true
 
-  /@types/node/18.7.11:
-    resolution: {integrity: sha512-KZhFpSLlmK/sdocfSAjqPETTMd0ug6HIMIAwkwUpU79olnZdQtMxpQP+G1wDzCH7na+FltSIhbaZuKdwZ8RDrw==}
+  /@types/node/18.7.13:
+    resolution: {integrity: sha512-46yIhxSe5xEaJZXWdIBP7GU4HDTG8/eo0qd9atdiL+lFpA03y8KS+lkTN834TWJj5767GbWv4n/P6efyTFt1Dw==}
     dev: true
 
   /@types/normalize-package-data/2.4.1:
@@ -2826,7 +2826,7 @@ packages:
     resolution: {integrity: sha512-mY6i+bwcgn0XAdZTiiBt6kyoUjLsm3Cuv0T4CchQJcq/UCSUcGPapSxc4g7whtIsUfcsJ2kGqZAdmqCF/VNC/Q==}
     dependencies:
       acorn: 8.8.0
-      pathe: 0.3.4
+      pathe: 0.3.5
       pkg-types: 0.3.3
       ufo: 0.8.5
     dev: true
@@ -3122,10 +3122,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /pathe/0.3.4:
-    resolution: {integrity: sha512-YWgqEdxf36R6vcsyj0A+yT/rDRPe0wui4J9gRR7T4whjU5Lx/jZOr75ckEgTNaLVQABAwsrlzHRpIKcCdXAQ5A==}
-    dev: true
-
   /pathe/0.3.5:
     resolution: {integrity: sha512-grU/QeYP0ChuE5kjU2/k8VtAeODzbernHlue0gTa27+ayGIu3wqYBIPGfP9r5xSqgCgDd4nWrjKXEfxMillByg==}
     dev: true
@@ -3171,7 +3167,7 @@ packages:
     dependencies:
       jsonc-parser: 3.1.0
       mlly: 0.5.10
-      pathe: 0.3.4
+      pathe: 0.3.5
     dev: true
 
   /pluralize/8.0.0:
@@ -3179,8 +3175,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /pnpm/7.9.4:
-    resolution: {integrity: sha512-eZG33kdDFmIzBZoSRguEHVLtnHdJTvfP6wm53SyBt4Mqzbro9eIaQcEcB4qfJCGMaLvPegG2MQxD2EiArALaJA==}
+  /pnpm/7.9.5:
+    resolution: {integrity: sha512-+r7+PlBIsblqia8eUOUsBp/R+lHmGAm55jyQRt3DWMUI0srVR1aNJhQECfx24L53Ckz9g48mVxQXEniQMWQPmw==}
     engines: {node: '>=14.6'}
     hasBin: true
     dev: true
@@ -3711,7 +3707,7 @@ packages:
       local-pkg: 0.4.2
       magic-string: 0.26.2
       mlly: 0.5.10
-      pathe: 0.3.4
+      pathe: 0.3.5
       scule: 0.3.2
       strip-literal: 0.4.0
       unplugin: 0.9.3_vite@3.0.9

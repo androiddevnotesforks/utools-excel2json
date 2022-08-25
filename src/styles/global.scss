@@ -55,8 +55,7 @@
 html,
 body,
 .guide_wrapper {
-  font-family: 'Inter', 'HarmonyOS Sans SC', 'HarmonyOS', 'NanumGothic', 'NotoSansThai',
-    system-ui, —apple-system, Segoe UI, Rototo, Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-family) !important;
   background-color: #fff;
 }
 

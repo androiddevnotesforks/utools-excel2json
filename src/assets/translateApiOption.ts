@@ -9,6 +9,19 @@ export const apiOptions = [
   { label: '彩云小译', value: 'caiyun' },
   { label: '火山翻译', value: 'huoshan' },
 ]
+export type 语种 =
+  | 'zh'
+  | 'en'
+  | 'jp'
+  | 'ru'
+  | 'kor'
+  | 'de'
+  | 'fra'
+  | 'spa'
+  | 'th'
+  | 'cht'
+  | 'yue'
+  | 'wyw'
 
 const onlyChinese: 语种[] = [
   'en',
@@ -23,19 +36,6 @@ const onlyChinese: 语种[] = [
   'yue',
   'wyw',
 ]
-export type 语种 =
-  | 'zh'
-  | 'en'
-  | 'jp'
-  | 'ru'
-  | 'kor'
-  | 'de'
-  | 'fra'
-  | 'spa'
-  | 'th'
-  | 'cht'
-  | 'yue'
-  | 'wyw'
 
 interface 不支持对象 {
   auto: 语种[]
@@ -114,7 +114,7 @@ export const api不支持的大对象: 大对象item类型 = {
     自定义不支持: undefined,
   },
   caiyun: {
-    from不支持: ['kor', 'de', 'fra', 'cht', 'yue', 'wyw'],
+    from不支持: ['kor', 'de', 'fra', 'spa', 'th', 'cht', 'yue', 'wyw'],
     自定义不支持: {
       auto: ['kor', 'de', 'fra', 'spa', 'th', 'cht', 'yue', 'wyw'],
       zh: ['zh', 'kor', 'de', 'fra', 'spa', 'th', 'cht', 'yue', 'wyw'],
@@ -158,9 +158,9 @@ export function 语种树(arr = translateFromOptions) {
   tmpArr.forEach(i => {
     i.children = arr
       .filter(r => r.value !== 'auto')
-      .map(r => {
+      .map(j => {
         return {
-          ...r,
+          ...j,
           id: nanoid(),
         }
       })

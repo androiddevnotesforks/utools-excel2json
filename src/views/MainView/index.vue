@@ -692,9 +692,7 @@ onKeyStroke('Tab', e => {
   }
   ::v-deep(.arco-select-view-value) {
     text-align: center;
-    font-family: 'iconfont', 'Inter', 'HarmonyOS Sans SC', 'HarmonyOS', 'NanumGothic',
-      'NotoSansThai', system-ui, —apple-system, Segoe UI, Rototo, Helvetica, Arial,
-      sans-serif !important;
+    font-family: 'iconfont', var(--font-family) !important;
   }
 }
 </style>
