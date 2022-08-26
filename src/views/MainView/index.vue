@@ -1,5 +1,7 @@
 <template>
-  <div class="grid-c h-screen overflow-hidden relative dark:(text-white bg-#303133)">
+  <div
+    class="main_wrapper grid-c h-screen overflow-hidden relative dark:(text-white bg-#303133)"
+  >
     <div
       class="main p-23px pt-8px flex flex-col h-full w-full overflow-hidden dark:bg-#303133"
     >
@@ -642,6 +644,7 @@ onKeyStroke('Tab', e => {
 </script>
 
 <style lang="scss" scoped>
+.main_wrapper,
 .main {
   transition: all 200ms var(--ani-bezier);
 }
