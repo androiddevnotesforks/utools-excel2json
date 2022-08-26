@@ -18,9 +18,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
-        modifyVars: {
-          'arcoblue-6': primaryColor,
-        },
+        modifyVars: { 'arcoblue-6': primaryColor },
         javascriptEnabled: true,
       },
     },
@@ -28,13 +26,8 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      eslintrc: {
-        enabled: true,
-        filepath: './.eslintrc-auto-import.json',
-        globalsPropValue: true,
-      },
       imports: ['vue', '@vueuse/core', 'pinia'],
-      dts: true,
+      dts: 'src/auto-imports.d.ts',
       vueTemplate: true,
     }),
     UnoCSS(),

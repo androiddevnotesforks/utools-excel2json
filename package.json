@@ -7,7 +7,7 @@
     "dev": "vite --port 6789 --open",
     "build": "vue-tsc --noEmit && vite build",
     "lint:fix": "eslint . --fix",
-    "preview": "vite preview"
+    "clear": "rimraf node_modules&&pnpm i"
   },
   "dependencies": {
     "@vueuse/core": "^9.1.1",
@@ -17,14 +17,14 @@
     "dayjs": "^1.11.5",
     "lodash-es": "^4.17.21",
     "nanoid": "^4.0.0",
-    "pinia": "^2.0.20",
+    "pinia": "^2.0.21",
     "shepherd.js": "^10.0.1",
     "vue": "^3.2.37"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.26.1",
     "@arco-design/web-vue": "^2.35.1",
-    "@iconify/json": "^2.1.98",
+    "@iconify/json": "^2.1.99",
     "@types/crypto-js": "^4.1.1",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.7.13",
@@ -39,7 +39,7 @@
     "prettier": "^2.7.1",
     "sass": "^1.54.5",
     "terser": "^5.15.0",
-    "typescript": "^4.7.4",
+    "typescript": "~4.7.4",
     "unocss": "^0.45.13",
     "unplugin-auto-import": "^0.11.2",
     "unplugin-vue-components": "^0.22.4",

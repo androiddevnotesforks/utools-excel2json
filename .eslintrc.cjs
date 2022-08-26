@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   plugins: ['prettier'],
-  extends: ['@antfu', 'plugin:prettier/recommended', './.eslintrc-auto-import.json'],
+  extends: ['@antfu', 'plugin:prettier/recommended'],
   rules: {
     'vue/component-tags-order': [
       'error',

@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@antfu/eslint-config': ^0.26.1
   '@arco-design/web-vue': ^2.35.1
-  '@iconify/json': ^2.1.98
+  '@iconify/json': ^2.1.99
   '@types/crypto-js': ^4.1.1
   '@types/lodash-es': ^4.17.6
   '@types/node': ^18.7.13
@@ -21,13 +21,13 @@ specifiers:
   less: ^4.1.3
   lodash-es: ^4.17.21
   nanoid: ^4.0.0
-  pinia: ^2.0.20
+  pinia: ^2.0.21
   pnpm: ^7.9.5
   prettier: ^2.7.1
   sass: ^1.54.5
   shepherd.js: ^10.0.1
   terser: ^5.15.0
-  typescript: ^4.7.4
+  typescript: ~4.7.4
   unocss: ^0.45.13
   unplugin-auto-import: ^0.11.2
   unplugin-vue-components: ^0.22.4
@@ -44,14 +44,14 @@ dependencies:
   dayjs: 1.11.5
   lodash-es: 4.17.21
   nanoid: 4.0.0
-  pinia: 2.0.20_j6bzmzd4ujpabbp5objtwxyjp4
+  pinia: 2.0.21_j6bzmzd4ujpabbp5objtwxyjp4
   shepherd.js: 10.0.1
   vue: 3.2.37
 
 devDependencies:
   '@antfu/eslint-config': 0.26.1_4rv7y5c6xz3vfxwhbrcxxi73bq
   '@arco-design/web-vue': 2.35.1_vue@3.2.37
-  '@iconify/json': 2.1.98
+  '@iconify/json': 2.1.99
   '@types/crypto-js': 4.1.1
   '@types/lodash-es': 4.17.6
   '@types/node': 18.7.13
@@ -302,8 +302,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@iconify/json/2.1.98:
-    resolution: {integrity: sha512-I/kGkyCcoAl5T9Mr5eseEkj3O6SPDs52saeM4mwXGK2oy5eIJAjv0f2tIJXwQV1gNaIB1iMcRWQjkIO+qy0JMQ==}
+  /@iconify/json/2.1.99:
+    resolution: {integrity: sha512-A3kvTZmF5cy3xVF3HhItNFwHN7vY27kzcqBXy53bZwuXmXUstevddoqOQi4/01/OGVFFe9sPowclSWUXX+dErg==}
     dependencies:
       '@iconify/types': 1.1.0
       pathe: 0.3.5
@@ -3144,8 +3144,8 @@ packages:
     dev: true
     optional: true
 
-  /pinia/2.0.20_j6bzmzd4ujpabbp5objtwxyjp4:
-    resolution: {integrity: sha512-fdHHumXW/0U5HhxmY1emo3I4z85p8NJPdbtFQSlmJXFe3ktuF0pYNVgVtk2q+j2zCtTufY763xzaEMx0t6T59g==}
+  /pinia/2.0.21_j6bzmzd4ujpabbp5objtwxyjp4:
+    resolution: {integrity: sha512-6ol04PtL29O0Z6JHI47O3JUSoyOJ7Og0rstXrHVMZSP4zAldsQBXJCNF0i/H7m8vp/Hjd/CSmuPl7C5QAwpeWQ==}
     peerDependencies:
       '@vue/composition-api': ^1.4.0
       typescript: '>=4.4.4'
