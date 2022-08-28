@@ -65,13 +65,7 @@ html {
     .colorful_btn_main {
       .ripple_wrapper {
         span[dynamic='true'] {
-          background: linear-gradient(
-            45deg,
-            #1900ff77,
-            #0066ff77,
-            #5e4dff77,
-            #a200ff77
-          );
+          background: linear-gradient(45deg, #1900ff77, #0066ff77, #5e4dff77, #a200ff77);
         }
       }
       @apply border border-#444;

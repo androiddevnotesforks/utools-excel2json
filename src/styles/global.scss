@@ -76,16 +76,27 @@ body,
 }
 
 ::-webkit-scrollbar {
-  @apply w-6px h-6px;
+  @apply w-5px h-5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply rounded-4px;
-  box-shadow: inset 0 0 10px #0000001a;
+  @apply rounded-full;
+  background: var(--scrollbar_color);
+  border-color: var(--scrollbar_color);
+  border: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-#777:50;
+}
+
+::-webkit-scrollbar-track {
+  @apply rounded-full;
+  background: var(--scrollbar_color);
+}
+
+::-webkit-scrollbar-track-piece {
+  background: var(--scrollbg_color);
 }
 
 img {

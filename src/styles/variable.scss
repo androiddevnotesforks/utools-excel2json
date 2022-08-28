@@ -1,6 +1,13 @@
 // 全局变量
 :root {
+  --scrollbg_color: #fff;
+  --scrollbar_color: #0000001a;
   --ani-bezier: cubic-bezier(0.22, 0.58, 0.12, 0.98);
   --font-family: 'Inter', 'HarmonyOS Sans SC', 'HarmonyOS', 'NanumGothic', 'NotoSansThai',
     system-ui, —apple-system, Segoe UI, Rototo, Helvetica, Arial, sans-serif;
+}
+
+:root[class='dark'] {
+  --scrollbg_color: #28282a;
+  --scrollbar_color: #5f5f5f;
 }
