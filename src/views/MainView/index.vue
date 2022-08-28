@@ -194,6 +194,7 @@ import {
   use复制模块,
   use语音朗读模块,
   关闭窗口,
+  获取级联的值,
   通用翻译,
 } from '@MainView/MainViewModule'
 
@@ -201,7 +202,6 @@ import {
   debounce,
   nanoid,
   noCase,
-  replace,
   throttle,
   提示,
   显示引导,
@@ -210,12 +210,7 @@ import {
   获取当前,
 } from '@MainView/MainViewUtils'
 
-import {
-  api不支持的大对象,
-  汉字和汉字符号正则,
-  用户设置存储,
-  语种树,
-} from '@MainView/MainViewData'
+import { api不支持的大对象, 用户设置存储, 语种树 } from '@MainView/MainViewData'
 
 import type { CascaderOption, 引导options类型, 级联值类型 } from '@MainView/MainViewTypes'
 
@@ -227,7 +222,6 @@ const {
   getHomeApiOptions: 翻译api数组,
   getHomeFontSize: 文字尺寸,
   copyBtnShow: 复制按钮显示的数组,
-  defaultForeignLanguage: 默认目标外语语种,
 } = storeToRefs(存储)
 const 翻译加载 = ref(false) // 是否正在翻译
 const 用户输入 = ref('') // 输入的内容
@@ -378,7 +372,7 @@ async function 开始翻译(val = 当前翻译api.value) {
     return
   }
   if (自动模式.value && !是命名模式.value) {
-    判断是否大多汉字()
+    form和to的数组.value = 获取级联的值(用户输入.value)
   }
 
   翻译加载.value = true
@@ -447,40 +441,6 @@ function resetHandler() {
 
 function 重置from和to(arr: 级联值类型 = ['auto', 'zh']) {
   form和to的数组.value = arr
-}
-
-const 符号数字reg = /[\x21-\x2F\x3A-\x40\x5B-\x60\x7B-\x7E\s\d]/g
-const 去除符号和数字的用户输入 = computed(() => {
-  return replace(用户输入.value, 符号数字reg, '')
-})
-
-function 获取用户输入前几个字(字数 = 0) {
-  return 去除符号和数字的用户输入.value.substring(0, 字数)
-}
-
-const 用户输入字数 = computed(() => {
-  return 去除符号和数字的用户输入.value.match(/./gu)?.length || 0
-})
-
-function 判断是否大多汉字() {
-  if (是命名模式.value) {
-    return
-  }
-  let arr: 级联值类型
-  const 目标外语 = 默认目标外语语种.value
-  if (用户输入字数.value < 20) {
-    const 第一个字是为汉字 = !!获取用户输入前几个字(1).match(汉字和汉字符号正则)
-    arr = ['auto', 第一个字是为汉字 ? 目标外语 : 'zh']
-  } else {
-    const 抽样数量 = 20
-    const 比例 = 0.35
-    const 一部分字 = 获取用户输入前几个字(抽样数量)
-    const 一部分字包含汉字数 = 一部分字.match(汉字和汉字符号正则)?.length ?? 0
-    const 汉字占一部分字的比例 = parseFloat((一部分字包含汉字数 / 抽样数量).toFixed(3))
-    const 前一部分字大多汉字 = 汉字占一部分字的比例 >= 比例
-    arr = ['auto', 前一部分字大多汉字 ? 目标外语 : 'zh']
-  }
-  重置from和to(arr)
 }
 
 onMounted(() => {
@@ -617,9 +577,7 @@ watch(结果只读, newVal => {
 })
 
 // 设置弹窗的状态
-const 设置弹框正在活动 = computed(() => {
-  return 设置弹框Ref.value.modal可见
-})
+const 设置弹框正在活动 = computed(() => 设置弹框Ref.value.modal可见)
 
 // Tab键切换翻译方式
 onKeyStroke('Tab', e => {
