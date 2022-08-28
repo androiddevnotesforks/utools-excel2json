@@ -72,7 +72,7 @@
               :style="{ width: '240px' }"
               value-key="id"
               :format-label="格式化级联显示内容"
-              @change="切换from和to()"
+              @change="语种级联发生变化()"
             />
           </template>
         </div>
@@ -194,9 +194,11 @@ import {
   use复制模块,
   use语音朗读模块,
   关闭窗口,
+  未配置服务引导,
   检查from和to是否兼容,
   获取级联的值,
   通用翻译,
+  首次引导,
 } from '@MainView/MainViewModule'
 
 import {
@@ -205,15 +207,13 @@ import {
   noCase,
   throttle,
   提示,
-  显示引导,
-  清除引导,
   获取存储项,
   获取当前,
 } from '@MainView/MainViewUtils'
 
 import { api不支持的大对象, 用户设置存储, 语种树 } from '@MainView/MainViewData'
 
-import type { CascaderOption, 引导options类型, 级联值类型 } from '@MainView/MainViewTypes'
+import type { CascaderOption, 级联值类型 } from '@MainView/MainViewTypes'
 
 const 语种树的数据 = ref(语种树())
 const form和to的数组 = ref<级联值类型>(['auto', 'zh'])
@@ -395,34 +395,19 @@ async function 开始翻译(val = 当前翻译api.value) {
   翻译加载.value = false
 }
 
-function 尝试分词(str = '') {
+function 尝试分词(str: string) {
   const reg = /^[A-Za-z-_]+\d*$/g
   const result = reg.test(str)
   return result ? noCase(str) : str
 }
 
 // 切换翻译的From和To
-function 切换from和to() {
+function 语种级联发生变化() {
   自动模式.value = false
   输入框focus()
   setTimeout(() => {
     开始翻译()
   }, 0)
-}
-
-function 首次引导() {
-  const option: 引导options类型 = {
-    id: 'firstUseMain',
-    title: '欢迎使用易翻😁',
-    text: '初次使用，应该点击这里去配置一下服务哦~',
-    attachTo: {
-      element: '#setting-wrapper',
-      on: 'left',
-    },
-    classes: 'guide_wrapper',
-  }
-
-  显示引导(option, 'firstUseMain')
 }
 
 // 读取配置
@@ -479,18 +464,7 @@ watch(
   () => 结果对象.数据.结果编号,
   () => {
     if (结果对象.数据.结果码 === 401) {
-      const option: 引导options类型 = {
-        id: 'missingParameter',
-        title: '未配置服务',
-        text: '你应该点击这里去配置一下服务哦~🖊️',
-        attachTo: {
-          element: '#setting-wrapper',
-          on: 'left',
-        },
-        classes: 'guide_wrapper',
-      }
-      清除引导()
-      显示引导(option, 'firstUseMain')
+      未配置服务引导()
     }
   }
 )
