@@ -194,6 +194,7 @@ import {
   use复制模块,
   use语音朗读模块,
   关闭窗口,
+  检查from和to是否兼容,
   获取级联的值,
   通用翻译,
 } from '@MainView/MainViewModule'
@@ -236,7 +237,7 @@ const 结果对象 = reactive({
 const 当前翻译api = ref('') // 当前翻译api
 const 设置弹框Ref = ref() // 设置弹窗的ref
 const 用户输入框Ref = ref() // 输入textarea的dom
-const 下方placeholder = ref('翻译结果') // 下方placeholder
+const 下方placeholder = ref('翻译结果')
 const { 朗读功能, 音频Url, 朗读loading, 正在播放, 点击朗读, 重置音频 } = use语音朗读模块(
   form和to的数组,
   结果对象
@@ -309,9 +310,7 @@ function 输入框focus() {
 // 设置弹框点击了确定
 function 设置确定() {
   nextTick(() => {
-    // 重新读取设置
     读取设置()
-    // 输入框获取焦点
     输入框focus()
     // 设置成功，刷新上一次翻译
     开始翻译(当前翻译api.value)
@@ -376,10 +375,11 @@ async function 开始翻译(val = 当前翻译api.value) {
   }
 
   翻译加载.value = true
+  const [from, to] = form和to的数组.value
   const obj = {
+    from,
+    to,
     q: 尝试分词(用户输入.value),
-    from: form和to的数组.value[0],
-    to: form和to的数组.value[1],
   }
 
   const { text: 返回的文字, code: 状态码 } = await 通用翻译(val, obj)
@@ -524,38 +524,9 @@ watchEffect(() => {
   })
 })
 
-function 检查from和to是否兼容(arr: string[] = []) {
-  const 当前api规则 = api不支持的大对象?.[当前翻译api.value]
-  if (!当前api规则) {
-    return 'from不兼容'
-  }
-  const 非互翻_自定义不支持: any = 当前api规则?.自定义不支持 // 不支持互翻的才会有这个obj
-  const 互翻_to不支持的数组 = 当前api规则?.to不支持 // 支持互翻的会有这个数组
-  const 源语言 = arr?.[0]
-  const 目标语言 = arr?.[1]
-
-  // 判断from是否不支持
-  // 如果当前的翻译from，在当前api的源语言不支持中不存在，就恢复默认
-  if (当前api规则?.from不支持.includes(源语言)) {
-    return 'from不兼容'
-  }
-
-  // 判断to是否不支持
-  // 如果是不支持互翻的api，且当前from的对应to为不支持的，就恢复默认
-  if (非互翻_自定义不支持 && 非互翻_自定义不支持[源语言].includes(目标语言)) {
-    return 'to不兼容'
-  }
-
-  // 如果是支持互翻的，则取目标语言不支持数组中进行判断
-  if (互翻_to不支持的数组 && 互翻_to不支持的数组.includes(目标语言)) {
-    return 'to不兼容'
-  }
-  return '兼容'
-}
-
 // 监听当前的to和form是否是当前api不支持的，如果存在不支持的，则重置
 watchEffect(() => {
-  const result = 检查from和to是否兼容(form和to的数组.value)
+  const result = 检查from和to是否兼容(form和to的数组.value, 当前翻译api.value)
   if (['from不兼容', 'to不兼容'].includes(result)) {
     重置from和to()
   }
