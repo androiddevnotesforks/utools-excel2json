@@ -3,4 +3,14 @@
   --ani-bezier: cubic-bezier(0.22, 0.58, 0.12, 0.98);
   --font-family: 'Inter', 'HarmonyOS Sans SC', 'HarmonyOS', 'NanumGothic', 'NotoSansThai',
     system-ui, —apple-system, Segoe UI, Rototo, Helvetica, Arial, sans-serif;
+    --scrollbg_color: #fff;
+    --scrollbar_color   : rgba(225, 228, 232, 0.514);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  // 暗色模式变量
+  :root {
+    --scrollbg_color: #272728;
+    --scrollbar_color   : #4f4e4e;
+  }
 }
