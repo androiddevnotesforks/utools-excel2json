@@ -80,23 +80,11 @@ body,
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply rounded-full;
-  background: var(--scrollbar_color);
-  border-color: var(--scrollbar_color);
-  border: 0;
+  @apply rounded-4px bg-#0000001a dark:bg-#555;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-#777:50;
-}
-
-::-webkit-scrollbar-track {
-  @apply rounded-full;
-  background: var(--scrollbar_color);
-}
-
-::-webkit-scrollbar-track-piece {
-  background: var(--scrollbg_color);
+  @apply bg-#777:50 dark:bg-#777:85;
 }
 
 img {
