@@ -80,7 +80,7 @@ body,
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply rounded-4px bg-#0000001a dark:bg-#555 border-0;
+  @apply rounded-4px bg-#0000001a border-0 dark:bg-#555;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -88,7 +88,7 @@ body,
 }
 
 ::-webkit-scrollbar-track-piece {
-  @apply bg-#fff dark:bg-#272728
+  @apply bg-#fff dark:bg-#272728;
 }
 
 img {
