@@ -4,6 +4,7 @@ import {
   presetIcons,
   presetUno,
   transformerDirectives,
+  transformerVariantGroup,
 } from 'unocss'
 import { primaryColor } from './src/config/colorConfig'
 export default defineConfig({
@@ -33,7 +34,7 @@ export default defineConfig({
       primary: primaryColor,
     },
   },
-  transformers: [transformerDirectives()],
+  transformers: [transformerDirectives(), transformerVariantGroup()],
   variants: [
     // 因为.scss文件里面,uno不能写"!xxx"去表示 !importannt ,会报错
     // 这里为important写一种变体，让以"I_"开头的class也是important，兼容scss文件
