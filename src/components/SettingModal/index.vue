@@ -15,7 +15,7 @@
     >
       <header
         ref="设置弹框Header"
-        class="h-48px w-full sticky top-0 text-16px px-20px z-1 flex items-center backdrop-blur-5px"
+        class="setting_header h-48px w-full sticky top-0 text-16px px-20px z-1 flex items-center backdrop-blur-5px"
       >
         <div class="flex items-center space-x-8px">
           <img src="/favicon.svg" width="24" />
@@ -25,7 +25,7 @@
       <div class="header_shadow"></div>
       <div
         ref="modalBody"
-        class="w-full top-0 bottom-0 px-20px py-16px pb-81px overflow-x-hidden"
+        class="w-full top-0 bottom-0 px-20px py-16px overflow-x-hidden"
       >
         <div class="w-full flex">
           <div class="left" :class="[!侧边收起 ? 'w-70%' : 'w-full']">
@@ -403,8 +403,9 @@
 
       <div
         ref="设置弹框Footer"
-        class="fixed bottom-0 w-full bg-white py-16px px-20px"
-        border="t-solid #e5e6eb t-width-1px"
+        class="sticky bottom-0 bg-white py-16px px-20px dark:bg-#2a2a2b"
+        border="t-solid #e5e6eb t-width-1px dark:#484849"
+        :style="{ paddingRight: 触发尺寸变化的属性 }"
       >
         <div class="flex justify-between">
           <div>
@@ -438,7 +439,7 @@
       <div>
         <a-alert class="mb-16px"> 导入配置会覆盖当前配置，请备份好相关信息 </a-alert>
         <a-textarea
-          ref="importModalRef"
+          ref="导入文本框Ref"
           v-model.trim="导入配置文本"
           :auto-size="{
             minRows: 6,
@@ -532,7 +533,7 @@ const 显示顺序data = computed(() => {
   return arr
 })
 
-const importModalRef = ref()
+const 导入文本框Ref = ref()
 const 导入配置文本 = ref('')
 const utools = window?.utools
 
@@ -589,7 +590,7 @@ function 设置modal确定() {
 }
 
 function 导入框获得焦点() {
-  importModalRef.value.focus()
+  导入文本框Ref.value.focus()
 }
 
 function 打开导入弹窗() {
@@ -635,10 +636,11 @@ function modal取消() {
   emit('cancel')
   关闭弹窗()
 }
-
-// 打开设置弹框回调
+const 触发尺寸变化的属性 = ref('20px')
+// 打开设置弹框（动画结束）回调
 function 打开model() {
   !获取存储项('firstUseSetting') && 首次引导()
+  触发尺寸变化的属性.value = '21px'
 }
 
 // 首次提示链接位置
@@ -662,6 +664,7 @@ function 打开弹窗() {
 }
 
 function 关闭弹窗() {
+  触发尺寸变化的属性.value = '20px'
   modal可见.value = false
 }
 
@@ -712,7 +715,7 @@ function 切换文案(id = '') {
   解释文案.value = `<h2 class="text-20px">${id}:</h2>${文案主体}`
 }
 
-// 暴露打开弹窗的函数，供父组件调用
+// 暴露弹窗的函数，供父组件调用
 defineExpose({
   打开弹窗,
   关闭弹窗,
@@ -727,9 +730,11 @@ defineExpose({
 .left {
   transition: all 0.4s var(--ani-bezier);
 }
-header {
-  background: radial-gradient(transparent, #fffe 2px);
-  background-size: 5px 5px;
+.setting_header {
+  background: radial-gradient(transparent, white 2px);
+  // 这里的important不可以去除，因为background在深色模式需要覆盖，但是background又包含-size
+  // 如果不加这个important，那么此处的background-size将被深色的background覆盖
+  background-size: 5px 5px !important;
 }
 .header_shadow {
   &::before {
@@ -739,10 +744,8 @@ header {
   }
   &::after {
     content: '';
-    width: 100%;
-    height: 20px;
-    background: linear-gradient(to bottom, #fff 50%, transparent);
-    position: absolute;
+    @apply w-full h-20px absolute;
+    background: linear-gradient(to bottom, white 50%, transparent);
   }
 }
 </style>

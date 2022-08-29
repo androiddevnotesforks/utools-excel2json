@@ -83,6 +83,8 @@ html {
         }
       }
     }
+
+    // 深色下的设置卡片
     .setting_card {
       box-shadow: 9px 9px 18px #232324;
       &:hover {
@@ -92,6 +94,19 @@ html {
           --offset: 4px;
           text-decoration-color: #333;
         }
+      }
+    }
+
+    // 深色下的设置header
+    .setting_header {
+      background: radial-gradient(transparent, #2a2a2b 2px);
+    }
+    .header_shadow {
+      &::before {
+        box-shadow: 0 1px 8px 1px #111;
+      }
+      &::after {
+        background: linear-gradient(to bottom, #272728 50%, transparent);
       }
     }
   }

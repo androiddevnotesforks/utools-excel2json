@@ -22,9 +22,9 @@
     "vue": "^3.2.37"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.26.1",
+    "@antfu/eslint-config": "^0.26.2",
     "@arco-design/web-vue": "^2.35.1",
-    "@iconify/json": "^2.1.99",
+    "@iconify/json": "^2.1.100",
     "@types/crypto-js": "^4.1.1",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.7.13",
@@ -44,7 +44,7 @@
     "unplugin-vue-components": "^0.22.4",
     "vite": "^3.0.9",
     "vite-plugin-chunk-split": "^0.2.7",
-    "vue-tsc": "^0.40.2"
+    "vue-tsc": "^0.40.4"
   },
   "eslintConfig": {
     "extends": "@antfu"
