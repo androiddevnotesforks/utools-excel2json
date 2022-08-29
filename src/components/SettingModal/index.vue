@@ -23,7 +23,7 @@
         </div>
       </header>
       <div class="header_shadow"></div>
-      <div
+      <section
         ref="modalBody"
         class="w-full top-0 bottom-0 px-20px py-16px overflow-x-hidden"
       >
@@ -376,9 +376,12 @@
             :class="{ '-mr-100% opacity-30': 侧边收起 }"
           >
             <setting-card
-              class="fixed top-64px pb-16px w-28%"
+              class="fixed pb-16px w-28%"
+              :style="{
+                top: `${侧边定位top}px`,
+                bottom: `${侧边定位bottom}px`,
+              }"
               title="选项说明"
-              :style="{ height: `${侧边高度}px` }"
             >
               <div
                 class="bg-white rounded-full shadow-md w-22px grid-c text-18px cursor-pointer absolute-y-center aspect-ratio-square -left-11px transition-all active:shadow dark:bg-#444"
@@ -399,34 +402,31 @@
             </setting-card>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div
+      <section
         ref="设置弹框Footer"
-        class="sticky bottom-0 bg-white py-16px px-20px dark:bg-#2a2a2b"
+        class="sticky bottom-0 h-65px flex items-center justify-between px-20px bg-white dark:bg-#2a2a2b"
         border="t-solid #e5e6eb t-width-1px dark:#484849"
-        :style="{ paddingRight: 触发尺寸变化的属性 }"
       >
-        <div class="flex justify-between">
-          <div>
-            <a-popconfirm
-              position="tl"
-              content-class="popconfirm_wrapper"
-              type="warning"
-              content="确定要重置本插件的数据吗？重置可以解决大部分问题，但在此之前请备份好相关服务的信息哦~"
-              ok-text="取消"
-              cancel-text="确定"
-              @cancel="重置数据()"
-            >
-              <a-button type="outline" status="danger">重置插件数据</a-button>
-            </a-popconfirm>
-          </div>
-          <div class="space-x-12px">
-            <a-button @click="modal取消()">取消</a-button>
-            <a-button type="primary" @click="设置modal确定()">确定</a-button>
-          </div>
+        <div>
+          <a-popconfirm
+            position="tl"
+            content-class="popconfirm_wrapper"
+            type="warning"
+            content="确定要重置本插件的数据吗？重置可以解决大部分问题，但在此之前请备份好相关服务的信息哦~"
+            ok-text="取消"
+            cancel-text="确定"
+            @cancel="重置数据()"
+          >
+            <a-button type="outline" status="danger">重置插件数据</a-button>
+          </a-popconfirm>
         </div>
-      </div>
+        <div class="space-x-12px">
+          <a-button @click="modal取消()">取消</a-button>
+          <a-button type="primary" @click="设置modal确定()">确定</a-button>
+        </div>
+      </section>
     </a-modal>
 
     <!-- 导入弹窗 -->
@@ -485,10 +485,15 @@ const emit = defineEmits(['ok', 'cancel', 'reset'])
 const 设置弹框Header = ref()
 const 设置弹框Footer = ref()
 const { height: 设置弹框Header高度 } = useElementSize(设置弹框Header)
-const { top: 设置弹框Footer距离顶部 } = useElementBounding(设置弹框Footer)
-const 侧边高度 = computed(() => {
-  const paddingY = 16
-  return 设置弹框Footer距离顶部.value - 设置弹框Header高度.value - 2 * paddingY
+const { height: 设置弹框Footer高度 } = useElementSize(设置弹框Footer)
+
+const 侧边paddingY = 16
+const 侧边定位top = computed(() => {
+  return 设置弹框Header高度.value + 侧边paddingY
+})
+
+const 侧边定位bottom = computed(() => {
+  return 设置弹框Footer高度.value + 侧边paddingY
 })
 const 系统 = 获取当前('系统')
 const api列表 = ref(api选项)
@@ -636,11 +641,9 @@ function modal取消() {
   emit('cancel')
   关闭弹窗()
 }
-const 触发尺寸变化的属性 = ref('20px')
 // 打开设置弹框（动画结束）回调
 function 打开model() {
   !获取存储项('firstUseSetting') && 首次引导()
-  触发尺寸变化的属性.value = '21px'
 }
 
 // 首次提示链接位置
@@ -664,7 +667,6 @@ function 打开弹窗() {
 }
 
 function 关闭弹窗() {
-  触发尺寸变化的属性.value = '20px'
   modal可见.value = false
 }
 
