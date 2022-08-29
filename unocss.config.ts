@@ -5,7 +5,6 @@ import {
   presetUno,
   transformerDirectives,
 } from 'unocss'
-import presetRemToPx from '@unocss/preset-rem-to-px'
 import { primaryColor } from './src/config/colorConfig'
 export default defineConfig({
   shortcuts: [
@@ -20,7 +19,6 @@ export default defineConfig({
   presets: [
     presetUno(),
     presetAttributify(),
-    presetRemToPx(),
     presetIcons({
       warn: true,
       extraProperties: {

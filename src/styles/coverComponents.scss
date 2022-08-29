@@ -15,6 +15,11 @@
 .arco-message {
   border-radius: 8px;
 }
+.no_header_modal {
+  .arco-modal-header {
+    @apply hidden;
+  }
+}
 
 // 引导层样式
 .guide_wrapper {

@@ -7,7 +7,6 @@ specifiers:
   '@types/crypto-js': ^4.1.1
   '@types/lodash-es': ^4.17.6
   '@types/node': ^18.7.13
-  '@unocss/preset-rem-to-px': ^0.45.13
   '@unocss/reset': ^0.45.13
   '@vitejs/plugin-vue': ^3.0.3
   '@vueuse/core': ^9.1.1
@@ -55,7 +54,6 @@ devDependencies:
   '@types/crypto-js': 4.1.1
   '@types/lodash-es': 4.17.6
   '@types/node': 18.7.13
-  '@unocss/preset-rem-to-px': 0.45.13
   '@unocss/reset': 0.45.13
   '@vitejs/plugin-vue': 3.0.3_vite@3.0.9+vue@3.2.37
   eslint: 8.23.0
@@ -646,12 +644,6 @@ packages:
 
   /@unocss/preset-mini/0.45.13:
     resolution: {integrity: sha512-aHnVtVu0twY0m/SzTzOLniFiBDHx1PaewJRfRdqeJdTu5d+FeWK9XA/kXudWBTvRSxOKz2yQJw3kReCVit8ueQ==}
-    dependencies:
-      '@unocss/core': 0.45.13
-    dev: true
-
-  /@unocss/preset-rem-to-px/0.45.13:
-    resolution: {integrity: sha512-H/IB3Q7hLvauTC3yF7vtreFjmpgI5BFyTjdnil01c7zwXSyHkZ0KHus9da+6uL9Wl+xjKArFaYKHVOZcDK0Z8g==}
     dependencies:
       '@unocss/core': 0.45.13
     dev: true

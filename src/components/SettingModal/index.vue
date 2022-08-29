@@ -5,20 +5,27 @@
       fullscreen
       title-align="start"
       modal-animation-name="zoom-br"
+      modal-class="no_header_modal"
       body-class="p-0"
+      :footer="false"
+      title="设置"
       @open="打开model()"
       @cancel="modal取消()"
       @close="modal关闭动画结束()"
     >
-      <template #title>
+      <header
+        ref="设置弹框Header"
+        class="h-48px w-full sticky top-0 text-16px px-20px z-1 flex items-center backdrop-blur-5px"
+      >
         <div class="flex items-center space-x-8px">
           <img src="/favicon.svg" width="24" />
-          <span>设置</span>
+          <span class="font-500">设置</span>
         </div>
-      </template>
+      </header>
+      <div class="header_shadow"></div>
       <div
         ref="modalBody"
-        class="w-full h-full overflow-y-auto overflow-x-hidden px-20px py-16px"
+        class="w-full top-0 bottom-0 px-20px py-16px pb-81px overflow-x-hidden"
       >
         <div class="w-full flex">
           <div class="left" :class="[!侧边收起 ? 'w-70%' : 'w-full']">
@@ -365,13 +372,13 @@
             </setting-card>
           </div>
           <div
-            class="right relative w-30% transition-all ml-16px"
+            class="right relative transition-all ml-16px"
             :class="{ '-mr-100% opacity-30': 侧边收起 }"
           >
             <setting-card
-              class="sticky top-0 pb-16px"
+              class="fixed top-64px pb-16px w-28%"
               title="选项说明"
-              :style="{ height: `${modalHeight}px` }"
+              :style="{ height: `${侧边高度}px` }"
             >
               <div
                 class="bg-white rounded-full shadow-md w-22px grid-c text-18px cursor-pointer absolute-y-center aspect-ratio-square -left-11px transition-all active:shadow dark:bg-#444"
@@ -393,7 +400,12 @@
           </div>
         </div>
       </div>
-      <template #footer>
+
+      <div
+        ref="设置弹框Footer"
+        class="fixed bottom-0 w-full bg-white py-16px px-20px"
+        border="t-solid #e5e6eb t-width-1px"
+      >
         <div class="flex justify-between">
           <div>
             <a-popconfirm
@@ -413,7 +425,7 @@
             <a-button type="primary" @click="设置modal确定()">确定</a-button>
           </div>
         </div>
-      </template>
+      </div>
     </a-modal>
 
     <!-- 导入弹窗 -->
@@ -469,7 +481,14 @@ import {
 import { api选项, 文案映射 } from '@/components/SettingModal/SettingsData'
 import type { 引导options类型 } from '@/components/SettingModal/SettingsTypes'
 const emit = defineEmits(['ok', 'cancel', 'reset'])
-
+const 设置弹框Header = ref()
+const 设置弹框Footer = ref()
+const { height: 设置弹框Header高度 } = useElementSize(设置弹框Header)
+const { top: 设置弹框Footer距离顶部 } = useElementBounding(设置弹框Footer)
+const 侧边高度 = computed(() => {
+  const paddingY = 16
+  return 设置弹框Footer距离顶部.value - 设置弹框Header高度.value - 2 * paddingY
+})
 const 系统 = 获取当前('系统')
 const api列表 = ref(api选项)
 const modal可见 = ref(false)
@@ -477,7 +496,6 @@ const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
 const 导出密码框 = ref('') // 导出密码框的内容
 const 导入密码框 = ref('') // 导入密码框的内容
 const modalBody = ref()
-const { height: modalHeight } = useElementSize(modalBody)
 const 解释文案 = ref('') // 解释文案
 const formData = reactive({
   homeHasApi: ['baidu', 'tencent', 'youdao', 'ali'], // 首页展示的翻译方式
@@ -708,5 +726,23 @@ defineExpose({
 }
 .left {
   transition: all 0.4s var(--ani-bezier);
+}
+header {
+  background: radial-gradient(transparent, #fffe 2px);
+  background-size: 5px 5px;
+}
+.header_shadow {
+  &::before {
+    content: '';
+    box-shadow: 0 1px 8px 1px #172a4770;
+    @apply fixed w-full;
+  }
+  &::after {
+    content: '';
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to bottom, #fff 50%, transparent);
+    position: absolute;
+  }
 }
 </style>

@@ -28,7 +28,6 @@
     "@types/crypto-js": "^4.1.1",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.7.13",
-    "@unocss/preset-rem-to-px": "^0.45.13",
     "@unocss/reset": "^0.45.13",
     "@vitejs/plugin-vue": "^3.0.3",
     "eslint": "^8.23.0",

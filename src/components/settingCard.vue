@@ -1,5 +1,5 @@
 <template>
-  <div border="~ #f2f3f4 dark:#444" class="setting_card rounded-4px w-full flex flex-col">
+  <div border="~ #f2f3f4 dark:#444" class="setting_card rounded-4px flex flex-col">
     <div
       class="title_wrapper bg-#2f54ea:5 flex items-center py-4px px-22px text-16px select-none dark:(bg-#333)"
     >
