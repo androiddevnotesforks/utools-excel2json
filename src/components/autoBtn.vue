@@ -3,13 +3,13 @@
     <template #content>
       <p>智能切换语种「{{ props.modelValue ? '开' : '关' }}」</p>
     </template>
-    <div class="btn_wrapper">
+    <button class="btn_wrapper">
       <i
         i-simple-icons-adobeillustrator
-        class="text-19px rounded-2px overflow-hidden"
+        class="text-19px rounded-2px overflow-hidden transition-all !duration-100"
         :class="[props.modelValue ? 'active_auto_btn' : 'disabled_auto_btn']"
       />
-    </div>
+    </button>
   </cus-tooltip>
 </template>
 

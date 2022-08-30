@@ -32,11 +32,11 @@
       </header>
       <div class="header_shadow"></div>
       <section
-        ref="modalBody"
+        ref="modal主体Ref"
         class="w-full top-0 bottom-0 px-20px py-16px overflow-x-hidden"
       >
         <div class="w-full flex">
-          <div class="left" :class="[!侧边收起 ? 'w-70%' : 'w-full']">
+          <div class="custom_bezier" :class="[!侧边收起 ? 'w-70%' : 'w-full']">
             <setting-card @mouseenter="切换文案()">
               <template #title>
                 <div class="horizontal-place-4px">
@@ -345,7 +345,7 @@
             <setting-card class="mt-18px" @mouseenter="切换文案('配置信息')">
               <template #title>
                 <div class="horizontal-place-6px">
-                  <i i-fxemoji-opticaldiscicon class="text-16px"></i>
+                  <i i-fxemoji-opticaldisc class="text-16px"></i>
                   <span>配置信息</span>
                 </div>
               </template>
@@ -365,7 +365,6 @@
                 <a-popconfirm
                   position="tl"
                   content-class="popconfirm_wrapper"
-                  :popup-container="modalBody"
                   ok-text="确认导出"
                   @ok="导出数据()"
                 >
@@ -411,26 +410,23 @@
                 top: `${侧边定位top}px`,
                 bottom: `${侧边定位bottom}px`,
               }"
-              title="选项说明"
             >
               <template #title>
                 <div class="horizontal-place-6px">
-                  <i i-fluent-emoji-flat-open-book class="text-18px mb-2px"></i>
+                  <i i-noto-v1-bookmark class="text-18px mb-2px"></i>
                   <span>选项说明</span>
                 </div>
               </template>
-              <div
+              <button
                 class="bg-white rounded-full shadow-md w-22px grid-c text-18px cursor-pointer absolute-y-center aspect-ratio-square -left-11px transition-all active:shadow dark:bg-#444"
                 @click="切换侧边()"
               >
                 <i
-                  :class="[
-                    侧边收起
-                      ? 'i-ic-outline-keyboard-arrow-left'
-                      : 'i-ic-outline-keyboard-arrow-right',
-                  ]"
+                  i-ic-outline-keyboard-arrow-left
+                  class="transition-all !duration-500"
+                  :class="[侧边收起 ? 'rotate-0' : '-rotate-180']"
                 />
-              </div>
+              </button>
               <div
                 class="flex flex-col"
                 v-html="解释文案 || '鼠标悬浮左侧选项上可查看对应选项说明'"
@@ -468,7 +464,7 @@
     <!-- 导入弹窗 -->
     <a-modal
       v-model:visible="导入弹窗显隐"
-      :popup-container="modalBody"
+      :popup-container="modal主体Ref"
       title="导入配置"
       @cancel="关闭导入弹窗()"
     >
@@ -537,7 +533,7 @@ const modal可见 = ref(false)
 const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
 const 导出密码框 = ref('') // 导出密码框的内容
 const 导入密码框 = ref('') // 导入密码框的内容
-const modalBody = ref()
+const modal主体Ref = ref()
 const 解释文案 = ref('') // 解释文案
 const formData = reactive({
   homeHasApi: ['baidu', 'tencent', 'youdao', 'ali'], // 首页展示的翻译方式
@@ -765,7 +761,8 @@ defineExpose({
 .divide_content {
   @apply flex-c space-x-4px;
 }
-.left {
+
+.custom_bezier {
   transition: all 0.4s var(--ani-bezier);
 }
 .setting_header {
