@@ -39,6 +39,7 @@ declare module '@vue/runtime-core' {
     CusTooltip: typeof import('./src/components/cusTooltip.vue')['default']
     DarkFullPage: typeof import('./src/components/darkFullPage.vue')['default']
     HoverAnswer: typeof import('./src/components/hoverAnswer.vue')['default']
+    ImportModal: typeof import('./src/components/SettingModal/Modal/ImportModal.vue')['default']
     LightFullPage: typeof import('./src/components/lightFullPage.vue')['default']
     Loading: typeof import('./src/components/loading.vue')['default']
     LoadingIcon01: typeof import('./src/components/loadingIcon01.vue')['default']
