@@ -38,7 +38,7 @@ function changeVal(e: any) {
 
 .cus_switch_label {
   @apply cursor-pointer -indent-999 w-40px h-24px block rounded-full relative
-    bg-gray select-none dark:bg-[#3c3c3f];
+    bg-gray select-none dark:bg-#3c3c3f;
   &::after {
     content: '';
     @apply absolute-y-center left-4px h-70% aspect-ratio-square bg-white rounded-full

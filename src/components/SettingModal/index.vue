@@ -15,9 +15,9 @@
     >
       <header
         ref="设置弹框Header"
-        class="setting_header h-48px w-full sticky top-0 text-16px px-20px z-1 flex items-center backdrop-blur-5px"
+        class="setting_header h-48px w-full sticky top-0 text-16px px-20px z-1 flex-y-c backdrop-blur-5px"
       >
-        <div class="flex items-center space-x-8px">
+        <div class="horizontal-place-8px">
           <img src="/favicon.svg" width="24" />
           <span class="font-500">设置</span>
         </div>
@@ -29,7 +29,13 @@
       >
         <div class="w-full flex">
           <div class="left" :class="[!侧边收起 ? 'w-70%' : 'w-full']">
-            <setting-card title="一些提示" @mouseenter="切换文案()">
+            <setting-card @mouseenter="切换文案()">
+              <template #title>
+                <div class="horizontal-place-4px">
+                  <i i-fluent-emoji-flat-wind-chime class="text-19px" />
+                  <span>一些提示</span>
+                </div>
+              </template>
               <section :class="动态宽度类名">
                 <ul class="mb-18px list-disc pl-16px">
                   <li>
@@ -63,7 +69,13 @@
             <a-form auto-label-width :model="formData">
               <a-row>
                 <section class="mt-18px space-y-18px flex-1">
-                  <setting-card title="基本设置">
+                  <setting-card>
+                    <template #title>
+                      <div class="horizontal-place-6px">
+                        <i i-fluent-emoji-flat-gear class="text-16px" />
+                        <span>基本设置</span>
+                      </div>
+                    </template>
                     <section :class="动态宽度类名">
                       <a-form-item label="翻译服务:" @mouseenter="切换文案('翻译服务')">
                         <a-checkbox-group v-model="formData.homeHasApi">
@@ -86,7 +98,7 @@
                         label="主页显示顺序:"
                         @mouseenter="切换文案('主页显示顺序')"
                       >
-                        <div class="flex items-center space-x-8px">
+                        <div class="horizontal-place-8px">
                           <template v-for="(item, index) in 显示顺序data" :key="item">
                             <i
                               v-if="index > 0"
@@ -175,10 +187,14 @@
                       </a-form-item>
                     </section>
                   </setting-card>
-                  <setting-card
-                    title="翻译服务数据"
-                    @mouseenter="切换文案('翻译服务数据')"
-                  >
+                  <setting-card @mouseenter="切换文案('翻译服务数据')">
+                    <template #title>
+                      <div class="horizontal-place-4px">
+                        <i i-flat-color-icons-menu class="text-18px" />
+                        <!-- i-flat-color-icons-list -->
+                        <span>翻译服务数据</span>
+                      </div>
+                    </template>
                     <a-divider orientation="left">
                       <div class="divide_content">
                         <ApiIcon :data="{ value: 'baidu' }" />
@@ -318,18 +334,22 @@
                 </section>
               </a-row>
             </a-form>
-            <setting-card
-              title="配置信息"
-              class="mt-18px"
-              @mouseenter="切换文案('配置信息')"
-            >
+            <setting-card class="mt-18px" @mouseenter="切换文案('配置信息')">
+              <template #title>
+                <div class="horizontal-place-6px">
+                  <i i-fxemoji-opticaldiscicon class="text-16px"></i>
+                  <span>配置信息</span>
+                </div>
+              </template>
               <div class="space-x-16px mb-20px">
                 <a-button
                   :type="获取当前('主题') === 'light' ? 'outline' : 'primary'"
                   @click="打开导入弹窗()"
                 >
                   <template #icon>
-                    <i class="text-16px mb-1px" i-iconoir-import />
+                    <i class="text-20px mb-1px" i-line-md-download-loop />
+                    <!-- i-lucide-download -->
+                    <!-- i-line-md-downloading-loop -->
                   </template>
                   导入
                 </a-button>
@@ -363,7 +383,9 @@
                   </template>
                   <a-button :type="获取当前('主题') === 'light' ? 'outline' : 'primary'">
                     <template #icon>
-                      <i class="text-16px mb-1px" i-iconoir-share-ios />
+                      <i class="text-20px mb-1px" i-line-md-upload-loop />
+                      <!-- i-lucide-upload -->
+                      <!-- i-line-md-uploading-loop -->
                     </template>
                     导出
                   </a-button>
@@ -376,13 +398,19 @@
             :class="{ '-mr-100% opacity-30': 侧边收起 }"
           >
             <setting-card
-              class="fixed pb-16px w-28%"
+              class="fixed pb-16px w-[calc(30%-24px)]"
               :style="{
                 top: `${侧边定位top}px`,
                 bottom: `${侧边定位bottom}px`,
               }"
               title="选项说明"
             >
+              <template #title>
+                <div class="horizontal-place-6px">
+                  <i i-fluent-emoji-flat-open-book class="text-18px mb-2px"></i>
+                  <span>选项说明</span>
+                </div>
+              </template>
               <div
                 class="bg-white rounded-full shadow-md w-22px grid-c text-18px cursor-pointer absolute-y-center aspect-ratio-square -left-11px transition-all active:shadow dark:bg-#444"
                 @click="切换侧边()"
@@ -406,7 +434,7 @@
 
       <section
         ref="设置弹框Footer"
-        class="sticky bottom-0 h-65px flex items-center justify-between px-20px bg-white dark:bg-#2a2a2b"
+        class="sticky bottom-0 h-65px flex-y-c justify-between px-20px bg-white dark:bg-#2a2a2b"
         border="t-solid #e5e6eb t-width-1px dark:#484849"
       >
         <div>

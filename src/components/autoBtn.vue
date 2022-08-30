@@ -23,6 +23,6 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .btn_wrapper {
-  @apply select-none w-32px grid-c cursor-pointer rounded-t-4px transition-all overflow-hidden aspect-ratio-square hover:(bg-[#f2f3f5] dark:bg-[#3d3d3d]);
+  @apply select-none w-32px grid-c cursor-pointer rounded-t-4px transition-all overflow-hidden aspect-ratio-square hover:(bg-#f2f3f5 dark:bg-#3d3d3d);
 }
 </style>

@@ -19,6 +19,15 @@
           </template>
         </transition>
 
+        <transition name="component-scale">
+          <span
+            v-show="检测语言显示条件"
+            class="absolute opacity-35 left-12px bottom-8px text-12px text-#777 dark:text-white"
+          >
+            检测到: 法语
+          </span>
+        </transition>
+
         <!-- 上方文本域 -->
         <a-textarea
           ref="用户输入框Ref"
@@ -48,7 +57,7 @@
         </a-radio-group>
         <div
           border="#f2f3f5 b-width-1px dark:#3d3d3d"
-          class="flex flex-1 justify-end items-center space-x-8px"
+          class="flex-1 horizontal-place-8px justify-end"
         >
           <!-- 命名翻译模式的select -->
           <template v-if="是命名模式">
@@ -166,7 +175,7 @@
     <!-- 设置按钮 -->
     <i
       id="setting-wrapper"
-      class="icon setting_icon i-carbon-settings"
+      class="icon setting_icon i-ep-setting"
       @click="打开设置Modal()"
     />
     <!-- 命名翻译模式按钮 -->
@@ -231,6 +240,7 @@ const 结果对象 = reactive({
   数据: {
     结果文字: ``, // 翻译结果
     结果码: -1, // 翻译结果状态(code = 200 为成功,code = -1为等待用户操作,code = 401为未配置翻译API)
+    from语种: '',
     结果编号: nanoid(),
   },
 })
@@ -276,11 +286,16 @@ function 格式化级联显示内容(options: CascaderOption[]) {
   return 文字.join('\u3000  \u3000')
 }
 
-// 清空输入框
 function 清空输入框() {
   用户输入.value = ''
   输入框focus()
 }
+
+const 检测语言显示条件 = computed(() => {
+  // 结果对象.数据.from语种不是中文、英文
+  // 且api支持返回了检测的语种
+  return true
+})
 
 const { ctrl, command } = useMagicKeys()
 
@@ -382,14 +397,15 @@ async function 开始翻译(val = 当前翻译api.value) {
     q: 尝试分词(用户输入.value),
   }
 
-  const { text: 返回的文字, code: 状态码 } = await 通用翻译(val, obj)
+  const { text: 返回的文字, code: 结果码, from语种 } = await 通用翻译(val, obj)
 
   const 处理后的文字 = 是命名模式.value
     ? 返回命名模式对应结果(返回的文字, 命名模式类型.value)
     : 返回的文字
   结果对象.数据 = {
+    结果码,
+    from语种,
     结果文字: 处理后的文字,
-    结果码: 状态码,
     结果编号: nanoid(),
   }
   翻译加载.value = false
@@ -551,18 +567,18 @@ onKeyStroke('Tab', e => {
 .main {
   transition: all 200ms var(--ani-bezier);
 }
-.icon {
-  @apply text-22px text-[#999] cursor-pointer transition-all duration-250 hover:text-[#666] active:text-primary;
-}
 
-.code_icon {
-  @apply absolute left-4px bottom-4px;
-  &.code_active {
-    @apply text-primary;
+.icon {
+  @apply absolute text-22px text-#999 cursor-pointer transition-all duration-250 hover:text-#666 active:text-primary;
+  &.setting_icon {
+    @apply right-4px bottom-4px hover:i-fluent-settings-28-filled;
   }
-}
-.setting_icon {
-  @apply absolute right-4px bottom-4px hover:i-material-symbols-settings-rounded;
+  &.code_icon {
+    @apply left-4px bottom-4px;
+    &.code_active {
+      @apply text-primary;
+    }
+  }
 }
 
 // 文本域公用样式
