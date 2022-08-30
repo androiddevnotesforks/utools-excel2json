@@ -19,14 +19,12 @@
           </template>
         </transition>
 
-        <transition name="component-scale">
-          <span
-            v-show="检测语言显示条件 && 结果对象.数据.from语种"
-            class="absolute opacity-35 left-12px bottom-8px text-12px text-#777 dark:text-white"
-          >
-            检测到: {{ 结果对象.数据.from语种 }}
-          </span>
-        </transition>
+        <span
+          v-show="检测语言显示条件 && 结果对象.数据.from语种"
+          class="absolute opacity-35 left-12px bottom-8px text-12px text-#777 dark:text-white"
+        >
+          检测到: {{ 结果对象.数据.from语种 }}
+        </span>
 
         <!-- 上方文本域 -->
         <a-textarea
@@ -292,9 +290,7 @@ function 清空输入框() {
 }
 
 const 检测语言显示条件 = computed(() => {
-  // 结果对象.数据.from语种不是中文、英文
-  // 且api支持返回了检测的语种
-  return true
+  return 结果对象.数据.from语种 && !['简体中文'].includes(结果对象.数据.from语种)
 })
 
 const { ctrl, command } = useMagicKeys()
