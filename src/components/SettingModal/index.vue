@@ -15,11 +15,19 @@
     >
       <header
         ref="设置弹框Header"
-        class="setting_header h-48px w-full sticky top-0 text-16px px-20px z-1 flex-y-c backdrop-blur-5px"
+        class="setting_header h-48px w-full sticky top-0 text-16px px-20px z-1 flex-y-c justify-between backdrop-blur-5px"
       >
         <div class="horizontal-place-8px">
           <img src="/favicon.svg" width="24" />
           <span class="font-500">设置</span>
+        </div>
+        <div>
+          <button
+            class="w-20px aspect-ratio-square flex-c rounded-full transition-all hover:bg-#777:10 dark:(hover:bg-#fff:10)"
+            @click="modal取消()"
+          >
+            <i i-fe-close class="text-14px"></i>
+          </button>
         </div>
       </header>
       <div class="header_shadow"></div>
@@ -521,7 +529,7 @@ const 侧边定位top = computed(() => {
 })
 
 const 侧边定位bottom = computed(() => {
-  return 设置弹框Footer高度.value + 侧边paddingY
+  return 设置弹框Footer高度.value + 侧边paddingY + 1
 })
 const 系统 = 获取当前('系统')
 const api列表 = ref(api选项)
