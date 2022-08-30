@@ -8,6 +8,8 @@ import axios from 'axios'
 import type { 翻译参数Type } from '../common'
 
 import { 返回状态码及信息 } from '../common'
+import { 获取推断语言名称 } from '@/utils/language'
+
 const 错误信息: Record<string, string> = {
   101: '缺少必填的参数,首先确保必填参数齐全，然后确认参数书写是否正确。',
   102: '不支持的语言类型',
@@ -173,7 +175,7 @@ export default function ({ q, from, to, keyConfig }: 翻译参数Type) {
   return axios
     .get(url, { params })
     .then(res => {
-      const { translation, errorCode } = res.data
+      const { translation, errorCode, l: 识别标识 } = res.data
       let result
       if (errorCode === '0') {
         // 翻译成功
@@ -181,7 +183,8 @@ export default function ({ q, from, to, keyConfig }: 翻译参数Type) {
         translation.forEach((item: string) => {
           text += `${item}\n`
         })
-        result = 返回状态码及信息(200, { text })
+        const from = 获取推断语言名称('youdao', 识别标识.split('2')[0])
+        result = 返回状态码及信息(200, { text, from })
       } else {
         // 翻译失败
         result = 返回状态码及信息(500, null, 错误信息[errorCode])

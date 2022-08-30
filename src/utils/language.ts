@@ -1,7 +1,10 @@
 /** 整合的语言修正options */
 
 interface 语言集合Type {
-  [key: string]: any
+  [key: string]: {
+    name: string
+    datas: { [key: string]: string }
+  }
 }
 
 export interface 语音标识参数Type {
@@ -12,123 +15,159 @@ export interface 语音标识参数Type {
 const 语音集合: 语言集合Type = {
   // 简体中文
   zh: {
-    baidu: 'zh',
-    tencent: 'zh',
-    ali: 'zh',
-    youdao: 'zh-CHS',
-    google: 'zh-CN',
-    caiyun: 'zh',
-    huoshan: 'zh',
+    name: '简体中文',
+    datas: {
+      baidu: 'zh',
+      tencent: 'zh',
+      ali: 'zh',
+      youdao: 'zh-CHS',
+      google: 'zh-CN',
+      caiyun: 'zh',
+      huoshan: 'zh',
+    },
   },
   // 繁体中文
   cht: {
-    baidu: 'cht',
-    tencent: 'zh-TW',
-    ali: 'zh-tw',
-    youdao: 'zh-CHT',
-    google: 'zh-TW',
-    caiyun: '',
-    huoshan: 'zh-Hant',
+    name: '繁体中文',
+    datas: {
+      baidu: 'cht',
+      tencent: 'zh-TW',
+      ali: 'zh-tw',
+      youdao: 'zh-CHT',
+      google: 'zh-TW',
+      caiyun: '',
+      huoshan: 'zh-Hant',
+    },
   },
   // 文言文
   wyw: {
-    baidu: 'wyw',
-    tencent: '',
-    ali: '',
-    youdao: '',
-    google: '',
-    caiyun: '',
-    huoshan: '',
+    name: '文言文',
+    datas: {
+      baidu: 'wyw',
+      tencent: '',
+      ali: '',
+      youdao: '',
+      google: '',
+      caiyun: '',
+      huoshan: '',
+    },
   },
   // 粤语
   yue: {
-    baidu: 'yue',
-    tencent: '',
-    ali: 'yue',
-    youdao: 'yue',
-    google: '',
-    caiyun: '',
-    huoshan: '',
+    name: '粤语',
+    datas: {
+      baidu: 'yue',
+      tencent: '',
+      ali: 'yue',
+      youdao: 'yue',
+      google: '',
+      caiyun: '',
+      huoshan: '',
+    },
   },
   // 英语
   en: {
-    baidu: 'en',
-    tencent: 'en',
-    ali: 'en',
-    youdao: 'en',
-    google: 'en',
-    caiyun: 'en',
-    huoshan: 'en',
+    name: '英语',
+    datas: {
+      baidu: 'en',
+      tencent: 'en',
+      ali: 'en',
+      youdao: 'en',
+      google: 'en',
+      caiyun: 'en',
+      huoshan: 'en',
+    },
   },
   // 日语
   jp: {
-    baidu: 'jp',
-    tencent: 'ja',
-    ali: 'ja',
-    youdao: 'ja',
-    google: 'ja',
-    caiyun: 'ja',
-    huoshan: 'ja',
+    name: '日语',
+    datas: {
+      baidu: 'jp',
+      tencent: 'ja',
+      ali: 'ja',
+      youdao: 'ja',
+      google: 'ja',
+      caiyun: 'ja',
+      huoshan: 'ja',
+    },
   },
   // 俄语
   ru: {
-    baidu: 'ru',
-    tencent: 'ru',
-    ali: 'ru',
-    youdao: 'ru',
-    google: 'ru',
-    caiyun: 'ru',
-    huoshan: 'ru',
+    name: '俄语',
+    datas: {
+      baidu: 'ru',
+      tencent: 'ru',
+      ali: 'ru',
+      youdao: 'ru',
+      google: 'ru',
+      caiyun: 'ru',
+      huoshan: 'ru',
+    },
   },
   // 德语
   de: {
-    baidu: 'de',
-    tencent: 'de',
-    ali: 'de',
-    youdao: 'de',
-    google: 'de',
-    caiyun: '',
-    huoshan: 'de',
+    name: '德语',
+    datas: {
+      baidu: 'de',
+      tencent: 'de',
+      ali: 'de',
+      youdao: 'de',
+      google: 'de',
+      caiyun: '',
+      huoshan: 'de',
+    },
   },
   // 法语
   fra: {
-    baidu: 'fra',
-    tencent: 'fr',
-    ali: 'fr',
-    youdao: 'fr',
-    google: 'fr',
-    caiyun: '',
-    huoshan: 'fr',
+    name: '法语',
+    datas: {
+      baidu: 'fra',
+      tencent: 'fr',
+      ali: 'fr',
+      youdao: 'fr',
+      google: 'fr',
+      caiyun: '',
+      huoshan: 'fr',
+    },
   },
   // 韩语
   kor: {
-    baidu: 'kor',
-    tencent: 'ko',
-    ali: 'ko',
-    youdao: 'ko',
-    google: 'ko',
-    caiyun: '',
-    huoshan: 'ko',
+    name: '韩语',
+    datas: {
+      baidu: 'kor',
+      tencent: 'ko',
+      ali: 'ko',
+      youdao: 'ko',
+      google: 'ko',
+      caiyun: '',
+      huoshan: 'ko',
+    },
   },
   // 泰语
   th: {
-    baidu: 'th',
-    tencent: 'th',
-    ali: 'th',
-    youdao: 'th',
-    google: 'th',
-    caiyun: 'th',
-    huoshan: 'th',
+    name: '泰语',
+    datas: {
+      baidu: 'th',
+      tencent: 'th',
+      ali: 'th',
+      youdao: 'th',
+      google: 'th',
+      caiyun: 'th',
+      huoshan: 'th',
+    },
   },
   // 西班牙语
   spa: {
-    baidu: 'spa',
-    tencent: 'es',
-    ali: 'es',
-    youdao: 'es',
-    google: 'es',
-    caiyun: 'es',
-    huoshan: 'es',
+    name: '西班牙语',
+    datas: {
+      baidu: 'spa',
+      tencent: 'es',
+      ali: 'es',
+      youdao: 'es',
+      google: 'es',
+      caiyun: 'es',
+      huoshan: 'es',
+    },
   },
 }
 
@@ -154,14 +193,30 @@ export function 语音标识修正(tag: string, 翻译参数: 语音标识参数
     }
     try {
       const options = 语音集合[目标语言]
-      return options[tag] || 目标语言
+      return options.datas[tag] || 目标语言
     } catch (error) {
       console.error(`语言标识错误: ${tag} - ${目标语言}`)
+      return 目标语言
     }
   }
 
   return {
     from: fn(from),
     to: fn(to),
+  }
+}
+
+/**
+ * 获取推断语言名称
+ * @param api
+ * @param 推测的语言
+ * @returns
+ */
+export function 获取推断语言名称(api: string, 推测的语言: string) {
+  for (const key in 语音集合) {
+    const item = 语音集合[key]
+    if (item.datas[api] === 推测的语言) {
+      return item.name
+    }
   }
 }

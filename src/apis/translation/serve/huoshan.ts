@@ -7,6 +7,7 @@ import encHex from 'crypto-js/enc-hex'
 import hmacSHA256 from 'crypto-js/hmac-sha256'
 import { 返回状态码及信息 } from '../common'
 import type { 翻译参数Type } from '../common'
+import { 获取推断语言名称 } from '@/utils/language'
 
 const 错误信息: Record<string, string> = {
   // UndefinedError: '一般不出现这个问题，这是系统开发兜底的错误提示',
@@ -82,7 +83,8 @@ export default async function ({ q, from, to, keyConfig }: 翻译参数Type) {
       return 返回状态码及信息(500, null, 错误信息[apiError])
     } else {
       const text = TranslationList[0].Translation
-      result = 返回状态码及信息(200, { text })
+      const from = 获取推断语言名称('huoshan', TranslationList[0]?.DetectedSourceLanguage)
+      result = 返回状态码及信息(200, { text, from })
     }
     return result
   } catch (err: any) {

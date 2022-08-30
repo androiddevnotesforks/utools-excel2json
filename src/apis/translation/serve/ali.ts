@@ -30,6 +30,7 @@ export default async function ({ q, from, to, keyConfig }: 翻译参数Type) {
       .then(async (res: any) => {
         const { Code, Data, Message } = res
         if (Code === '200') {
+          // console.log('res', res)
           return 返回状态码及信息(200, { text: Data.Translated })
         } else {
           // return 返回状态码及信息(500, null, Message)

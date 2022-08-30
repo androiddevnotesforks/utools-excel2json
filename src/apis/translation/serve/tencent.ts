@@ -9,6 +9,7 @@ import axios from 'axios'
 import dayjs from 'dayjs'
 import { 返回状态码及信息 } from '../common'
 import type { 翻译参数Type } from '../common'
+import { 获取推断语言名称 } from '@/utils/language'
 
 const 错误信息: Record<string, string> = {
   ActionOffline: '接口已下线。',
@@ -103,13 +104,14 @@ export default async function ({ q, from, to, keyConfig }: 翻译参数Type) {
 
   try {
     const res = await axios.post(url, params, { headers })
-    const { TargetText, Error } = res.data?.Response
+    const { TargetText, Error, Source } = res.data?.Response
     let result
     if (Error) {
       // 翻译失败
       result = 返回状态码及信息(500, null, 错误信息[Error.Code])
     } else {
-      result = 返回状态码及信息(200, { text: TargetText })
+      const from = 获取推断语言名称('tencent', Source)
+      result = 返回状态码及信息(200, { text: TargetText, from })
     }
     return result
   } catch (err) {

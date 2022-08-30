@@ -4,6 +4,7 @@
  *  */
 import { 返回状态码及信息 } from '../common'
 import type { 翻译参数Type } from '../common'
+import { 获取推断语言名称 } from '@/utils/language'
 
 /**
  * 机器翻译
@@ -21,7 +22,8 @@ export default function ({ q, from, to }: 翻译参数Type) {
         to,
       })
       .then((res: any) => {
-        return 返回状态码及信息(200, { text: res.text })
+        const from = 获取推断语言名称('google', res?.from?.language?.iso)
+        return 返回状态码及信息(200, { text: res.text, from })
       })
       .catch((err: any) => {
         return 返回状态码及信息(500, null, err)

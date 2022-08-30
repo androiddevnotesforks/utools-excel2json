@@ -6,6 +6,7 @@ import md5 from 'crypto-js/md5'
 import axios from 'axios'
 import { 返回状态码及信息 } from '../common'
 import type { 翻译参数Type } from '../common'
+import { 获取推断语言名称 } from '@/utils/language'
 
 const 错误信息: Record<string, string> = {
   // 52001: '请求超时，请重试',
@@ -80,7 +81,9 @@ export default async function baiduTranslator({ q, from, to, keyConfig }: 翻译
         text += `${item.dst}\n`
       })
 
-      result = 返回状态码及信息(200, { text })
+      const from = 获取推断语言名称('baidu', res.data.from)
+
+      result = 返回状态码及信息(200, { text, from })
     }
     return result
   } catch (err: any) {

@@ -53,5 +53,7 @@ export async function 通用翻译(tag: string, options: 翻译参数Type): Prom
 
   // last.result = result
   // last.optionsStr = optionsStr
+
+  // console.log('result', result)
   return result
 }

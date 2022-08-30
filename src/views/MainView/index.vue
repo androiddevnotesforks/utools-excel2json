@@ -21,10 +21,10 @@
 
         <transition name="component-scale">
           <span
-            v-show="检测语言显示条件"
+            v-show="检测语言显示条件 && 结果对象.数据.from语种"
             class="absolute opacity-35 left-12px bottom-8px text-12px text-#777 dark:text-white"
           >
-            检测到: 法语
+            检测到: {{ 结果对象.数据.from语种 }}
           </span>
         </transition>
 
@@ -397,7 +397,7 @@ async function 开始翻译(val = 当前翻译api.value) {
     q: 尝试分词(用户输入.value),
   }
 
-  const { text: 返回的文字, code: 结果码, from语种 } = await 通用翻译(val, obj)
+  const { text: 返回的文字, code: 结果码, from: from语种 } = await 通用翻译(val, obj)
 
   const 处理后的文字 = 是命名模式.value
     ? 返回命名模式对应结果(返回的文字, 命名模式类型.value)
