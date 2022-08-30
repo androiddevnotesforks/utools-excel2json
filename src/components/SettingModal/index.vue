@@ -357,46 +357,20 @@
                   <template #icon>
                     <i class="text-20px mb-1px" i-line-md-download-loop />
                     <!-- i-lucide-download -->
-                    <!-- i-line-md-downloading-loop -->
                   </template>
                   导入
                 </a-button>
 
-                <a-popconfirm
-                  position="tl"
-                  content-class="popconfirm_wrapper"
-                  ok-text="确认导出"
-                  @ok="导出数据()"
+                <a-button
+                  :type="获取当前('主题') === 'light' ? 'outline' : 'primary'"
+                  @click="打开导出弹窗()"
                 >
                   <template #icon>
-                    <div class="hidden"></div>
+                    <i class="text-20px mb-1px" i-line-md-upload-loop />
+                    <!-- i-lucide-upload -->
                   </template>
-                  <template #content>
-                    <div class="mb-8px">
-                      将导出当前
-                      <span class="text_important"> 「已生效的配置」 </span>
-                      ，如果你刚才修改过设置，还未点确定进行保存，请先点确定保存后再进行导出。
-                    </div>
-                    <a-input-password
-                      v-model.trim="导出密码框"
-                      size="small"
-                      :max-length="20"
-                      show-word-limit
-                      placeholder="密码（非必填）"
-                    ></a-input-password>
-                    <p class="text-12px text-red-500 mt-4px leading-tight">
-                      如果你设置了密码，在导入时需要填写相同的密码才能正常导入
-                    </p>
-                  </template>
-                  <a-button :type="获取当前('主题') === 'light' ? 'outline' : 'primary'">
-                    <template #icon>
-                      <i class="text-20px mb-1px" i-line-md-upload-loop />
-                      <!-- i-lucide-upload -->
-                      <!-- i-line-md-uploading-loop -->
-                    </template>
-                    导出
-                  </a-button>
-                </a-popconfirm>
+                  导出
+                </a-button>
               </div>
             </setting-card>
           </div>
@@ -462,37 +436,10 @@
     </a-modal>
 
     <!-- 导入弹窗 -->
-    <a-modal
-      v-model:visible="导入弹窗显隐"
-      :popup-container="modal主体Ref"
-      title="导入配置"
-      @cancel="关闭导入弹窗()"
-    >
-      <div>
-        <a-alert class="mb-16px"> 导入配置会覆盖当前配置，请备份好相关信息 </a-alert>
-        <a-textarea
-          ref="导入文本框Ref"
-          v-model.trim="导入配置文本"
-          :auto-size="{
-            minRows: 6,
-            maxRows: 6,
-          }"
-          placeholder="请输入配置信息"
-          allow-clear
-        />
-        <a-input-password
-          v-model.trim="导入密码框"
-          placeholder="如未设置导入密码，请留空"
-          allow-clear
-        />
-      </div>
-      <template #footer>
-        <div class="space-x-12px">
-          <a-button @click="关闭导入弹窗()">取消</a-button>
-          <a-button type="primary" @click="导入点击确定()">确定</a-button>
-        </div>
-      </template>
-    </a-modal>
+    <ImportModal ref="导入弹框Ref" :form-data="formData" @importOK="导入成功()" />
+
+    <!-- 导出弹窗 -->
+    <ExportModal ref="导出弹框Ref" :form-data="formData" @exportOK="导出成功()" />
   </div>
 </template>
 
@@ -504,7 +451,6 @@ import {
 } from '@/components/SettingModal/SettingsModules'
 import {
   cloneDeep,
-  useClipboard,
   提示,
   显示引导,
   替换字符串,
@@ -530,10 +476,9 @@ const 侧边定位bottom = computed(() => {
 const 系统 = 获取当前('系统')
 const api列表 = ref(api选项)
 const modal可见 = ref(false)
-const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
-const 导出密码框 = ref('') // 导出密码框的内容
-const 导入密码框 = ref('') // 导入密码框的内容
 const modal主体Ref = ref()
+const 导入弹框Ref = ref()
+const 导出弹框Ref = ref()
 const 解释文案 = ref('') // 解释文案
 const formData = reactive({
   homeHasApi: ['baidu', 'tencent', 'youdao', 'ali'], // 首页展示的翻译方式
@@ -570,12 +515,9 @@ const 显示顺序data = computed(() => {
   return arr
 })
 
-const 导入文本框Ref = ref()
-const 导入配置文本 = ref('')
 const utools = window?.utools
 
-const { 获取设置, 保存设置, 重置设置, 导出设置, 导入配置 } = 设置存储(formData)
-const { copy: 复制 } = useClipboard() // 复制结果功能
+const { 获取设置, 保存设置, 重置设置 } = 设置存储(formData)
 const 首页的api数组 = ref<string[]>([]) // 当前首页展示的翻译方式
 
 const 已勾选的翻译 = computed(() => {
@@ -624,47 +566,6 @@ function 设置modal确定() {
   提示.success({ content: '设置成功', duration: 1000 })
   emit('ok')
   关闭弹窗()
-}
-
-function 导入框获得焦点() {
-  导入文本框Ref.value.focus()
-}
-
-function 打开导入弹窗() {
-  导入弹窗显隐.value = true
-  nextTick(() => {
-    导入框获得焦点()
-  })
-}
-
-async function 导入点击确定() {
-  try {
-    await 导入配置(导入配置文本.value, 导入密码框.value)
-    提示.success('导入成功，欢迎回来~🎉')
-    关闭导入弹窗()
-    保存设置()
-    emit('ok')
-    关闭弹窗()
-  } catch (e) {
-    提示.error('导入出错了，可能是配置信息有误或密码错误😯')
-  }
-}
-
-function 关闭导入弹窗() {
-  导入弹窗显隐.value = false
-  导入配置文本.value = ''
-  导入密码框.value = ''
-}
-
-async function 导出数据() {
-  try {
-    const 导出内容: string = await 导出设置(导出密码框.value)
-    导出密码框.value = ''
-    await 复制(导出内容)
-    提示.success('已将导出设置添加到剪切板')
-  } catch (error) {
-    提示.error('导出出错了，稍后再试一下吧😯')
-  }
 }
 
 // 点击弹框取消
@@ -747,6 +648,26 @@ function 切换文案(id = '') {
     文案主体 = 替换字符串(文案主体, ['%s', 快捷键文案.value])
   }
   解释文案.value = `<h2 class="text-20px">${id}:</h2>${文案主体}`
+}
+
+function 打开导入弹窗() {
+  导入弹框Ref.value.打开导入弹窗()
+}
+
+function 导入成功() {
+  提示.success('导入成功，欢迎回来~🎉')
+  导入弹框Ref.value.关闭导入弹窗()
+  emit('ok')
+  关闭弹窗()
+}
+
+function 打开导出弹窗() {
+  导出弹框Ref.value.打开导出弹窗()
+}
+
+function 导出成功() {
+  提示.success('导出成功，已将配置信息写入到剪切板~')
+  导出弹框Ref.value.关闭导出弹窗()
 }
 
 // 暴露弹窗的函数，供父组件调用

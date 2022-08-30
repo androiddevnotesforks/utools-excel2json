@@ -1,5 +1,11 @@
 <template>
-  <a-modal v-model:visible="导入弹窗显隐" title="导入配置" @cancel="关闭导入弹窗()">
+  <a-modal v-model:visible="导入弹窗显隐" title-align="start" @cancel="关闭导入弹窗()">
+    <template #title>
+      <div class="horizontal-place-4px">
+        <span>导入</span>
+        <i i-line-md-downloading-loop class="text-18px"></i>
+      </div>
+    </template>
     <div>
       <a-alert class="mb-16px"> 导入配置会覆盖当前配置，请备份好相关信息 </a-alert>
       <a-textarea
@@ -16,6 +22,8 @@
         v-model.trim="导入密码框"
         placeholder="如未设置导入密码，请留空"
         allow-clear
+        :max-length="20"
+        show-word-limit
       />
     </div>
     <template #footer>
@@ -56,16 +64,14 @@ function 导入框获得焦点() {
 }
 
 function 关闭导入弹窗() {
-  导入弹窗显隐.value = false
   导入配置文本.value = ''
   导入密码框.value = ''
+  导入弹窗显隐.value = false
 }
 
 async function 导入点击确定() {
   try {
     await 导入配置(导入配置文本.value, 导入密码框.value)
-    提示.success('导入成功，欢迎回来~🎉')
-    关闭导入弹窗()
     保存设置()
     emit('importOK')
   } catch (e) {
@@ -74,6 +80,7 @@ async function 导入点击确定() {
 }
 defineExpose({
   打开导入弹窗,
+  关闭导入弹窗,
 })
 </script>
 
