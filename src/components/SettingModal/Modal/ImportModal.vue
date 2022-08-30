@@ -36,17 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { 设置存储 } from '@/components/SettingModal/SettingsModules'
-import { 提示 } from '@/components/SettingModal/SettingsUtils'
-
-const props = defineProps({
-  formData: {
-    type: Object,
-    required: true,
-  },
-})
-const emit = defineEmits(['importOK'])
-const { 保存设置, 导入配置 } = 设置存储(props.formData)
+const emit = defineEmits(['importSubmit'])
 const 导入弹窗显隐 = ref(false) // 导入弹框的显隐
 const 导入配置文本 = ref('')
 const 导入文本框Ref = ref()
@@ -70,13 +60,7 @@ function 关闭导入弹窗() {
 }
 
 async function 导入点击确定() {
-  try {
-    await 导入配置(导入配置文本.value, 导入密码框.value)
-    保存设置()
-    emit('importOK')
-  } catch (e) {
-    提示.error('导入出错了，可能是配置信息有误或密码错误😯')
-  }
+  emit('importSubmit', { text: 导入配置文本.value, password: 导入密码框.value })
 }
 defineExpose({
   打开导入弹窗,

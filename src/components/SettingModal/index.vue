@@ -436,10 +436,10 @@
     </a-modal>
 
     <!-- 导入弹窗 -->
-    <ImportModal ref="导入弹框Ref" :form-data="formData" @importOK="导入成功()" />
+    <ImportModal ref="导入弹框Ref" @importSubmit="导入提交($event)" />
 
     <!-- 导出弹窗 -->
-    <ExportModal ref="导出弹框Ref" :form-data="formData" @exportOK="导出成功()" />
+    <ExportModal ref="导出弹框Ref" @exportSubmit="导出提交($event)" />
   </div>
 </template>
 
@@ -517,12 +517,14 @@ const 显示顺序data = computed(() => {
 
 const utools = window?.utools
 
-const { 获取设置, 保存设置, 重置设置 } = 设置存储(formData)
+const { 获取设置, 保存设置, 重置设置, 导入配置, 导出设置 } = 设置存储(formData)
 const 首页的api数组 = ref<string[]>([]) // 当前首页展示的翻译方式
 
 const 已勾选的翻译 = computed(() => {
   return api列表.value.filter(i => 首页的api数组.value.includes(i.value))
 })
+
+const { copy: 复制 } = useClipboard() // 复制结果功能
 
 // 监听首页翻译方式的checkbox勾选数量
 const 可选择的服务数量 = ref(4)
@@ -654,20 +656,37 @@ function 打开导入弹窗() {
   导入弹框Ref.value.打开导入弹窗()
 }
 
-function 导入成功() {
-  提示.success('导入成功，欢迎回来~🎉')
-  导入弹框Ref.value.关闭导入弹窗()
-  emit('ok')
-  关闭弹窗()
+interface importType {
+  text: string
+  password: string
+}
+
+async function 导入提交(data: importType) {
+  try {
+    await 导入配置(data.text, data.password)
+    保存设置()
+    提示.success('导入成功，欢迎回来~🎉')
+    导入弹框Ref.value.关闭导入弹窗()
+    emit('ok')
+    关闭弹窗()
+  } catch (e) {
+    提示.error('导入出错了，可能是配置信息有误或密码错误😯')
+  }
 }
 
 function 打开导出弹窗() {
   导出弹框Ref.value.打开导出弹窗()
 }
 
-function 导出成功() {
-  提示.success('导出成功，已将配置信息写入到剪切板~')
-  导出弹框Ref.value.关闭导出弹窗()
+async function 导出提交(password: string) {
+  try {
+    const 导出内容: string = await 导出设置(password)
+    await 复制(导出内容)
+    提示.success('导出成功，已将配置信息写入到剪切板~')
+    导出弹框Ref.value.关闭导出弹窗()
+  } catch (error) {
+    提示.error('导出出错了，稍后再试一下吧😯')
+  }
 }
 
 // 暴露弹窗的函数，供父组件调用

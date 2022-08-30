@@ -38,28 +38,12 @@
 </template>
 
 <script setup lang="ts">
-import { 提示 } from '@/components/SettingModal/SettingsUtils'
-import { 设置存储 } from '@/components/SettingModal/SettingsModules'
-const props = defineProps({
-  formData: {
-    type: Object,
-    required: true,
-  },
-})
-const emit = defineEmits(['exportOK'])
+const emit = defineEmits(['exportSubmit'])
 const 导出弹窗显隐 = ref(false)
 const 导出密码框Ref = ref()
 const 导出密码框 = ref('') // 导出密码框的内容
-const { copy: 复制 } = useClipboard() // 复制结果功能
-const { 导出设置 } = 设置存储(props.formData)
 async function 导出数据() {
-  try {
-    const 导出内容: string = await 导出设置(导出密码框.value)
-    await 复制(导出内容)
-    emit('exportOK')
-  } catch (error) {
-    提示.error('导出出错了，稍后再试一下吧😯')
-  }
+  emit('exportSubmit', 导出密码框.value)
 }
 
 function 导出密码框获取焦点() {

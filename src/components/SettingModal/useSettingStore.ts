@@ -2,9 +2,7 @@
  * 用户设置存储业务
  */
 import { cloneDeep } from 'lodash-es'
-
 import Rabbit from 'crypto-js/rabbit'
-// import AES from 'crypto-js/aes'
 import encUtf8 from 'crypto-js/enc-utf8'
 import { 用户设置存储 } from '@/store/userSetting'
 
@@ -16,9 +14,6 @@ export function 设置存储(formData: any) {
   function 获取设置() {
     const tempFormData = settingStore.getSetingFormData
     填写表单(tempFormData)
-    // Object.keys(formData).forEach(key => {
-    //   formData[key] = tempFormData[key]
-    // })
   }
 
   function 填写表单(value: any) {
