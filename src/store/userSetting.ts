@@ -86,6 +86,12 @@ const CONFIG: configObj = {
     type: String,
     defaultState: 'en',
   },
+  // 语言模式(在线|离线)
+  READING_MODEL: {
+    key: 'readingModel',
+    type: String,
+    defaultState: '离线',
+  },
 }
 
 /** 获取初始化初始值 */
@@ -129,8 +135,10 @@ function getInitState() {
     readingPreference: getStorageData(CONFIG.READING_PREFERENCE),
     theme: getStorageData(CONFIG.THEME),
     defaultForeignLanguage: getStorageData(CONFIG.DEFAULT_FOREIGN_LANGUAGE),
+    readingModel: getStorageData(CONFIG.READING_MODEL),
   }
 }
+
 interface 首页api类型 {
   value: string
   label: string
@@ -166,6 +174,7 @@ export const 用户设置存储 = defineStore('settings', {
         readingPreference,
         theme,
         defaultForeignLanguage,
+        readingModel,
       } = state
 
       return {
@@ -190,6 +199,7 @@ export const 用户设置存储 = defineStore('settings', {
         readingPreference, // 朗读偏好
         theme, // 主题
         defaultForeignLanguage,
+        readingModel, // 语言模式
       }
     },
   },
@@ -249,6 +259,12 @@ export const 用户设置存储 = defineStore('settings', {
       setDbStorageItem(CONFIG.READING_PREFERENCE.key, data)
     },
 
+    /** 设置默认外语 */
+    setDefaultForeignLanguage(data: any) {
+      this.defaultForeignLanguage = data
+      setDbStorageItem(CONFIG.DEFAULT_FOREIGN_LANGUAGE.key, data)
+    },
+
     /** 设置主题 */
     setTheme(data: any) {
       this.theme = data
@@ -256,9 +272,9 @@ export const 用户设置存储 = defineStore('settings', {
     },
 
     /** 设置默认外语 */
-    setDefaultForeignLanguage(data: any) {
-      this.defaultForeignLanguage = data
-      setDbStorageItem(CONFIG.DEFAULT_FOREIGN_LANGUAGE.key, data)
+    setReadingModel(data: any) {
+      this.readingModel = data
+      setDbStorageItem(CONFIG.READING_MODEL.key, data)
     },
 
     /** 重置设置 */

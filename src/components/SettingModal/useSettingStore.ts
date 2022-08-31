@@ -65,6 +65,7 @@ export function 设置存储(formData: any) {
     settingStore.setReadingPreference(formData.readingPreference)
     settingStore.setTheme(formData.theme)
     settingStore.setDefaultForeignLanguage(formData.defaultForeignLanguage)
+    settingStore.setReadingModel(formData.readingModel)
   }
 
   function 重置设置() {

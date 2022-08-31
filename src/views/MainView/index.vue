@@ -246,6 +246,7 @@ const {
   getHomeApiOptions: 翻译api数组,
   getHomeFontSize: 文字尺寸,
   copyBtnShow: 复制按钮显示的数组,
+  readingModel: 朗读模式,
 } = storeToRefs(存储)
 const 翻译加载 = ref(false) // 是否正在翻译
 const 用户输入 = ref('') // 输入的内容
@@ -286,9 +287,10 @@ const { 要显示复制按钮, 复制按钮事件 } = use复制模块(
   粘贴,
   延迟关闭utools
 )
-const 朗读模式 = computed(() => {
-  return '离线'
-})
+// const 朗读模式 = computed(() => {
+//   readingModel
+//   return '离线'
+// })
 
 use主题()
 
