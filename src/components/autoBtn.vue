@@ -1,13 +1,16 @@
 <template>
   <cus-tooltip>
     <template #content>
-      <p>智能切换语种「{{ props.modelValue ? '开' : '关' }}」</p>
+      <p>智能切换语种「{{ props.active ? '开' : '关' }}」</p>
     </template>
-    <button class="btn_wrapper">
+    <button
+      class="select-none w-32px grid-c cursor-pointer rounded-t-4px transition-all overflow-hidden aspect-ratio-square hover:(bg-#f2f3f5 dark:bg-#3d3d3d)"
+      @click="handleClick"
+    >
       <i
         i-simple-icons-adobeillustrator
         class="text-19px rounded-2px overflow-hidden transition-all !duration-100"
-        :class="[props.modelValue ? 'active_auto_btn' : 'disabled_auto_btn']"
+        :class="[props.active ? 'active_auto_btn' : 'disabled_auto_btn']"
       />
     </button>
   </cus-tooltip>
@@ -15,14 +18,14 @@
 
 <script setup lang="ts">
 const props = defineProps({
-  modelValue: {
+  active: {
     type: Boolean,
   },
 })
+const emit = defineEmits(['click'])
+function handleClick(ev: MouseEvent) {
+  emit('click', ev)
+}
 </script>
 
-<style lang="scss" scoped>
-.btn_wrapper {
-  @apply select-none w-32px grid-c cursor-pointer rounded-t-4px transition-all overflow-hidden aspect-ratio-square hover:(bg-#f2f3f5 dark:bg-#3d3d3d);
-}
-</style>
+<style lang="scss" scoped></style>

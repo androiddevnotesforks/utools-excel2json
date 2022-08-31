@@ -71,7 +71,7 @@
           </template>
 
           <template v-else>
-            <AutoBtn v-model="自动模式" @click="切换自动模式()" />
+            <AutoBtn :active="自动模式" @click="切换自动模式()" />
             <a-cascader
               v-model:model-value="form和to的数组"
               path-mode
@@ -335,7 +335,7 @@ function 打开设置Modal() {
 
 const 切换自动模式 = throttle(() => {
   自动模式.value = !自动模式.value
-}, 500)
+}, 300)
 
 watch(自动模式, newVal => {
   提示.success(`智能切换语种已${newVal ? '开启' : '关闭'}`)
