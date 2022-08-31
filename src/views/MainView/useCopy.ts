@@ -46,7 +46,7 @@ export function use复制模块(
 
   // 仅复制
   async function 仅复制() {
-    await 复制(结果对象.数据.结果文字)
+    await 复制(结果对象.结果文字)
     提示.success({ content: '复制成功', duration: 2500 })
   }
 
@@ -64,7 +64,7 @@ export function use复制模块(
 
   // 是否应该显示复制按钮
   const 要显示复制按钮 = computed(() => {
-    return 结果对象.数据.结果文字?.trim() && 结果对象.数据.结果码 === 200
+    return 结果对象.结果文字?.trim() && 结果对象.状态码 === 200
   })
 
   const 系统 = 获取当前('系统')

@@ -20,10 +20,10 @@
         </transition>
 
         <span
-          v-show="检测语言显示条件 && 结果对象.数据.from语种"
+          v-show="检测语言显示条件 && 结果对象.from语种"
           class="absolute opacity-35 left-12px bottom-8px text-12px text-#777 dark:text-white"
         >
-          检测到: {{ 结果对象.数据.from语种 }}
+          检测到: {{ 结果对象.from语种 }}
         </span>
 
         <!-- 上方文本域 -->
@@ -95,7 +95,7 @@
       >
         <div class="flex h-full relative">
           <!-- -1：等待用户操作、200：翻译成功均应该显示<code/> -->
-          <codeBg v-if="是命名模式 && [-1, 200].includes(结果对象.数据.结果码)" />
+          <codeBg v-if="是命名模式 && [-1, 200].includes(结果对象.状态码)" />
           <transition name="fade-in-standard">
             <Loading
               v-if="翻译加载"
@@ -110,12 +110,15 @@
             @contextmenu.prevent
           >
             <a-textarea
-              v-model="结果对象.数据.结果文字"
+              v-model="结果对象.结果文字"
               class="rounded-b-8px relative z-1"
               :placeholder="下方placeholder"
               :readonly="结果只读"
             />
-            <transition v-if="朗读功能 && !是命名模式" name="fade-in-standard">
+            <transition
+              v-if="朗读功能 && 朗读模式 === '在线' && !是命名模式"
+              name="fade-in-standard"
+            >
               <div
                 v-show="要显示复制按钮"
                 class="absolute left-10px bottom-8px z-1 flex space-x-8px"
@@ -128,6 +131,31 @@
                 <!-- 开始暂停按钮 -->
                 <MimicryBtn v-show="音频Url" @click="正在播放 = !正在播放">
                   <i :class="[正在播放 ? 'i-ic-twotone-pause' : 'i-ri-play-fill']"></i>
+                </MimicryBtn>
+              </div>
+            </transition>
+
+            <transition
+              v-if="
+                朗读功能 &&
+                朗读模式 === '离线' &&
+                !是命名模式 &&
+                form和to的数组[1] === 'en'
+              "
+              name="fade-in-standard"
+            >
+              <div
+                v-show="要显示复制按钮"
+                class="absolute left-10px bottom-8px z-1 flex space-x-8px"
+              >
+                <!-- 播放按钮 -->
+                <MimicryBtn @click="离线朗读开始()">
+                  <i i-akar-icons-sound-on />
+                </MimicryBtn>
+
+                <!-- 开始暂停按钮 -->
+                <MimicryBtn v-show="离线朗读状态 === 'play'" @click="离线朗读停止()">
+                  <i i-carbon-stop-filled-alt></i>
                 </MimicryBtn>
               </div>
             </transition>
@@ -199,7 +227,6 @@ import { debounce, throttle } from 'lodash-es'
 import { noCase } from 'change-case'
 import { Message as 提示 } from '@arco-design/web-vue'
 import { 获取存储项, 获取当前 } from '@MainView/MainViewUtils'
-
 import {
   useUtools,
   use主题,
@@ -230,12 +257,10 @@ const 翻译加载 = ref(false) // 是否正在翻译
 const 用户输入 = ref('') // 输入的内容
 const 结果只读 = ref(true) // 结果是否可编辑
 const 结果对象 = reactive({
-  数据: {
-    结果文字: ``, // 翻译结果
-    结果码: -1, // 翻译结果状态(code = 200 为成功,code = -1为等待用户操作,code = 401为未配置翻译API)
-    from语种: '',
-    结果编号: nanoid(),
-  },
+  结果文字: '', // 翻译结果
+  状态码: -1, // 翻译结果状态(code = 200 为成功,code = -1为等待用户操作,code = 401为未配置翻译API)
+  from语种: '',
+  结果编号: nanoid(),
 })
 const 当前翻译api = ref('') // 当前翻译api
 const 设置弹框Ref = ref() // 设置弹窗的ref
@@ -267,6 +292,9 @@ const { 要显示复制按钮, 复制按钮事件 } = use复制模块(
   粘贴,
   延迟关闭utools
 )
+const 朗读模式 = computed(() => {
+  return '离线'
+})
 
 use主题()
 
@@ -285,7 +313,7 @@ function 清空输入框() {
 }
 
 const 检测语言显示条件 = computed(() => {
-  return 结果对象.数据.from语种 && !['简体中文'].includes(结果对象.数据.from语种)
+  return 结果对象.from语种 && !['简体中文'].includes(结果对象.from语种)
 })
 
 const { ctrl, command } = useMagicKeys()
@@ -347,10 +375,10 @@ const 切换模式 = throttle(() => {
     content: `命名翻译模式${是命名模式.value ? '关闭' : '开启'}`,
     duration: 1000,
   })
-  // 如果未输入，则结果码设为-1，即为等待用户操作状态，-1会触发Code动画
-  // 否则，将结果码设为0，后面会触发翻译，翻译成功后继而变为200，会在成功后触发Code动画
-  // 如果连续翻译，结果码从200 => 200并不会触发Code动画，符合预期
-  结果对象.数据.结果码 = !用户输入.value ? -1 : 0
+  // 如果未输入，则状态码设为-1，即为等待用户操作状态，-1会触发Code动画
+  // 否则，将状态码设为0，后面会触发翻译，翻译成功后继而变为200，会在成功后触发Code动画
+  // 如果连续翻译，状态码从200 => 200并不会触发Code动画，符合预期
+  结果对象.状态码 = !用户输入.value ? -1 : 0
 
   存储.setCodeMode(!是命名模式.value)
   输入框focus()
@@ -373,7 +401,7 @@ async function 开始翻译(val = 当前翻译api.value) {
   输入框focus()
   // 如果没输入内容，则不翻译
   if ([undefined, null, ''].includes(用户输入.value.trim())) {
-    结果对象.数据.结果文字 = ''
+    结果对象.结果文字 = ''
     return
   }
   if (自动模式.value && !是命名模式.value) {
@@ -388,17 +416,15 @@ async function 开始翻译(val = 当前翻译api.value) {
     q: 尝试分词(用户输入.value),
   }
 
-  const { text: 返回的文字, code: 结果码, from: from语种 } = await 通用翻译(val, obj)
+  const { text: 返回的文字, code, from: from语种 } = await 通用翻译(val, obj)
 
   const 处理后的文字 = 是命名模式.value
     ? 返回命名模式对应结果(返回的文字, 命名模式类型.value)
     : 返回的文字
-  结果对象.数据 = {
-    结果码,
-    from语种,
-    结果文字: 处理后的文字,
-    结果编号: nanoid(),
-  }
+  结果对象.状态码 = code
+  结果对象.结果文字 = 处理后的文字
+  结果对象.from语种 = from语种
+  结果对象.结果编号 = nanoid()
   翻译加载.value = false
 }
 
@@ -435,10 +461,44 @@ function 重置from和to(arr: 级联值类型 = ['auto', 'zh']) {
   form和to的数组.value = arr
 }
 
+const voice = ref<SpeechSynthesisVoice>(undefined as unknown as SpeechSynthesisVoice)
+const text = toRef(结果对象, '结果文字')
+const {
+  isSupported: 支持离线朗读,
+  speak: 开始离线朗读,
+  status: 离线朗读状态,
+} = useSpeechSynthesis(text, { voice })
+
+const 读者列表 = ref<SpeechSynthesisVoice[]>([])
+
+function 初始化离线语音() {
+  let synth: SpeechSynthesis
+  if (支持离线朗读.value) {
+    setTimeout(() => {
+      synth = window.speechSynthesis
+      读者列表.value = synth.getVoices().filter(i => i.lang === 'en-US')
+      voice.value = 读者列表.value[0]
+    })
+  }
+}
+
+function 离线朗读开始() {
+  if (离线朗读状态.value === 'pause') {
+    window.speechSynthesis.resume()
+  } else {
+    开始离线朗读()
+  }
+}
+
+function 离线朗读停止() {
+  window.speechSynthesis.cancel()
+}
+
 onMounted(() => {
   utools && utools初始化()
   输入框focus()
   读取设置()
+  初始化离线语音()
   !获取存储项('firstUseMain') && 首次引导()
 })
 
@@ -468,9 +528,9 @@ watch(用户输入, () => 防抖翻译())
 
 // 监听401，自动弹引导层
 watch(
-  () => 结果对象.数据.结果编号,
+  () => 结果对象.结果编号,
   () => {
-    if (结果对象.数据.结果码 === 401) {
+    if (结果对象.状态码 === 401) {
       未配置服务引导()
     }
   }

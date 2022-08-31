@@ -44,7 +44,7 @@ export function use语音朗读模块(form和to的数组: Ref<级联值类型>, 
     const params = {
       voice: 声音,
       rate: 语速,
-      text: 结果对象.数据?.结果文字,
+      text: 结果对象?.结果文字,
     }
     const 原始文件流 = await 语音朗读生成base64(params)
     if (原始文件流.type === 'audio/mp3') {
@@ -62,7 +62,7 @@ export function use语音朗读模块(form和to的数组: Ref<级联值类型>, 
     const params = {
       voice: 声音,
       rate: 语速,
-      text: 结果对象.数据?.结果文字,
+      text: 结果对象?.结果文字,
     }
     const arrayBuffer = await 语音朗读生成ArrayBuffer(params)
     const file = new File([arrayBuffer], 'temp.mp3')
