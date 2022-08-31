@@ -57,4 +57,5 @@ export default defineConfig({
       }
     },
   ],
+  safelist: ['mt-6px', 'mt-16px'],
 })

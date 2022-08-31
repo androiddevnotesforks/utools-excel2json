@@ -80,7 +80,7 @@
                   <setting-card>
                     <template #title>
                       <div class="horizontal-place-6px">
-                        <i i-fluent-emoji-flat-gear class="text-16px" />
+                        <i i-fluent-emoji-flat-gear class="text-17px" />
                         <span>基本设置</span>
                       </div>
                     </template>
@@ -177,20 +177,42 @@
                         </a-radio-group>
                       </a-form-item>
                     </section>
+                  </setting-card>
+
+                  <setting-card>
+                    <template #title>
+                      <div class="horizontal-place-6px">
+                        <i i-twemoji-speaker-high-volume class="text-16px" />
+                        <span>朗读设置</span>
+                      </div>
+                    </template>
                     <section :class="动态宽度类名">
                       <a-form-item label="语音朗读:" @mouseenter="切换文案('语音朗读')">
                         <a-switch v-model="formData.readAloud" class="ml-5px"> </a-switch>
                       </a-form-item>
                     </section>
                     <section :class="动态宽度类名">
+                      <a-form-item label="朗读模式:" @mouseenter="切换文案('朗读模式')">
+                        <a-radio-group
+                          v-model="formData.readingModel"
+                          :disabled="!formData.readAloud"
+                        >
+                          <a-radio value="在线">质量优先</a-radio>
+                          <a-radio value="离线">速度优先</a-radio>
+                        </a-radio-group>
+                      </a-form-item>
+                    </section>
+                    <section :class="动态宽度类名">
                       <a-form-item label="朗读偏好:" @mouseenter="切换文案('朗读偏好')">
                         <a-radio-group
                           v-model="formData.readingPreference"
-                          :disabled="!formData.readAloud"
+                          :disabled="
+                            !formData.readAloud || formData.readingModel === '离线'
+                          "
                         >
                           <a-radio value="default">系统默认</a-radio>
-                          <a-radio value="male"> 仅男声 </a-radio>
-                          <a-radio value="female"> 仅女声 </a-radio>
+                          <a-radio value="male">仅男声</a-radio>
+                          <a-radio value="female">仅女声</a-radio>
                         </a-radio-group>
                       </a-form-item>
                     </section>
@@ -199,7 +221,6 @@
                     <template #title>
                       <div class="horizontal-place-4px">
                         <i i-flat-color-icons-menu class="text-18px" />
-                        <!-- i-flat-color-icons-list -->
                         <span>翻译服务数据</span>
                       </div>
                     </template>
@@ -356,7 +377,6 @@
                 >
                   <template #icon>
                     <i class="text-20px mb-1px" i-line-md-download-loop />
-                    <!-- i-lucide-download -->
                   </template>
                   导入
                 </a-button>
@@ -367,7 +387,6 @@
                 >
                   <template #icon>
                     <i class="text-20px mb-1px" i-line-md-upload-loop />
-                    <!-- i-lucide-upload -->
                   </template>
                   导出
                 </a-button>
@@ -486,6 +505,7 @@ const formData = reactive({
   copyBtnBehavior: 'open', // 快捷键的行为
   copyBtnShow: [1, 2, 3], // 首页显示的按钮
   readAloud: true, // 语音朗读
+  readingModel: '在线', // 语音朗读模式
   readingPreference: 'default', // 朗读偏好
   codeMode: false, // 命名翻译模式
   defaultForeignLanguage: 'en', // 默认目标外语
