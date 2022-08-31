@@ -1,6 +1,6 @@
 import type { 级联值类型 } from '@MainView/MainViewTypes'
 import { 汉字和汉字符号正则, 用户设置存储, 符号数字reg } from '@MainView/MainViewData'
-import { replace } from '@MainView/MainViewUtils'
+import { replace } from 'lodash-es'
 
 /**
  * @param str 要获取的字符串

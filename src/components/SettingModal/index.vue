@@ -444,19 +444,19 @@
 </template>
 
 <script setup lang="ts">
+import { Message as 提示 } from '@arco-design/web-vue'
+import { cloneDeep } from 'lodash-es'
 import {
-  useGlobalStore,
-  获取存储项,
-  设置存储,
-} from '@/components/SettingModal/SettingsModules'
-import {
-  cloneDeep,
-  提示,
   显示引导,
   替换字符串,
   清除引导,
   获取当前,
 } from '@/components/SettingModal/SettingsUtils'
+import {
+  useGlobalStore,
+  获取存储项,
+  设置存储,
+} from '@/components/SettingModal/SettingsModules'
 import { api选项, 文案映射 } from '@/components/SettingModal/SettingsData'
 import type { 引导options类型 } from '@/components/SettingModal/SettingsTypes'
 const emit = defineEmits(['ok', 'cancel', 'reset'])

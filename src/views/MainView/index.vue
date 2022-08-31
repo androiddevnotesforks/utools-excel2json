@@ -194,6 +194,12 @@
 </template>
 
 <script setup lang="ts">
+import { nanoid } from 'nanoid'
+import { debounce, throttle } from 'lodash-es'
+import { noCase } from 'change-case'
+import { Message as 提示 } from '@arco-design/web-vue'
+import { 获取存储项, 获取当前 } from '@MainView/MainViewUtils'
+
 import {
   useUtools,
   use主题,
@@ -208,18 +214,7 @@ import {
   首次引导,
 } from '@MainView/MainViewModule'
 
-import {
-  debounce,
-  nanoid,
-  noCase,
-  throttle,
-  提示,
-  获取存储项,
-  获取当前,
-} from '@MainView/MainViewUtils'
-
 import { api不支持的大对象, 用户设置存储, 语种树 } from '@MainView/MainViewData'
-
 import type { CascaderOption, 级联值类型 } from '@MainView/MainViewTypes'
 
 const 语种树的数据 = ref(语种树())
