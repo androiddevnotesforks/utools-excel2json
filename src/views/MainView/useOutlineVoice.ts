@@ -1,35 +1,38 @@
 const voice = ref<SpeechSynthesisVoice>(undefined as unknown as SpeechSynthesisVoice)
 
-const text = ref(`hello world`)
-const speech = useSpeechSynthesis(text, {
-  voice,
-})
-let synth: SpeechSynthesis
-const voices = ref<SpeechSynthesisVoice[]>([])
-onMounted(() => {
-  if (speech.isSupported.value) {
-    console.log('初始化了语音')
+const 要读的文字 = ref('')
+export const {
+  isSupported: 支持离线朗读,
+  speak: 开始离线朗读,
+  status: 离线朗读状态,
+} = useSpeechSynthesis(要读的文字, { voice })
+
+export function 初始化离线语音() {
+  if (支持离线朗读.value) {
+    let synth: SpeechSynthesis
     setTimeout(() => {
       synth = window.speechSynthesis
-      voices.value = synth.getVoices()
-      voice.value = voices.value[0]
+      voice.value = synth.getVoices().filter(i => i.lang === 'en-US')[0]
     })
   }
-})
+}
 
-export const 开始 = () => {
-  if (speech.status.value === 'pause') {
-    console.log('resume')
+export function 离线朗读控制(str: string) {
+  if (!str) {
+    return
+  }
+  要读的文字.value = str
+  离线朗读状态.value === 'play' ? 离线朗读停止() : 离线朗读开始()
+}
+
+export function 离线朗读停止() {
+  window.speechSynthesis.cancel()
+}
+
+function 离线朗读开始() {
+  if (离线朗读状态.value === 'pause') {
     window.speechSynthesis.resume()
   } else {
-    speech.speak()
+    开始离线朗读()
   }
-}
-
-export const 暂停 = () => {
-  window.speechSynthesis.pause()
-}
-
-export const 停止 = () => {
-  window.speechSynthesis.cancel()
 }

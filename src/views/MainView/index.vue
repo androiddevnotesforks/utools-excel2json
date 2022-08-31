@@ -71,7 +71,7 @@
           </template>
 
           <template v-else>
-            <AutoBtn :active="自动模式" @click="切换自动模式()" />
+            <AutoBtn :active="自动模式" @click="切换自动语种模式()" />
             <a-cascader
               v-model:model-value="form和to的数组"
               path-mode
@@ -115,10 +115,7 @@
               :placeholder="下方placeholder"
               :readonly="结果只读"
             />
-            <transition
-              v-if="朗读功能 && 朗读模式 === '在线' && !是命名模式"
-              name="fade-in-standard"
-            >
+            <transition v-if="在线朗读显示条件" name="fade-in-standard">
               <div
                 v-show="要显示复制按钮"
                 class="absolute left-10px bottom-8px z-1 flex space-x-8px"
@@ -135,27 +132,20 @@
               </div>
             </transition>
 
-            <transition
-              v-if="
-                朗读功能 &&
-                朗读模式 === '离线' &&
-                !是命名模式 &&
-                form和to的数组[1] === 'en'
-              "
-              name="fade-in-standard"
-            >
+            <transition v-if="离线朗读显示条件" name="fade-in-standard">
               <div
                 v-show="要显示复制按钮"
                 class="absolute left-10px bottom-8px z-1 flex space-x-8px"
               >
                 <!-- 播放按钮 -->
-                <MimicryBtn @click="离线朗读开始()">
-                  <i i-akar-icons-sound-on />
-                </MimicryBtn>
-
-                <!-- 开始暂停按钮 -->
-                <MimicryBtn v-show="离线朗读状态 === 'play'" @click="离线朗读停止()">
-                  <i i-carbon-stop-filled-alt></i>
+                <MimicryBtn @click="离线朗读控制(结果对象.结果文字)">
+                  <i
+                    :class="[
+                      离线朗读状态 === 'play'
+                        ? 'i-carbon-stop-filled-alt'
+                        : 'i-akar-icons-sound-on',
+                    ]"
+                  />
                 </MimicryBtn>
               </div>
             </transition>
@@ -234,8 +224,12 @@ import {
   use复制模块,
   use语音朗读模块,
   关闭窗口,
+  初始化离线语音,
   未配置服务引导,
   检查from和to是否兼容,
+  离线朗读停止,
+  离线朗读控制,
+  离线朗读状态,
   获取级联的值,
   通用翻译,
   首次引导,
@@ -361,7 +355,7 @@ function 打开设置Modal() {
   设置弹框Ref.value.打开弹窗()
 }
 
-const 切换自动模式 = throttle(() => {
+const 切换自动语种模式 = throttle(() => {
   自动模式.value = !自动模式.value
 }, 300)
 
@@ -421,6 +415,7 @@ async function 开始翻译(val = 当前翻译api.value) {
   const 处理后的文字 = 是命名模式.value
     ? 返回命名模式对应结果(返回的文字, 命名模式类型.value)
     : 返回的文字
+
   结果对象.状态码 = code
   结果对象.结果文字 = 处理后的文字
   结果对象.from语种 = from语种
@@ -461,38 +456,18 @@ function 重置from和to(arr: 级联值类型 = ['auto', 'zh']) {
   form和to的数组.value = arr
 }
 
-const voice = ref<SpeechSynthesisVoice>(undefined as unknown as SpeechSynthesisVoice)
-const text = toRef(结果对象, '结果文字')
-const {
-  isSupported: 支持离线朗读,
-  speak: 开始离线朗读,
-  status: 离线朗读状态,
-} = useSpeechSynthesis(text, { voice })
+const 在线朗读显示条件 = computed(() => {
+  return 朗读功能.value && 朗读模式.value === '在线' && !是命名模式.value
+})
 
-const 读者列表 = ref<SpeechSynthesisVoice[]>([])
-
-function 初始化离线语音() {
-  let synth: SpeechSynthesis
-  if (支持离线朗读.value) {
-    setTimeout(() => {
-      synth = window.speechSynthesis
-      读者列表.value = synth.getVoices().filter(i => i.lang === 'en-US')
-      voice.value = 读者列表.value[0]
-    })
-  }
-}
-
-function 离线朗读开始() {
-  if (离线朗读状态.value === 'pause') {
-    window.speechSynthesis.resume()
-  } else {
-    开始离线朗读()
-  }
-}
-
-function 离线朗读停止() {
-  window.speechSynthesis.cancel()
-}
+const 离线朗读显示条件 = computed(() => {
+  return (
+    朗读功能.value &&
+    朗读模式.value === '离线' &&
+    !是命名模式.value &&
+    form和to的数组.value[1] === 'en'
+  )
+})
 
 onMounted(() => {
   utools && utools初始化()
@@ -515,6 +490,7 @@ watch(页面可见性, (current, previous) => {
     恢复标题.start()
   } else if (current === 'hidden' && previous === 'visible') {
     正在播放.value = false
+    离线朗读停止()
   }
 })
 
