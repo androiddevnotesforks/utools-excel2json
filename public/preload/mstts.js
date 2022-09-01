@@ -48,9 +48,8 @@ async function getTTSData(
   const SSML = `
     <speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
         <voice name="${voice}">
-            <mstts:express-as style="${express}" ${
-    role !== '' ? 'role="' + role + '"' : ''
-  }>
+            <mstts:express-as style="${express}" ${role !== '' ? 'role="' + role + '"' : ''
+    }>
                 <prosody rate="${rate}%" pitch="${pitch}%">
                 ${text}
                 </prosody>
@@ -64,10 +63,10 @@ async function getTTSData(
   const Authorization = await getAuthToken()
   const XConnectionId = uuidv4().toUpperCase()
 
-  console.log('创建webscoket连接...')
-  const connect = await wssConnect(
-    `wss://eastus.tts.speech.microsoft.com/cognitiveservices/websocket/v1?Authorization=${Authorization}&X-ConnectionId=${XConnectionId}`
-  )
+  console.log('创建webscoket连接...1')
+  // const connect = await wssConnect(`wss://eastus.tts.speech.microsoft.com/cognitiveservices/websocket/v1?Authorization=${Authorization}&X-ConnectionId=${XConnectionId}`)
+  const connect = await wssConnect(`wss://eastus.api.speech.microsoft.com/cognitiveservices/websocket/v1?TrafficType=AzureDemo&Authorization=${Authorization}&X-ConnectionId=${XConnectionId}`);
+
 
   console.log('第1次上报...')
   const message_1 = `Path: speech.config\r\nX-RequestId: ${XConnectionId}\r\nX-Timestamp: ${getXTime()}\r\nContent-Type: application/json\r\n\r\n{"context":{"system":{"name":"SpeechSDK","version":"1.19.0","build":"JavaScript","lang":"JavaScript","os":{"platform":"Browser/Linux x86_64","name":"Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0","version":"5.0 (X11)"}}}}`
