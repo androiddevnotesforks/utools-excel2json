@@ -90,7 +90,7 @@ const CONFIG: configObj = {
   READING_MODEL: {
     key: 'readingModel',
     type: String,
-    defaultState: '离线',
+    defaultState: '在线',
   },
 }
 
