@@ -47,7 +47,7 @@
                 class="grid-c"
                 :class="[当前翻译api === 项.value ? 'contrast-120' : 'grayscale-30']"
               >
-                <ApiIcon :data="项" />
+                <ApiIcon :data="项" :current="当前翻译api" />
               </div>
               <div>{{ 项.label }}</div>
             </div>

@@ -1,15 +1,30 @@
 <template>
-  <img class="inline-flex" :width="图片大小" :src="当前图片Url" alt="" />
+  <div
+    class="inline-flex w-20px aspect-ratio-square relative"
+    :class="[发光显示条件 && 'shadow_wrapper', data.value === 'huoshan' && 'mb-2px']"
+    :style="{
+      background: `url(${当前图片Url}) no-repeat center center`,
+      backgroundSize: `${图片大小}px auto`,
+    }"
+    alt=""
+  ></div>
 </template>
 
 <script setup lang="ts">
+import { 获取当前 } from '@/utils/getEnv'
 const props = defineProps({
   data: {
     type: Object,
     required: true,
   },
+  current: {
+    type: String,
+    default: '',
+  },
 })
-
+const 发光显示条件 = computed(() => {
+  return props.current === props.data.value && 获取当前('主题') === 'dark'
+})
 const 当前api的value = props.data.value
 const 当前图片Url = computed(() => {
   const 所有文件对象: any = import.meta.glob('@imgs/api图标/*', { eager: true })
@@ -30,4 +45,20 @@ const 图片大小 = computed(() => {
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.shadow_wrapper {
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 5%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    background-size: 100% 100%;
+    transform: scale(0.85);
+    filter: blur(7px) contrast(160%) opacity(0.8);
+    z-index: -1;
+  }
+}
+</style>
