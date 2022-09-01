@@ -502,7 +502,12 @@ const 防抖翻译 = debounce(function () {
 }, 300)
 
 // 监听用户输入，防抖翻译
-watch(用户输入, () => 防抖翻译())
+watch(用户输入, newVal => {
+  if (!newVal.trim()) {
+    结果对象.from语种 = ''
+  }
+  防抖翻译()
+})
 
 // 监听401，自动弹引导层
 watch(
