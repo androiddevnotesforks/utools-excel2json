@@ -17,7 +17,7 @@ export function use语音朗读模块(form和to的数组: Ref<级联值类型>, 
   const 朗读loading = ref(false) // 译文发音按钮的Loading
   const { playing: 正在播放 } = useMediaControls(audio本体, { src: 音频Url })
   // 发音按钮
-  async function 点击朗读() {
+  async function 在线朗读控制() {
     重置音频()
     const 译文语言标识 = form和to的数组.value[1]
     const 声音对象: any = 声音映射[译文语言标识] || 声音映射.zh!
@@ -75,7 +75,7 @@ export function use语音朗读模块(form和to的数组: Ref<级联值类型>, 
     音频Url,
     朗读loading,
     正在播放,
-    点击朗读,
+    在线朗读控制,
     重置音频,
   }
 }

@@ -121,7 +121,7 @@
                 class="absolute left-10px bottom-8px z-1 flex space-x-8px"
               >
                 <!-- 播放按钮 -->
-                <MimicryBtn :loading="朗读loading" @click="点击朗读()">
+                <MimicryBtn :loading="朗读loading" @click="在线朗读控制()">
                   <i i-akar-icons-sound-on />
                 </MimicryBtn>
 
@@ -222,6 +222,7 @@ import {
   use主题,
   use命名模式模块,
   use复制模块,
+  use快捷键,
   use语音朗读模块,
   关闭窗口,
   初始化离线语音,
@@ -261,10 +262,8 @@ const 当前翻译api = ref('') // 当前翻译api
 const 设置弹框Ref = ref() // 设置弹窗的ref
 const 用户输入框Ref = ref() // 输入textarea的dom
 const 下方placeholder = ref('翻译结果')
-const { 朗读功能, 音频Url, 朗读loading, 正在播放, 点击朗读, 重置音频 } = use语音朗读模块(
-  form和to的数组,
-  结果对象
-)
+const { 朗读功能, 音频Url, 朗读loading, 正在播放, 在线朗读控制, 重置音频 } =
+  use语音朗读模块(form和to的数组, 结果对象)
 
 const {
   是命名模式,
@@ -287,10 +286,6 @@ const { 要显示复制按钮, 复制按钮事件 } = use复制模块(
   粘贴,
   延迟关闭utools
 )
-// const 朗读模式 = computed(() => {
-//   readingModel
-//   return '离线'
-// })
 
 use主题()
 
@@ -470,6 +465,20 @@ const 离线朗读显示条件 = computed(() => {
     form和to的数组.value[1] === 'en'
   )
 })
+
+function 语音朗读快捷键方法() {
+  // console.log('语音朗读快捷键方法')
+  if (离线朗读显示条件.value) {
+    // console.log('离线朗读')
+    离线朗读控制(结果对象.结果文字)
+  }
+  if (在线朗读显示条件.value) {
+    // console.log('在线朗读')
+    在线朗读控制()
+  }
+}
+
+use快捷键(语音朗读快捷键方法)
 
 onMounted(() => {
   utools && utools初始化()
