@@ -98,31 +98,9 @@ const CONFIG: configObj = {
 function getInitState() {
   // 获取存储的数据
   const getStorageData = (config: configType) => {
-    const { key, type, defaultState } = config
-    const strData = getDbStorageItem(key)
-    // if (defaultState === null || defaultState === undefined) {
-    //   return strData
-    // }
-
-    // 根据默认值类型尝试对获取到的值做反序列化处理
-    let result
-    try {
-      if (type === Number) {
-        result = Number.parseFloat(strData)
-      } else if (type === Object || type === Array) {
-        result = JSON.parse(strData)
-      } else if (type === Boolean) {
-        result = !!(strData === 'true' || strData === true)
-      } else {
-        result = strData
-      }
-    } catch (error) {
-      //
-    }
-
-    return result || defaultState
+    const { key, defaultState } = config
+    return getDbStorageItem(key, defaultState)
   }
-
   return {
     homeOption: getStorageData(CONFIG.HOME_OPTION),
     defaultApi: getStorageData(CONFIG.DEFAULT_API),
@@ -208,7 +186,7 @@ export const 用户设置存储 = defineStore('settings', {
     /** 设置首页可见翻译 */
     setHomeOption(data: any) {
       this.homeOption = data
-      setDbStorageItem(CONFIG.HOME_OPTION.key, JSON.stringify(data))
+      setDbStorageItem(CONFIG.HOME_OPTION.key, data)
     },
 
     /** 设置默认翻译 */
@@ -220,7 +198,7 @@ export const 用户设置存储 = defineStore('settings', {
     /** 设置密钥 */
     setKeyConfig(data: any) {
       this.keyConfig = data
-      setDbStorageItem(CONFIG.KEY_SETTING.key, JSON.stringify(data))
+      setDbStorageItem(CONFIG.KEY_SETTING.key, data)
     },
 
     /** 设置字体大小 */
@@ -238,7 +216,7 @@ export const 用户设置存储 = defineStore('settings', {
     /** 设置复制按钮 */
     setCopyBtnShow(data: any) {
       this.copyBtnShow = data
-      setDbStorageItem(CONFIG.COPY_BTN_SHOW.key, JSON.stringify(data))
+      setDbStorageItem(CONFIG.COPY_BTN_SHOW.key, data)
     },
 
     /** 设置命名翻译模式 */
