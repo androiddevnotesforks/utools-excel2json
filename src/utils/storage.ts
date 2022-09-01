@@ -4,11 +4,11 @@ const utools = window.utools
 
 /** 数据读取某一项 */
 export function getDbStorageItem(key: string, defaultValue?: any) {
-  const fn = (_key: string): string => {
+  const fn = (tempKey: string): string => {
     if (utools) {
-      return utools.dbStorage.getItem(key) || ''
+      return utools.dbStorage.getItem(tempKey) || ''
     } else {
-      return window.localStorage.getItem(key) || ''
+      return window.localStorage.getItem(tempKey) || ''
     }
   }
 
@@ -43,11 +43,11 @@ export function setDbStorageItem(
   key: string,
   value: string | number | boolean | object | any[]
 ) {
-  const fn = (_key: string, _value: string) => {
+  const fn = (tempKey: string, tempValue: string) => {
     if (utools) {
-      utools.dbStorage.setItem(_key, _value)
+      utools.dbStorage.setItem(tempKey, tempValue)
     } else {
-      window.localStorage.setItem(_key, _value)
+      window.localStorage.setItem(tempKey, tempValue)
     }
   }
 
