@@ -41,7 +41,7 @@ function changeVal(e: any) {
     bg-gray select-none dark:bg-#3c3c3f;
   &::after {
     content: '';
-    @apply absolute-y-center left-4px h-70% aspect-ratio-square bg-white rounded-full
+    @apply absolute-y-center left-4px h-70% aspect-ratio-square bg-#fff rounded-full
       transition-all;
   }
   // 点击时的样式

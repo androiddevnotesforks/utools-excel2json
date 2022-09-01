@@ -71,7 +71,7 @@ function 删除第一个波纹dom() {
 .colorful_btn_main {
   border: 1px solid #eeeeee;
   transition: all 0.2s ease;
-  @apply flex-c w-112px h-34px relative overflow-hidden rounded-4px bg-white shadow-lg text-#333 hover:shadow-md active:shadow-sm dark:(bg-dark-400 text-shadow-xl shadow-dark-800 text-#d1d1d1);
+  @apply flex-c w-112px h-34px relative overflow-hidden rounded-4px bg-#fff shadow-lg text-#333 hover:shadow-md active:shadow-sm dark:(bg-dark-400 text-shadow-xl shadow-dark-800 text-#d1d1d1);
 }
 
 .ripple_wrapper {

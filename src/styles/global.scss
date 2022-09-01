@@ -76,7 +76,7 @@ body,
 }
 
 ::-webkit-scrollbar {
-  @apply w-5px h-5px;
+  @apply w-6px h-6px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -88,7 +88,7 @@ body,
 }
 
 ::-webkit-scrollbar-track-piece {
-  @apply bg-white dark:bg-#272728;
+  @apply bg-#fff dark:bg-#272728;
 }
 
 img {

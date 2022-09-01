@@ -19,7 +19,7 @@
   animation: sun 0.8s ease 0.5s both;
 }
 .sun_ray {
-  @apply w-full h-full rounded-full bg-white opacity-50 relative z-0;
+  @apply w-full h-full rounded-full bg-#fff opacity-50 relative z-0;
   animation: sun-ray 0.8s ease 0.2s both;
 }
 

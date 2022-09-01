@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex-c flex-col bg-white w-full h-full dark:(border-transparent bg-#272728)"
-  >
+  <div class="flex-c flex-col bg-#fff w-full h-full dark:(border-transparent bg-#272728)">
     <LoadingIcon03 />
     <p class="mt-20px text-16px text-gray-500">{{ loadingText }}</p>
   </div>

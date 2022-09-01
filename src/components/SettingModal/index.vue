@@ -17,7 +17,9 @@
         ref="设置弹框Header"
         class="setting_header h-48px w-full sticky top-0 text-16px px-20px z-1 flex-y-c justify-between backdrop-blur-5px"
       >
-        <div class="horizontal-place-8px">
+        <div
+          class="horizontal-place-8px bg-#fff:50 px-6px py-2px rounded-8px dark:bg-#2a2a2b:60"
+        >
           <img src="/favicon.svg" width="24" />
           <span class="font-500">设置</span>
         </div>
@@ -411,7 +413,7 @@
                 </div>
               </template>
               <button
-                class="bg-white rounded-full shadow-md w-22px grid-c text-18px cursor-pointer absolute-y-center aspect-ratio-square -left-11px transition-all active:shadow dark:bg-#444"
+                class="bg-#fff rounded-full shadow-md w-22px grid-c text-18px cursor-pointer absolute-y-center aspect-ratio-square -left-11px transition-all active:shadow dark:bg-#444"
                 @click="切换侧边()"
               >
                 <i
@@ -431,7 +433,7 @@
 
       <section
         ref="设置弹框Footer"
-        class="sticky bottom-0 h-65px flex-y-c justify-between px-20px bg-white dark:bg-#2a2a2b"
+        class="sticky bottom-0 h-65px flex-y-c justify-between px-20px bg-#fff dark:bg-#2a2a2b"
         border="t-solid #e5e6eb t-width-1px dark:#484849"
       >
         <div>
