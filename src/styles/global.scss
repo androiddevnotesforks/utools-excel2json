@@ -7,17 +7,15 @@
 // 鸿蒙字体
 @font-face {
   font-display: swap;
-  font-family: 'HarmonyOS';
-  src: url('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-be392405-5b88-4143-ad6b-f155b106ab85/d5d507cc-3a4a-40b2-ad94-fa6bead114bb.woff2')
-    format('woff2');
+  font-family: 'HarmonyOS Medium';
+  src: url('../assets/font/HarmonyOS_Sans_SC_Medium.woff2') format('woff2');
 }
 
 // 英文字体
 @font-face {
   font-display: swap;
   font-family: 'Inter';
-  src: url('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-be392405-5b88-4143-ad6b-f155b106ab85/84b9b260-9c21-4b60-9a4c-e7a4312fc862.woff2')
-    format('woff2');
+  src: url('../assets/font/Inter-Medium.woff2') format('woff2');
 }
 
 // 代码字体
@@ -40,8 +38,7 @@
 @font-face {
   font-display: swap;
   font-family: 'NotoSansThai';
-  src: url('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-44af3f84-786a-4383-9b43-d2bdfa949d80/d50d99e9-d17c-45e8-b3e6-57df7ebd2832.woff2')
-    format('woff2');
+  src: url('../assets/font/AlibabaSansThai-Rg.woff2') format('woff2');
 }
 
 .dark {
