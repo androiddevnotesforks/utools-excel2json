@@ -226,6 +226,7 @@ import {
   use语音朗读模块,
   关闭窗口,
   初始化离线语音,
+  支持离线朗读,
   未配置服务引导,
   检查from和to是否兼容,
   离线朗读停止,
@@ -460,6 +461,7 @@ const 在线朗读显示条件 = computed(() => {
 const 离线朗读显示条件 = computed(() => {
   return (
     朗读功能.value &&
+    支持离线朗读.value &&
     朗读模式.value === '离线' &&
     !是命名模式.value &&
     form和to的数组.value[1] === 'en'
@@ -484,7 +486,9 @@ onMounted(() => {
   utools && utools初始化()
   输入框focus()
   读取设置()
-  初始化离线语音()
+  if (支持离线朗读.value) {
+    初始化离线语音()
+  }
   !获取存储项('firstUseMain') && 首次引导()
 })
 

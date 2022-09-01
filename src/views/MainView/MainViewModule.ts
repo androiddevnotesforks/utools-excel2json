@@ -15,4 +15,5 @@ export {
   离线朗读状态,
   初始化离线语音,
   离线朗读停止,
+  支持离线朗读,
 } from '@MainView/useOutlineVoice'
