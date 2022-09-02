@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@antfu/eslint-config': ^0.26.2
-  '@arco-design/web-vue': ^2.35.2
+  '@arco-design/web-vue': ^2.35.3
   '@iconify/json': ^2.1.101
   '@types/crypto-js': ^4.1.1
   '@types/lodash-es': ^4.17.6
@@ -49,7 +49,7 @@ dependencies:
 
 devDependencies:
   '@antfu/eslint-config': 0.26.2_sorwav4hsh5vncerguqybud76i
-  '@arco-design/web-vue': 2.35.2_vue@3.2.37
+  '@arco-design/web-vue': 2.35.3_vue@3.2.37
   '@iconify/json': 2.1.101
   '@types/crypto-js': 4.1.1
   '@types/lodash-es': 4.17.6
@@ -200,8 +200,8 @@ packages:
       color: 3.2.1
     dev: true
 
-  /@arco-design/web-vue/2.35.2_vue@3.2.37:
-    resolution: {integrity: sha512-NUE75L2pVnQoEnlaLmXGu/5ZY6V4eV8BI/dzoaDSJU/dzs3UFwlir9RrA7qfQ/l2anxWDILI/7x7icfaHsR+dA==}
+  /@arco-design/web-vue/2.35.3_vue@3.2.37:
+    resolution: {integrity: sha512-DsymevtyMGEX4ALDAmYVpLMY1pJJeIhWDKV1LOTaa0RJSdX9QBnwVCpo4oACFXu+b3HbeFyprgIr9iI5ONUQYQ==}
     peerDependencies:
       vue: ^3.1.0
     dependencies:

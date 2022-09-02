@@ -52,6 +52,7 @@ const 图片大小 = computed(() => {
     @apply absolute bottom-5% left-0 w-full h-full scale-85 -z-1;
     background: inherit;
     background-size: 100% 100%;
+    will-change: filter;
     filter: blur(7px) contrast(160%) opacity(0.8);
   }
 }

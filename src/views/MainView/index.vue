@@ -44,7 +44,7 @@
           >
             <div class="flex space-x-4px">
               <div
-                class="grid-c"
+                class="grid-c api_icon_wrapper"
                 :class="[当前翻译api === 项.value ? 'contrast-120' : 'grayscale-30']"
               >
                 <ApiIcon :data="项" :current="当前翻译api" />
@@ -660,5 +660,8 @@ onKeyStroke('Tab', e => {
     text-align: center;
     font-family: 'iconfont', var(--font-family) !important;
   }
+}
+.api_icon_wrapper {
+  will-change: filter;
 }
 </style>

@@ -724,6 +724,10 @@ defineExpose({
   @apply flex-c space-x-4px;
 }
 
+.right {
+  will-change: opacity;
+}
+
 .custom_bezier {
   transition: all 0.4s var(--ani-bezier);
 }
