@@ -457,10 +457,10 @@
     </a-modal>
 
     <!-- 导入弹窗 -->
-    <ImportModal ref="导入弹框Ref" @importSubmit="导入提交($event)" />
+    <ImportModal ref="导入弹框Ref" @import-submit="导入提交($event)" />
 
     <!-- 导出弹窗 -->
-    <ExportModal ref="导出弹框Ref" @exportSubmit="导出提交($event)" />
+    <ExportModal ref="导出弹框Ref" @export-submit="导出提交($event)" />
   </div>
 </template>
 
