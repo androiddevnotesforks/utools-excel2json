@@ -3,13 +3,17 @@ import { getDbStorageItem, setDbStorageItem } from '@/utils/storage'
 
 const utools = window.utools
 
-const OSRules = [
-  { condition: () => utools.isWindows(), OSName: 'Windows' },
-  { condition: () => utools.isMacOs(), OSName: 'macOS' },
-  { condition: () => utools.isLinux(), OSName: 'Linux' },
+const OSRules: rules类型[] = [
+  { condition: (): boolean => utools.isWindows(), OSName: 'Windows' },
+  { condition: (): boolean => utools.isMacOs(), OSName: 'macOS' },
+  { condition: (): boolean => utools.isLinux(), OSName: 'Linux' },
 ]
-
-function getOS() {
+interface rules类型 {
+  condition: () => boolean
+  OSName: 系统类型
+}
+type 系统类型 = 'browser' | 'Windows' | 'macOS' | 'Linux' | 'unknown'
+function getOS(): 系统类型 {
   if (!utools) {
     return 'browser'
   }

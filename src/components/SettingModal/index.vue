@@ -475,11 +475,13 @@ import {
 } from '@/components/SettingModal/SettingsUtils'
 import {
   useGlobalStore,
+  快捷键文案,
   获取存储项,
   设置存储,
 } from '@/components/SettingModal/SettingsModules'
 import { api选项, 文案映射 } from '@/components/SettingModal/SettingsData'
 import type { 引导options类型 } from '@/components/SettingModal/SettingsTypes'
+
 const emit = defineEmits(['ok', 'cancel', 'reset'])
 const 设置弹框Header = ref()
 const 设置弹框Footer = ref()
@@ -494,7 +496,7 @@ const 侧边定位top = computed(() => {
 const 侧边定位bottom = computed(() => {
   return 设置弹框Footer高度.value + 侧边paddingY + 1
 })
-const 系统 = 获取当前('系统')
+
 const api列表 = ref(api选项)
 const modal可见 = ref(false)
 const modal主体Ref = ref()
@@ -648,15 +650,6 @@ function 重置数据() {
   }, 300)
 }
 
-const 快捷键文案 = computed(() => {
-  const m = new Map([
-    ['macOS', 'Command+Shift+C'],
-    ['Windows', 'Ctrl+Shift+C'],
-    ['Linux', 'Ctrl+Shift+C'],
-  ])
-  return m.get(系统) || 'Ctrl+Shift+C / Command+Shift+C'
-})
-
 function 切换文案(id = '') {
   if (侧边收起.value) {
     return
@@ -668,9 +661,11 @@ function 切换文案(id = '') {
 
   let 文案主体 = 文案映射?.[id]
   // 快捷键的文案中包含动态文字，需要替换
-  if (id === '快捷键行为') {
-    文案主体 = 替换字符串(文案主体, ['%s', 快捷键文案.value])
-  }
+  const 需要替换文案的映射 = new Map([
+    ['快捷键行为', 替换字符串(文案主体, ['%s', 快捷键文案.value.copy])],
+    ['语音朗读', 替换字符串(文案主体, ['%s', 快捷键文案.value.read])],
+  ])
+  文案主体 = 需要替换文案的映射.get(id) || 文案主体
   解释文案.value = `<h2 class="text-20px">${id}:</h2>${文案主体}`
 }
 
