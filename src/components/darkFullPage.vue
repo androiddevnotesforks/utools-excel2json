@@ -1,6 +1,6 @@
 <template>
   <div class="bg-black fixed w-screen h-screen grid-c">
-    <div class="moon"></div>
+    <div class="moon relative w-200px h-200px rounded-full"></div>
   </div>
 </template>
 
@@ -8,7 +8,6 @@
 
 <style lang="scss" scoped>
 .moon {
-  @apply relative w-200px h-200px rounded-full;
   border-top: 5px solid #fff;
   transform: rotate(60deg);
   filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px #fff) drop-shadow(0 0 10px #fff)

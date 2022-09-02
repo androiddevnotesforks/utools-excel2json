@@ -191,13 +191,13 @@
     <!-- 设置按钮 -->
     <i
       id="setting-wrapper"
-      class="icon setting_icon i-ep-setting"
+      class="icon setting_icon i-ep-setting hover:i-fluent-settings-28-filled"
       @click="打开设置Modal()"
     />
     <!-- 命名翻译模式按钮 -->
     <i
       class="icon code_icon"
-      :class="[是命名模式 ? 'code_active i-tabler-code' : 'i-tabler-code-off ']"
+      :class="[是命名模式 ? 'text-primary i-tabler-code' : 'i-tabler-code-off ']"
       @click="切换模式()"
     />
   </div>
@@ -613,15 +613,24 @@ onKeyStroke('Tab', e => {
 }
 
 .icon {
-  @apply absolute text-22px text-#999 cursor-pointer transition-all duration-250 hover:text-#666 active:text-primary;
+  position: absolute;
+  font-size: 22px;
+  color: #999;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  &:hover {
+    color: #666;
+  }
+  &:active {
+    color: var(--primary-color);
+  }
   &.setting_icon {
-    @apply right-4px bottom-4px hover:i-fluent-settings-28-filled;
+    right: 4px;
+    bottom: 4px;
   }
   &.code_icon {
-    @apply left-4px bottom-4px;
-    &.code_active {
-      @apply text-primary;
-    }
+    left: 4px;
+    bottom: 4px;
   }
 }
 
@@ -629,32 +638,37 @@ onKeyStroke('Tab', e => {
 .text_wrapper {
   ::v-deep(.arco-textarea) {
     font-size: v-bind(文字尺寸);
-    @apply h-full pr-26px pb-50px resize-none;
+    height: 100%;
+    padding-right: 26px;
+    padding-bottom: 50px;
+    resize: none;
   }
 
   ::v-deep(.arco-textarea-wrapper) {
-    @apply border-#e9e9e9 bg-transparent;
+    background-color: transparent;
+    border-color: #e9e9e9;
   }
 
   ::v-deep(.arco-textarea-focus) {
-    @apply border-primary;
+    border-color: var(--primary-color);
   }
 }
 
 // 下面的文本域样式
 .text_readonly {
-  @apply relative;
+  position: relative;
   ::v-deep(.arco-textarea-focus) {
-    @apply border-#e9e9e9;
+    border-color: #e9e9e9;
   }
 }
 
 .tools_wrapper {
   ::v-deep(.arco-select-view-single) {
-    @apply px-16px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   ::v-deep(.arco-select-view-value) {
-    @apply grid;
+    display: grid;
   }
   ::v-deep(.arco-select-view-value) {
     text-align: center;

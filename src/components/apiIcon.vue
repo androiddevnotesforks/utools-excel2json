@@ -49,7 +49,13 @@ const 图片大小 = computed(() => {
 .shadow_wrapper {
   &::after {
     content: '';
-    @apply absolute bottom-5% left-0 w-full h-full scale-85 -z-1;
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(0.85);
+    z-index: -1;
     background: inherit;
     background-size: 100% 100%;
     will-change: filter;

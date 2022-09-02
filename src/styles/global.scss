@@ -8,14 +8,16 @@
 @font-face {
   font-display: swap;
   font-family: 'HarmonyOS Medium';
-  src: url('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-be392405-5b88-4143-ad6b-f155b106ab85/aafa8101-fcad-4bf8-b1e3-d6d1f0a01807.woff2') format('woff2');
+  src: url('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-be392405-5b88-4143-ad6b-f155b106ab85/aafa8101-fcad-4bf8-b1e3-d6d1f0a01807.woff2')
+    format('woff2');
 }
 
 // 英文字体
 @font-face {
   font-display: swap;
   font-family: 'Inter';
-  src: url('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-be392405-5b88-4143-ad6b-f155b106ab85/23baf9a5-0395-4904-a9f0-bfbc989ccbea.woff2') format('woff2');
+  src: url('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-be392405-5b88-4143-ad6b-f155b106ab85/23baf9a5-0395-4904-a9f0-bfbc989ccbea.woff2')
+    format('woff2');
 }
 
 // 代码字体
@@ -38,7 +40,8 @@
 @font-face {
   font-display: swap;
   font-family: 'NotoSansThai';
-  src: url('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-be392405-5b88-4143-ad6b-f155b106ab85/f4ed6bc5-77da-4635-b724-33d757432e21.woff2') format('woff2');
+  src: url('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-be392405-5b88-4143-ad6b-f155b106ab85/f4ed6bc5-77da-4635-b724-33d757432e21.woff2')
+    format('woff2');
 }
 
 .dark {
@@ -46,7 +49,7 @@
 }
 
 .dark ::selection {
-  @apply bg-#686868;
+  background-color: #686868;
 }
 
 html,
@@ -57,7 +60,8 @@ body,
 }
 
 .text_important {
-  @apply text-red-500 font-bold;
+  font-weight: bold;
+  @apply text-red-500;
 }
 
 .code_font-family {
@@ -73,11 +77,14 @@ body,
 }
 
 ::-webkit-scrollbar {
-  @apply w-6px h-6px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply rounded-4px bg-#e5e5e5 border-0 dark:bg-#555;
+  border-radius: 4px;
+  border-width: 0px;
+  @apply bg-#e5e5e5 dark:bg-#555;
 }
 
 ::-webkit-scrollbar-thumb:hover {

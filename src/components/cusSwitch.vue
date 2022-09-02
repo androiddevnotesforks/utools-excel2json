@@ -1,12 +1,12 @@
 <template>
   <input
     id="switch"
-    class="cus_switch"
+    class="cus_switch transition-all"
     type="checkbox"
     :checked="props.modelValue"
     @input="changeVal($event)"
   />
-  <label class="cus_switch_label" for="switch"> 切换 </label>
+  <label class="cus_switch_label bg-gray dark:bg-#3c3c3f" for="switch"> 切换 </label>
 </template>
 
 <script setup lang="ts">
@@ -24,10 +24,13 @@ function changeVal(e: any) {
 
 <style lang="scss" scoped>
 .cus_switch {
-  @apply h-0 w-0 invisible select-none transition-all;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  user-select: none;
   &:checked {
     & + .cus_switch_label {
-      @apply bg-primary;
+      background-color: var(--primary-color);
       &:after {
         left: calc(100% - 4px);
         transform: translate(-100%, -50%);
@@ -37,12 +40,26 @@ function changeVal(e: any) {
 }
 
 .cus_switch_label {
-  @apply cursor-pointer -indent-999 w-40px h-24px block rounded-full relative
-    bg-gray select-none dark:bg-#3c3c3f;
+  cursor: pointer;
+  text-indent: 9999px;
+  overflow: hidden;
+  width: 40px;
+  height: 24px;
+  display: block;
+  border-radius: 9999px;
+  position: relative;
+  user-select: none;
   &::after {
     content: '';
-    @apply absolute-y-center left-4px h-70% aspect-ratio-square bg-#fff rounded-full
-      transition-all;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 4px;
+    height: 70%;
+    aspect-ratio: 1/1;
+    background-color: #fff;
+    border-radius: 9999px;
+    transition: all 0.15s ease;
   }
   // 点击时的样式
   // &:active:after {

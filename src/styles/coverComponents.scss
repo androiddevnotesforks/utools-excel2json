@@ -1,12 +1,12 @@
 // 覆盖组件库的样式
 .arco-modal {
   will-change: transform, opacity;
-  @apply rounded-none;
+  border-radius: none;
 }
 
 .arco-popover-popup-content,
 .popconfirm_wrapper {
-  @apply w-300px;
+  width: 300px;
 }
 
 // 不让Modal外部出现滚动条，优化动画效果，因为该项目不会出现Modal中内容很多需要滚动Modal的情况
@@ -18,7 +18,7 @@
 }
 .no_header_modal {
   .arco-modal-header {
-    @apply hidden;
+    display: none;
   }
 }
 
@@ -27,25 +27,32 @@
   box-shadow: 0 4px 29px #0000003d !important;
 
   .shepherd-header {
-    @apply I_bg-transparent;
+    background-color: transparent !important;
   }
 
   .shepherd-text,
   .shepherd-header,
   .shepherd-footer {
-    @apply text-14px pt-10px;
+    font-size: 14px;
+    padding-top: 10px;
   }
 
   .shepherd-text {
-    @apply text-#333 leading-relaxed I_pt-0;
+    color: #333;
+    line-height: 1.625;
+    padding-top: 0 !important;
   }
 
   .shepherd-title {
-    @apply font-bold text-18px;
+    font-weight: bold;
+    font-size: 18px;
   }
 
   .shepherd-button {
-    @apply bg-primary text-white py-4px px-16px rounded-2px;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 4px 16px;
+    border-radius: 2px;
     &:hover {
       filter: contrast(150%);
     }
@@ -56,5 +63,5 @@
 }
 
 .shepherd-modal-overlay-container {
-  @apply I_opacity-40;
+  opacity: 0.4 !important;
 }

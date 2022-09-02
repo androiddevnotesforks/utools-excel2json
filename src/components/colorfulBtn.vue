@@ -2,7 +2,11 @@
   <button
     ref="btnRef"
     ripple="ripple"
-    class="colorful_btn_main"
+    border="~ #eee"
+    shadow="lg hover:md active:sm dark:dark-800"
+    text="#333 dark:#d1d1d1"
+    bg="#fff dark:dark-400"
+    class="colorful_btn_main flex-c transition-all w-112px h-34px relative overflow-hidden rounded-4px dark:(text-shadow-xl)"
     @mousedown="显示波纹($event)"
     @mouseup="清除波纹()"
   >
@@ -69,17 +73,14 @@ function 删除第一个波纹dom() {
 
 <style lang="scss" scoped>
 .colorful_btn_main {
-  border: 1px solid #eeeeee;
-  transition: all 0.2s ease;
-  @apply flex-c w-112px h-34px relative overflow-hidden rounded-4px bg-#fff shadow-lg text-#333 hover:shadow-md active:shadow-sm dark:(bg-dark-400 text-shadow-xl shadow-dark-800 text-#d1d1d1);
-}
-
-.ripple_wrapper {
-  span[dynamic='true'] {
-    @apply transform scale-0 rounded-full absolute;
-
-    background: linear-gradient(45deg, #ff000080, #ffff0080, #00ffff80, #0000ff80);
-    animation: ripple 1200ms ease;
+  .ripple_wrapper {
+    span[dynamic='true'] {
+      transform: scale(0);
+      border-radius: 50%;
+      position: absolute;
+      background: linear-gradient(45deg, #ff000080, #ffff0080, #00ffff80, #0000ff80);
+      animation: ripple 1200ms ease;
+    }
   }
 }
 

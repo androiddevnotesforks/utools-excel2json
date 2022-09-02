@@ -1,5 +1,5 @@
 <template>
-  <div border="~ #f2f3f4 dark:#444" class="setting_card rounded-4px flex flex-col">
+  <div flex="~ col" border="~ #f2f3f4 dark:#444" class="setting_card rounded-4px">
     <div
       class="title_wrapper bg-#2f54ea:5 flex-y-c py-4px px-18px text-16px select-none dark:(bg-#333)"
     >
@@ -27,7 +27,7 @@ const props = defineProps({
   initial-value: 0;
 }
 .setting_card {
-  @apply transition-all;
+  transition: all 0.15s ease;
   box-shadow: 0 4px 8px 1px #064bb30a;
   .title_wrapper {
     text-underline-offset: var(--offset, 1px);

@@ -227,7 +227,7 @@
                       </div>
                     </template>
                     <a-divider orientation="left">
-                      <div class="divide_content">
+                      <div class="flex-c space-x-4px">
                         <ApiIcon :data="{ value: 'baidu' }" />
                         <span>百度翻译</span>
                       </div>
@@ -251,7 +251,7 @@
                       </a-form-item>
                     </section>
                     <a-divider orientation="left">
-                      <div class="divide_content">
+                      <div class="flex-c space-x-5px">
                         <ApiIcon :data="{ value: 'tencent' }" />
                         <span>腾讯云翻译</span>
                       </div>
@@ -275,7 +275,7 @@
                       </a-form-item>
                     </section>
                     <a-divider orientation="left">
-                      <div class="divide_content">
+                      <div class="flex-c space-x-6px">
                         <ApiIcon :data="{ value: 'ali' }" />
                         <span>阿里云翻译</span>
                       </div>
@@ -299,7 +299,7 @@
                       </a-form-item>
                     </section>
                     <a-divider orientation="left">
-                      <div class="divide_content">
+                      <div class="flex-c space-x-4px">
                         <ApiIcon :data="{ value: 'youdao' }" />
                         <span>有道翻译</span>
                       </div>
@@ -323,7 +323,7 @@
                       </a-form-item>
                     </section>
                     <a-divider orientation="left">
-                      <div class="divide_content">
+                      <div class="flex-c space-x-4px">
                         <ApiIcon :data="{ value: 'caiyun' }" />
                         <span>彩云小译</span>
                       </div>
@@ -338,7 +338,7 @@
                       </a-form-item>
                     </section>
                     <a-divider orientation="left">
-                      <div class="divide_content">
+                      <div class="flex-c space-x-4px">
                         <ApiIcon :data="{ value: 'huoshan' }" />
                         <span>火山翻译</span>
                       </div>
@@ -715,10 +715,6 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-.divide_content {
-  @apply flex-c space-x-4px;
-}
-
 .right {
   will-change: opacity;
 }
@@ -736,11 +732,14 @@ defineExpose({
   &::before {
     content: '';
     box-shadow: 0 1px 8px 1px #172a4770;
-    @apply fixed w-full;
+    position: fixed;
+    width: 100%;
   }
   &::after {
     content: '';
-    @apply w-full h-20px absolute;
+    width: 100%;
+    height: 20px;
+    position: absolute;
     background: linear-gradient(to bottom, white 50%, transparent);
   }
 }

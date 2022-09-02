@@ -2,10 +2,10 @@
   <button
     border="~ #f2f3f4"
     :disabled="props.loading || props.disabled"
-    class="mimicry_btn"
+    class="mimicry_btn p-4px z-10 grid-c rounded-8px cursor-pointer text-slate-4 select-none"
     :class="{ mimicry_btn_disabled: props.loading || props.disabled }"
   >
-    <span class="text_inner">
+    <span class="text_inner leading-0 transition-all duration-100 ease-linear">
       <i v-if="props.loading" i-line-md-loading-loop />
 
       <slot v-else>
@@ -57,9 +57,6 @@ const 缩小后的尺寸 = computed(() => {
   box-shadow: 5px 5px 12px #d9d9d9, -5px -5px 12px #fff;
   transition: 0.3s --houdini-colorA, 0.3s --houdini-colorB, 0.1s transform linear,
     0.2s box-shadow;
-  .text_inner {
-    @apply leading-0 transition-all duration-100 ease-linear;
-  }
   &:hover,
   &:active {
     --houdini-colorA: #eee;
@@ -72,12 +69,11 @@ const 缩小后的尺寸 = computed(() => {
       transform: scale(v-bind(缩小后的尺寸));
     }
   }
-  @apply p-4px z-10 grid-c rounded-8px cursor-pointer text-slate-4 select-none;
 }
 
 // 禁用的样式
 .mimicry_btn_disabled {
-  @apply cursor-not-allowed;
+  cursor: not-allowed;
   &:hover,
   &:active {
     --houdini-colorA: #fff;
@@ -85,9 +81,9 @@ const 缩小后的尺寸 = computed(() => {
   }
   &:active {
     box-shadow: 5px 5px 12px #d9d9d9, -5px -5px 12px #fff;
-    @apply scale-100;
+    transform: scale(1);
     .text_inner {
-      @apply scale-100;
+      transform: scale(1);
     }
   }
 }
