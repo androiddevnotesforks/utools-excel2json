@@ -88,15 +88,14 @@
                     </template>
                     <section :class="动态宽度类名">
                       <a-form-item label="翻译服务:" @mouseenter="切换文案('翻译服务')">
-                        <a-checkbox-group v-model="formData.homeHasApi">
+                        <a-checkbox-group
+                          v-model="formData.homeHasApi"
+                          :max="可选择的服务数量"
+                        >
                           <a-checkbox
                             v-for="item in api列表"
                             :key="item.value"
                             :value="item.value"
-                            :disabled="
-                              !formData.homeHasApi.includes(item.value) &&
-                              formData.homeHasApi?.length >= 可选择的服务数量
-                            "
                           >
                             {{ item.label }}
                           </a-checkbox>
