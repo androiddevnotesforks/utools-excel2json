@@ -1,5 +1,6 @@
 // 覆盖组件库的样式
 .arco-modal {
+  will-change: transform, opacity;
   @apply rounded-none;
 }
 
