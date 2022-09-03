@@ -59,7 +59,6 @@
                       id="guide-link"
                       class="-indent-4px"
                       target="_blank"
-                      href="https://www.wolai.com/jtSV7oah6M7rErz2RMFzo"
                       @click="打开url('https://www.wolai.com/jtSV7oah6M7rErz2RMFzo')"
                     >
                       大力点击这里，了解如何申请~
@@ -141,18 +140,26 @@
                         @mouseenter="切换文案('快捷键行为')"
                       >
                         <a-radio-group v-model="formData.copyBtnBehavior">
-                          <a-radio value="open">仅复制</a-radio>
-                          <a-radio value="close"> 复制后隐藏插件 </a-radio>
-                          <a-radio value="closeInput"> 复制隐藏并输入 </a-radio>
+                          <a-radio
+                            v-for="item in 快捷键行为选项"
+                            :key="item.value"
+                            :value="item.value"
+                          >
+                            {{ item.label }}
+                          </a-radio>
                         </a-radio-group>
                       </a-form-item>
                     </section>
                     <section :class="动态宽度类名">
                       <a-form-item label="显示按钮:" @mouseenter="切换文案('显示按钮')">
                         <a-checkbox-group v-model="formData.copyBtnShow">
-                          <a-checkbox :value="1">仅复制</a-checkbox>
-                          <a-checkbox :value="2">复制并隐藏</a-checkbox>
-                          <a-checkbox :value="3">复制并输入</a-checkbox>
+                          <a-checkbox
+                            v-for="item in 显示按钮选项"
+                            :key="item.value"
+                            :value="item.value"
+                          >
+                            {{ item.label }}
+                          </a-checkbox>
                         </a-checkbox-group>
                       </a-form-item>
                     </section>
@@ -163,18 +170,26 @@
                         @mouseenter="切换文案('默认目标外语')"
                       >
                         <a-radio-group v-model="formData.defaultForeignLanguage">
-                          <a-radio value="en"> 英语 </a-radio>
-                          <a-radio value="jp"> 日语 </a-radio>
-                          <a-radio value="ru"> 俄语 </a-radio>
+                          <a-radio
+                            v-for="item in 默认目标外语选项"
+                            :key="item.value"
+                            :value="item.value"
+                          >
+                            {{ item.label }}
+                          </a-radio>
                         </a-radio-group>
                       </a-form-item>
                     </section>
                     <section :class="动态宽度类名">
                       <a-form-item label="插件主题:" @mouseenter="切换文案('插件主题')">
                         <a-radio-group v-model="formData.theme">
-                          <a-radio value="auto">跟随uTools</a-radio>
-                          <a-radio value="light"> 浅色 </a-radio>
-                          <a-radio value="dark"> 深色 </a-radio>
+                          <a-radio
+                            v-for="item in 插件主题选项"
+                            :key="item.value"
+                            :value="item.value"
+                          >
+                            {{ item.label }}
+                          </a-radio>
                         </a-radio-group>
                       </a-form-item>
                     </section>
@@ -198,8 +213,13 @@
                           v-model="formData.readingModel"
                           :disabled="!formData.readAloud"
                         >
-                          <a-radio value="在线">质量优先</a-radio>
-                          <a-radio value="离线">速度优先</a-radio>
+                          <a-radio
+                            v-for="item in 朗读模式选项"
+                            :key="item.value"
+                            :value="item.value"
+                          >
+                            {{ item.label }}
+                          </a-radio>
                         </a-radio-group>
                       </a-form-item>
                     </section>
@@ -211,9 +231,13 @@
                             !formData.readAloud || formData.readingModel === '离线'
                           "
                         >
-                          <a-radio value="default">系统默认</a-radio>
-                          <a-radio value="male">仅男声</a-radio>
-                          <a-radio value="female">仅女声</a-radio>
+                          <a-radio
+                            v-for="item in 朗读偏好选项"
+                            :key="item.value"
+                            :value="item.value"
+                          >
+                            {{ item.label }}
+                          </a-radio>
                         </a-radio-group>
                       </a-form-item>
                     </section>
@@ -432,7 +456,7 @@
 
       <section
         ref="设置弹框Footer"
-        class="sticky bottom-0 h-65px flex-y-c justify-between px-20px bg-#fff dark:bg-#2a2a2b"
+        class="sticky bottom-0 h-65px flex-y-c justify-between px-20px bg-#ffffff:85 backdrop-blur-12px dark:bg-#2a2a2b:85"
         border="t-solid #e5e6eb t-width-1px dark:#484849"
       >
         <div>
@@ -478,7 +502,16 @@ import {
   获取存储项,
   设置存储,
 } from '@/components/SettingModal/SettingsModules'
-import { api选项, 文案映射 } from '@/components/SettingModal/SettingsData'
+import {
+  api选项,
+  快捷键行为选项,
+  插件主题选项,
+  文案映射,
+  显示按钮选项,
+  朗读偏好选项,
+  朗读模式选项,
+  默认目标外语选项,
+} from '@/components/SettingModal/SettingsData'
 import type { 引导options类型 } from '@/components/SettingModal/SettingsTypes'
 
 const emit = defineEmits(['ok', 'cancel', 'reset'])
@@ -634,9 +667,10 @@ function modal关闭动画结束() {
 
 function 打开url(url: string) {
   if (!utools) {
-    return
+    open(url)
+  } else {
+    utools.shellOpenExternal(url)
   }
-  utools.shellOpenExternal(url)
 }
 
 function 重置数据() {
