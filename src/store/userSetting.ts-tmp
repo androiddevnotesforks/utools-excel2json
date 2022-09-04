@@ -1,0 +1,151 @@
+/** 用户设置信息 */
+import { defineStore } from 'pinia'
+import { getDbStorageItem, removeDbStorageItem, setDbStorageItem } from '@/utils/storage'
+
+import { apiOptions } from '@/assets/translateApiOption'
+
+interface configType {
+  key: string
+  defaultState: {}
+}
+
+interface configObj {
+  [key: string]: configType
+}
+
+// 设置数据类型
+interface SettingDataType {
+  // 首页翻译
+  homeOption: string[]
+  // 默认使用的api
+  defaultApi: string
+  // 密钥配置
+  keyConfig: object
+  // 字体大小
+  fontSize: number
+  // 复制快捷键行为
+  copyBtnBehavior: string
+  // 命名翻译模式
+  codeMode: boolean
+  // 显示的复制按钮
+  copyBtnShow: number[]
+  // 语音朗读
+  readAloud: boolean
+  // 朗读偏好
+  readingPreference: string
+  // 插件主题
+  theme: string
+  // 默认目标外语语种
+  defaultForeignLanguage: string
+  // 语言模式(在线|离线)
+  readingModel: string
+}
+
+const CONFIG: configObj = {
+  // 密钥配置
+  KEY_SETTING: {
+    key: 'keyConfig',
+    defaultState: {},
+  },
+  // 首页选择
+  HOME_OPTION: {
+    key: 'homeOption',
+    defaultState: getDefaultHomeApi(),
+  },
+  // 默认使用api
+  DEFAULT_API: {
+    key: 'defaultApi',
+    defaultState: getDefaultHomeApi()[0],
+  },
+  // 输入框文本大小
+  FONT_SIZE: {
+    key: 'fontSize',
+    defaultState: 16,
+  },
+  // 复制快捷键行为
+  COPY_BTN_BEHAVIOR: {
+    key: 'copyBtnBehavior',
+    defaultState: 'open',
+  },
+  // 显示的复制按钮
+  COPY_BTN_SHOW: {
+    key: 'copyBtnShow',
+    defaultState: [1, 2, 3],
+  },
+  // 命名翻译模式
+  CODE_MODE: {
+    key: 'codeMode',
+    defaultState: false,
+  },
+  // 语音朗读
+  READ_ALOUD: {
+    key: 'readAloud',
+    defaultState: true,
+  },
+  // 朗读偏好
+  READING_PREFERENCE: {
+    key: 'readingPreference',
+    defaultState: 'default',
+  },
+  // 插件主题
+  THEME: {
+    key: 'theme',
+    defaultState: 'auto',
+  },
+  // 默认目标外语语种
+  DEFAULT_FOREIGN_LANGUAGE: {
+    key: 'defaultForeignLanguage',
+    defaultState: 'en',
+  },
+  // 语言模式(在线|离线)
+  READING_MODEL: {
+    key: 'readingModel',
+    defaultState: '在线',
+  },
+}
+
+/** 获取默认的首页api */
+function getDefaultHomeApi() {
+  return apiOptions.slice(0, 4).map(i => i.value)
+}
+
+/** 获取初始化初始值 */
+function getInitState(): SettingDataType {
+  // 获取存储的数据
+  const getStorageData = (config: configType) => {
+    const { key, defaultState } = config
+    return getDbStorageItem(key, defaultState)
+  }
+
+  return {
+    homeOption: getStorageData(CONFIG.HOME_OPTION),
+    defaultApi: getStorageData(CONFIG.DEFAULT_API),
+    keyConfig: getStorageData(CONFIG.KEY_SETTING),
+    fontSize: getStorageData(CONFIG.FONT_SIZE),
+    copyBtnBehavior: getStorageData(CONFIG.COPY_BTN_BEHAVIOR),
+    codeMode: false,
+    copyBtnShow: getStorageData(CONFIG.COPY_BTN_SHOW),
+    readAloud: getStorageData(CONFIG.READ_ALOUD),
+    readingPreference: getStorageData(CONFIG.READING_PREFERENCE),
+    theme: getStorageData(CONFIG.THEME),
+    defaultForeignLanguage: getStorageData(CONFIG.DEFAULT_FOREIGN_LANGUAGE),
+    readingModel: getStorageData(CONFIG.READING_MODEL),
+  }
+}
+
+export const 用户设置存储 = defineStore('settings', () => {
+  const setting = reactive(getInitState())
+
+  /** 保存配置 */
+  function saveSetting(settingData: SettingDataType) {
+    for (const key in settingData) {
+      if (Object.prototype.hasOwnProperty.call(settingData, key)) {
+        const data = settingData[key]
+        setting[key] = data
+      }
+    }
+  }
+  return {
+    setting,
+  }
+})
