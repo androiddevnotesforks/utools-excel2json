@@ -67,14 +67,14 @@ export const 文案映射: 文案类型 = {
       <li>极具表现力，拥有类似人类的声音</li>
       <li>支持易翻的所有语种</li>
       <li>朗读表现稳定</li>
-      <li>速度较慢</li>
+      <li>加载速度较慢</li>
     </ul>
     <p class="mt-6px text-16px">速度优先：</p>
     <ul class="list-disc pl-16px">
       <li>比较生硬的机器声音</li>
       <li>仅支持目标语种为英文</li>
       <li>朗读表现视设备而定</li>
-      <li>速度极快，无需网络</li>
+      <li>加载速度极快，无网络要求</li>
     </ul>
   </div>
   `,
