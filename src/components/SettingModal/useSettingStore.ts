@@ -18,7 +18,9 @@ export function 设置存储(formData: any) {
 
   function 填写表单(value: any) {
     Object.keys(formData).forEach(key => {
-      formData[key] = value[key]
+      if (value[key]) {
+        formData[key] = value[key]
+      }
     })
   }
 

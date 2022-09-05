@@ -13,8 +13,8 @@ export function getDbStorageItem(key: string, defaultValue?: any) {
   }
 
   const tempStr: string = fn(key)
-  if (!defaultValue) {
-    return tempStr
+  if (!tempStr) {
+    return defaultValue
   }
 
   // 根据默认值及类型处理
