@@ -455,7 +455,7 @@
 
         <section
           ref="设置弹框FooterRef"
-          class="sticky bottom-0 h-65px flex-y-c justify-between px-20px bg-#ffffff:80 backdrop-blur-12px dark:bg-#2a2a2b:85"
+          class="sticky bottom-0 h-65px flex-y-c justify-between px-20px bg-#ffffff:70 backdrop-blur-12px dark:bg-#2a2a2b:85"
           border="t-solid #e5e6eb t-width-1px dark:#484849"
         >
           <div>

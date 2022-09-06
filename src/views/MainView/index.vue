@@ -584,6 +584,15 @@ watch(结果只读, newVal => {
 // 设置弹窗的状态
 const 设置弹框正在活动 = computed(() => 设置弹框Ref.value.modal可见)
 
+function 获取下一个api的value() {
+  let 下一个api的index =
+    翻译api数组.value.findIndex(i => i.value === 当前翻译api.value) + 1
+  if (下一个api的index >= 翻译api数组.value.length) {
+    下一个api的index = 0
+  }
+  return 翻译api数组.value[下一个api的index]?.value
+}
+
 // Tab键切换翻译方式
 onKeyStroke('Tab', e => {
   e.preventDefault()
@@ -593,13 +602,7 @@ onKeyStroke('Tab', e => {
   if (翻译api数组.value.length <= 1) {
     return
   }
-  let 当前api的index = 翻译api数组.value.findIndex(i => i.value === 当前翻译api.value)
-  当前api的index += 1
-  if (当前api的index > 翻译api数组.value.length - 1) {
-    当前api的index = 0
-  }
-  const 下一个api = 翻译api数组.value[当前api的index]?.value
-  当前翻译api.value = 下一个api
+  当前翻译api.value = 获取下一个api的value()
   setTimeout(() => {
     防抖翻译()
   }, 0)
