@@ -76,7 +76,10 @@
               v-model:model-value="form和to的数组"
               path-mode
               :options="语种树的数据"
-              :style="{ width: '240px' }"
+              :style="{
+                width: '240px',
+                borderRadius: '2px 2px 0 0',
+              }"
               value-key="id"
               :format-label="格式化级联显示内容"
               @change="语种级联发生变化()"
