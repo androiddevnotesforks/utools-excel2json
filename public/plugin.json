@@ -47,7 +47,8 @@
       "explain": "命名翻译模式：大驼峰",
       "cmds": [
         "大驼峰",
-        "mmdt"
+        "mmdt",
+        "mmpsk"
       ]
     },
     {

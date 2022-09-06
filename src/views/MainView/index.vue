@@ -607,7 +607,6 @@ onKeyStroke('Tab', e => {
 </script>
 
 <style lang="scss" scoped>
-.main_wrapper,
 .main {
   transition: all 200ms var(--ani-bezier);
 }

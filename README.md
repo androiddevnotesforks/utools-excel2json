@@ -44,7 +44,7 @@
 通过以下快捷键可以直接进入命名翻译模式，帮助你快速命名
 
 1. mmxt（“命名小驼”的首字母）：小驼峰模式，如 "getUserInformation"
-2. mmdt（“命名大驼”的首字母）：大驼峰模式，如 "GetUserInformation"
+2. mmdt/mmpsk（“命名大驼/命名帕斯卡”的首字母）：大驼峰/帕斯卡模式，如 "GetUserInformation"
 3. mmxh（“命名下划”的首字母）：下划线模式，如 "get_user_information"
 4. mmzhx（“命名中划小”的首字母）：中划线小写模式，如 "get-user-information"
 5. mmzhd（“命名中划大”的首字母）：中划线大写模式，如 "Get-User-Information"
