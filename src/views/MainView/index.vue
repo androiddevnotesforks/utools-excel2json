@@ -596,10 +596,7 @@ function 获取下一个api的value() {
 // Tab键切换翻译方式
 onKeyStroke('Tab', e => {
   e.preventDefault()
-  if (设置弹框正在活动.value) {
-    return
-  }
-  if (翻译api数组.value.length <= 1) {
+  if (设置弹框正在活动.value || 翻译api数组.value.length <= 1) {
     return
   }
   当前翻译api.value = 获取下一个api的value()
