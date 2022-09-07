@@ -20,7 +20,7 @@ specifiers:
   less: ^4.1.3
   lodash-es: ^4.17.21
   nanoid: ^4.0.0
-  pinia: ^2.0.21
+  pinia: ^2.0.22
   pnpm: ^7.11.0
   prettier: ^2.7.1
   sass: ^1.54.8
@@ -43,7 +43,7 @@ dependencies:
   dayjs: 1.11.5
   lodash-es: 4.17.21
   nanoid: 4.0.0
-  pinia: 2.0.21_bw4xur2vyhvhfd4whxbr7emp4u
+  pinia: 2.0.22_bw4xur2vyhvhfd4whxbr7emp4u
   shepherd.js: 10.0.1
   vue: 3.2.37
 
@@ -3144,8 +3144,8 @@ packages:
     dev: true
     optional: true
 
-  /pinia/2.0.21_bw4xur2vyhvhfd4whxbr7emp4u:
-    resolution: {integrity: sha512-6ol04PtL29O0Z6JHI47O3JUSoyOJ7Og0rstXrHVMZSP4zAldsQBXJCNF0i/H7m8vp/Hjd/CSmuPl7C5QAwpeWQ==}
+  /pinia/2.0.22_bw4xur2vyhvhfd4whxbr7emp4u:
+    resolution: {integrity: sha512-u+b8/BC+tmvo3ACbYO2w5NfxHWFOjvvw9DQnyT0dW8aUMCPRQT5QnfZ5R5W2MzZBMTeZRMQI7V/QFbafmM9QHw==}
     peerDependencies:
       '@vue/composition-api': ^1.4.0
       typescript: '>=4.4.4'
