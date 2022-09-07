@@ -114,7 +114,8 @@
           >
             <a-textarea
               v-model="结果对象.结果文字"
-              class="rounded-b-8px relative z-1"
+              rounded="b-8px t-0"
+              class="relative z-1"
               :placeholder="下方placeholder"
               :readonly="结果只读"
             />
