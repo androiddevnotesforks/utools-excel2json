@@ -33,10 +33,7 @@ function 离线朗读开始() {
   离线loading.value = true
   setTimeout(() => {
     离线loading.value = false
-    if (离线朗读状态.value === 'pause') {
-      window.speechSynthesis.resume()
-    } else {
-      开始离线朗读()
-    }
-  }, 500)
+    离线朗读停止()
+    开始离线朗读()
+  }, 0)
 }
