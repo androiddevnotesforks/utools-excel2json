@@ -141,7 +141,10 @@
                 class="absolute left-10px bottom-8px z-1 flex space-x-8px"
               >
                 <!-- 播放按钮 -->
-                <MimicryBtn @click="离线朗读控制(结果对象.结果文字)">
+                <MimicryBtn
+                  :loading="离线loading"
+                  @click="离线朗读控制(结果对象.结果文字)"
+                >
                   <i
                     :class="[
                       离线朗读状态 === 'play'
@@ -232,6 +235,7 @@ import {
   支持离线朗读,
   未配置服务引导,
   检查from和to是否兼容,
+  离线loading,
   离线朗读停止,
   离线朗读控制,
   离线朗读状态,
