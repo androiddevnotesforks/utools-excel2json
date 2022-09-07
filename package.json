@@ -43,7 +43,7 @@
     "unplugin-auto-import": "^0.11.2",
     "unplugin-vue-components": "^0.22.4",
     "vite": "^3.0.9",
-    "vite-plugin-chunk-split": "^0.2.7",
+    "vite-plugin-chunk-split": "^0.3.0",
     "vue-tsc": "^0.40.5"
   },
   "eslintConfig": {
