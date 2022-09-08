@@ -12,7 +12,7 @@ export function use语音朗读模块(form和to的数组: Ref<级联值类型>, 
   const { readAloud: 朗读功能, readingPreference: 朗读性别偏好 } = storeToRefs(
     用户设置存储()
   )
-  const audio本体 = ref(new Audio()) as Ref<HTMLAudioElement>
+  const audio本体 = ref(new Audio())
   const 音频Url = ref('')
   const 朗读loading = ref(false) // 译文发音按钮的Loading
   const { playing: 正在播放 } = useMediaControls(audio本体, { src: 音频Url })
