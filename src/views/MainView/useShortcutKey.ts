@@ -15,7 +15,7 @@ interface 快捷键映射类型 {
 }
 const { current } = useMagicKeys()
 
-const 当前按下的所有键 = computed(() => {
+export const 当前按下的所有键 = computed(() => {
   return Array.from(current)
 })
 

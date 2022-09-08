@@ -220,7 +220,7 @@
 
 <script setup lang="ts">
 import { nanoid } from 'nanoid'
-import { debounce, throttle } from 'lodash-es'
+import { debounce, isEqual, throttle } from 'lodash-es'
 import { noCase } from 'change-case'
 import { Message as 提示 } from '@arco-design/web-vue'
 import { 获取存储项, 获取当前 } from '@MainView/MainViewUtils'
@@ -233,6 +233,7 @@ import {
   use语音朗读模块,
   关闭窗口,
   初始化离线语音,
+  当前按下的所有键,
   支持离线朗读,
   未配置服务引导,
   检查from和to是否兼容,
@@ -316,17 +317,17 @@ const 检测语言显示条件 = computed(() => {
   return 结果对象.from语种 && !['简体中文'].includes(结果对象.from语种)
 })
 
-const { ctrl, command } = useMagicKeys()
-
 // 这个函数目前只有右键才会触发
 // 触发后检查是否按下了必要的按键
 function 结果只读切换() {
   const 系统 = 获取当前('系统')
+  const 是windows或linux系统 = ['Windows', 'Linux', 'browser'].includes(系统)
+  const 是mac系统 = ['macOS', 'browser'].includes(系统)
   // 条件：当前为Windows、Linux或是浏览器，且按下了Ctrl
-  const windows和linux条件 = ['Windows', 'Linux', 'browser'].includes(系统) && ctrl.value
-
-  // 条件：当前为macOS，且按下了Command
-  const mac条件 = ['macOS', 'browser'].includes(系统) && command.value
+  const 仅按下了Ctrl = isEqual(['control'], 当前按下的所有键.value)
+  const 仅按下了Command = isEqual(['command'], 当前按下的所有键.value)
+  const windows和linux条件 = 是windows或linux系统 && 仅按下了Ctrl
+  const mac条件 = 是mac系统 && 仅按下了Command
 
   if (windows和linux条件 || mac条件) {
     if (是命名模式.value) {
