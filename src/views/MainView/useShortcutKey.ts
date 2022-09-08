@@ -21,7 +21,7 @@ const 当前按下的所有键 = computed(() => {
 
 const 快捷键集合: 快捷键映射类型 = {
   windows和linux: {
-    复制: ['control', 'shift', 'x'],
+    复制: ['control', 'shift', 'c'],
     朗读: ['control', 'shift', 's'],
   },
   mac: {
@@ -83,18 +83,20 @@ function 符合win和lin或mac条件(win和lin的keys: string[], mac的keys: str
 export function use快捷键监听(funObj: 快捷键方法Type) {
   // 监听朗读快捷键
   watchEffect(() => {
-    const win和lin的keys = 快捷键集合.windows和linux.朗读
-    const mac的keys = 快捷键集合.mac.朗读
-    const 是否符合系统任意条件 = 符合win和lin或mac条件(win和lin的keys, mac的keys)
+    const 是否符合系统任意条件 = 符合win和lin或mac条件(
+      快捷键集合.windows和linux.朗读,
+      快捷键集合.mac.朗读
+    )
     if (是否符合系统任意条件) {
       funObj.语音朗读快捷键方法 && funObj.语音朗读快捷键方法()
     }
   })
 
   watchEffect(() => {
-    const win和lin的keys = 快捷键集合.windows和linux.复制
-    const mac的keys = 快捷键集合.mac.复制
-    const 是否符合任意系统条件 = 符合win和lin或mac条件(win和lin的keys, mac的keys)
+    const 是否符合任意系统条件 = 符合win和lin或mac条件(
+      快捷键集合.windows和linux.复制,
+      快捷键集合.mac.复制
+    )
     if (是否符合任意系统条件) {
       funObj.复制快捷键方法 && funObj.复制快捷键方法()
     }
