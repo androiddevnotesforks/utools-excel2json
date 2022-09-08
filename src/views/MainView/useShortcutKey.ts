@@ -25,8 +25,8 @@ const 快捷键集合: 快捷键映射类型 = {
     朗读: ['control', 'shift', 's'],
   },
   mac: {
-    复制: ['command', 'shift', 'c'],
-    朗读: ['command', 'shift', 's'],
+    复制: ['meta', 'shift', 'c'],
+    朗读: ['meta', 'shift', 's'],
   },
 }
 
