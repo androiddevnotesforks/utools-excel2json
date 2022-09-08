@@ -616,10 +616,6 @@ onKeyStroke('Tab', e => {
 </script>
 
 <style lang="scss" scoped>
-.main {
-  transition: all 200ms var(--ani-bezier);
-}
-
 .icon {
   position: absolute;
   font-size: 22px;
