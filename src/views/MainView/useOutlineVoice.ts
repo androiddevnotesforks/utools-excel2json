@@ -30,17 +30,23 @@ export function 离线朗读停止() {
 }
 
 // 返回随机数
-function 来个随机数(min: number, max: number) {
+export function 来个随机数(min: number, max: number) {
   min = Math.ceil(min)
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 function 离线朗读开始() {
-  离线loading.value = true
-  setTimeout(() => {
-    离线loading.value = false
-    离线朗读停止()
+  if (离线朗读状态.value === 'pause') {
+    window.speechSynthesis.resume()
+  } else {
     开始离线朗读()
-  }, 来个随机数(300, 1000))
+  }
+
+  // 离线loading.value = true
+  // setTimeout(() => {
+  //   离线loading.value = false
+  //   离线朗读停止()
+  //   开始离线朗读()
+  // }, 来个随机数(300, 1000))
 }
