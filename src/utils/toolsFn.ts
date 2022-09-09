@@ -32,3 +32,15 @@ export function hex转rgb(hex: string) {
   const [r, g, b] = 分割后的数组.map(hex转256)
   return `${r}, ${g}, ${b}`
 }
+
+/**
+ *
+ * @param min 最小值
+ * @param max 最大值
+ * @returns 返回一个在min和max之间的随机[整]数(不包含min和max)
+ */
+export function 来个随机数(min: number, max: number) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}

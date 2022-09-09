@@ -23,8 +23,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.26.3",
-    "@arco-design/web-vue": "^2.36.0",
-    "@iconify/json": "^2.1.104",
+    "@arco-design/web-vue": "^2.36.1",
+    "@iconify/json": "^2.1.105",
     "@types/crypto-js": "^4.1.1",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.7.16",

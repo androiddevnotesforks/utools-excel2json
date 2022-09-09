@@ -36,13 +36,6 @@ export function 离线朗读停止() {
   window.speechSynthesis.cancel()
 }
 
-// 返回随机数
-export function 来个随机数(min: number, max: number) {
-  min = Math.ceil(min)
-  max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
 // function 离线朗读开始() {
 //   if (离线朗读状态.value === 'pause') {
 //     window.speechSynthesis.resume()
