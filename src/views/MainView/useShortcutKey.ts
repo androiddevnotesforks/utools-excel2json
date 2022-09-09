@@ -22,11 +22,11 @@ export const 当前按下的所有键 = computed(() => {
 const 快捷键集合: 快捷键映射类型 = {
   windows和linux: {
     复制: ['control', 'shift', 'c'],
-    朗读: ['control', 'shift', 's'],
+    朗读: ['control', 's'],
   },
   mac: {
     复制: ['meta', 'shift', 'c'],
-    朗读: ['meta', 'shift', 's'],
+    朗读: ['control', 's'],
   },
 }
 
