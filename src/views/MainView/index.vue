@@ -477,20 +477,19 @@ const 离线朗读显示条件 = computed(() => {
   )
 })
 
-// let 离线朗读锁 = false
+let 离线朗读锁 = false
 use快捷键监听({
   语音朗读快捷键方法: () => {
     if (离线朗读显示条件.value) {
-      // if (!离线朗读锁) {
-      离线朗读控制(结果对象.结果文字)
-      // 离线朗读锁 = true
-      // setTimeout(() => {
-      //   离线朗读锁 = false
-      // }, 1500)
-      // } else {
-      // console.log('不要按太快了啊喂~')
-      // 提示.warning('不要按太快了啊喂~！')
-      // }
+      if (!离线朗读锁) {
+        离线朗读控制(结果对象.结果文字)
+        离线朗读锁 = true
+        setTimeout(() => {
+          离线朗读锁 = false
+        }, 1500)
+      } else {
+        提示.warning('不要按太快了啊喂~！')
+      }
     } else if (在线朗读显示条件.value) {
       !朗读loading.value && 在线朗读控制()
     }
