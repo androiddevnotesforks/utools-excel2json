@@ -32,6 +32,7 @@
           v-model="用户输入"
           class="rounded-t-8px"
           placeholder="请输入要翻译的内容"
+          @click.right="右键点击文本域($event)"
         />
       </div>
       <section class="tools_wrapper flex my-8px">
@@ -311,6 +312,12 @@ function 格式化级联显示内容(options: CascaderOption[]) {
 function 清空输入框() {
   用户输入.value = ''
   输入框focus()
+}
+
+function 右键点击文本域(e: MouseEvent) {
+  e.preventDefault()
+  输入框focus()
+  粘贴()
 }
 
 const 检测语言显示条件 = computed(() => {
