@@ -33,6 +33,7 @@ export default defineConfig({
     UnoCSS(),
     Components({
       resolvers: [ArcoResolver()],
+      dts: 'src/components.d.ts',
     }),
     chunkSplitPlugin({
       strategy: 'default',
