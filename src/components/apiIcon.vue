@@ -37,7 +37,6 @@ const 图片尺寸映射 = new Map([
   ['google', 16],
   ['baidu', 16],
   ['huoshan', 15],
-  ['youdao', 18],
 ])
 
 const 图片大小 = computed(() => {
