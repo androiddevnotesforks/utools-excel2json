@@ -8,6 +8,7 @@ export const apiOptions = [
   { label: '有道翻译', value: 'youdao' },
   { label: '彩云小译', value: 'caiyun' },
   { label: '火山翻译', value: 'huoshan' },
+  { label: '小牛翻译', value: 'xiaoniu' },
 ]
 export type 语种 =
   | 'zh'
@@ -127,6 +128,11 @@ export const api不支持的大对象: 大对象item类型 = {
   huoshan: {
     from不支持: ['yue', 'wyw'],
     to不支持: ['yue', 'wyw'],
+    自定义不支持: undefined,
+  },
+  xiaoniu: {
+    from不支持: ['wyw'],
+    to不支持: ['wyw'],
     自定义不支持: undefined,
   },
 }

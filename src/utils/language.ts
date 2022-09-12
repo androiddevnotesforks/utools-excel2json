@@ -24,6 +24,7 @@ const 语音集合: 语言集合Type = {
       google: 'zh-CN',
       caiyun: 'zh',
       huoshan: 'zh',
+      xiaoniu: 'zh',
     },
   },
   // 繁体中文
@@ -37,6 +38,7 @@ const 语音集合: 语言集合Type = {
       google: 'zh-TW',
       caiyun: '',
       huoshan: 'zh-Hant',
+      xiaoniu: 'cht',
     },
   },
   // 文言文
@@ -50,6 +52,7 @@ const 语音集合: 语言集合Type = {
       google: '',
       caiyun: '',
       huoshan: '',
+      xiaoniu: '',
     },
   },
   // 粤语
@@ -63,6 +66,7 @@ const 语音集合: 语言集合Type = {
       google: '',
       caiyun: '',
       huoshan: '',
+      xiaoniu: 'yue',
     },
   },
   // 英语
@@ -76,6 +80,7 @@ const 语音集合: 语言集合Type = {
       google: 'en',
       caiyun: 'en',
       huoshan: 'en',
+      xiaoniu: 'en',
     },
   },
   // 日语
@@ -89,6 +94,7 @@ const 语音集合: 语言集合Type = {
       google: 'ja',
       caiyun: 'ja',
       huoshan: 'ja',
+      xiaoniu: 'ja',
     },
   },
   // 俄语
@@ -102,6 +108,7 @@ const 语音集合: 语言集合Type = {
       google: 'ru',
       caiyun: 'ru',
       huoshan: 'ru',
+      xiaoniu: 'ru',
     },
   },
   // 德语
@@ -115,6 +122,7 @@ const 语音集合: 语言集合Type = {
       google: 'de',
       caiyun: '',
       huoshan: 'de',
+      xiaoniu: 'de',
     },
   },
   // 法语
@@ -128,6 +136,7 @@ const 语音集合: 语言集合Type = {
       google: 'fr',
       caiyun: '',
       huoshan: 'fr',
+      xiaoniu: 'fr',
     },
   },
   // 韩语
@@ -141,6 +150,7 @@ const 语音集合: 语言集合Type = {
       google: 'ko',
       caiyun: '',
       huoshan: 'ko',
+      xiaoniu: 'ko',
     },
   },
   // 泰语
@@ -154,6 +164,7 @@ const 语音集合: 语言集合Type = {
       google: 'th',
       caiyun: 'th',
       huoshan: 'th',
+      xiaoniu: 'th',
     },
   },
   // 西班牙语
@@ -167,6 +178,7 @@ const 语音集合: 语言集合Type = {
       google: 'es',
       caiyun: 'es',
       huoshan: 'es',
+      xiaoniu: 'es',
     },
   },
 }
