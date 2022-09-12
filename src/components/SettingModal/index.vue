@@ -250,7 +250,7 @@
                       </template>
                       <a-divider orientation="left">
                         <div class="flex-c space-x-4px">
-                          <ApiIcon :data="{ value: 'baidu' }" />
+                          <ApiIcon data="baidu" />
                           <span>百度翻译</span>
                         </div>
                       </a-divider>
@@ -274,7 +274,7 @@
                       </section>
                       <a-divider orientation="left">
                         <div class="flex-c space-x-5px">
-                          <ApiIcon :data="{ value: 'tencent' }" />
+                          <ApiIcon data="tencent" />
                           <span>腾讯云翻译</span>
                         </div>
                       </a-divider>
@@ -298,7 +298,7 @@
                       </section>
                       <a-divider orientation="left">
                         <div class="flex-c space-x-6px">
-                          <ApiIcon :data="{ value: 'ali' }" />
+                          <ApiIcon data="ali" />
                           <span>阿里云翻译</span>
                         </div>
                       </a-divider>
@@ -322,7 +322,7 @@
                       </section>
                       <a-divider orientation="left">
                         <div class="flex-c space-x-4px">
-                          <ApiIcon :data="{ value: 'youdao' }" />
+                          <ApiIcon data="youdao" />
                           <span>有道翻译</span>
                         </div>
                       </a-divider>
@@ -346,7 +346,7 @@
                       </section>
                       <a-divider orientation="left">
                         <div class="flex-c space-x-4px">
-                          <ApiIcon :data="{ value: 'caiyun' }" />
+                          <ApiIcon data="caiyun" />
                           <span>彩云小译</span>
                         </div>
                       </a-divider>
@@ -361,7 +361,7 @@
                       </section>
                       <a-divider orientation="left">
                         <div class="flex-c space-x-4px">
-                          <ApiIcon :data="{ value: 'huoshan' }" />
+                          <ApiIcon data="huoshan" />
                           <span>火山翻译</span>
                         </div>
                       </a-divider>
@@ -379,6 +379,21 @@
                           <a-input-password
                             v-model.trim="formData.huoshanSecretAccessKey"
                             placeholder="请输入火山翻译SecretAccessKey"
+                            allow-clear
+                          />
+                        </a-form-item>
+                      </section>
+                      <a-divider orientation="left">
+                        <div class="flex-c space-x-4px">
+                          <ApiIcon data="xiaoniu" />
+                          <span>小牛翻译</span>
+                        </div>
+                      </a-divider>
+                      <section :class="动态宽度类名">
+                        <a-form-item label="API-KEY:">
+                          <a-input-password
+                            v-model.trim="formData.xiaoniuApiKey"
+                            placeholder="请输入小牛翻译API-KEY"
                             allow-clear
                           />
                         </a-form-item>
@@ -559,6 +574,7 @@ const formData = reactive({
   caiyunToken: undefined, // 彩云
   huoshanAccessKeyId: undefined, // 火山
   huoshanSecretAccessKey: undefined, // 火山
+  xiaoniuApiKey: undefined, // 小牛
 })
 const 显示顺序data = computed(() => {
   const 所有服务 = cloneDeep(api列表.value)
