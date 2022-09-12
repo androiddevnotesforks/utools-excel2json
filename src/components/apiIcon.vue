@@ -1,7 +1,7 @@
 <template>
   <div
     class="inline-flex w-20px aspect-ratio-square relative"
-    :class="[发光显示条件 && 'shadow_wrapper', data.value === 'huoshan' && 'mb-2px']"
+    :class="[发光显示条件 && 'shadow_wrapper', api的值 === 'huoshan' && 'mb-2px']"
     :style="{
       background: `url(${当前图片Url}) no-repeat center center`,
       backgroundSize: `${图片大小}px auto`,
@@ -14,7 +14,7 @@
 import { 获取当前 } from '@/utils/getEnv'
 const props = defineProps({
   data: {
-    type: Object,
+    type: [Object, String],
     required: true,
   },
   current: {
@@ -22,14 +22,23 @@ const props = defineProps({
     default: '',
   },
 })
-const 发光显示条件 = computed(() => {
-  return props.current === props.data.value && 获取当前('主题') === 'dark'
+
+const api的值 = computed(() => {
+  if (typeof props.data === 'string') {
+    return props.data
+  } else {
+    return props.data.value
+  }
 })
-const 当前api的value = props.data.value
+
+const 发光显示条件 = computed(() => {
+  return props.current === api的值.value && 获取当前('主题') === 'dark'
+})
+
 const 当前图片Url = computed(() => {
   const 所有文件对象: any = import.meta.glob('@imgs/api图标/*', { eager: true })
   const 文件名arr = Object.keys(所有文件对象)
-  const 当前图片在对象中的key = 文件名arr.find(key => key.includes(当前api的value)) || ''
+  const 当前图片在对象中的key = 文件名arr.find(key => key.includes(api的值.value)) || ''
   return 所有文件对象?.[当前图片在对象中的key]?.default || ''
 })
 
@@ -40,7 +49,7 @@ const 图片尺寸映射 = new Map([
 ])
 
 const 图片大小 = computed(() => {
-  return 图片尺寸映射.get(当前api的value) || 17
+  return 图片尺寸映射.get(api的值.value) || 17
 })
 </script>
 
