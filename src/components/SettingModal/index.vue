@@ -16,8 +16,13 @@
       <div ref="modal包裹Ref" class="overflow-auto h-full">
         <header
           ref="设置弹框HeaderRef"
-          class="setting_header h-48px w-full sticky top-0 text-16px px-20px z-1 flex-y-c justify-between backdrop-blur-5px transition-all duration-400"
-          :class="[wrapper的y滚动 > 16 && 'shadow-md dark:shadow-lg']"
+          border="b-1px dark:#333"
+          position="sticky top-0"
+          class="setting_header h-48px w-full text-16px px-20px z-1 flex-y-c justify-between backdrop-blur-5px transition-all duration-400"
+          :class="{
+            'shadow-md !border-transparent dark:(shadow-lg !border-#414141)':
+              wrapper的y滚动 > 16,
+          }"
         >
           <div
             class="horizontal-place-8px bg-#fff:50 px-6px py-2px rounded-8px dark:bg-#2a2a2b:60"
@@ -450,7 +455,9 @@
                   </div>
                 </template>
                 <button
-                  class="bg-#fff rounded-full shadow-md w-22px grid-c text-18px cursor-pointer absolute-y-center aspect-ratio-square -left-11px transition-all active:shadow dark:bg-#444"
+                  bg="#fff dark:#444"
+                  shadow="md active:~"
+                  class="rounded-full w-22px aspect-ratio-square grid-c text-18px cursor-pointer absolute-y-center -left-10px transition-all"
                   @click="切换侧边()"
                 >
                   <i
@@ -460,7 +467,7 @@
                   />
                 </button>
                 <div
-                  class="flex flex-col"
+                  flex="~ col"
                   v-html="解释文案 || '鼠标悬浮左侧选项上可查看对应选项说明'"
                 ></div>
               </setting-card>
@@ -471,7 +478,7 @@
         <section
           ref="设置弹框FooterRef"
           class="sticky bottom-0 h-65px flex-y-c justify-between px-20px bg-#ffffff:70 backdrop-blur-12px dark:bg-#2a2a2b:85"
-          border="t-solid #e5e6eb t-width-1px dark:#484849"
+          border="t-solid #e5e6eb t-width-1px dark:#333"
         >
           <div>
             <a-popconfirm
