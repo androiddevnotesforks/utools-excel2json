@@ -13,7 +13,7 @@
       @cancel="modal取消()"
       @close="modal关闭动画结束()"
     >
-      <div ref="modal包裹Ref" class="overflow-auto h-full">
+      <div ref="modal包裹Ref" class="overflow-auto h-full scroll-smooth">
         <header
           ref="设置弹框HeaderRef"
           border="b-1px dark:#333"
