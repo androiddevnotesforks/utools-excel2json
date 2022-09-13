@@ -31,7 +31,7 @@
           ref="用户输入框Ref"
           v-model="用户输入"
           class="rounded-t-8px"
-          placeholder="请输入要翻译的内容"
+          placeholder="请输入要翻译的内容，可右键点击文本框粘贴"
           @click.right="右键点击文本域($event)"
         />
       </div>
