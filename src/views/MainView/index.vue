@@ -43,12 +43,12 @@
             :key="项.value"
             :value="项.value"
           >
-            <div class="flex space-x-4px">
+            <div class="flex space-x-4px select-none">
               <div
                 class="grid-c api_icon_wrapper"
-                :class="[当前翻译api === 项.value ? 'contrast-120' : 'grayscale-30']"
+                :class="[当前翻译api === 项.value ? 'contrast-120' : 'grayscale-20']"
               >
-                <ApiIcon :data="项" :current="当前翻译api" />
+                <api-icon :data="项" :current="当前翻译api" />
               </div>
               <div>{{ 项.label }}</div>
             </div>
@@ -172,15 +172,17 @@
                   </template>
                   仅复制
                 </colorful-btn>
+
                 <colorful-btn
                   v-if="复制按钮显示的数组.includes(2)"
                   @click="复制按钮事件(2)"
                 >
                   <template #icon>
-                    <i i-line-md-minus class="text-18px" />
+                    <i i-line-md-navigation-right-down class="text-18px" />
                   </template>
                   复制并隐藏
                 </colorful-btn>
+
                 <colorful-btn
                   v-if="复制按钮显示的数组.includes(3)"
                   @click="复制按钮事件(3)"
@@ -196,17 +198,17 @@
         </div>
       </a-resize-box>
     </div>
+    <!-- 命名翻译模式按钮 -->
+    <i
+      class="icon left-4px"
+      :class="[是命名模式 ? '!text-primary i-tabler-code' : 'i-tabler-code-off ']"
+      @click="切换模式()"
+    />
     <!-- 设置按钮 -->
     <i
       id="setting-wrapper"
-      class="icon setting_icon i-ep-setting hover:i-fluent-settings-28-filled"
+      class="icon right-4px i-ci-settings-future hover:i-ep-setting"
       @click="打开设置Modal()"
-    />
-    <!-- 命名翻译模式按钮 -->
-    <i
-      class="icon code_icon"
-      :class="[是命名模式 ? 'text-primary i-tabler-code' : 'i-tabler-code-off ']"
-      @click="切换模式()"
     />
   </div>
 
@@ -634,23 +636,16 @@ onKeyStroke('Tab', e => {
 <style lang="scss" scoped>
 .icon {
   position: absolute;
+  bottom: 4px;
   font-size: 22px;
   color: #999;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.3s ease;
   &:hover {
     color: #666;
   }
   &:active {
     color: var(--primary-color);
-  }
-  &.setting_icon {
-    right: 4px;
-    bottom: 4px;
-  }
-  &.code_icon {
-    left: 4px;
-    bottom: 4px;
   }
 }
 
