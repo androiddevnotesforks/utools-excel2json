@@ -9,13 +9,13 @@
         <!-- 清除按钮 -->
         <transition name="component-scale">
           <template v-if="!['', undefined, null].includes(用户输入)">
-            <MimicryBtn
+            <mimicry-btn
               key="1"
               class="absolute right-10px bottom-8px"
               @click="清空输入框()"
             >
               <i i-line-md-close />
-            </MimicryBtn>
+            </mimicry-btn>
           </template>
         </transition>
 
@@ -72,7 +72,7 @@
           </template>
 
           <template v-else>
-            <AutoBtn :active="自动模式" @click="切换自动语种模式()" />
+            <auto-btn :active="自动模式" @click="切换自动语种模式()" />
             <a-cascader
               v-model:model-value="form和to的数组"
               path-mode
@@ -99,9 +99,9 @@
       >
         <div class="flex h-full relative">
           <!-- -1：等待用户操作、200：翻译成功均应该显示<code/> -->
-          <codeBg v-if="是命名模式 && [-1, 200].includes(结果对象.状态码)" />
+          <code-bg v-if="是命名模式 && [-1, 200].includes(结果对象.状态码)" />
           <transition name="fade-in-standard">
-            <Loading
+            <loading
               v-if="翻译加载"
               border="~ #e9e9e9"
               class="rounded-b-8px absolute top-0 z-100"
@@ -126,14 +126,14 @@
                 class="absolute left-10px bottom-8px z-1 flex space-x-8px"
               >
                 <!-- 播放按钮 -->
-                <MimicryBtn :loading="朗读loading" @click="在线朗读控制()">
+                <mimicry-btn :loading="朗读loading" @click="在线朗读控制()">
                   <i i-akar-icons-sound-on />
-                </MimicryBtn>
+                </mimicry-btn>
 
                 <!-- 开始暂停按钮 -->
-                <MimicryBtn v-show="音频Url" @click="正在播放 = !正在播放">
+                <mimicry-btn v-show="音频Url" @click="正在播放 = !正在播放">
                   <i :class="[正在播放 ? 'i-ic-twotone-pause' : 'i-ri-play-fill']"></i>
-                </MimicryBtn>
+                </mimicry-btn>
               </div>
             </transition>
 
@@ -143,7 +143,7 @@
                 class="absolute left-10px bottom-8px z-1 flex space-x-8px"
               >
                 <!-- 播放按钮 -->
-                <MimicryBtn
+                <mimicry-btn
                   :loading="离线loading"
                   @click="离线朗读控制(结果对象.结果文字)"
                 >
@@ -154,7 +154,7 @@
                         : 'i-akar-icons-sound-on',
                     ]"
                   />
-                </MimicryBtn>
+                </mimicry-btn>
               </div>
             </transition>
 
@@ -163,7 +163,7 @@
                 v-show="要显示复制按钮"
                 class="bottom-8px absolute-x-center z-1 flex space-x-8px"
               >
-                <ColorfulBtn
+                <colorful-btn
                   v-if="复制按钮显示的数组.includes(1)"
                   @click="复制按钮事件(1)"
                 >
@@ -171,8 +171,8 @@
                     <i i-line-md-clipboard-arrow class="text-18px" />
                   </template>
                   仅复制
-                </ColorfulBtn>
-                <ColorfulBtn
+                </colorful-btn>
+                <colorful-btn
                   v-if="复制按钮显示的数组.includes(2)"
                   @click="复制按钮事件(2)"
                 >
@@ -180,8 +180,8 @@
                     <i i-line-md-minus class="text-18px" />
                   </template>
                   复制并隐藏
-                </ColorfulBtn>
-                <ColorfulBtn
+                </colorful-btn>
+                <colorful-btn
                   v-if="复制按钮显示的数组.includes(3)"
                   @click="复制按钮事件(3)"
                 >
@@ -189,7 +189,7 @@
                     <i i-line-md-edit-twotone class="text-18px" />
                   </template>
                   复制并输入
-                </ColorfulBtn>
+                </colorful-btn>
               </div>
             </transition>
           </div>
@@ -211,7 +211,7 @@
   </div>
 
   <!-- 设置弹窗 -->
-  <SettingModal
+  <setting-modal
     ref="设置弹框Ref"
     @ok="设置确定()"
     @cancel="设置取消()"

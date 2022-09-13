@@ -44,7 +44,7 @@
                     <span>一些提示</span>
                   </div>
                 </template>
-                <section :class="动态宽度类名">
+                <form-item-wrapper>
                   <ul class="mb-18px list-disc pl-16px">
                     <li>
                       插件的功能依赖第三方服务，不幸的是，除谷歌翻译外，其他的您需要自行申请之后才能使用它们
@@ -71,7 +71,7 @@
                       >”
                     </li>
                   </ul>
-                </section>
+                </form-item-wrapper>
               </setting-card>
               <a-form auto-label-width :model="formData">
                 <a-row>
@@ -83,7 +83,7 @@
                           <span>基本设置</span>
                         </div>
                       </template>
-                      <section :class="动态宽度类名">
+                      <form-item-wrapper>
                         <a-form-item label="翻译服务:" @mouseenter="切换文案('翻译服务')">
                           <a-checkbox-group
                             v-model="formData.homeHasApi"
@@ -98,8 +98,8 @@
                             </a-checkbox>
                           </a-checkbox-group>
                         </a-form-item>
-                      </section>
-                      <section :class="动态宽度类名">
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item
                           label="主页显示顺序:"
                           @mouseenter="切换文案('主页显示顺序')"
@@ -115,8 +115,8 @@
                             </template>
                           </div>
                         </a-form-item>
-                      </section>
-                      <section :class="动态宽度类名">
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item
                           label="文本框字号:"
                           @mouseenter="切换文案('文本框字号')"
@@ -131,8 +131,8 @@
                             <template #suffix> 像素 </template>
                           </a-input-number>
                         </a-form-item>
-                      </section>
-                      <section :class="动态宽度类名">
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item
                           label="快捷键行为:"
                           @mouseenter="切换文案('快捷键行为')"
@@ -147,8 +147,8 @@
                             </a-radio>
                           </a-radio-group>
                         </a-form-item>
-                      </section>
-                      <section :class="动态宽度类名">
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item label="显示按钮:" @mouseenter="切换文案('显示按钮')">
                           <a-checkbox-group v-model="formData.copyBtnShow">
                             <a-checkbox
@@ -160,8 +160,8 @@
                             </a-checkbox>
                           </a-checkbox-group>
                         </a-form-item>
-                      </section>
-                      <section :class="动态宽度类名">
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item
                           label="默认目标外语:"
                           class="flex items-start"
@@ -177,8 +177,8 @@
                             </a-radio>
                           </a-radio-group>
                         </a-form-item>
-                      </section>
-                      <section :class="动态宽度类名">
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item label="插件主题:" @mouseenter="切换文案('插件主题')">
                           <a-radio-group v-model="formData.theme">
                             <a-radio
@@ -190,7 +190,7 @@
                             </a-radio>
                           </a-radio-group>
                         </a-form-item>
-                      </section>
+                      </form-item-wrapper>
                     </setting-card>
 
                     <setting-card>
@@ -200,13 +200,13 @@
                           <span>朗读设置</span>
                         </div>
                       </template>
-                      <section :class="动态宽度类名">
+                      <form-item-wrapper>
                         <a-form-item label="语音朗读:" @mouseenter="切换文案('语音朗读')">
                           <a-switch v-model="formData.readAloud" class="ml-5px">
                           </a-switch>
                         </a-form-item>
-                      </section>
-                      <section :class="动态宽度类名">
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item label="朗读模式:" @mouseenter="切换文案('朗读模式')">
                           <a-radio-group
                             v-model="formData.readingModel"
@@ -221,8 +221,8 @@
                             </a-radio>
                           </a-radio-group>
                         </a-form-item>
-                      </section>
-                      <section :class="动态宽度类名">
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item label="朗读偏好:" @mouseenter="切换文案('朗读偏好')">
                           <a-radio-group
                             v-model="formData.readingPreference"
@@ -239,7 +239,7 @@
                             </a-radio>
                           </a-radio-group>
                         </a-form-item>
-                      </section>
+                      </form-item-wrapper>
                     </setting-card>
                     <setting-card @mouseenter="切换文案('翻译服务数据')">
                       <template #title>
@@ -250,11 +250,11 @@
                       </template>
                       <a-divider orientation="left">
                         <div class="flex-c space-x-4px">
-                          <ApiIcon data="baidu" />
+                          <api-icon data="baidu" />
                           <span>百度翻译</span>
                         </div>
                       </a-divider>
-                      <section :class="动态宽度类名">
+                      <form-item-wrapper>
                         <a-form-item label="APP ID:">
                           <a-input
                             v-model.trim="formData.appid"
@@ -262,8 +262,8 @@
                             allow-clear
                           />
                         </a-form-item>
-                      </section>
-                      <section :class="动态宽度类名">
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item label="密钥:">
                           <a-input-password
                             v-model.trim="formData.token"
@@ -271,14 +271,14 @@
                             allow-clear
                           />
                         </a-form-item>
-                      </section>
+                      </form-item-wrapper>
                       <a-divider orientation="left">
                         <div class="flex-c space-x-5px">
-                          <ApiIcon data="tencent" />
+                          <api-icon data="tencent" />
                           <span>腾讯云翻译</span>
                         </div>
                       </a-divider>
-                      <section :class="动态宽度类名">
+                      <form-item-wrapper>
                         <a-form-item label="Secret Id:">
                           <a-input
                             v-model.trim="formData.secretId"
@@ -286,8 +286,8 @@
                             allow-clear
                           />
                         </a-form-item>
-                      </section>
-                      <section :class="动态宽度类名">
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item label="Secret Key:">
                           <a-input-password
                             v-model.trim="formData.secretKey"
@@ -295,14 +295,14 @@
                             allow-clear
                           />
                         </a-form-item>
-                      </section>
+                      </form-item-wrapper>
                       <a-divider orientation="left">
                         <div class="flex-c space-x-6px">
-                          <ApiIcon data="ali" />
+                          <api-icon data="ali" />
                           <span>阿里云翻译</span>
                         </div>
                       </a-divider>
-                      <section :class="动态宽度类名">
+                      <form-item-wrapper>
                         <a-form-item label="Secret Id:">
                           <a-input
                             v-model.trim="formData.accessKeyId"
@@ -310,8 +310,8 @@
                             allow-clear
                           />
                         </a-form-item>
-                      </section>
-                      <section :class="动态宽度类名">
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item label="Secret Key:">
                           <a-input-password
                             v-model.trim="formData.accessKeySecret"
@@ -319,14 +319,14 @@
                             allow-clear
                           />
                         </a-form-item>
-                      </section>
+                      </form-item-wrapper>
                       <a-divider orientation="left">
                         <div class="flex-c space-x-4px">
-                          <ApiIcon data="youdao" />
+                          <api-icon data="youdao" />
                           <span>有道翻译</span>
                         </div>
                       </a-divider>
-                      <section :class="动态宽度类名">
+                      <form-item-wrapper>
                         <a-form-item label="应用ID:">
                           <a-input
                             v-model.trim="formData.youdaoId"
@@ -334,8 +334,8 @@
                             allow-clear
                           />
                         </a-form-item>
-                      </section>
-                      <section :class="动态宽度类名">
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item label="应用密钥:">
                           <a-input-password
                             v-model.trim="formData.youdaoSecret"
@@ -343,14 +343,14 @@
                             allow-clear
                           />
                         </a-form-item>
-                      </section>
+                      </form-item-wrapper>
                       <a-divider orientation="left">
                         <div class="flex-c space-x-4px">
-                          <ApiIcon data="caiyun" />
+                          <api-icon data="caiyun" />
                           <span>彩云小译</span>
                         </div>
                       </a-divider>
-                      <section :class="动态宽度类名">
+                      <form-item-wrapper>
                         <a-form-item label="令牌:">
                           <a-input-password
                             v-model.trim="formData.caiyunToken"
@@ -358,14 +358,14 @@
                             allow-clear
                           />
                         </a-form-item>
-                      </section>
+                      </form-item-wrapper>
                       <a-divider orientation="left">
                         <div class="flex-c space-x-4px">
-                          <ApiIcon data="huoshan" />
+                          <api-icon data="huoshan" />
                           <span>火山翻译</span>
                         </div>
                       </a-divider>
-                      <section :class="动态宽度类名">
+                      <form-item-wrapper>
                         <a-form-item label="AccessKeyID:">
                           <a-input
                             v-model.trim="formData.huoshanAccessKeyId"
@@ -373,8 +373,8 @@
                             allow-clear
                           />
                         </a-form-item>
-                      </section>
-                      <section :class="动态宽度类名">
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item label="SecretAccessKey:">
                           <a-input-password
                             v-model.trim="formData.huoshanSecretAccessKey"
@@ -382,14 +382,14 @@
                             allow-clear
                           />
                         </a-form-item>
-                      </section>
+                      </form-item-wrapper>
                       <a-divider orientation="left">
                         <div class="flex-c space-x-4px">
-                          <ApiIcon data="xiaoniu" />
+                          <api-icon data="xiaoniu" />
                           <span>小牛翻译</span>
                         </div>
                       </a-divider>
-                      <section :class="动态宽度类名">
+                      <form-item-wrapper>
                         <a-form-item label="API-KEY:">
                           <a-input-password
                             v-model.trim="formData.xiaoniuApiKey"
@@ -397,7 +397,7 @@
                             allow-clear
                           />
                         </a-form-item>
-                      </section>
+                      </form-item-wrapper>
                     </setting-card>
                   </section>
                 </a-row>
@@ -495,10 +495,10 @@
     </a-modal>
 
     <!-- 导入弹窗 -->
-    <ImportModal ref="导入弹框Ref" @import-submit="导入提交($event)" />
+    <import-modal ref="导入弹框Ref" @import-submit="导入提交($event)" />
 
     <!-- 导出弹窗 -->
-    <ExportModal ref="导出弹框Ref" @export-submit="导出提交($event)" />
+    <export-modal ref="导出弹框Ref" @export-submit="导出提交($event)" />
   </div>
 </template>
 
@@ -626,9 +626,6 @@ watchEffect(() => {
 
 const 全局存储 = useGlobalStore()
 const 侧边收起 = computed(() => 全局存储.侧边收起)
-const 动态宽度类名 = computed(() => {
-  return 侧边收起.value ? 'w-80%' : 'w-full'
-})
 
 function 切换侧边() {
   if (!侧边收起.value) {

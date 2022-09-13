@@ -38,6 +38,7 @@ declare module '@vue/runtime-core' {
     CusTooltip: typeof import('./components/cusTooltip.vue')['default']
     DarkFullPage: typeof import('./components/darkFullPage.vue')['default']
     ExportModal: typeof import('./components/SettingModal/Modal/ExportModal.vue')['default']
+    FormItemWrapper: typeof import('./components/formItemWrapper.vue')['default']
     HoverAnswer: typeof import('./components/hoverAnswer.vue')['default']
     ImportModal: typeof import('./components/SettingModal/Modal/ImportModal.vue')['default']
     LightFullPage: typeof import('./components/lightFullPage.vue')['default']
