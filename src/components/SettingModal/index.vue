@@ -71,7 +71,7 @@
                       如果你使用uTools的
                       <span class="text_important">全局快捷键</span>
                       功能，请将关键字请设置为 “<span
-                        class="select-all text_important text-15px code_font-family"
+                        class="code_font-family text_important select-all text-15px tracking-wider"
                         >fjyi</span
                       >”
                     </li>
@@ -468,6 +468,7 @@
                 </button>
                 <div
                   flex="~ col"
+                  class="leading-relaxed"
                   v-html="解释文案 || '鼠标悬浮左侧选项上可查看对应选项说明'"
                 ></div>
               </setting-card>

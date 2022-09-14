@@ -25,7 +25,7 @@ export const 文案映射: 文案类型 = {
           认定为中文
         </span>
         ，将会自动切换
-        「目标语种」为一个外语，该选项用来指定这个外语默认是什么，若
+        「目标语种」为一个外语，该选项用来指定这个外语默认是什么，如果
         <span class="text_important"> 不是中文 </span>
         ，则会切换为 “自动 → 中文” 尽可能免去你
         手动调整目标语种的这一步骤
@@ -36,7 +36,7 @@ export const 文案映射: 文案类型 = {
         任一语种，易翻会认为自己猜错了，将自动关闭「智能切换语种」功能
         ，直至
         <span class="text_important">插件退出</span>
-        ，但是你依然可以在语种下拉选择左侧点击
+        ，但是你依然可以在语种下拉选择的左侧点击
         <span i-simple-icons-adobeillustrator class="text-#777:70">
         </span>
         按钮
