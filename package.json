@@ -7,7 +7,8 @@
     "dev": "vite --port 6789 --open",
     "build": "vue-tsc --noEmit && vite build",
     "lint:fix": "eslint . --fix",
-    "clear": "rimraf node_modules&&pnpm i"
+    "clear": "rimraf node_modules&&pnpm i",
+    "up": "taze major -I"
   },
   "dependencies": {
     "@vueuse/core": "^9.2.0",
@@ -37,6 +38,7 @@
     "pnpm": "^7.11.0",
     "prettier": "^2.7.1",
     "sass": "^1.54.9",
+    "taze": "^0.8.0",
     "terser": "^5.15.0",
     "typescript": "^4.8.3",
     "unocss": "^0.45.21",
