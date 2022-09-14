@@ -44,7 +44,7 @@
     {
       "code": "codeMode__pascalCase",
       "label": "易翻翻译",
-      "explain": "命名翻译模式：大驼峰",
+      "explain": "命名翻译模式：大驼峰/帕斯卡",
       "cmds": [
         "大驼峰",
         "mmdt",
