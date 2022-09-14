@@ -4,6 +4,7 @@
     "antfu.unocss",
     "antfu.goto-alias",
     "dbaeumer.vscode-eslint",
-    "Vue.volar"
+    "Vue.volar",
+    "EditorConfig.EditorConfig"
   ]
 }
