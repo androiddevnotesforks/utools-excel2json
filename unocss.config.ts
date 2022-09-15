@@ -2,7 +2,7 @@ import {
   defineConfig,
   presetAttributify,
   presetIcons,
-  presetUno,
+  presetWind,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
@@ -20,7 +20,7 @@ export default defineConfig({
     [/^horizontal-place-(.*)$/, ([, c]) => `flex items-center space-x-${c}`],
   ],
   presets: [
-    presetUno(),
+    presetWind(),
     presetAttributify(),
     presetIcons({
       warn: true,
