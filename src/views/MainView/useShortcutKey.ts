@@ -13,7 +13,6 @@ type 快捷键映射类型 = {
     readonly 朗读: string[]
   }
 }
-// type 系统类型 = 'windows和linux' | 'mac'
 const { current } = useMagicKeys()
 const 快捷键集合: 快捷键映射类型 = {
   other: {
@@ -28,10 +27,6 @@ const 快捷键集合: 快捷键映射类型 = {
 export const 当前按下的所有键 = computed(() => {
   return Array.from(current)
 })
-
-function 数组排序后转字符串(arr: string[]) {
-  return cloneDeep(arr).sort().join()
-}
 
 /**
  * 检查按下快捷键与该系统下所有快捷键定义的长度
@@ -53,26 +48,20 @@ function 判断按键(fn: 快捷键方法Type, os: 系统类型) {
   }
   const mac快捷键条件 = os === 'macOS' && 按键合规
   const 其他快捷键条件 = os !== 'macOS' && 按键合规
-  const 排序后按下的键str = 数组排序后转字符串(当前按下的所有键.value)
+  const 排序后按下的键str = cloneDeep(当前按下的所有键.value).sort().join()
 
   if (mac快捷键条件) {
-    switch (排序后按下的键str) {
-      case 快捷键集合.macOS.复制.join():
-        fn.复制快捷键方法?.()
-        break
-      case 快捷键集合.macOS.朗读.join():
-        fn.语音朗读快捷键方法?.()
-        break
-    }
+    const macMap = new Map([
+      [快捷键集合.macOS.复制.join(), fn.复制快捷键方法],
+      [快捷键集合.macOS.朗读.join(), fn.语音朗读快捷键方法],
+    ])
+    macMap.get(排序后按下的键str)?.()
   } else if (其他快捷键条件) {
-    switch (排序后按下的键str) {
-      case 快捷键集合.other.复制.join():
-        fn.复制快捷键方法?.()
-        break
-      case 快捷键集合.other.朗读.join():
-        fn.语音朗读快捷键方法?.()
-        break
-    }
+    const otherMap = new Map([
+      [快捷键集合.other.复制.join(), fn.复制快捷键方法],
+      [快捷键集合.other.朗读.join(), fn.语音朗读快捷键方法],
+    ])
+    otherMap.get(排序后按下的键str)?.()
   }
 }
 
