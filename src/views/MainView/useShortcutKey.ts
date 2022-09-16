@@ -29,7 +29,7 @@ export const 当前按下的所有键 = computed(() => {
 })
 
 /**
- * 检查按下快捷键与该系统下所有快捷键定义的长度
+ * 将当前按下按键的个数，与该系统下所有快捷键长度进行对比
  * @param os 系统
  * @returns 当前按下的快捷键个数，与当前系统下的所有定义的快捷键，是否有长度一样的
  */
@@ -43,13 +43,17 @@ function 检查按下快捷键与定义的长度(os: 系统类型) {
 
 function 判断按键(fn: 快捷键方法Type, os: 系统类型) {
   const 按键合规 = 检查按下快捷键与定义的长度(os)
+  // 首先判断当前按下的按键个数，在对应的系统里有没有定义一样长度的快捷键
   if (!按键合规) {
     return
   }
-  const mac快捷键条件 = os === 'macOS' && 按键合规
-  const 其他快捷键条件 = os !== 'macOS' && 按键合规
+  // 创建互斥变量用于区分mac与非mac
+  const 是macOS = os === 'macOS'
+  const mac快捷键条件 = 是macOS && 按键合规
+  const 其他快捷键条件 = !是macOS && 按键合规
+  // 将当前按下的所有按键，转换为字符串
   const 排序后按下的键str = cloneDeep(当前按下的所有键.value).sort().join()
-
+  // 根据系统，创建该系统下的所有快捷键字符串与方法的映射，并尝试执行该方法
   if (mac快捷键条件) {
     const macMap = new Map([
       [快捷键集合.macOS.复制.join(), fn.复制快捷键方法],
