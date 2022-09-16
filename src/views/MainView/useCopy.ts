@@ -2,8 +2,10 @@
 import { storeToRefs } from 'pinia'
 import { throttle } from 'lodash-es'
 import { Message as 提示 } from '@arco-design/web-vue'
-import { use快捷键监听 } from '@MainView/MainViewModule'
+import { 判断快捷键 } from '@MainView/MainViewModule'
 import { 用户设置存储 } from '@/store/userSetting'
+import { 获取当前 } from '@/utils/getEnv'
+import type { 系统类型 } from '@/types/index'
 
 export function use复制模块(
   结果对象: any,
@@ -66,12 +68,16 @@ export function use复制模块(
     return 结果对象.结果文字?.trim() && 结果对象.状态码 === 200
   })
 
-  use快捷键监听({
-    复制快捷键方法: () => {
-      if (要显示复制按钮.value) {
-        快捷键复制()
-      }
-    },
+  watchEffect(() => {
+    const obj = {
+      复制快捷键方法: () => {
+        if (要显示复制按钮.value) {
+          快捷键复制()
+        }
+      },
+    }
+    const 系统 = 获取当前('系统') as 系统类型
+    判断快捷键(obj, 系统)
   })
 
   return {

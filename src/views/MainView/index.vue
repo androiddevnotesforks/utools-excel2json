@@ -232,10 +232,10 @@ import {
   use主题,
   use命名模式模块,
   use复制模块,
-  use快捷键监听,
   use语音朗读模块,
   关闭窗口,
   初始化离线语音,
+  判断快捷键,
   当前按下的所有键,
   支持离线朗读,
   未配置服务引导,
@@ -250,7 +250,7 @@ import {
 } from '@MainView/MainViewModule'
 
 import { api不支持的大对象, 用户设置存储, 语种树 } from '@MainView/MainViewData'
-import type { CascaderOption, 级联值类型 } from '@MainView/MainViewTypes'
+import type { CascaderOption, 系统类型, 级联值类型 } from '@MainView/MainViewTypes'
 
 const 语种树的数据 = ref(语种树())
 const form和to的数组 = ref<级联值类型>(['auto', 'zh'])
@@ -299,7 +299,7 @@ const { 要显示复制按钮, 复制按钮事件 } = use复制模块(
   粘贴,
   延迟关闭utools
 )
-
+const 系统 = 获取当前('系统') as 系统类型
 use主题()
 
 const 自动模式 = ref(true)
@@ -328,8 +328,8 @@ const 检测语言显示条件 = computed(() => {
 
 // 这个函数目前只有右键才会触发
 // 触发后检查是否按下了必要的按键
+
 function 结果只读切换() {
-  const 系统 = 获取当前('系统')
   const 是windows或linux系统 = ['Windows', 'Linux', 'browser'].includes(系统)
   const 是mac系统 = ['macOS', 'browser'].includes(系统)
   // 条件：当前为Windows、Linux或是浏览器，且按下了Ctrl
@@ -487,23 +487,26 @@ const 离线朗读显示条件 = computed(() => {
 })
 
 let 离线朗读锁 = false
-use快捷键监听({
-  语音朗读快捷键方法: () => {
-    if (离线朗读显示条件.value) {
-      if (!离线朗读锁) {
-        离线朗读控制(结果对象.结果文字)
-        离线朗读锁 = true
-        setTimeout(() => {
-          离线朗读锁 = false
-        }, 1500)
-      } else {
-        // TODO: 由于离线语音在utools中会被连续触发两遍，所以该代码块必执行，待调整
-        // 提示.warning('不要按太快了啊喂~！')
+watchEffect(() => {
+  const obj = {
+    语音朗读快捷键方法: () => {
+      if (离线朗读显示条件.value) {
+        if (!离线朗读锁) {
+          离线朗读控制(结果对象.结果文字)
+          离线朗读锁 = true
+          setTimeout(() => {
+            离线朗读锁 = false
+          }, 1500)
+        } else {
+          // TODO: 由于离线语音在utools中会被连续触发两遍，所以该代码块必执行，待调整
+          // 提示.warning('不要按太快了啊喂~！')
+        }
+      } else if (在线朗读显示条件.value) {
+        !朗读loading.value && 在线朗读控制()
       }
-    } else if (在线朗读显示条件.value) {
-      !朗读loading.value && 在线朗读控制()
-    }
-  },
+    },
+  }
+  判断快捷键(obj, 系统)
 })
 
 onMounted(() => {

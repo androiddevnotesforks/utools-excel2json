@@ -1,6 +1,5 @@
 /** 快捷键 */
 import { cloneDeep } from 'lodash-es'
-import { 获取当前 } from '@/utils/getEnv'
 import type { 系统类型 } from '@/types/index'
 interface 快捷键方法Type {
   语音朗读快捷键方法?: Function
@@ -41,7 +40,7 @@ function 检查按下快捷键与定义的长度(os: 系统类型) {
   return 当前系统下所有快捷键长度arr.includes(按下的按键个数)
 }
 
-function 判断按键(fn: 快捷键方法Type, os: 系统类型) {
+export function 判断快捷键(fn: 快捷键方法Type, os: 系统类型) {
   const 按键合规 = 检查按下快捷键与定义的长度(os)
   // 首先判断当前按下的按键个数，在对应的系统里有没有定义一样长度的快捷键
   if (!按键合规) {
@@ -67,11 +66,4 @@ function 判断按键(fn: 快捷键方法Type, os: 系统类型) {
     ])
     otherMap.get(排序后按下的键str)?.()
   }
-}
-
-export function use快捷键监听(funObj: 快捷键方法Type) {
-  watchEffect(() => {
-    const 系统 = 获取当前('系统') as 系统类型
-    判断按键(funObj, 系统)
-  })
 }
