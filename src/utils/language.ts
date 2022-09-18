@@ -181,6 +181,20 @@ const 语音集合: 语言集合Type = {
       xiaoniu: 'es',
     },
   },
+  // 葡萄牙语
+  pt: {
+    name: '葡萄牙语',
+    datas: {
+      baidu: 'pt',
+      tencent: 'pt',
+      ali: 'pt',
+      youdao: 'pt',
+      google: 'pt',
+      caiyun: 'pt',
+      huoshan: 'pt',
+      xiaoniu: 'pt',
+    },
+  },
 }
 
 /**
