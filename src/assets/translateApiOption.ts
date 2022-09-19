@@ -25,7 +25,7 @@ export type 语种 =
   | 'yue'
   | 'wyw'
 
-const onlyChinese: 语种[] = [
+const onlyChinese: Exclude<语种, 'zh'>[] = [
   'en',
   'jp',
   'ru',
