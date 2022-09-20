@@ -641,6 +641,7 @@ function 切换侧边() {
   }
   全局存储.设置侧边收起()
 }
+
 function 设置modal确定() {
   保存设置()
   提示.success({ content: '设置成功', duration: 1000 })

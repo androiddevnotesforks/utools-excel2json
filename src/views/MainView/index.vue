@@ -251,7 +251,8 @@ import {
 
 import { api不支持的大对象, 用户设置存储, 语种树 } from '@MainView/MainViewData'
 import type { CascaderOption, 系统类型, 级联值类型 } from '@MainView/MainViewTypes'
-
+import { useGlobalStore } from '@/components/SettingModal/SettingsModules'
+const 全局存储 = useGlobalStore()
 const 语种树的数据 = ref(语种树())
 const form和to的数组 = ref<级联值类型>(['auto', 'zh'])
 const 存储 = 用户设置存储()
@@ -290,10 +291,9 @@ const {
 const { utools, utools初始化 } = useUtools(设置弹框Ref, 用户输入, 改变命名模式类型)
 
 const 系统 = 获取当前('系统') as 系统类型
-use主题()
-
 const 自动模式 = ref(true)
 
+use主题()
 关闭窗口(utools)
 
 function 格式化级联显示内容(options: CascaderOption[]) {
@@ -321,18 +321,16 @@ const 检测语言显示条件 = computed(() => {
 })
 
 // 这个函数目前只有右键才会触发
-// 触发后检查是否按下了必要的按键
-
 function 结果只读切换() {
-  const 是windows或linux系统 = ['Windows', 'Linux', 'browser'].includes(系统)
-  const 是mac系统 = ['macOS', 'browser'].includes(系统)
+  const 是mac系统 = 系统 === 'macOS'
+  const 不是mac系统 = 系统 !== 'macOS'
   // 条件：当前为Windows、Linux或是浏览器，且按下了Ctrl
   const 仅按下了Ctrl = isEqual(['control'], 当前按下的所有键.value)
   const 仅按下了Command = isEqual(['command'], 当前按下的所有键.value)
-  const windows和linux条件 = 是windows或linux系统 && 仅按下了Ctrl
+  const 其他系统条件 = 不是mac系统 && 仅按下了Ctrl
   const mac条件 = 是mac系统 && 仅按下了Command
 
-  if (windows和linux条件 || mac条件) {
+  if (其他系统条件 || mac条件) {
     if (是命名模式.value) {
       return 提示.warning('命名模式不可以编辑结果哦')
     }
@@ -350,8 +348,7 @@ function 设置确定() {
   nextTick(() => {
     读取设置()
     输入框focus()
-    // 设置成功，刷新上一次翻译
-    开始翻译(当前翻译api.value)
+    开始翻译(当前翻译api.value) // 设置成功，刷新上一次翻译
   })
 }
 
@@ -427,6 +424,7 @@ async function 开始翻译(val = 当前翻译api.value) {
     : 返回的文字
 
   结果对象.状态码 = code
+  全局存储.设置当前翻译状态码(code)
   结果对象.结果文字 = 处理后的文字
   结果对象.from语种 = from语种
   结果对象.结果编号 = nanoid()
@@ -439,7 +437,6 @@ function 尝试分词(str: string) {
   return result ? noCase(str) : str
 }
 
-// 切换翻译的From和To
 function 语种级联发生变化() {
   自动模式.value = false
   输入框focus()
@@ -448,7 +445,6 @@ function 语种级联发生变化() {
   }, 0)
 }
 
-// 读取配置
 function 读取设置() {
   //  首次加载设置当前选中为设置的默认翻译
   if (!首页选项.value.includes(当前翻译api.value)) {

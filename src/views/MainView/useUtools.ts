@@ -9,6 +9,12 @@ interface utoolsPluginEnter {
   payload: any // feature.cmd.type 对应匹配的数据(String | Object | Array)
 }
 const utools = window?.utools
+
+/**
+ * 为了防止突然关闭utools太突兀，所以延迟一小段时间关闭
+ * @param delayTime 延迟时间
+ * @returns
+ */
 export function 延迟关闭utools(delayTime = 300) {
   if (!utools) {
     return
