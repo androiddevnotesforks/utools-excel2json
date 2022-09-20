@@ -1,6 +1,9 @@
 /** 快捷键 */
-import { cloneDeep } from 'lodash-es'
+import { cloneDeep, debounce } from 'lodash-es'
 import { 复制主函数 } from '@MainView/useCopy'
+import { 离线朗读主函数 } from '@MainView/useOutlineVoice'
+import { 用户设置存储 } from '@/store/userSetting'
+// 这里应该导入一个“在线朗读主函数”
 import { 获取当前 } from '@/utils/getEnv'
 import type { 系统类型 } from '@/types/index'
 
@@ -21,6 +24,16 @@ const 快捷键集合: 快捷键映射类型 = {
     朗读: ['meta', 'shift', 's'].sort(),
   },
 }
+
+const 朗读主函数 = debounce((str: string) => {
+  const { readingModel } = storeToRefs(用户设置存储())
+  if (readingModel.value === '在线') {
+    // 在线朗读主函数(str)
+  } else if (readingModel.value === '离线') {
+    离线朗读主函数(str)
+  }
+}, 400)
+
 export const 当前按下的所有键 = computed(() => {
   return Array.from(current)
 })
@@ -52,8 +65,8 @@ export function 判断快捷键(str: string) {
 
   // 创建互斥变量用于区分mac与非mac
   const 是macOS = 系统 === 'macOS'
-  const mac快捷键条件 = 是macOS && 按键合规
-  const 其他快捷键条件 = !是macOS && 按键合规
+  const mac快捷键条件 = 是macOS
+  const 其他快捷键条件 = !是macOS
   // 将当前按下的所有按键，转换为字符串
   const 排序后按下的键str = cloneDeep(当前按下的所有键.value).sort().join()
   // 根据系统，创建该系统下的所有快捷键字符串与方法的映射，并尝试执行该方法
@@ -63,6 +76,7 @@ export function 判断快捷键(str: string) {
         复制主函数('快捷键', str)
         break
       case 快捷键集合.macOS.朗读.join():
+        朗读主函数(str)
         break
     }
   } else if (其他快捷键条件) {
@@ -71,6 +85,7 @@ export function 判断快捷键(str: string) {
         复制主函数('快捷键', str)
         break
       case 快捷键集合.other.朗读.join():
+        朗读主函数(str)
         break
     }
   }

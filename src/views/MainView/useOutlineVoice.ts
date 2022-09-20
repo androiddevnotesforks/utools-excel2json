@@ -24,7 +24,7 @@ const 离线朗读开始 = throttle(() => {
   开始离线朗读()
 })
 
-export function 离线朗读控制(str: string) {
+export function 离线朗读主函数(str: string) {
   if (!str) {
     return
   }
@@ -35,18 +35,3 @@ export function 离线朗读控制(str: string) {
 export function 离线朗读停止() {
   window.speechSynthesis.cancel()
 }
-
-// function 离线朗读开始() {
-//   if (离线朗读状态.value === 'pause') {
-//     window.speechSynthesis.resume()
-//   } else {
-//     开始离线朗读()
-//   }
-
-//   // 离线loading.value = true
-//   // setTimeout(() => {
-//   //   离线loading.value = false
-//   //   离线朗读停止()
-//   //   开始离线朗读()
-//   // }, 来个随机数(300, 1000))
-// }
