@@ -30,7 +30,6 @@ declare module '@vue/runtime-core' {
     ASelect: typeof import('@arco-design/web-vue')['Select']
     ASwitch: typeof import('@arco-design/web-vue')['Switch']
     ATextarea: typeof import('@arco-design/web-vue')['Textarea']
-    ATooltip: typeof import('@arco-design/web-vue')['Tooltip']
     AutoBtn: typeof import('./components/autoBtn.vue')['default']
     CodeBg: typeof import('./components/codeBg.vue')['default']
     ColorfulBtn: typeof import('./components/colorfulBtn.vue')['default']

@@ -126,7 +126,7 @@
                 class="absolute left-10px bottom-8px z-1 flex space-x-8px"
               >
                 <!-- 播放按钮 -->
-                <mimicry-btn :loading="朗读loading" @click="在线朗读控制()">
+                <mimicry-btn :loading="朗读loading" @click="点击在线朗读按钮()">
                   <i i-akar-icons-sound-on />
                 </mimicry-btn>
 
@@ -231,10 +231,10 @@ import {
   useUtools,
   use主题,
   use命名模式模块,
-  use语音朗读模块,
   关闭窗口,
   初始化离线语音,
   判断快捷键,
+  在线朗读主函数,
   复制主函数,
   当前按下的所有键,
   支持离线朗读,
@@ -251,7 +251,9 @@ import {
 
 import { api不支持的大对象, 用户设置存储, 语种树 } from '@MainView/MainViewData'
 import type { CascaderOption, 系统类型, 级联值类型 } from '@MainView/MainViewTypes'
+import { 朗读loading, 正在播放, 重置音频, 音频Url } from '@MainView/useVoice'
 import { useGlobalStore } from '@/components/SettingModal/SettingsModules'
+
 const 全局存储 = useGlobalStore()
 const 语种树的数据 = ref(语种树())
 const form和to的数组 = ref<级联值类型>(['auto', 'zh'])
@@ -262,6 +264,7 @@ const {
   getHomeFontSize: 文字尺寸,
   copyBtnShow: 复制按钮显示的数组,
   readingModel: 朗读模式,
+  readAloud: 朗读功能,
 } = storeToRefs(存储)
 const 翻译加载 = ref(false) // 是否正在翻译
 const 用户输入 = ref('') // 输入的内容
@@ -276,8 +279,9 @@ const 当前翻译api = ref('') // 当前翻译api
 const 设置弹框Ref = ref() // 设置弹窗的ref
 const 用户输入框Ref = ref() // 输入textarea的dom
 const 下方placeholder = ref('翻译结果')
-const { 朗读功能, 音频Url, 朗读loading, 正在播放, 在线朗读控制, 重置音频 } =
-  use语音朗读模块(form和to的数组, 结果对象)
+
+// const { 朗读功能, 音频Url, 朗读loading, 正在播放, 在线朗读控制, 重置音频 } =
+//   use语音朗读模块(form和to的数组, 结果对象)
 
 const {
   是命名模式,
@@ -476,6 +480,12 @@ const 离线朗读显示条件 = computed(() => {
   )
 })
 
+function 点击在线朗读按钮() {
+  // 结果对象.结果文字
+
+  在线朗读主函数(结果对象.结果文字, form和to的数组.value[1])
+}
+
 // let 离线朗读锁 = false
 watchEffect(() => {
   // const obj = {
@@ -496,7 +506,7 @@ watchEffect(() => {
   //     }
   //   },
   // }
-  判断快捷键(结果对象.结果文字)
+  判断快捷键(结果对象.结果文字, form和to的数组.value[1])
 })
 
 onMounted(() => {

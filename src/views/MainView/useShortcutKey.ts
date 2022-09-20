@@ -2,10 +2,11 @@
 import { cloneDeep, debounce } from 'lodash-es'
 import { 复制主函数 } from '@MainView/useCopy'
 import { 离线朗读主函数 } from '@MainView/useOutlineVoice'
+import { 在线朗读主函数 } from '@MainView/useVoice'
 import { 用户设置存储 } from '@/store/userSetting'
-// 这里应该导入一个“在线朗读主函数”
 import { 获取当前 } from '@/utils/getEnv'
 import type { 系统类型 } from '@/types/index'
+import type { 语种 } from '@/assets/translateApiOption'
 
 type 快捷键映射类型 = {
   [key in 'macOS' | 'other']: {
@@ -25,10 +26,10 @@ const 快捷键集合: 快捷键映射类型 = {
   },
 }
 
-const 朗读主函数 = debounce((str: string) => {
+const 朗读主函数 = debounce((str: string, 译文语言标识: 语种) => {
   const { readingModel } = storeToRefs(用户设置存储())
   if (readingModel.value === '在线') {
-    // 在线朗读主函数(str)
+    在线朗读主函数(str, 译文语言标识)
   } else if (readingModel.value === '离线') {
     离线朗读主函数(str)
   }
@@ -55,7 +56,7 @@ function 检查按下快捷键与定义的长度(os: 系统类型) {
  * 快捷键主函数
  * @param str 要复制或者要读的文字
  */
-export function 判断快捷键(str: string) {
+export function 判断快捷键(str: string, 译文语言标识: 语种) {
   const 系统 = 获取当前('系统') as 系统类型
   const 按键合规 = 检查按下快捷键与定义的长度(系统)
   // 首先判断当前按下的按键个数，在对应的系统里有没有定义一样长度的快捷键
@@ -76,7 +77,7 @@ export function 判断快捷键(str: string) {
         复制主函数('快捷键', str)
         break
       case 快捷键集合.macOS.朗读.join():
-        朗读主函数(str)
+        朗读主函数(str, 译文语言标识)
         break
     }
   } else if (其他快捷键条件) {
@@ -85,7 +86,7 @@ export function 判断快捷键(str: string) {
         复制主函数('快捷键', str)
         break
       case 快捷键集合.other.朗读.join():
-        朗读主函数(str)
+        朗读主函数(str, 译文语言标识)
         break
     }
   }

@@ -1,6 +1,6 @@
 // MainView用到的所有功能模块
 export { useUtools } from '@MainView/useUtools'
-export { use语音朗读模块 } from '@MainView/useVoice'
+// export { use语音朗读模块 } from '@MainView/useVoice'
 export { 复制主函数 } from '@MainView/useCopy'
 export { use命名模式模块 } from '@MainView/useNamingMode'
 export { use主题 } from '@MainView/useTheme'
@@ -18,3 +18,11 @@ export {
   支持离线朗读,
   离线loading,
 } from '@MainView/useOutlineVoice'
+
+export {
+  在线朗读主函数,
+  朗读loading,
+  正在播放,
+  重置音频,
+  音频Url,
+} from '@MainView/useVoice'
