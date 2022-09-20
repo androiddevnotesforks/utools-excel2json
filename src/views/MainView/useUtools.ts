@@ -8,6 +8,27 @@ interface utoolsPluginEnter {
   type: string // plugin.json 配置的 feature.cmd.type，可以为 "text"、"img"、 "files"、 "regex"、 "over"、"window"
   payload: any // feature.cmd.type 对应匹配的数据(String | Object | Array)
 }
+const utools = window?.utools
+export function 延迟关闭utools(delayTime = 300) {
+  if (!utools) {
+    return
+  }
+  return new Promise<void>(resolve => {
+    delay(function () {
+      utools.hideMainWindow()
+      resolve()
+    }, delayTime)
+  })
+}
+
+export async function 粘贴() {
+  const 系统 = 获取当前('系统')
+  if (!utools) {
+    return
+  }
+  const key = 系统 === 'macOS' ? 'command' : 'ctrl'
+  await utools.simulateKeyboardTap('v', key)
+}
 
 export function useUtools(
   设置弹框Ref: Ref<any>,
@@ -36,33 +57,8 @@ export function useUtools(
     utools.subInputBlur()
   }
 
-  // 粘贴
-  async function 粘贴() {
-    const 系统 = 获取当前('系统')
-    if (!utools) {
-      return
-    }
-    const key = 系统 === 'macOS' ? 'command' : 'ctrl'
-    await utools.simulateKeyboardTap('v', key)
-  }
-
-  // 延迟时间关闭utools
-  function 延迟关闭utools(delayTime = 300) {
-    if (!utools) {
-      return
-    }
-    return new Promise<void>(resolve => {
-      delay(function () {
-        utools.hideMainWindow()
-        resolve()
-      }, delayTime)
-    })
-  }
-
   return {
     utools,
     utools初始化,
-    粘贴,
-    延迟关闭utools,
   }
 }

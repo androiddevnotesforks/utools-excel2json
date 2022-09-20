@@ -165,7 +165,7 @@
               >
                 <colorful-btn
                   v-if="复制按钮显示的数组.includes(1)"
-                  @click="复制按钮事件(1)"
+                  @click="复制主函数('手动', 结果对象.结果文字, 1)"
                 >
                   <template #icon>
                     <i i-line-md-clipboard-arrow class="text-18px" />
@@ -175,7 +175,7 @@
 
                 <colorful-btn
                   v-if="复制按钮显示的数组.includes(2)"
-                  @click="复制按钮事件(2)"
+                  @click="复制主函数('手动', 结果对象.结果文字, 2)"
                 >
                   <template #icon>
                     <i i-line-md-navigation-right-down class="text-18px" />
@@ -185,7 +185,7 @@
 
                 <colorful-btn
                   v-if="复制按钮显示的数组.includes(3)"
-                  @click="复制按钮事件(3)"
+                  @click="复制主函数('手动', 结果对象.结果文字, 3)"
                 >
                   <template #icon>
                     <i i-line-md-edit-twotone class="text-18px" />
@@ -226,16 +226,16 @@ import { nanoid } from 'nanoid'
 import { debounce, isEqual, throttle } from 'lodash-es'
 import { noCase } from 'change-case'
 import { Message as 提示 } from '@arco-design/web-vue'
-import { 获取存储项, 获取当前 } from '@MainView/MainViewUtils'
+import { 粘贴, 获取存储项, 获取当前 } from '@MainView/MainViewUtils'
 import {
   useUtools,
   use主题,
   use命名模式模块,
-  use复制模块,
   use语音朗读模块,
   关闭窗口,
   初始化离线语音,
   判断快捷键,
+  复制主函数,
   当前按下的所有键,
   支持离线朗读,
   未配置服务引导,
@@ -287,18 +287,8 @@ const {
   改变命名模式类型,
 } = use命名模式模块(结果对象)
 
-const { utools, utools初始化, 粘贴, 延迟关闭utools } = useUtools(
-  设置弹框Ref,
-  用户输入,
-  改变命名模式类型
-)
+const { utools, utools初始化 } = useUtools(设置弹框Ref, 用户输入, 改变命名模式类型)
 
-const { 要显示复制按钮, 复制按钮事件 } = use复制模块(
-  结果对象,
-  utools,
-  粘贴,
-  延迟关闭utools
-)
 const 系统 = 获取当前('系统') as 系统类型
 use主题()
 
@@ -310,6 +300,10 @@ function 格式化级联显示内容(options: CascaderOption[]) {
   const 文字 = options.map(option => option.label)
   return 文字.join('\u3000  \u3000')
 }
+
+const 要显示复制按钮 = computed(() => {
+  return 结果对象.结果文字?.trim() && 结果对象.状态码 === 200
+})
 
 function 清空输入框() {
   用户输入.value = ''
@@ -486,27 +480,27 @@ const 离线朗读显示条件 = computed(() => {
   )
 })
 
-let 离线朗读锁 = false
+// let 离线朗读锁 = false
 watchEffect(() => {
-  const obj = {
-    语音朗读快捷键方法: () => {
-      if (离线朗读显示条件.value) {
-        if (!离线朗读锁) {
-          离线朗读控制(结果对象.结果文字)
-          离线朗读锁 = true
-          setTimeout(() => {
-            离线朗读锁 = false
-          }, 1500)
-        } else {
-          // TODO: 由于离线语音在utools中会被连续触发两遍，所以该代码块必执行，待调整
-          // 提示.warning('不要按太快了啊喂~！')
-        }
-      } else if (在线朗读显示条件.value) {
-        !朗读loading.value && 在线朗读控制()
-      }
-    },
-  }
-  判断快捷键(obj, 系统)
+  // const obj = {
+  //   语音朗读快捷键方法: () => {
+  //     if (离线朗读显示条件.value) {
+  //       if (!离线朗读锁) {
+  //         离线朗读控制(结果对象.结果文字)
+  //         离线朗读锁 = true
+  //         setTimeout(() => {
+  //           离线朗读锁 = false
+  //         }, 1500)
+  //       } else {
+  //         // TODO: 由于离线语音在utools中会被连续触发两遍，所以该代码块必执行，待调整
+  //         // 提示.warning('不要按太快了啊喂~！')
+  //       }
+  //     } else if (在线朗读显示条件.value) {
+  //       !朗读loading.value && 在线朗读控制()
+  //     }
+  //   },
+  // }
+  判断快捷键(结果对象.结果文字)
 })
 
 onMounted(() => {
