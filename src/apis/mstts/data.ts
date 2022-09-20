@@ -20,6 +20,8 @@ const 发音角色Map = new Map([
   ['Elvira', 'es-ES-ElviraNeural'],
   ['Achara', 'th-TH-AcharaNeural'],
   ['Niwat', 'th-TH-NiwatNeural'],
+  ['Duarte', 'pt-PT-DuarteNeural'],
+  ['Fernanda', 'pt-PT-FernandaNeural'],
 ])
 
 function 获取发音人(str = '') {
@@ -72,6 +74,11 @@ export const 声音映射: 声音映射Type = {
     male: 获取发音人('Alvaro'),
     female: 获取发音人('Elvira'),
     default: 获取发音人('Elvira'),
+  },
+  pt: {
+    male: 获取发音人('Duarte'),
+    female: 获取发音人('Fernanda'),
+    default: 获取发音人('Fernanda'),
   },
   th: {
     male: 获取发音人('Niwat'),
