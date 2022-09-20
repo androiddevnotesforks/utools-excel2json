@@ -17,7 +17,7 @@ type 快捷键映射类型 = {
 const { current } = useMagicKeys()
 const 快捷键集合: 快捷键映射类型 = {
   other: {
-    复制: ['control', 'shift', 'x'].sort(),
+    复制: ['control', 'shift', 'c'].sort(),
     朗读: ['control', 'shift', 's'].sort(),
   },
   macOS: {

@@ -54,6 +54,10 @@ async function 播放音频V2(朗读文本: string, 声音: string, 语速: numb
 }
 
 export async function 在线朗读主函数(str: string, 译文语言标识: 语种) {
+  if (朗读loading.value) {
+    提示.warning({ content: '加载音频中，请稍等', duration: 1500 })
+    return
+  }
   重置音频()
   const 声音对象: any = 声音映射[译文语言标识] || 声音映射.zh!
   // 读取发音配置
