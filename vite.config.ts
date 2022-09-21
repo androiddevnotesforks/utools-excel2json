@@ -6,7 +6,6 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import UnoCSS from 'unocss/vite'
 import { ArcoResolver } from 'unplugin-vue-components/resolvers'
-import Inspector from 'vite-plugin-vue-inspector'
 import { primaryColor } from './src/config/colorConfig'
 
 function pathResolve(dir: string) {
@@ -35,9 +34,6 @@ export default defineConfig({
     Components({
       resolvers: [ArcoResolver()],
       dts: 'src/components.d.ts',
-    }),
-    Inspector({
-      toggleComboKey: 'alt-1',
     }),
     chunkSplitPlugin({
       strategy: 'default',

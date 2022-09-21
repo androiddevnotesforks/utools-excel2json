@@ -269,12 +269,13 @@ const {
 const 翻译加载 = ref(false) // 是否正在翻译
 const 用户输入 = ref('') // 输入的内容
 const 结果只读 = ref(true) // 结果是否可编辑
-const 结果对象 = reactive({
+const 结果对象原始数据 = {
   结果文字: '', // 翻译结果
   状态码: -1, // 翻译结果状态(code = 200 为成功,code = -1为等待用户操作,code = 401为未配置翻译API)
   from语种: '',
   结果编号: nanoid(),
-})
+}
+const 结果对象 = reactive({ ...结果对象原始数据 })
 const 当前翻译api = ref('') // 当前翻译api
 const 设置弹框Ref = ref() // 设置弹窗的ref
 const 用户输入框Ref = ref() // 输入textarea的dom
@@ -328,7 +329,6 @@ const 检测语言显示条件 = computed(() => {
 function 结果只读切换() {
   const 是mac系统 = 系统 === 'macOS'
   const 不是mac系统 = 系统 !== 'macOS'
-  // 条件：当前为Windows、Linux或是浏览器，且按下了Ctrl
   const 仅按下了Ctrl = isEqual(['control'], 当前按下的所有键.value)
   const 仅按下了Command = isEqual(['command'], 当前按下的所有键.value)
   const 其他系统条件 = 不是mac系统 && 仅按下了Ctrl
@@ -427,11 +427,14 @@ async function 开始翻译(val = 当前翻译api.value) {
     ? 返回命名模式对应结果(返回的文字, 命名模式类型.value)
     : 返回的文字
 
-  结果对象.状态码 = code
+  const 返回数据 = {
+    from语种,
+    结果文字: 处理后的文字,
+    状态码: code,
+    结果编号: nanoid(),
+  }
+  Object.assign(结果对象, 返回数据)
   全局存储.设置当前翻译状态码(code)
-  结果对象.结果文字 = 处理后的文字
-  结果对象.from语种 = from语种
-  结果对象.结果编号 = nanoid()
   翻译加载.value = false
 }
 
@@ -481,31 +484,10 @@ const 离线朗读显示条件 = computed(() => {
 })
 
 function 点击在线朗读按钮() {
-  // 结果对象.结果文字
-
   在线朗读主函数(结果对象.结果文字, form和to的数组.value[1])
 }
 
-// let 离线朗读锁 = false
 watchEffect(() => {
-  // const obj = {
-  //   语音朗读快捷键方法: () => {
-  //     if (离线朗读显示条件.value) {
-  //       if (!离线朗读锁) {
-  //         离线朗读主函数(结果对象.结果文字)
-  //         离线朗读锁 = true
-  //         setTimeout(() => {
-  //           离线朗读锁 = false
-  //         }, 1500)
-  //       } else {
-  //         // TODO: 由于离线语音在utools中会被连续触发两遍，所以该代码块必执行，待调整
-  //         // 提示.warning('不要按太快了啊喂~！')
-  //       }
-  //     } else if (在线朗读显示条件.value) {
-  //       !朗读loading.value && 在线朗读控制()
-  //     }
-  //   },
-  // }
   判断快捷键(结果对象.结果文字, form和to的数组.value[1])
 })
 
