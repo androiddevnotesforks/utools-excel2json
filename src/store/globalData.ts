@@ -31,6 +31,10 @@ export const useGlobalStore = defineStore('global', () => {
   const 侧边收起 = ref(getSettingSide())
   const 当前翻译状态码 = ref(-1)
 
+  const 是mac = computed(() => {
+    return currentOS.value === 'macOS'
+  })
+
   function 设置侧边收起() {
     侧边收起.value = !侧边收起.value
     setDbStorageItem('settingSide', 侧边收起.value)
@@ -47,5 +51,6 @@ export const useGlobalStore = defineStore('global', () => {
     设置侧边收起,
     当前翻译状态码,
     设置当前翻译状态码,
+    是mac,
   }
 })
