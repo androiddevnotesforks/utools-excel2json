@@ -6,6 +6,7 @@
 import MainView from '@MainView/index.vue'
 import '@/utils/setTheme'
 import '@MainView/useExit.ts'
+import '@MainView/useTheme.ts'
 
 // 虽然深色浅色的主题色一致，但是Arco主题色设置过后，深色模式下会对主题色进行一个偏移，这里强制指定深色下主题色的颜色值
 import { primaryColor } from '@/config/colorConfig'

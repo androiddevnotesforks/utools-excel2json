@@ -11,7 +11,9 @@
     @mouseup="清除波纹()"
   >
     <div class="relative z-20 flex-c space-x-8px">
-      <slot name="icon"></slot>
+      <slot name="icon">
+        <i :class="props.iconName" class="text-19px"></i>
+      </slot>
       <div class="leading-none flex-c">
         <slot></slot>
       </div>
@@ -35,6 +37,12 @@
 <script setup lang="ts">
 import { delay } from 'lodash-es'
 import { nanoid } from 'nanoid'
+const props = defineProps({
+  iconName: {
+    type: String,
+    default: 'i-ep-more-filled',
+  },
+})
 const btnRef = ref() // 按钮的DOM
 
 const 波纹数组 = ref<波纹数组Item[]>([]) // 波纹DOM数组

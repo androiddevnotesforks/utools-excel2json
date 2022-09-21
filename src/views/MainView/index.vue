@@ -8,15 +8,13 @@
       <div class="text_wrapper flex flex-1 relative">
         <!-- 清除按钮 -->
         <transition name="component-scale">
-          <template v-if="!['', undefined, null].includes(用户输入)">
-            <mimicry-btn
-              key="1"
-              class="absolute right-10px bottom-8px"
-              @click="清空输入框()"
-            >
-              <i i-line-md-close />
-            </mimicry-btn>
-          </template>
+          <mimicry-btn
+            v-if="!['', undefined, null].includes(用户输入)"
+            class="absolute right-10px bottom-8px"
+            @click="清空输入框()"
+          >
+            <i i-line-md-close />
+          </mimicry-btn>
         </transition>
 
         <span
@@ -120,76 +118,74 @@
               :placeholder="下方placeholder"
               :readonly="结果只读"
             />
-            <transition v-if="在线朗读显示条件" name="fade-in-standard">
-              <div
-                v-show="要显示复制按钮"
-                class="absolute left-10px bottom-8px z-1 flex space-x-8px"
-              >
-                <!-- 播放按钮 -->
-                <mimicry-btn :loading="朗读loading" @click="点击在线朗读按钮()">
-                  <i i-akar-icons-sound-on />
-                </mimicry-btn>
 
-                <!-- 开始暂停按钮 -->
-                <mimicry-btn v-show="音频Url" @click="正在播放 = !正在播放">
-                  <i :class="[正在播放 ? 'i-ic-twotone-pause' : 'i-ri-play-fill']"></i>
-                </mimicry-btn>
-              </div>
-            </transition>
-
-            <transition v-if="离线朗读显示条件" name="fade-in-standard">
-              <div
-                v-show="要显示复制按钮"
-                class="absolute left-10px bottom-8px z-1 flex space-x-8px"
-              >
-                <!-- 播放按钮 -->
-                <mimicry-btn
-                  :loading="离线loading"
-                  @click="离线朗读主函数(结果对象.结果文字)"
+            <!-- 朗读按钮 -->
+            <transition name="component-scale">
+              <template v-if="在线朗读显示条件">
+                <div
+                  v-show="要显示复制按钮"
+                  class="absolute left-10px bottom-8px z-1 flex space-x-8px"
                 >
-                  <i
-                    :class="[
-                      离线朗读状态 === 'play'
-                        ? 'i-carbon-stop-filled-alt'
-                        : 'i-akar-icons-sound-on',
-                    ]"
-                  />
-                </mimicry-btn>
-              </div>
+                  <!-- 播放按钮 -->
+                  <mimicry-btn :loading="朗读loading" @click="点击在线朗读按钮()">
+                    <i i-akar-icons-sound-on />
+                  </mimicry-btn>
+
+                  <!-- 开始暂停按钮 -->
+                  <mimicry-btn v-show="音频Url" @click="正在播放 = !正在播放">
+                    <i :class="[正在播放 ? 'i-ic-twotone-pause' : 'i-ri-play-fill']"></i>
+                  </mimicry-btn>
+                </div>
+              </template>
+
+              <template v-else-if="离线朗读显示条件">
+                <div
+                  v-show="要显示复制按钮"
+                  class="absolute left-10px bottom-8px z-1 flex space-x-8px"
+                >
+                  <!-- 播放按钮 -->
+                  <mimicry-btn
+                    :loading="离线loading"
+                    @click="离线朗读主函数(结果对象.结果文字)"
+                  >
+                    <i
+                      :class="[
+                        离线朗读状态 === 'play'
+                          ? 'i-carbon-stop-filled-alt'
+                          : 'i-akar-icons-sound-on',
+                      ]"
+                    />
+                  </mimicry-btn>
+                </div>
+              </template>
             </transition>
 
-            <transition name="fade-in-standard" mode="out-in">
+            <transition name="fade-in-standard">
               <div
                 v-show="要显示复制按钮"
                 class="bottom-8px absolute-x-center z-1 flex space-x-8px"
               >
                 <colorful-btn
                   v-if="复制按钮显示的数组.includes(1)"
+                  icon-name="i-line-md-clipboard-arrow"
                   @click="点击触发复制主函数('open')"
                 >
-                  <template #icon>
-                    <i i-line-md-clipboard-arrow class="text-18px" />
-                  </template>
                   仅复制
                 </colorful-btn>
 
                 <colorful-btn
                   v-if="复制按钮显示的数组.includes(2)"
+                  icon-name="i-line-md-navigation-right-down"
                   @click="点击触发复制主函数('close')"
                 >
-                  <template #icon>
-                    <i i-line-md-navigation-right-down class="text-18px" />
-                  </template>
                   复制并隐藏
                 </colorful-btn>
 
                 <colorful-btn
                   v-if="复制按钮显示的数组.includes(3)"
+                  icon-name="i-line-md-edit-twotone"
                   @click="点击触发复制主函数('closeInput')"
                 >
-                  <template #icon>
-                    <i i-line-md-edit-twotone class="text-18px" />
-                  </template>
                   复制并输入
                 </colorful-btn>
               </div>
@@ -200,14 +196,14 @@
     </div>
     <!-- 命名翻译模式按钮 -->
     <i
-      class="icon left-4px"
+      class="icon left-4px hover:text-#666 dark:hover:text-#d9d9d9"
       :class="[是命名模式 ? '!text-primary i-tabler-code' : 'i-tabler-code-off ']"
       @click="切换模式()"
     />
     <!-- 设置按钮 -->
     <i
       id="setting-wrapper"
-      class="icon right-4px i-ci-settings-future hover:i-ep-setting"
+      class="icon right-4px i-ci-settings-future hover:(i-ep-setting text-#666) dark:hover:text-#d9d9d9"
       @click="打开设置Modal()"
     />
   </div>
@@ -229,7 +225,6 @@ import { Message as 提示 } from '@arco-design/web-vue'
 import { 粘贴, 获取存储项, 获取当前 } from '@MainView/MainViewUtils'
 import {
   useUtools,
-  use主题,
   use命名模式模块,
   初始化离线语音,
   判断快捷键,
@@ -280,9 +275,6 @@ const 设置弹框Ref = ref() // 设置弹窗的ref
 const 用户输入框Ref = ref() // 输入textarea的dom
 const 下方placeholder = ref('翻译结果')
 
-// const { 朗读功能, 音频Url, 朗读loading, 正在播放, 在线朗读控制, 重置音频 } =
-//   use语音朗读模块(form和to的数组, 结果对象)
-
 const {
   是命名模式,
   命名模式类型,
@@ -296,8 +288,6 @@ const { utools, utools初始化 } = useUtools(设置弹框Ref, 用户输入, 改
 
 const 系统 = 获取当前('系统') as 系统类型
 const 自动模式 = ref(true)
-
-use主题()
 
 function 格式化级联显示内容(options: CascaderOption[]) {
   const 文字 = options.map(option => option.label)
@@ -628,11 +618,8 @@ onKeyStroke('Tab', e => {
   color: #999;
   cursor: pointer;
   transition: all 0.3s ease;
-  &:hover {
-    color: #666;
-  }
   &:active {
-    color: var(--primary-color);
+    color: var(--primary-color) !important;
   }
 }
 
