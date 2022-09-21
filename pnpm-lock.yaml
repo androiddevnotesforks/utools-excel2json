@@ -25,7 +25,7 @@ specifiers:
   prettier: ^2.7.1
   sass: ^1.54.9
   shepherd.js: ^10.0.1
-  taze: ^0.8.0
+  taze: ^0.8.1
   terser: ^5.15.0
   typescript: ^4.8.3
   unocss: ^0.45.22
@@ -64,7 +64,7 @@ devDependencies:
   pnpm: 7.12.1
   prettier: 2.7.1
   sass: 1.54.9
-  taze: 0.8.0
+  taze: 0.8.1
   terser: 5.15.0
   typescript: 4.8.3
   unocss: 0.45.22_vite@3.1.3
@@ -176,8 +176,8 @@ packages:
       find-up: 5.0.0
     dev: true
 
-  /@antfu/ni/0.16.3:
-    resolution: {integrity: sha512-/C1N/hORSJp1qJHr4oRqQzmWPqB6S42T4HV4dWhXOllPJkcqQA/L40U55Oc7Gq4Gm9pLeCNZn7YYU1kUK2Ekpg==}
+  /@antfu/ni/0.18.0:
+    resolution: {integrity: sha512-D0eek5EV8wOUpZNVAs/mPyeC5TMWFXqchqCyPiR6Lj5FgmSJw0EpFLqAczHX0O5+Jc07N7NBwBip85Gi1MBJnA==}
     hasBin: true
     dev: true
 
@@ -4280,11 +4280,11 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /taze/0.8.0:
-    resolution: {integrity: sha512-3FWGegvt1JB+qfBPEr/9sBhGc2VQmwrGFacvfCllmm+Raw9iDHlWSy/CyIJU+6FsfUrTIhF5X9xT2sUNh4nz8Q==}
+  /taze/0.8.1:
+    resolution: {integrity: sha512-W2ZOGYiH57GFM38gBVE1pMV3TDExuqwqETdWh8xGeAOMMWwSUt6NWZnHw7c1AMhaC8abCikjXe1s2H43h5CieA==}
     hasBin: true
     dependencies:
-      '@antfu/ni': 0.16.3
+      '@antfu/ni': 0.18.0
       detect-indent: 7.0.1
       libnpmconfig: 1.2.1
       pacote: 13.6.2
