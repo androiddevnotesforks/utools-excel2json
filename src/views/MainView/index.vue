@@ -165,7 +165,7 @@
               >
                 <colorful-btn
                   v-if="复制按钮显示的数组.includes(1)"
-                  @click="复制主函数('手动', 结果对象.结果文字, 1)"
+                  @click="点击触发复制主函数('open')"
                 >
                   <template #icon>
                     <i i-line-md-clipboard-arrow class="text-18px" />
@@ -175,7 +175,7 @@
 
                 <colorful-btn
                   v-if="复制按钮显示的数组.includes(2)"
-                  @click="复制主函数('手动', 结果对象.结果文字, 2)"
+                  @click="点击触发复制主函数('close')"
                 >
                   <template #icon>
                     <i i-line-md-navigation-right-down class="text-18px" />
@@ -185,7 +185,7 @@
 
                 <colorful-btn
                   v-if="复制按钮显示的数组.includes(3)"
-                  @click="复制主函数('手动', 结果对象.结果文字, 3)"
+                  @click="点击触发复制主函数('closeInput')"
                 >
                   <template #icon>
                     <i i-line-md-edit-twotone class="text-18px" />
@@ -231,7 +231,6 @@ import {
   useUtools,
   use主题,
   use命名模式模块,
-  关闭窗口,
   初始化离线语音,
   判断快捷键,
   在线朗读主函数,
@@ -299,7 +298,6 @@ const 系统 = 获取当前('系统') as 系统类型
 const 自动模式 = ref(true)
 
 use主题()
-关闭窗口(utools)
 
 function 格式化级联显示内容(options: CascaderOption[]) {
   const 文字 = options.map(option => option.label)
@@ -398,6 +396,10 @@ function 切换翻译服务() {
   setTimeout(() => {
     开始翻译()
   }, 0)
+}
+
+function 点击触发复制主函数(type: 'open' | 'close' | 'closeInput') {
+  复制主函数('手动', 结果对象.结果文字, type)
 }
 
 // 分发翻译请求，并开始翻译，默认根据Radio的值来确定翻译api

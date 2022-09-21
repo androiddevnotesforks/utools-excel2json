@@ -32,34 +32,32 @@ async function 复制并输入() {
   await 粘贴()
 }
 
-const 复制按钮事件 = throttle((val = 1) => {
+const 复制按钮事件 = throttle((val = 'open') => {
   const m = new Map([
-    [1, 仅复制],
-    [2, 复制并隐藏],
-    [3, 复制并输入],
+    ['open', 仅复制],
+    ['close', 复制并隐藏],
+    ['closeInput', 复制并输入],
   ])
   m.get(val)?.()
 }, 300)
+type 复制触发类型 = '手动' | '快捷键'
+type 按钮行为值 = 'open' | 'close' | 'closeInput'
 
 /**
  * 复制的主函数
  * @param type 需要点击的为’手动‘快捷键为’快捷键‘
  * @param str 要复制的文字
- * @param val ’手动‘才会有的值
+ * @param behavior ’手动‘才会有的值
  */
-export function 复制主函数(type: '手动' | '快捷键', str: string, val?: number) {
+export function 复制主函数(type: '手动', str: string, behavior: 按钮行为值): void
+export function 复制主函数(type: '快捷键', str: string, behavior?: 按钮行为值): void
+export function 复制主函数(type: 复制触发类型, str: string, behavior?: 按钮行为值) {
   // 所有复制都走这个函数，保证“要复制的文字”有值
   要复制的文字.value = str
   if (type === '手动') {
-    复制按钮事件(val)
+    复制按钮事件(behavior)
   } else if (type === '快捷键') {
-    const m = new Map([
-      ['open', 1],
-      ['close', 2],
-      ['closeInput', 3],
-    ])
     const { copyBtnBehavior: 复制按钮行为 } = storeToRefs(用户设置存储())
-    const value = m.get(复制按钮行为.value) || 1
-    复制按钮事件(value)
+    复制按钮事件(复制按钮行为.value)
   }
 }
