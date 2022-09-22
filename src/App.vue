@@ -3,7 +3,6 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
 import MainView from '@MainView/index.vue'
 import { primaryColor } from '@/config/colorConfig'
 import { setTheme } from '@/utils/setTheme'

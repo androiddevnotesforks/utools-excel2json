@@ -31,7 +31,7 @@ export const useGlobalStore = defineStore('global', () => {
   const 侧边收起 = ref(getSettingSide())
   const 当前翻译状态码 = ref(-1)
 
-  const 是mac = computed(() => {
+  const 是否mac = computed(() => {
     return currentOS.value === 'macOS'
   })
 
@@ -51,6 +51,6 @@ export const useGlobalStore = defineStore('global', () => {
     设置侧边收起,
     当前翻译状态码,
     设置当前翻译状态码,
-    是mac,
+    是否mac,
   }
 })

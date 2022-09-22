@@ -1,7 +1,7 @@
 /** utools 业务逻辑 */
 import { delay } from 'lodash-es'
 import type { Ref } from 'vue'
-import { 获取当前 } from '@/utils/getEnv'
+import { useGlobalStore } from '@/store/globalData'
 
 interface utoolsPluginEnter {
   code: string // plugin.json 配置的 feature.code
@@ -28,11 +28,11 @@ export function 延迟关闭utools(delayTime = 300) {
 }
 
 export async function 粘贴() {
-  const 系统 = 获取当前('系统')
   if (!utools) {
     return
   }
-  const key = 系统 === 'macOS' ? 'command' : 'ctrl'
+  const { 是否mac } = storeToRefs(useGlobalStore())
+  const key = 是否mac.value ? 'command' : 'ctrl'
   await utools.simulateKeyboardTap('v', key)
 }
 

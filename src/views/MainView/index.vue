@@ -222,7 +222,7 @@ import { nanoid } from 'nanoid'
 import { debounce, isEqual, throttle } from 'lodash-es'
 import { noCase } from 'change-case'
 import { Message as 提示 } from '@arco-design/web-vue'
-import { 粘贴, 获取存储项, 获取当前 } from '@MainView/MainViewUtils'
+import { 粘贴, 获取存储项 } from '@MainView/MainViewUtils'
 import {
   useUtools,
   use命名模式模块,
@@ -244,11 +244,11 @@ import {
 } from '@MainView/MainViewModule'
 
 import { api不支持的大对象, 用户设置存储, 语种树 } from '@MainView/MainViewData'
-import type { CascaderOption, 系统类型, 级联值类型 } from '@MainView/MainViewTypes'
+import type { CascaderOption, 级联值类型 } from '@MainView/MainViewTypes'
 import { 朗读loading, 正在播放, 重置音频, 音频Url } from '@MainView/useVoice'
 import { useGlobalStore } from '@/components/SettingModal/SettingsModules'
-
 const 全局存储 = useGlobalStore()
+const { 是否mac } = storeToRefs(全局存储)
 const 语种树的数据 = ref(语种树())
 const form和to的数组 = ref<级联值类型>(['auto', 'zh'])
 const 存储 = 用户设置存储()
@@ -286,7 +286,6 @@ const {
 
 const { utools, utools初始化 } = useUtools(设置弹框Ref, 用户输入, 改变命名模式类型)
 
-const 系统 = 获取当前('系统') as 系统类型
 const 自动模式 = ref(true)
 
 function 格式化级联显示内容(options: CascaderOption[]) {
@@ -315,8 +314,8 @@ const 检测语言显示条件 = computed(() => {
 
 // 这个函数目前只有右键才会触发
 function 结果只读切换() {
-  const 是mac系统 = 系统 === 'macOS'
-  const 不是mac系统 = 系统 !== 'macOS'
+  const 是mac系统 = 是否mac.value
+  const 不是mac系统 = !是否mac.value
   const 仅按下了Ctrl = isEqual(['control'], 当前按下的所有键.value)
   const 仅按下了Command = isEqual(['command'], 当前按下的所有键.value)
   const 其他系统条件 = 不是mac系统 && 仅按下了Ctrl
