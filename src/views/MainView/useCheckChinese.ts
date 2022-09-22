@@ -19,7 +19,7 @@ function 获取有效输入文字(str: string) {
   return replace(str, 符号数字reg, '')
 }
 
-export function 获取级联的值(用户输入: string) {
+export function 自动矫正级联值(用户输入: string) {
   let arr: 级联值类型
   const 存储 = 用户设置存储()
   const { defaultForeignLanguage: 默认目标外语语种 } = storeToRefs(存储)

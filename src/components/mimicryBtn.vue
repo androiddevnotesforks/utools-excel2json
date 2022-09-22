@@ -26,11 +26,11 @@ const props = defineProps({
   },
 })
 // 按钮点击放大的倍率
-const 放大倍率 = ref<number>(1.2)
+const 放大倍率 = ref(1.2)
 
 // 按钮放大，文字同步缩小为14的倍率
 const 缩小后的尺寸 = computed(() => {
-  const after: number = parseFloat((放大倍率.value * 14).toFixed(3))
+  const after = parseFloat((放大倍率.value * 14).toFixed(3))
   return (14 / after).toFixed(3)
 })
 </script>

@@ -238,7 +238,7 @@ import {
   离线朗读主函数,
   离线朗读停止,
   离线朗读状态,
-  获取级联的值,
+  自动矫正级联值,
   通用翻译,
   首次引导,
 } from '@MainView/MainViewModule'
@@ -390,8 +390,7 @@ function 切换翻译服务() {
 function 点击触发复制主函数(type: 'open' | 'close' | 'closeInput') {
   复制主函数('手动', 结果对象.结果文字, type)
 }
-
-// 分发翻译请求，并开始翻译，默认根据Radio的值来确定翻译api
+const 需要去除换行 = true
 async function 开始翻译(val = 当前翻译api.value) {
   重置音频()
   输入框focus()
@@ -401,15 +400,16 @@ async function 开始翻译(val = 当前翻译api.value) {
     return
   }
   if (自动模式.value && !是命名模式.value) {
-    form和to的数组.value = 获取级联的值(用户输入.value)
+    form和to的数组.value = 自动矫正级联值(用户输入.value)
   }
 
   翻译加载.value = true
   const [from, to] = form和to的数组.value
+  const 用户输入的文字 = 需要去除换行 ? 去除换行(用户输入.value) : 用户输入.value
   const obj = {
     from,
     to,
-    q: 尝试分词(用户输入.value),
+    q: 尝试分词(用户输入的文字),
   }
 
   const { text: 返回的文字, code, from: from语种 } = await 通用翻译(val, obj)
@@ -433,6 +433,10 @@ function 尝试分词(str: string) {
   const reg = /^[A-Za-z-_]+\d*$/g
   const result = reg.test(str)
   return result ? noCase(str) : str
+}
+
+function 去除换行(str: string) {
+  return str.replaceAll('\n', ' ').trim()
 }
 
 function 语种级联发生变化() {

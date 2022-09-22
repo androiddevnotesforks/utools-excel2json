@@ -184,6 +184,15 @@
                         </a-form-item>
                       </form-item-wrapper>
                       <form-item-wrapper>
+                        <a-form-item
+                          label="去除文字换行:"
+                          class="flex items-start"
+                          @mouseenter="切换文案('去除文字换行')"
+                        >
+                          <a-switch v-model="formData.removeN" class="ml-5px" />
+                        </a-form-item>
+                      </form-item-wrapper>
+                      <form-item-wrapper>
                         <a-form-item label="插件主题:" @mouseenter="切换文案('插件主题')">
                           <a-radio-group v-model="formData.theme">
                             <a-radio
@@ -570,6 +579,7 @@ const formData = reactive({
   codeMode: false, // 命名翻译模式
   defaultForeignLanguage: 'en', // 默认目标外语
   defaultApi: '', // 默认翻译方式
+  removeN: false,
   theme: 'auto',
   appid: undefined, // 百度
   token: undefined, // 百度
