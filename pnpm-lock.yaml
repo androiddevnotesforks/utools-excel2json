@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@antfu/eslint-config': ^0.27.0
   '@arco-design/web-vue': ^2.37.2
-  '@iconify/json': ^2.1.110
+  '@iconify/json': ^2.1.111
   '@types/crypto-js': ^4.1.1
   '@types/lodash-es': ^4.17.6
   '@types/node': ^18.7.18
@@ -51,7 +51,7 @@ dependencies:
 devDependencies:
   '@antfu/eslint-config': 0.27.0_irgkl5vooow2ydyo6aokmferha
   '@arco-design/web-vue': 2.37.2_vue@3.2.39
-  '@iconify/json': 2.1.110
+  '@iconify/json': 2.1.111
   '@types/crypto-js': 4.1.1
   '@types/lodash-es': 4.17.6
   '@types/node': 18.7.18
@@ -300,15 +300,11 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@iconify/json/2.1.110:
-    resolution: {integrity: sha512-y+C2w8jbt0Vnk0RC9tjB0ZnT9apMaxYMv2rzAOMeWfx4SlHbZAyy7UKqbSqih9mHmDJuhs6fk5CZP2+dggIHww==}
+  /@iconify/json/2.1.111:
+    resolution: {integrity: sha512-5kOi5EbBEDf6vPjAlsQuBPtiC453eblVuOeds4cP2jNR9wPzTKQW3evNY9z7L2Lxv3akHV9teb4F7rL6+f0qbw==}
     dependencies:
-      '@iconify/types': 1.1.0
-      pathe: 0.3.5
-    dev: true
-
-  /@iconify/types/1.1.0:
-    resolution: {integrity: sha512-Jh0llaK2LRXQoYsorIH8maClebsnzTcve+7U3rQUSnC11X4jtPnFuyatqFLvMxZ8MLG8dB4zfHsbPfuvxluONw==}
+      '@iconify/types': 2.0.0
+      pathe: 0.3.8
     dev: true
 
   /@iconify/types/2.0.0:
@@ -3267,7 +3263,7 @@ packages:
     resolution: {integrity: sha512-mY6i+bwcgn0XAdZTiiBt6kyoUjLsm3Cuv0T4CchQJcq/UCSUcGPapSxc4g7whtIsUfcsJ2kGqZAdmqCF/VNC/Q==}
     dependencies:
       acorn: 8.8.0
-      pathe: 0.3.5
+      pathe: 0.3.8
       pkg-types: 0.3.3
       ufo: 0.8.5
     dev: true
@@ -3712,10 +3708,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /pathe/0.3.5:
-    resolution: {integrity: sha512-grU/QeYP0ChuE5kjU2/k8VtAeODzbernHlue0gTa27+ayGIu3wqYBIPGfP9r5xSqgCgDd4nWrjKXEfxMillByg==}
-    dev: true
-
   /pathe/0.3.8:
     resolution: {integrity: sha512-c71n61F1skhj/jzZe+fWE9XDoTYjWbUwIKVwFftZ5IOgiX44BVkTkD+/803YDgR50tqeO4eXWxLyVHBLWQAD1g==}
     dev: true
@@ -3761,7 +3753,7 @@ packages:
     dependencies:
       jsonc-parser: 3.1.0
       mlly: 0.5.10
-      pathe: 0.3.5
+      pathe: 0.3.8
     dev: true
 
   /pluralize/8.0.0:
@@ -4416,7 +4408,7 @@ packages:
       local-pkg: 0.4.2
       magic-string: 0.26.3
       mlly: 0.5.10
-      pathe: 0.3.5
+      pathe: 0.3.8
       scule: 0.3.2
       strip-literal: 0.4.0
       unplugin: 0.9.3_vite@3.1.3

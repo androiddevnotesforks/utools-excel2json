@@ -25,7 +25,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.27.0",
     "@arco-design/web-vue": "^2.37.2",
-    "@iconify/json": "^2.1.110",
+    "@iconify/json": "^2.1.111",
     "@types/crypto-js": "^4.1.1",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.7.18",
