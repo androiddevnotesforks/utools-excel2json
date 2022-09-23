@@ -789,7 +789,8 @@ defineExpose({
   transition: all 0.4s var(--ani-bezier);
 }
 .setting_header {
-  background: radial-gradient(transparent, white 2px);
+  // background: radial-gradient(transparent, white 2px); // 网孔效果
+  background: linear-gradient(45deg, transparent, white 3px); // 方形棱角玻璃效果
   // 这里的important不可以去除，因为background在深色模式需要覆盖，但是background又包含-size
   // 如果不加这个important，那么此处的background-size将被深色的background覆盖
   background-size: 5px 5px !important;
