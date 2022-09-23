@@ -525,12 +525,13 @@ watch(用户输入, newVal => {
   }
   防抖翻译()
 })
-
+// 设置弹窗的状态
+const 设置弹框正在活动 = computed(() => 设置弹框Ref.value.modal可见)
 // 监听401，自动弹引导层
 watch(
   () => 结果对象.结果编号,
   () => {
-    if (结果对象.状态码 === 401) {
+    if (结果对象.状态码 === 401 && !设置弹框正在活动.value) {
       未配置服务引导()
     }
   }
@@ -587,9 +588,6 @@ watchEffect(() => {
 watch(结果只读, newVal => {
   提示.info(`结果文本框现已${newVal ? '只读' : '可编辑'}`)
 })
-
-// 设置弹窗的状态
-const 设置弹框正在活动 = computed(() => 设置弹框Ref.value.modal可见)
 
 function 获取下一个api的value() {
   let 下一个api的index =
